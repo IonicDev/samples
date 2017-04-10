@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectKeys", "direct-keys\DirectKeys.csproj", "{AD805BEB-233D-411B-89AA-204A1DA6C8FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IonicHelloWorld", "ionic-helloworld\IonicHelloWorld.csproj", "{D26078C7-1F59-4124-9772-A1C42A9B6596}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SepConversion", "sep-conversion\SepConversion.csproj", "{00FBDCCD-A164-448D-A934-52DAD6E62554}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "file-crypto-auto-encrypt", "file-crypto-auto-encrypt\file-crypto-auto-encrypt.csproj", "{73BA1716-43A0-4EF7-A919-47772BE9A5BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "file-crypto-auto-decrypt", "file-crypto-auto-decrypt\file-crypto-auto-decrypt.csproj", "{9F28CF90-82FE-477F-B8D1-D9EE6B7AD9B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IonicChunkDecrypt", "chunk-decrypt\IonicChunkDecrypt.csproj", "{BF83472D-4B63-4C2C-89A4-251DA28408D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "logging", "logging\logging.csproj", "{6279B92D-FC66-4C25-AED2-EDE2DEA96F55}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AD805BEB-233D-411B-89AA-204A1DA6C8FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD805BEB-233D-411B-89AA-204A1DA6C8FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD805BEB-233D-411B-89AA-204A1DA6C8FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD805BEB-233D-411B-89AA-204A1DA6C8FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D26078C7-1F59-4124-9772-A1C42A9B6596}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D26078C7-1F59-4124-9772-A1C42A9B6596}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D26078C7-1F59-4124-9772-A1C42A9B6596}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D26078C7-1F59-4124-9772-A1C42A9B6596}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00FBDCCD-A164-448D-A934-52DAD6E62554}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00FBDCCD-A164-448D-A934-52DAD6E62554}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00FBDCCD-A164-448D-A934-52DAD6E62554}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00FBDCCD-A164-448D-A934-52DAD6E62554}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73BA1716-43A0-4EF7-A919-47772BE9A5BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73BA1716-43A0-4EF7-A919-47772BE9A5BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73BA1716-43A0-4EF7-A919-47772BE9A5BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73BA1716-43A0-4EF7-A919-47772BE9A5BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F28CF90-82FE-477F-B8D1-D9EE6B7AD9B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F28CF90-82FE-477F-B8D1-D9EE6B7AD9B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F28CF90-82FE-477F-B8D1-D9EE6B7AD9B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F28CF90-82FE-477F-B8D1-D9EE6B7AD9B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF83472D-4B63-4C2C-89A4-251DA28408D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF83472D-4B63-4C2C-89A4-251DA28408D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF83472D-4B63-4C2C-89A4-251DA28408D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF83472D-4B63-4C2C-89A4-251DA28408D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6279B92D-FC66-4C25-AED2-EDE2DEA96F55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6279B92D-FC66-4C25-AED2-EDE2DEA96F55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6279B92D-FC66-4C25-AED2-EDE2DEA96F55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6279B92D-FC66-4C25-AED2-EDE2DEA96F55}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
