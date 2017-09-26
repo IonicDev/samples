@@ -150,8 +150,6 @@ public class IonicRegister {
 			if (uc.getResponseCode() != 200)
 				throw new IOException();
 			String responseString = IOUtils.toString(response, "UTF-8");
-			int index = responseString.lastIndexOf('=');
-			responseString = responseString.substring(0, index + 1);
 			responseString = responseString.replaceAll("\\s|\n", "");
 			IOUtils.closeQuietly(response);
 			return responseString;

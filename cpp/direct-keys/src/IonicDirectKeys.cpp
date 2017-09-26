@@ -12,7 +12,6 @@ int main()
     // Initialize the Ionic agent
     ISAgent agent;
     agent.initialize();
-    std::cout << "Java Ionic Direct Key Access" << std::endl;
 
     // Request keys
     // Forming the key request object
@@ -45,7 +44,7 @@ int main()
 	int nErrorCode = agent.getKeys(fetchRequest, fetchResponse);
 	if (ISAGENT_OK != nErrorCode) {
 		std::cout << "Error fetching keys: " << nErrorCode << std::endl;
-		return -1;
+		return -3;
 	}
 	// Show what we got access to after a request for keys:
 	for each (ISAgentGetKeysResponse::Key responseKey in fetchResponse.getKeys())
@@ -57,7 +56,7 @@ int main()
 	//  This would happen if policy didn't give us access to all the keys.
 	if (fetchResponse.getKeys().size() < fetchRequest.getKeyIds().size()) {
 		std::cout << "We didn't get given all of the requested keys." << std::endl;
-		return -2;
+		return -4;
 	}
 
 	getchar();

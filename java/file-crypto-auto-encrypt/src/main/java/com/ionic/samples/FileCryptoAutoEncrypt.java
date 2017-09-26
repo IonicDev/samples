@@ -45,6 +45,6 @@ public class FileCryptoAutoEncrypt
     attrMap.set("classification", values);
     encryptAttributes.setKeyAttributes(attrMap);
     
-    fileCipher.encrypt(pathToPlainFile, pathToEncryptedFile);
+    fileCipher.encrypt(pathToPlainFile, pathToEncryptedFile, encryptAttributes);
   }
 }
