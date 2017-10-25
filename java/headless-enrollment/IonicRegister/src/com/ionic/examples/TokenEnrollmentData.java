@@ -1,12 +1,16 @@
+/*
+ * (c) 2017 Ionic Security Inc.
+ * By using this code, I agree to the Terms & Conditions (https://www.ionic.com/terms-of-use/)
+ * and the Privacy Policy (https://www.ionic.com/privacy-notice/).
+ */
+
 package com.ionic.examples;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
- * A bean (read) for passing the necessary enrollment data around
- * @author Ionic Security
- *
+ * A bean for passing the necessary enrollment data around.
  */
 public class TokenEnrollmentData {
 

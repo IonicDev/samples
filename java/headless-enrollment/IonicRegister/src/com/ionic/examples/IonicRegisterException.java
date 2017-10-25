@@ -1,9 +1,13 @@
+/*
+ * (c) 2017 Ionic Security Inc.
+ * By using this code, I agree to the Terms & Conditions (https://www.ionic.com/terms-of-use/)
+ * and the Privacy Policy (https://www.ionic.com/privacy-notice/).
+ */
+
 package com.ionic.examples;
 
 /**
-* an Exception that we can use for enrollment errors
-* @author Ionic Security
-*
+* An Exception that we can use for enrollment errors
 */
 public class IonicRegisterException extends Exception {
 

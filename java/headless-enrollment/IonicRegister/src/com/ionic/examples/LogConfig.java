@@ -1,5 +1,10 @@
-package com.ionic.examples;
+/*
+ * (c) 2017 Ionic Security Inc.
+ * By using this code, I agree to the Terms & Conditions (https://www.ionic.com/terms-of-use/)
+ * and the Privacy Policy (https://www.ionic.com/privacy-notice/).
+ */
 
+package com.ionic.examples;
 
 import java.util.ArrayList;
 
@@ -7,11 +12,8 @@ import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * A class to define a Log Configuration that can be used to generate a JSON representation for configuration of a
- * Ionic Log instance.
- * 
- * @author IonicSecurity
- *
+ * A class to define a Log Configuration that can be used to generate a JSON representation for
+ * configuration of a Ionic SDK Log instance.
  */
 public class LogConfig {
 	/**
@@ -98,8 +100,7 @@ public class LogConfig {
 	}			
 	
 	/**
-	 * A class to define a LogFilter. 
-	 * @author Ionic Security
+	 * A class to define a LogFilter.
 	 *
 	 * @see FilterType
 	 * @see LevelType
@@ -153,10 +154,7 @@ public class LogConfig {
 	}
 	
 	/**
-	 * 
-	 * @author Ionic Security
 	 * A class to define a log writer
-	 *
 	 */
 	class LogWriter {
 		
@@ -254,7 +252,6 @@ public class LogConfig {
 		}
 		
 		/** 
-		 * 
 		 * Set the file pattern
 		 * 
 		 * @param filePattern
@@ -329,9 +326,6 @@ public class LogConfig {
 	}
 	
 	/**
-	 * 
-	 * @author Ionic Security
-	 * 
 	 * A class to define a Log Sink.  You can have multiple of these in a LogConfig
 	 * A LogSink has a list of Channels a filter and a list of writers
 	 * @see Channel
@@ -356,7 +350,6 @@ public class LogConfig {
 		}
 		
 		/**
-		 * 
 		 * @param channel
 		 * @see Channel
 		 */
@@ -385,7 +378,9 @@ public class LogConfig {
 	}
 	
 	/**
-	 * Get a JSON string representation of the LogConfig object that can be used to config a Logger. This is really the point of this class
+	 * Get a JSON string representation of the LogConfig object that can be used to config a Logger.
+	 * Producing this output is the point of this class.
+	 * 
 	 * @return A JSON String 
 	 */
 	public String toJson() {
