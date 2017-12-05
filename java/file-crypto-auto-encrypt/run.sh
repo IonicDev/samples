@@ -1,8 +1,15 @@
 #!/bin/bash
 
-IS_SDK_LIB=${IONIC_REPO_ROOT}/ISAgentSDKJava/Lib/Linux/Release/x86_64
-IS_SDK_JAR=${IONIC_REPO_ROOT}/ISAgentSDKJava/Lib/Linux/Release/universal/AgentSdkJava.jar
+if [ `uname` == "Linux" ]; then
+    SDK_LIBDIR=Linux/Release/x86_64
+elif [ `uname` == "Darwin" ]; then
+    SDK_LIBDIR=MacOSX/Release/universal
+else
+    echo "Unexpected OS"
+    exit 1
+fi
 
-MAIN_CLASS=FileCryptoAutoEncrypt
-java -Djava.library.path=${IS_SDK_LIB} -cp ${IS_SDK_JAR}:./src/main/java/com/ionic/samples ${MAIN_CLASS} $1 $2
-
+IONIC_CLASSPATH="$IONIC_SDK_PATH/ISAgentSDKJava/Lib/${SDK_LIBDIR}"
+export MAVEN_OPTS="-Djava.library.path=${IONIC_CLASSPATH}"
+ARGS=\"$@\"
+eval mvn exec:java -Dexec.args="$ARGS"

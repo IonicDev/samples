@@ -1,6 +1,6 @@
 PROJECT=$(lastword $(subst /, ,$(CURDIR)))
 PROJECT_TYPE=exe
-SDKDIR?=../../../ISAgentSDK/
+SDKDIR?=$(IONIC_SDK_PATH)/ISAgentSDK/
 SRCDIR?=src/
 OBJDIR?=obj/
 CFLAGS+= -I . -I include/ -I $(SRCDIR)/ -I $(SDKDIR)/Include/
@@ -13,9 +13,10 @@ OBJS_CPP=$(subst $(SRCDIR),$(OBJDIR), \
 UNAME_S=$(shell uname -s)
 ifeq ($(UNAME_S),Linux)
 	TGT=linux
+	CFLAGS+= -D__STDC_LIMIT_MACROS -D_GLIBCXX_USE_CXX11_ABI=0
 	LDFLAGS= \
-	$(SDKDIR)/Lib/Linux/Debug/x86_64/libISAgentSDK.a \
-      -lcurl -lpthread
+	  $(SDKDIR)/Lib/Linux/Release/x86_64/libISAgentSDK.a \
+	  -lcurl -lpthread -lm -lstdc++
 else
 	TGT=mac
 	LDFLAGS= \
