@@ -1,6 +1,6 @@
 PROG1 = chunk-decrypt
-IONIC_SDK_PATH?=~/Documents/
-SDKDIR=$(IONIC_SDK_PATH)/ISAgentSDKC/
+IONIC_SDK_PATH=~/Documents
+SDKDIR=$(IONIC_SDK_PATH)/ISAgentSDKC
 CC=gcc
 OBJS_C=chunk-decrypt.c
 #CFLAGS= -x c -Wall -ggdb -I. -I include/
@@ -16,7 +16,7 @@ ifeq ($(UNAME_S),Linux)
 	CFLAGS+= -I $(SDKDIR)/Include/
 else
 	#SDKDIR = $(IONIC_SDK_PATH)/IonicSDK_c_OSX_1_0_0
-	DYLIB=$(SDKDIR)/Lib/MacOSX/Release/universal/libISAgentSDKC.dylib
+	DYLIB=$(SDKDIR)/Lib/MacOSX/Debug/universal/libISAgentSDKC.dylib
 	POSTBUILD=cp $(DYLIB) .
 	LDFLAGS= \
           -rpath @executable_path/ \

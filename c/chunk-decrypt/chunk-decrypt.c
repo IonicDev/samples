@@ -4,7 +4,7 @@
  * and the Privacy Policy (https://www.ionic.com/privacy-notice/).
  */
 
-#include "../Include/ISAgentSDKC.h"
+#include <ISAgentSDKC.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
