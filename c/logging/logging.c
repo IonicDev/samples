@@ -12,7 +12,8 @@
 
 #define MY_APPLICATION_CHANNEL_NAME "SampleLoggingApplication"
 
-void setupLogging() {
+void setupLogging() 
+{
 	//NOTE: Depending on the severity and channel name, this can cause many of the Ionic internal SDK actions to be logged.
 	//	This is made available as it is useful for debugging, but you may want to filter on your channel instead
 	//	of ISAGENT_LOG_CHANNEL to see content only from your application.

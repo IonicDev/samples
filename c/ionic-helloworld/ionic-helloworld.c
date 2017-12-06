@@ -13,7 +13,8 @@
 void setupLogging();
 bool makeLinuxHomeDirPath(char *pathFromHomeDir, char *plainSepPath);
 
-int main() {
+int main() 
+{
     setupLogging();
 
     // Setup an agent object to talk to Ionic
@@ -76,7 +77,8 @@ int main() {
 
 // UTILITY FUNCTIONS
 
-void setupLogging() {
+void setupLogging() 
+{
     // Set up logging
     // Create file to write log to
     const char *pszOutputLogFile = "log.txt";
@@ -87,7 +89,8 @@ void setupLogging() {
     }
 }
 
-bool makeLinuxHomeDirPath(char *pathFromHomeDir, char *plainSepPath) {
+bool makeLinuxHomeDirPath(char *pathFromHomeDir, char *plainSepPath) 
+{
     char *tmp = getenv("HOME");
     if (tmp == NULL) {
         return false;

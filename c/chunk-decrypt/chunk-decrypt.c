@@ -10,8 +10,8 @@
 #include <string.h>
 #include <errno.h>
 
-int main() {
-    
+int main() 
+{    
 	// TODO: Update the below string to your encrypted value from IonicHelloWorld, e.g. "~!2!ABcd...AA!Nk...Wp!"
     char *encryptedText = "{SET_ENCRYPTED_STRING_HERE}";
 	if (strcmp(encryptedText, "{SET_ENCRYPTED_STRING_HERE}") == 0) {
