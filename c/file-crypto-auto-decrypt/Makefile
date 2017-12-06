@@ -1,5 +1,4 @@
 PROG1 = file-crypto-auto-decrypt
-IONIC_SDK_PATH=~/Documents
 SDKDIR=$(IONIC_SDK_PATH)/ISAgentSDKC
 CC=gcc
 OBJS_C=file-crypto-auto-decrypt.c

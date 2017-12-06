@@ -1,5 +1,4 @@
 PROG1 = chunk-decrypt
-IONIC_SDK_PATH=~/Documents
 SDKDIR=$(IONIC_SDK_PATH)/ISAgentSDKC
 CC=gcc
 OBJS_C=chunk-decrypt.c
