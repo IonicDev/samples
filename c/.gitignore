@@ -2,6 +2,7 @@
 *.dylib
 */.DS_Store
 *.txt
+*.log
 file-crypto-auto-encrypt/file-crypto-auto-encrypt
 file-crypto-auto-decrypt/file-crypto-auto-decrypt
 chunk-decrypt/chunk-decrypt
