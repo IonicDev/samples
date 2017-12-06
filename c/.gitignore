@@ -1,3 +1,4 @@
 *.o
 *.dylib
 *.DS_Store
+*.txt
