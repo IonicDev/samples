@@ -28,7 +28,7 @@ int main()
     // Forming the key request
     // Declare an array object to put the keys in:
     ionic_key_data_array_t *keyDataArrayOut;
-    // Now ask the server to make those keys:
+    // Now ask the server to make a number of keys... 2 in this case:
     int createKeyCode = ionic_agent_create_keys(agent, attrsMap, 2, NULL, &keyDataArrayOut, NULL);
     if (createKeyCode != ISC_OK) {
         printf("Error creating keys: %s\n", ionic_get_error_str(createKeyCode));
