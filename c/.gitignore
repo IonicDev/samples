@@ -1,10 +1,10 @@
 *.o
 *.dylib
-*.DS_Store
+*/.DS_Store
 *.txt
-file-crypto-auto-encrypt
-file-crypto-auto-decrypt
-chunk-decrypt
-logging
-ionic-helloworld
-direct-keys
+file-crypto-auto-encrypt/file-crypto-auto-encrypt
+file-crypto-auto-decrypt/file-crypto-auto-decrypt
+chunk-decrypt/chunk-decrypt
+logging/logging
+ionic-helloworld/ionic-helloworld
+direct-keys/direct-keys
