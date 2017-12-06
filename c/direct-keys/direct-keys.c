@@ -25,7 +25,7 @@ int main()
 		exit(-1);
     }
 
-    // Forming the key request object
+    // Forming the key request
     // Declare an array object to put the keys in:
     ionic_key_data_array_t *keyDataArrayOut;
     // Now ask the server to make those keys:
@@ -44,12 +44,11 @@ int main()
     }
 
 
-    
     // The rest of this program would typically happen at a different time,
     //  not right after creating the keys, but when you were going to access
     //  the data protected by those keys.
 
-	// Now, using the Key Tags, ask the server for those keys again:
+    // Now, using the Key Tags, ask the server for those keys again:
 	// NOTE: We populated the 'keyIds' array of keytags in the above loop.
     ionic_key_data_array_t *keyDataArrayOutSecondary;
     int getKeyCode = ionic_agent_get_keys(agent, keyIds, 2, NULL, &keyDataArrayOutSecondary, NULL);
@@ -73,7 +72,6 @@ int main()
 		exit(-4);
 	}
 
-    
     // Release memory allocated by Ionic SDK
     int releaseError = ionic_release(keyDataArrayOut);
     if (releaseError != ISC_OK) {

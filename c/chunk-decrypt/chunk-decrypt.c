@@ -13,12 +13,11 @@
 int main() {
     
 	// TODO: Update the below string to your encrypted value from IonicHelloWorld, e.g. "~!2!ABcd...AA!Nk...Wp!"
-    char *encryptedText = "~!2!HVzG334Nm24!6S8oWtCJSoRnt544OZRUOuRu2wrsniiNFIt3dw!";
+    char *encryptedText = "{SET_ENCRYPTED_STRING_HERE}";
 	if (strcmp(encryptedText, "{SET_ENCRYPTED_STRING_HERE}") == 0) {
-		printf("You MUST set the output from IonicHelloWorld (or similar) to decrypt.\n");
+		printf("You MUST set the output from ionic-helloworld (or similar) to decrypt.\n");
 		exit(-1);
 	}
-
 
     // Setup an agent object to talk to Ionic
     ionic_profile_persistor_t *profileLoaderOpt = ionic_profile_persistor_create_default();
@@ -37,6 +36,7 @@ int main() {
 		exit(-2);
     }
 
+    // Show your plaintext and ciphertext
     printf("Chunk-Encrypted String: %s\n", encryptedText);
     printf("Decrypted String: %s\n", plaintext);
     

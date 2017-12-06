@@ -43,6 +43,7 @@ int main() {
         printf("Register a device before continuing.\n");
 		exit(-2);
     }
+
     // Setup a Chunk Crypto object to handle Ionic encryption
     ionic_chunkcipher_t *chunkCrypto = ionic_chunkcipher_create_auto(agent);
 
@@ -59,6 +60,7 @@ int main() {
 		exit(-3);
     }
     
+    // Show your plaintext and ciphertext
     printf("Plain Text: %s\n", input);
     printf("Ionic Chunk Encrypted Text: %s\n", encryptedText);
 
@@ -75,27 +77,14 @@ int main() {
 // UTILITY FUNCTIONS
 
 void setupLogging() {
+    // Set up logging
+    // Create file to write log to
     const char *pszOutputLogFile = "log.txt";
     int logError = ionic_log_setup_simple(pszOutputLogFile, false, ISLOG_SEV_DEBUG); 
     if (logError != ISC_OK) {
         printf("Error setting up log: %s\n", ionic_get_error_str(logError));
 		exit(-1);
     }
-
-    /*
-	ISLogFilterSeverity * pConsoleFilter = new ISLogFilterSeverity(SEV_DEBUG);
-	ISLogWriterConsole * pConsoleWriter = new ISLogWriterConsole();
-	pConsoleWriter->setFilter(pConsoleFilter);
-	// Initialize log sink(s)
-	ISLogSink * pSink = new ISLogSink();
-	pSink->registerChannelName(ISAGENT_LOG_CHANNEL);
-	pSink->registerWriter(pConsoleWriter);
-	// Initialize logger.
-	ISLogImpl * pLogger = new ISLogImpl(true);
-	pLogger->registerSink(pSink);
-	// Assign logger to static interface ISLog
-	ISLog::setSingleton(pLogger);
-    */
 }
 
 bool makeLinuxHomeDirPath(char *pathFromHomeDir, char *plainSepPath) {
