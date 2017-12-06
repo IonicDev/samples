@@ -13,6 +13,7 @@
 
 int main()
 {
+    // Can be done with other file types, too, like .docx, etc.
 	char inFilePath[] = "example_file.txt";
 	char outFilePath[] = "example_file_encrypted.txt";
     
