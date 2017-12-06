@@ -1,8 +1,8 @@
-PROG1 = chunk-decrypt
+PROG1 = ionic-helloworld
 IONIC_SDK_PATH=~/Documents
 SDKDIR=$(IONIC_SDK_PATH)/ISAgentSDKC
 CC=gcc
-OBJS_C=chunk-decrypt.c
+OBJS_C=ionic-helloworld.c
 CFLAGS=-I . -std=gnu99
 POSTBUILD=
 

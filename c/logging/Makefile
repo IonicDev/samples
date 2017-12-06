@@ -1,8 +1,8 @@
-PROG1 = chunk-decrypt
+PROG1 = logging
 IONIC_SDK_PATH=~/Documents
 SDKDIR=$(IONIC_SDK_PATH)/ISAgentSDKC
 CC=gcc
-OBJS_C=chunk-decrypt.c
+OBJS_C=logging.c
 CFLAGS=-I . -std=gnu99
 POSTBUILD=
 

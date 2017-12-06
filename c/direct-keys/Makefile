@@ -1,8 +1,8 @@
-PROG1 = chunk-decrypt
+PROG1 = direct-keys
 IONIC_SDK_PATH=~/Documents
 SDKDIR=$(IONIC_SDK_PATH)/ISAgentSDKC
 CC=gcc
-OBJS_C=chunk-decrypt.c
+OBJS_C=direct-keys.c
 CFLAGS=-I . -std=gnu99
 POSTBUILD=
 
