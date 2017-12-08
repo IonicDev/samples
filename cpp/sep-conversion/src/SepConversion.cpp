@@ -86,6 +86,14 @@ int main(int argc, char* argv[])
 		std::cout << agent.getAllProfiles().size() << " were loaded." << std::endl;
 	}
 
+	// Check if there are profiles.
+	if (!agent.hasAnyProfiles()) {
+		std::cout << "There are no device profiles on this device." << std::endl;
+		std::cout << "Register a device before continuing." << std::endl;
+		return -1;
+	}
+
     std::getchar();
 	return 0;
 }
+

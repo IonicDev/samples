@@ -7,11 +7,42 @@
 #include <stdio.h>
 #include <ISAgent.h>
 
+bool makeLinuxHomeDirPath(std::string pathFromHomeDir, std::string & fullPath);
+
 int main()
 {
-    // Initialize the Ionic agent
+    // Setup an agent object to talk to Ionic
     ISAgent agent;
-    agent.initialize();
+    int nErrorCode;
+#if __linux__
+    //NOTE: On Linux, you must add additional code here, see "Getting Started" for C++ on Linux.
+    std::string plainSepPath;
+    if (!makeLinuxHomeDirPath(".ionicsecurity/profiles.pt", plainSepPath)) { // Makes the absolute path for ~/.ionic/profiles.pt
+        std::cerr << "Error getting home directory path." << std::endl;
+        return -1;
+    }
+    ISAgentDeviceProfilePersistorPlaintext plainPersistor;
+    plainPersistor.setFilePath(plainSepPath);
+    std::cout << "Initializing agent..." << std::endl;
+    nErrorCode = agent.initialize(plainPersistor);
+    if (nErrorCode != ISAGENT_OK) {
+        std::cerr << "Error initializing agent: " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
+    } else {
+        std::cout << "A plaintext SEP was loaded from " << plainSepPath << std::endl;
+    }
+#else
+    nErrorCode = agent.initialize();
+    if (nErrorCode != ISAGENT_OK) {
+        std::cerr << "Error initializing agent: " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
+    }
+#endif
+
+	// Check if there are profiles.
+	if (!agent.hasAnyProfiles()) {
+		std::cout << "There are no device profiles on this device." << std::endl;
+		std::cout << "Register a device before continuing." << std::endl;
+		return -1;
+	}
 
     // Request keys
     // Forming the key request object
@@ -61,4 +92,14 @@ int main()
 
 	getchar();
     return 0;
+}
+
+bool makeLinuxHomeDirPath(std::string pathFromHomeDir, std::string & fullPath) {
+    char const* tmp = getenv("HOME");
+    if (tmp == NULL) {
+        return false;
+    } else {
+        fullPath = std::string(tmp) + "/" + pathFromHomeDir;
+        return true;
+    }
 }
