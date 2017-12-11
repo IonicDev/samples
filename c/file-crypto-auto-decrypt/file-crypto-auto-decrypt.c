@@ -35,30 +35,30 @@ int main()
 
 #endif
 
-	// Check if there are profiles.
-	if (ionic_agent_has_any_profiles(agent) == false) {
-		printf("There are no device profiles on this device.\n");
+    // Check if there are profiles.
+    if (ionic_agent_has_any_profiles(agent) == false) {
+        printf("There are no device profiles on this device.\n");
         printf("Register a device before continuing.\n");
-		exit(-2);
+        exit(-2);
     }
 
-	// Can be done with other file types, too, like .docx, etc.
-	char inFilePath[] = "example_file_encrypted.txt";
-	char outFilePath[] = "example_file_decrypted.txt";
+    // Can be done with other file types, too, like .docx, etc.
+    char inFilePath[] = "example_file_encrypted.txt";
+    char outFilePath[] = "example_file_decrypted.txt";
 
-	//Encrypt the file using the classification
-	ionic_filecipher_t *fileCipher = ionic_filecipher_create_auto(agent);
-	int nErrorCode = ionic_filecipher_decrypt(fileCipher, inFilePath, outFilePath);
+    //Encrypt the file using the classification
+    ionic_filecipher_t *fileCipher = ionic_filecipher_create_auto(agent);
+    int nErrorCode = ionic_filecipher_decrypt(fileCipher, inFilePath, outFilePath);
 
-	// Validate the response
-	if (nErrorCode != ISC_OK) {
-		printf("Error decrypting: %s\n", ionic_get_error_str(nErrorCode));
-		exit(-3);
-	}
+    // Validate the response
+    if (nErrorCode != ISC_OK) {
+        printf("Error decrypting: %s\n", ionic_get_error_str(nErrorCode));
+        exit(-3);
+    }
 
-	printf("Decrypted file %s to %s\n", inFilePath, outFilePath);
+    printf("Decrypted file %s to %s\n", inFilePath, outFilePath);
 
-	return 0;
+    return 0;
 }
 
 bool makeLinuxHomeDirPath(char *pathFromHomeDir, char *plainSepPath) 

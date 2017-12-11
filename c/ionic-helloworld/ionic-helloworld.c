@@ -37,11 +37,11 @@ int main()
 
 #endif
 
-	// Check if there are profiles.
-	if (ionic_agent_has_any_profiles(agent) == false) {
-		printf("There are no device profiles on this device.\n");
+    // Check if there are profiles.
+    if (ionic_agent_has_any_profiles(agent) == false) {
+        printf("There are no device profiles on this device.\n");
         printf("Register a device before continuing.\n");
-		exit(-2);
+        exit(-2);
     }
 
     // Setup a Chunk Crypto object to handle Ionic encryption
@@ -53,11 +53,11 @@ int main()
     // Encrypt the string using an Ionic-managed Key
     char *encryptedText;
     int nErrorCode = ionic_chunkcipher_encrypt_str(chunkCrypto, input, &encryptedText); 
-	
+    
     // Validate the response
     if (nErrorCode != ISC_OK) {
         printf("Error encrypting: %s\n", ionic_get_error_str(nErrorCode));
-		exit(-3);
+        exit(-3);
     }
     
     // Show your plaintext and ciphertext
@@ -68,7 +68,7 @@ int main()
     int releaseError = ionic_release(encryptedText);
     if (releaseError != ISC_OK) {
         printf("Error freeing memory: %s\n", ionic_get_error_str(releaseError));
-		exit(-4);
+        exit(-4);
     }
 
     return 0;
@@ -84,7 +84,7 @@ void setupLogging()
     int logError = ionic_log_setup_simple(pszOutputLogFile, false, ISLOG_SEV_DEBUG); 
     if (logError != ISC_OK) {
         printf("Error setting up log: %s\n", ionic_get_error_str(logError));
-		exit(-1);
+        exit(-1);
     }
 }
 

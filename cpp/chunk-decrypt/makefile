@@ -12,18 +12,18 @@ OBJS_CPP=$(subst $(SRCDIR),$(OBJDIR), \
 
 UNAME_S=$(shell uname -s)
 ifeq ($(UNAME_S),Linux)
-	TGT=linux
-	LDFLAGS= \
-	$(SDKDIR)/Lib/Linux/Debug/x86_64/libISAgentSDK.a \
+  TGT=linux
+  LDFLAGS= \
+  $(SDKDIR)/Lib/Linux/Debug/x86_64/libISAgentSDK.a \
       -lcurl -lpthread
 else
-	TGT=mac
-	LDFLAGS= \
-	  $(SDKDIR)/Lib/MacOSX/Release/universal/libISAgentSDK.a \
-	  -lstdc++ \
-	  -framework CoreFoundation -framework CoreServices \
-	  -framework IOKit -framework Foundation -framework Security
-	CFLAGS+= -fvisibility-inlines-hidden
+  TGT=mac
+  LDFLAGS= \
+    $(SDKDIR)/Lib/MacOSX/Release/universal/libISAgentSDK.a \
+    -lstdc++ \
+    -framework CoreFoundation -framework CoreServices \
+    -framework IOKit -framework Foundation -framework Security
+  CFLAGS+= -fvisibility-inlines-hidden
 endif
 
 ifeq ($(PROJECT_TYPE), lib)
@@ -36,17 +36,17 @@ endif
 all: $(ALLDEP)
 
 $(OBJDIR):
-	mkdir -p $(OBJDIR)
+  mkdir -p $(OBJDIR)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp | $(OBJDIR)
-	$(CXX) -fPIC $(CFLAGS) -o $@ -c $^
+  $(CXX) -fPIC $(CFLAGS) -o $@ -c $^
 
 lib$(PROJECT)_$(TGT).so: $(OBJS_CPP)
-	$(CC) -shared -fPIC $(CFLAGS) -o $@ $^ $(LDFLAGS)
+  $(CC) -shared -fPIC $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
 $(PROJECT)_$(TGT): $(OBJS_CPP)
-	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
+  $(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
 .PHONY:
 clean:
-	rm -f $(PROJECT)_$(TGT) lib$(PROJECT)_$(TGT).so $(OBJS_CPP)
+  rm -f $(PROJECT)_$(TGT) lib$(PROJECT)_$(TGT).so $(OBJS_CPP)

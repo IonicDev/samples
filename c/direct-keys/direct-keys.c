@@ -34,11 +34,11 @@ int main()
 
 #endif
 
-	// Check if there are profiles.
-	if (ionic_agent_has_any_profiles(agent) == false) {
-		printf("There are no device profiles on this device.\n");
+    // Check if there are profiles.
+    if (ionic_agent_has_any_profiles(agent) == false) {
+        printf("There are no device profiles on this device.\n");
         printf("Register a device before continuing.\n");
-		exit(-2);
+        exit(-2);
     }
 
     // Request keys
@@ -47,7 +47,7 @@ int main()
     int nAttrError = ionic_attributesmap_set(attrsMap, "classification", "Restricted");
     if (nAttrError != ISC_OK) {
         printf("Error setting attribute map: %s\n", ionic_get_error_str(nAttrError));
-		exit(-3);
+        exit(-3);
     }
 
     // Forming the key request
@@ -74,7 +74,7 @@ int main()
     //  the data protected by those keys.
 
     // Now, using the Key Tags, ask the server for those keys again:
-	// NOTE: We populated the 'keyIds' array of keytags in the above loop.
+    // NOTE: We populated the 'keyIds' array of keytags in the above loop.
     ionic_key_data_array_t *keyDataArrayOutSecondary;
     int getKeyCode = ionic_agent_get_keys(agent, keyIds, 2, NULL, &keyDataArrayOutSecondary, NULL);
     if (getKeyCode != ISC_OK) {
@@ -82,7 +82,7 @@ int main()
         exit(-5);
     }
 
-	// Show what we got access to after a request for keys:
+    // Show what we got access to after a request for keys:
     char *keyIdsSecondary[keyDataArrayOutSecondary->nSize];
     for(int j = 0; (j < (int)keyDataArrayOutSecondary->nSize); j++) {
         char *idSecondary = keyDataArrayOutSecondary->ppKeyArray[j]->pszKeyId;
@@ -90,24 +90,24 @@ int main()
         printf("We fetched a key with the Key Tag: %s\n", keyIdsSecondary[j]);
     }
 
-	// Tell us if we got less keys when we fetched than we created.
-	//  This would happen if policy didn't give us access to all the keys.
-	if (sizeof(keyIdsSecondary) < sizeof(keyIds)) {
-		printf("We didn't get given all of the requested keys.\n");
-		exit(-6);
-	}
+    // Tell us if we got less keys when we fetched than we created.
+    //  This would happen if policy didn't give us access to all the keys.
+    if (sizeof(keyIdsSecondary) < sizeof(keyIds)) {
+        printf("We didn't get given all of the requested keys.\n");
+        exit(-6);
+    }
 
     // Release memory allocated by Ionic SDK
     int releaseError = ionic_release(keyDataArrayOut);
     if (releaseError != ISC_OK) {
         printf("Error freeing memory: %s\n", ionic_get_error_str(releaseError));
-		exit(-7);
+        exit(-7);
     }
     // Release memory allocated by Ionic SDK
     int releaseError2 = ionic_release(keyDataArrayOutSecondary);
     if (releaseError2 != ISC_OK) {
         printf("Error freeing memory: %s\n", ionic_get_error_str(releaseError2));
-		exit(-7);
+        exit(-7);
     }
 
     return 0;

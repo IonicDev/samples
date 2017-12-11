@@ -35,37 +35,37 @@ int main()
 
 #endif
     
-	// Check if there are profiles.
-	if (ionic_agent_has_any_profiles(agent) == false) {
-		printf("There are no device profiles on this device.\n");
+    // Check if there are profiles.
+    if (ionic_agent_has_any_profiles(agent) == false) {
+        printf("There are no device profiles on this device.\n");
         printf("Register a device before continuing.\n");
-		exit(-2);
+        exit(-2);
     }
 
     // Can be done with other file types, too, like .docx, etc.
-	char inFilePath[] = "example_file.txt";
-	char outFilePath[] = "example_file_encrypted.txt";
+    char inFilePath[] = "example_file.txt";
+    char outFilePath[] = "example_file_encrypted.txt";
 
     // Create and apply classification
     ionic_attributesmap_t *attrsMap = ionic_attributesmap_create();
     int nAttrError = ionic_attributesmap_set(attrsMap, "classification", "Restricted");
     if (nAttrError != ISC_OK) {
         printf("Error setting attribute map: %s\n", ionic_get_error_str(nAttrError));
-		exit(-3);
+        exit(-3);
     }
     
     // Encrypt the file using the classification
-	ionic_filecipher_t *fileCipher = ionic_filecipher_create_auto(agent);
-	int nErrorCode = ionic_filecipher_encrypt2(fileCipher, inFilePath, outFilePath, attrsMap, NULL, NULL, NULL, NULL);
-	
-	// Validate the response
-	if (nErrorCode != ISC_OK) {
-		printf("Error encrypting: %s\n", ionic_get_error_str(nErrorCode));
-		exit(-4);
-	}
+    ionic_filecipher_t *fileCipher = ionic_filecipher_create_auto(agent);
+    int nErrorCode = ionic_filecipher_encrypt2(fileCipher, inFilePath, outFilePath, attrsMap, NULL, NULL, NULL, NULL);
+    
+    // Validate the response
+    if (nErrorCode != ISC_OK) {
+        printf("Error encrypting: %s\n", ionic_get_error_str(nErrorCode));
+        exit(-4);
+    }
 
-	printf("Encrypted file %s to %s\n", inFilePath, outFilePath);
-	return 0;
+    printf("Encrypted file %s to %s\n", inFilePath, outFilePath);
+    return 0;
 }
 
 bool makeLinuxHomeDirPath(char *pathFromHomeDir, char *plainSepPath) 

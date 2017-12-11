@@ -13,12 +13,12 @@ bool makeLinuxHomeDirPath(char *pathFromHomeDir, char *plainSepPath);
 
 int main() 
 {    
-	// TODO: Update the below string to your encrypted value from IonicHelloWorld, e.g. "~!2!ABcd...AA!Nk...Wp!"
+    // TODO: Update the below string to your encrypted value from IonicHelloWorld, e.g. "~!2!ABcd...AA!Nk...Wp!"
     char *encryptedText = "{SET_ENCRYPTED_STRING_HERE}";
-	if (strcmp(encryptedText, "{SET_ENCRYPTED_STRING_HERE}") == 0) {
-		printf("You MUST set the output from ionic-helloworld (or similar) to decrypt.\n");
-		exit(-1);
-	}
+    if (strcmp(encryptedText, "{SET_ENCRYPTED_STRING_HERE}") == 0) {
+        printf("You MUST set the output from ionic-helloworld (or similar) to decrypt.\n");
+        exit(-1);
+    }
 
     // Setup an agent object to talk to Ionic
 #if __linux__
@@ -51,7 +51,7 @@ int main()
     // Validate the response
     if (nErrorCode != ISC_OK) {
         printf("Error decrypting: %s\n", ionic_get_error_str(nErrorCode));
-		exit(-3);
+        exit(-3);
     }
 
     // Show your plaintext and ciphertext

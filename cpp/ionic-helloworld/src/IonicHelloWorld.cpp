@@ -46,12 +46,12 @@ int main(int argc, char* argv[]) {
     }
 #endif
 
-	// Check if there are profiles.
-	if (!agent.hasAnyProfiles()) {
-		std::cout << "There are no device profiles on this device." << std::endl;
-		std::cout << "Register a device before continuing." << std::endl;
-		return -1;
-	}
+    // Check if there are profiles.
+    if (!agent.hasAnyProfiles()) {
+        std::cout << "There are no device profiles on this device." << std::endl;
+        std::cout << "Register a device before continuing." << std::endl;
+        return -1;
+    }
 
     // Setup a Chunk Crypto object to handle Ionic encryption
     ISChunkCryptoCipherAuto chunkCrypto(agent);
@@ -75,18 +75,18 @@ int main(int argc, char* argv[]) {
 // UTILITY FUNCTIONS
 
 void setupLogging() {
-	ISLogFilterSeverity * pConsoleFilter = new ISLogFilterSeverity(SEV_DEBUG);
-	ISLogWriterConsole * pConsoleWriter = new ISLogWriterConsole();
-	pConsoleWriter->setFilter(pConsoleFilter);
-	// Initialize log sink(s)
-	ISLogSink * pSink = new ISLogSink();
-	pSink->registerChannelName(ISAGENT_LOG_CHANNEL);
-	pSink->registerWriter(pConsoleWriter);
-	// Initialize logger.
-	ISLogImpl * pLogger = new ISLogImpl(true);
-	pLogger->registerSink(pSink);
-	// Assign logger to static interface ISLog
-	ISLog::setSingleton(pLogger);
+    ISLogFilterSeverity * pConsoleFilter = new ISLogFilterSeverity(SEV_DEBUG);
+    ISLogWriterConsole * pConsoleWriter = new ISLogWriterConsole();
+    pConsoleWriter->setFilter(pConsoleFilter);
+    // Initialize log sink(s)
+    ISLogSink * pSink = new ISLogSink();
+    pSink->registerChannelName(ISAGENT_LOG_CHANNEL);
+    pSink->registerWriter(pConsoleWriter);
+    // Initialize logger.
+    ISLogImpl * pLogger = new ISLogImpl(true);
+    pLogger->registerSink(pSink);
+    // Assign logger to static interface ISLog
+    ISLog::setSingleton(pLogger);
 }
 
 bool makeLinuxHomeDirPath(std::string pathFromHomeDir, std::string & fullPath) {

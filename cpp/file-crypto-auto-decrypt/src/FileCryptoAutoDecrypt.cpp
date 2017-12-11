@@ -13,8 +13,8 @@ bool makeLinuxHomeDirPath(std::string pathFromHomeDir, std::string & fullPath);
 
 int main()
 {
-	std::string inFilePath("example_file_encrypted.docx");
-	std::string outFilePath("example_file_decrypted.docx");
+    std::string inFilePath("example_file_encrypted.docx");
+    std::string outFilePath("example_file_decrypted.docx");
 
     // Setup an agent object to talk to Ionic
     ISAgent agent;
@@ -42,29 +42,29 @@ int main()
     }
 #endif
 
-	// Check if there are profiles.
-	if (!agent.hasAnyProfiles()) {
-		std::cout << "There are no device profiles on this device." << std::endl;
-		std::cout << "Register a device before continuing." << std::endl;
-		return -1;
-	}
+    // Check if there are profiles.
+    if (!agent.hasAnyProfiles()) {
+        std::cout << "There are no device profiles on this device." << std::endl;
+        std::cout << "Register a device before continuing." << std::endl;
+        return -1;
+    }
 
-	//Encrypt the file using the classification
-	ISFileCryptoCipherAuto cipher(agent);
-	int nErrorCode = cipher.decrypt(inFilePath, outFilePath);
+    //Encrypt the file using the classification
+    ISFileCryptoCipherAuto cipher(agent);
+    int nErrorCode = cipher.decrypt(inFilePath, outFilePath);
 
-	// Validate the response
-	if (nErrorCode != ISCRYPTO_OK) {
-		std::cerr << "Error decrypting " << inFilePath << ": " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
-		std::cout << "Press return to exit.";
-		std::getchar();
-		return -2;
-	}
+    // Validate the response
+    if (nErrorCode != ISCRYPTO_OK) {
+        std::cerr << "Error decrypting " << inFilePath << ": " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
+        std::cout << "Press return to exit.";
+        std::getchar();
+        return -2;
+    }
 
-	std::cout << "Decrypted file " << inFilePath << " to " << outFilePath << "." << std::endl;
-	std::cout << "Press return to exit.";
-	std::getchar();
-	return 0;
+    std::cout << "Decrypted file " << inFilePath << " to " << outFilePath << "." << std::endl;
+    std::cout << "Press return to exit.";
+    std::getchar();
+    return 0;
 }
 
 bool makeLinuxHomeDirPath(std::string pathFromHomeDir, std::string & fullPath) {

@@ -42,12 +42,12 @@ int main()
     }
 #endif
 
-	// Check if there are profiles.
-	if (!agent.hasAnyProfiles()) {
-		std::cout << "There are no device profiles on this device." << std::endl;
-		std::cout << "Register a device before continuing." << std::endl;
-		return -1;
-	}
+    // Check if there are profiles.
+    if (!agent.hasAnyProfiles()) {
+        std::cout << "There are no device profiles on this device." << std::endl;
+        std::cout << "Register a device before continuing." << std::endl;
+        return -1;
+    }
     
     // Create a classification
     std::map< std::string, std::vector< std::string > > map;
@@ -59,20 +59,20 @@ int main()
     
     // Encrypt the file using the classification
     ISFileCryptoCipherAuto cipher(agent);
-	int nErrorCode = cipher.encrypt(inFilePath, outFilePath, &attribs);
-	
-	// Validate the response
-	if (nErrorCode != ISCRYPTO_OK) {
-		std::cerr << "Error encrypting " << inFilePath << ": " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
-		std::cout << "Press return to exit.";
-		std::getchar();
-		return -2;
-	}
+    int nErrorCode = cipher.encrypt(inFilePath, outFilePath, &attribs);
+    
+    // Validate the response
+    if (nErrorCode != ISCRYPTO_OK) {
+        std::cerr << "Error encrypting " << inFilePath << ": " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
+        std::cout << "Press return to exit.";
+        std::getchar();
+        return -2;
+    }
 
-	std::cout << "Encrypted file " << inFilePath << " to " << outFilePath << "." << std::endl;
-	std::cout << "Press return to exit.";
-	std::getchar();
-	return 0;
+    std::cout << "Encrypted file " << inFilePath << " to " << outFilePath << "." << std::endl;
+    std::cout << "Press return to exit.";
+    std::getchar();
+    return 0;
 }
 
 bool makeLinuxHomeDirPath(std::string pathFromHomeDir, std::string & fullPath) {
