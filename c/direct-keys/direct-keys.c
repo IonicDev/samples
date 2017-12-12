@@ -104,9 +104,9 @@ int main()
         exit(-7);
     }
     // Release memory allocated by Ionic SDK
-    int releaseError2 = ionic_release(keyDataArrayOutSecondary);
-    if (releaseError2 != ISC_OK) {
-        printf("Error freeing memory: %s\n", ionic_get_error_str(releaseError2));
+    releaseError = ionic_release(keyDataArrayOutSecondary);
+    if (releaseError != ISC_OK) {
+        printf("Error freeing memory: %s\n", ionic_get_error_str(releaseError));
         exit(-7);
     }
 

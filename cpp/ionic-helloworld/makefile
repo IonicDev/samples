@@ -7,29 +7,29 @@ CFLAGS+= -I . -I include/ -I $(SRCDIR)/ -I $(SDKDIR)/Include/
 CXX?=g++
 
 OBJS_CPP=$(subst $(SRCDIR),$(OBJDIR), \
-  $(subst .cpp,.o,                    \
-    $(wildcard $(SRCDIR)/*.cpp)))
+	$(subst .cpp,.o,                    \
+		$(wildcard $(SRCDIR)/*.cpp)))
 
 UNAME_S=$(shell uname -s)
 ifeq ($(UNAME_S),Linux)
 	TGT=linux
 	LDFLAGS= \
 	$(SDKDIR)/Lib/Linux/Debug/x86_64/libISAgentSDK.a \
-      -lcurl -lpthread
+			-lcurl -lpthread
 else
 	TGT=mac
 	LDFLAGS= \
-	  $(SDKDIR)/Lib/MacOSX/Release/universal/libISAgentSDK.a \
-	  -lstdc++ \
-	  -framework CoreFoundation -framework CoreServices \
-	  -framework IOKit -framework Foundation -framework Security
+		$(SDKDIR)/Lib/MacOSX/Release/universal/libISAgentSDK.a \
+		-lstdc++ \
+		-framework CoreFoundation -framework CoreServices \
+		-framework IOKit -framework Foundation -framework Security
 	CFLAGS+= -fvisibility-inlines-hidden
 endif
 
 ifeq ($(PROJECT_TYPE), lib)
-  ALLDEP=lib$(PROJECT)_$(TGT).so
+	ALLDEP=lib$(PROJECT)_$(TGT).so
 else
-  ALLDEP=$(PROJECT)_$(TGT)
+	ALLDEP=$(PROJECT)_$(TGT)
 endif
 
 .PHONY:
