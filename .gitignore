@@ -1,5 +1,7 @@
 # Java
 *.class
+*.jar
+target/
 
 # VS
 .vs/
