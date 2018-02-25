@@ -1,45 +1,43 @@
 /*
  * (c) 2017 Ionic Security Inc.
- * By using this code, I agree to the Terms & Conditions (https://www.ionic.com/terms-of-use/)
+ * By using this code, I agree to the Terms & Conditions (https://dev.ionic.com/use.html)
  * and the Privacy Policy (https://www.ionic.com/privacy-notice/).
  */
 
-import com.ionicsecurity.sdk.AgentSdk;
-import com.ionicsecurity.sdk.Agent;
-import com.ionicsecurity.sdk.DeviceProfilePersistorPlainText;
-import com.ionicsecurity.sdk.ChunkCipherAuto;
+package ionic.hw;
 
-public class IonicHelloWorld 
+import com.ionic.sdk.error.SdkException;
+import com.ionic.sdk.error.AgentErrorModuleConstants;
+import com.ionic.sdk.agent.Agent;
+import com.ionic.sdk.agent.cipher.chunk.ChunkCipherV2;
+import com.ionic.sdk.device.profile.persistor.DeviceProfilePersistorPlainText;
+
+public class IonicHelloWorld
 {
-    public static void main(String[] args) 
+    public static void main(String[] args)
     {
-        // Set input string
-        String str = "Hello World!";
+        try {
+            // Initialize Ionic agent
+            Agent isAgent = new Agent();
+            String profilePath = System.getenv("HOME") + "/.ionicsecurity/profiles.pt";
+            DeviceProfilePersistorPlainText ptPersistor = new DeviceProfilePersistorPlainText(profilePath);
+            isAgent.initialize(ptPersistor);
 
-        // Initialize sdk (calls system load from platform-specific objects)
-        AgentSdk.initialize(null);
+            // Encrypt and decrypt string "hello world"
+            ChunkCipherV2 cipher = new ChunkCipherV2(isAgent);
+            String cipherText = cipher.encrypt("hello world");
+            String plainText = cipher.decrypt(cipherText);
+            System.out.println("Plain Text: " + plainText);
+            System.out.println("Ionic Chunk Encrypted Text: " + cipherText);
 
-        // Initialize Ionic agent
-        Agent agent = new Agent();
-        if (System.getProperty("os.name").startsWith("Linux")) {
-            // Load a plain-text device profile (SEP) from disk if on Linux:
-            DeviceProfilePersistorPlainText ptPersistor = new DeviceProfilePersistorPlainText();
-            String sProfilePath = System.getProperty("user.home") + "/.ionicsecurity/profiles.pt";
-            ptPersistor.setFilePath(sProfilePath);
-            agent.initialize(ptPersistor);
-        } else {
-            // On platforms with a default SEP persistor:
-            agent.initialize();
+        } catch (SdkException e) {
+            System.out.println(e);
+            if(e.getReturnCode() == AgentErrorModuleConstants.ISAGENT_NO_DEVICE_PROFILE.value()) {
+                System.out.println("Profile does not exist");
+            }
+            if(e.getReturnCode() == AgentErrorModuleConstants.ISAGENT_KEY_DENIED.value()) {
+                System.out.println("Key request denied");
+            }
         }
-
-        // Initialize chunk cipher
-        ChunkCipherAuto chunkCipher = new ChunkCipherAuto(agent);
-
-        // Encrypt simple string
-        String ciphertext = chunkCipher.encrypt(str);
-
-        // Output results
-        System.out.println("Plain Text: " + str);
-        System.out.println("Ionic Chunk Encrypted Text: " + ciphertext);
     }
 }

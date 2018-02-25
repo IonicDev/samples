@@ -1,0 +1,14 @@
+# Java
+*.class
+*.jar
+target/
+
+# VS
+.vs/
+*.opendb
+*.sdf
+*.vcxproj.user
+Debug/
+Release/
+obj/
+

@@ -1,18 +1,18 @@
 /*
  * (c) 2017 Ionic Security Inc.
- * By using this code, I agree to the Terms & Conditions (https://www.ionic.com/terms-of-use/)
+ * By using this code, I agree to the Terms & Conditions (https://dev.ionic.com/use.html)
  * and the Privacy Policy (https://www.ionic.com/privacy-notice/).
  */
 
-import com.ionicsecurity.sdk.AgentSdk;
-import com.ionicsecurity.sdk.Agent;
-import com.ionicsecurity.sdk.DeviceProfilePersistorPlainText;
-import com.ionicsecurity.sdk.CreateKeysRequest;
-import com.ionicsecurity.sdk.CreateKeysResponse;
-import com.ionicsecurity.sdk.GetKeysRequest;
-import com.ionicsecurity.sdk.GetKeysResponse;
-import com.ionicsecurity.sdk.KeyAttributesMap;
-import com.ionicsecurity.sdk.SdkException;
+package ionic.directkeys;
+import com.ionic.sdk.error.SdkException;
+import com.ionic.sdk.device.profile.persistor.DeviceProfilePersistorPlainText;
+import com.ionic.sdk.agent.Agent;
+import com.ionic.sdk.agent.request.createkey.CreateKeysRequest;
+import com.ionic.sdk.agent.request.createkey.CreateKeysResponse;
+import com.ionic.sdk.agent.request.getkey.GetKeysRequest;
+import com.ionic.sdk.agent.request.getkey.GetKeysResponse;
+import com.ionic.sdk.agent.key.KeyAttributesMap;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,22 +21,23 @@ public class IonicDirectKeys
 {
     public static void main(String[] args)
     {
-        // Initialize sdk (calls system load from platform-specific objects)
-        AgentSdk.initialize(null);
-
-        // Load a plain-text device profile, or SEP, from disk
-        DeviceProfilePersistorPlainText sepPersistorPt = new DeviceProfilePersistorPlainText();
-        String sProfilePath = System.getProperty("user.home") + "/.ionicsecurity/profile.pt";
-        sepPersistorPt.setFilePath(sProfilePath);
-
-        // Initialize the Ionic agent
+        // Setup an agent object to talk to Ionic
         Agent agent = new Agent();
-        agent.initialize(sepPersistorPt);
+        try {
+            String sProfilePath = System.getenv("HOME") + "/.ionicsecurity/profiles.pt";
+            DeviceProfilePersistorPlainText ptPersistor = new DeviceProfilePersistorPlainText(sProfilePath);
+            agent.initialize(ptPersistor);
+        } catch (SdkException e) {
+            System.out.println("Failed to initialize agent:");
+            System.out.println(e);
+            System.exit(1);
+        }
+
         System.out.println("\nJava Ionic Direct Key Access\n");
-        
+
         // Request keys
         CreateKeysRequest request = new CreateKeysRequest();
-        
+
         // Here update request.getKeys() as the list of what it should create.
         // We are going to add a key attribute "classification", with the single value of "restricted"
         KeyAttributesMap attributes = new KeyAttributesMap();
@@ -68,18 +69,17 @@ public class IonicDirectKeys
         // The rest of this program would typically happen at a different time,
         //  not right after creating the keys, but when you were going to access
         //  the data protected by those keys.
-        
         // Now, using the Key Tags, ask the server for those keys again:
         GetKeysRequest keysRequest = new GetKeysRequest();
         keysRequest.getKeyIds().addAll(createdKeyIds);
-        GetKeysResponse keysResponse;
+        GetKeysResponse keysResponse = null;
         try {
         	keysResponse = agent.getKeys(keysRequest);
         } catch (SdkException ex) {
         	System.out.println("Sdk Exception: " + ex.getMessage());
-        	return;
+        	System.exit(1);
         }
-        
+
         // Show what we got access to after a request for keys:
        for (GetKeysResponse.Key key: keysResponse.getKeys()) {
             System.out.println("We fetched a key with the Key Tag: " + key.getId());
