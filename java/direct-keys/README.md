@@ -17,4 +17,5 @@ mvn package
 java -jar target/ionic-direct-keys.jar 
 ```
 
-> NOTE: This command expects a plaintext profile at `${HOME}/.ionicsecurity/profiles.pt`
+> NOTE: This sample expects a plaintext profile in the user's home directory, e.g. `${HOME}/.ionicsecurity/profiles.pt`
+> or `C:\Users\username\.ionicsecurity\profiles.pt` on Windows.
