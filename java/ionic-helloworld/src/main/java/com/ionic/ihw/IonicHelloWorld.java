@@ -19,7 +19,7 @@ public class IonicHelloWorld
         try {
             // Initialize Ionic agent
             Agent isAgent = new Agent();
-            String profilePath = System.getenv("HOME") + "/.ionicsecurity/profiles.pt";
+            String profilePath = System.getproperty("user.home") + "/.ionicsecurity/profiles.pt";
             DeviceProfilePersistorPlainText ptPersistor = new DeviceProfilePersistorPlainText(profilePath);
             isAgent.initialize(ptPersistor);
 

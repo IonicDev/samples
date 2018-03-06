@@ -17,4 +17,5 @@ mvn package
 java -jar target/ionic-chunk-decrypt.jar '<CHUNK_CRYPTO_CIPHERTEXT>'
 ```
 
-> NOTE: This command expects a plaintext profile at `${HOME}/.ionicsecurity/profiles.pt`, and the ciphertext should be surrounded by single quotes. 
+> NOTE: This sample expects a plaintext profile in the user's home directory, e.g. `${HOME}/.ionicsecurity/profiles.pt`
+> or `C:\Users\username\.ionicsecurity\profiles.pt` on Windows.

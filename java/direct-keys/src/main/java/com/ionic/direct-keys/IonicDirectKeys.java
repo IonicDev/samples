@@ -24,7 +24,7 @@ public class IonicDirectKeys
         // Setup an agent object to talk to Ionic
         Agent agent = new Agent();
         try {
-            String sProfilePath = System.getenv("HOME") + "/.ionicsecurity/profiles.pt";
+            String profilePath = System.getproperty("user.home") + "/.ionicsecurity/profiles.pt";
             DeviceProfilePersistorPlainText ptPersistor = new DeviceProfilePersistorPlainText(sProfilePath);
             agent.initialize(ptPersistor);
         } catch (SdkException e) {
