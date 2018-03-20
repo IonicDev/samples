@@ -4,7 +4,7 @@
  * and the Privacy Policy (https://www.ionic.com/privacy-notice/).
  */
 
-package ionic.chunkdecrypt;
+package com.ionic.chunkdecrypt;
 import com.ionic.sdk.error.SdkException;
 import com.ionic.sdk.agent.Agent;
 import com.ionic.sdk.device.profile.persistor.DeviceProfilePersistorPlainText;
@@ -25,8 +25,8 @@ public class ChunkDecrypt
     // Setup an agent object to talk to Ionic
     Agent agent = new Agent();
     try {
-      String profilePath = System.getproperty("user.home") + "/.ionicsecurity/profiles.pt";
-      DeviceProfilePersistorPlainText ptPersistor = new DeviceProfilePersistorPlainText(sProfilePath);
+      String profilePath = System.getProperty("user.home") + "/.ionicsecurity/profiles.pt";
+      DeviceProfilePersistorPlainText ptPersistor = new DeviceProfilePersistorPlainText(profilePath);
       agent.initialize(ptPersistor);
     } catch (SdkException e) {
       System.out.println("Failed to initialize agent:");
