@@ -4,7 +4,7 @@
  * and the Privacy Policy (https://www.ionic.com/privacy-notice/).
  */
 
-package ionic.hw;
+package com.ionic.ihw;
 
 import com.ionic.sdk.error.SdkException;
 import com.ionic.sdk.error.AgentErrorModuleConstants;
@@ -19,7 +19,7 @@ public class IonicHelloWorld
         try {
             // Initialize Ionic agent
             Agent isAgent = new Agent();
-            String profilePath = System.getproperty("user.home") + "/.ionicsecurity/profiles.pt";
+            String profilePath = System.getProperty("user.home") + "/.ionicsecurity/profiles.pt";
             DeviceProfilePersistorPlainText ptPersistor = new DeviceProfilePersistorPlainText(profilePath);
             isAgent.initialize(ptPersistor);
 
