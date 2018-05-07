@@ -16,17 +16,13 @@ namespace IonicHelloWorld
             // Set input string
             string input = "Hello World!";
 
+            string profilePath = Environment.GetEnvironmentVariable("HOMEPATH") + "/.ionicsecurity/profiles.pt";
+            DeviceProfilePersistorPlaintext persistor = new DeviceProfilePersistorPlaintext();
+            persistor.FilePath = profilePath;
+
             // Setup an agent object to talk to Ionic
             Agent agent = new Agent();
             agent.Initialize();
-
-            // Check if there are profiles.
-            if (!agent.HasAnyProfiles)
-            {
-                Console.WriteLine("There are no device profiles on this device.");
-                Console.WriteLine("Register a device before continuing.");
-                return -1;
-            }
 
             // Setup a Chunk Crypto object to handle Ionic encryption
             ChunkCipherAuto chunkCrypto = new ChunkCipherAuto(agent);

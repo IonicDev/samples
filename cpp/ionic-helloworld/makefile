@@ -27,11 +27,7 @@ else
 	CFLAGS+= -fvisibility-inlines-hidden
 endif
 
-ifeq ($(PROJECT_TYPE), lib)
-  ALLDEP=lib$(PROJECT)_$(TGT).so
-else
-  ALLDEP=$(PROJECT)_$(TGT)
-endif
+ALLDEP=$(PROJECT)_$(TGT)
 
 .PHONY:
 all: $(ALLDEP)
@@ -41,9 +37,6 @@ $(OBJDIR):
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp | $(OBJDIR)
 	$(CXX) -fPIC $(CFLAGS) -o $@ -c $^
-
-lib$(PROJECT)_$(TGT).so: $(OBJS_CPP)
-	$(CC) -shared -fPIC $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
 $(PROJECT)_$(TGT): $(OBJS_CPP)
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
