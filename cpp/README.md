@@ -8,7 +8,6 @@ Note: the sample apps expect a Password Persistor located at `~/.ionicsecurity/p
 export IONIC_PERSISTOR_PASSWORD=password123
 ```
 
-
 ## Linux
 
 **Requirements**:
