@@ -13,8 +13,9 @@ const appData = {
 
 const main = async () => {
     
-    const keyId1 = "HVzG5GNfuRQ"
-    const keyId2 = "HVzG34L2MVI"
+    const keyId1 = "HVzG5uKl3yE"
+    const keyId2 = "HVzG3AJoHQU"
+    const keyId3 = "HVzG52Kj3to"
 
     // initialize agent
     const agent = new window.IonicSdk.ISAgent('https://dev-api.ionic.com/jssdk/latest/');
