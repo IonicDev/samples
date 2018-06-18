@@ -4,10 +4,10 @@ To build and run an Ionic C++ SDK Sample, navigate into the directory of a speci
 
 Note: the sample apps expect a Password Persistor located at `~/.ionicsecurity/profiles.pw`. The password needs to be provided as an environment variable.
 
-Ex:
 ```bash
 export IONIC_PERSISTOR_PASSWORD=password123
 ```
+
 
 ## Linux
 
@@ -27,6 +27,7 @@ make
 ./target/<app>
 ```
 
+  
 ## MacOSX
 
 **Requirements**:
