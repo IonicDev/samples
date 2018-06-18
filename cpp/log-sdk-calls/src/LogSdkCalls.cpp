@@ -9,45 +9,53 @@
 #include "ISAgentSDKError.h"
 #include "ISLog.h"
 
-#define MY_APPLICATION_CHANNEL_NAME "SampleLoggingApplication"
+#ifdef _WIN32
+    #define HOMEVAR "USERPROFILE"
+#else 
+    #define HOMEVAR "HOME"
+#endif
 
-void setupLogging() {
-	//NOTE: Depending on the severity and channel name, this can cause many of the Ionic internal SDK actions to be logged.
-	//	This is made available as it is useful for debugging, but you may want to filter on your channel instead
-	//	of ISAGENT_LOG_CHANNEL to see content only from your application.
+int main()
+{
+	int nErrorCode
+	std::string message = "Hello World!";
+
+	// initialize logger
 	ISLogFilterSeverity * pConsoleFilter = new ISLogFilterSeverity(SEV_INFO); // INFO and above goes to console
 	ISLogWriterConsole * pConsoleWriter = new ISLogWriterConsole();
 	pConsoleWriter->setFilter(pConsoleFilter);
-
 	ISLogFilterSeverity * pFileFilter = new ISLogFilterSeverity(SEV_DEBUG); // DEBUG and above goes to file
 	ISLogWriterFile * pFileWriter = new ISLogWriterFile("sample.log");
 	pFileWriter->setFilter(pFileFilter);
-
-	// Initialize log sink(s)
 	ISLogSink * pSink = new ISLogSink();
 	pSink->registerChannelName(ISAGENT_LOG_CHANNEL);
 	pSink->registerChannelName(MY_APPLICATION_CHANNEL_NAME);
 	pSink->registerWriter(pConsoleWriter);
 	pSink->registerWriter(pFileWriter);
-
-	// Initialize logger. We pass true to the constructor so that it owns all
-	// the registered objects (the objects above that we created on the heap).
 	ISLogImpl * pLogger = new ISLogImpl(true);
 	pLogger->registerSink(pSink);
-
-	// Assign logger to static interface ISLog
 	ISLog::setSingleton(pLogger);
-}
 
-int main()
-{
-	std::string plainText = "Ionic Hello World";
+	// read persistor password from environment variable
+    char* cpersistorPassword = std::getenv("IONIC_PERSISTOR_PASSWORD");
+    if (cpersistorPassword == NULL) {
+        std::cerr << "[!] Please provide the persistor password as env variable: IONIC_PERSISTOR_PASSWORD" << std::endl;
+        exit(1);
+    }
+    std::string persistorPassword = std::string(cpersistorPassword);
 
-	setupLogging();
-
-	// Setup an agent object to talk to Ionic
-	ISAgent agent;
-	agent.initialize();
+    // initialize agent with password persistor
+    std::string persistorPath = std::string(std::getenv(HOMEVAR)) + "/.ionicsecurity/profiles.pw";
+    ISAgentDeviceProfilePersistorPassword persistor;
+    persistor.setFilePath(persistorPath);
+    persistor.setPassword(persistorPassword);
+    ISAgent agent;
+    nErrorCode = agent.initialize(persistor);
+    if (nErrorCode != ISAGENT_OK) {
+        std::cerr << "Failed to initialize agent from password persistor (" << persistorPath << ")" << std::endl;
+        std::cerr << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
+        exit(1);
+    }
 
 	// Setup a Chunk Crypto object to handle Ionic encryption
 	ISChunkCryptoCipherAuto chunkCrypto(agent);
@@ -70,4 +78,5 @@ int main()
 	ISLOGF_INFO(MY_APPLICATION_CHANNEL_NAME, "Press return to exit.");
 	std::getchar();
 	return 0;
+	*/
 }
