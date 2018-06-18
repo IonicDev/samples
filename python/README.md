@@ -1,6 +1,7 @@
 # Ionic Python SDK Samples
 
-To build and run an Ionic C++ SDK Sample, navigate into the directory of a specific sample task and follow the steps below depending on your platform.
+To build and run an Ionic Python SDK Sample, navigate into the directory of a specific sample task and follow the steps below.
+
 Note: the sample apps expect a Password Persistor located at `~/.ionicsecurity/profiles.pw`. The password needs to be provided as an environment variable.
 
 ```bash
