@@ -10,6 +10,12 @@
 #include <cstdlib>
 #include <iostream>
 
+#ifdef _WIN32
+    #define HOMEVAR "USERPROFILE"
+#else 
+    #define HOMEVAR "HOME"
+#endif
+
 int main(int argc, char* argv[]) {
 
     int nErrorCode;
@@ -23,7 +29,7 @@ int main(int argc, char* argv[]) {
     std::string persistorPassword = std::string(cpersistorPassword);
 
     // initialize agent with password persistor
-    std::string persistorPath = std::string(std::getenv("HOME")) + "/.ionicsecurity/profiles.pw";
+    std::string persistorPath = std::string(std::getenv(HOMEVAR)) + "/.ionicsecurity/profiles.pw";
     ISAgentDeviceProfilePersistorPassword persistor;
     persistor.setFilePath(persistorPath);
     persistor.setPassword(persistorPassword);

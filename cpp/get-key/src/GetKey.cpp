@@ -10,6 +10,12 @@
 #include <cstdlib>
 #include <iostream>
 
+#ifdef _WIN32
+    #define HOMEVAR "USERPROFILE"
+#else 
+    #define HOMEVAR "HOME"
+#endif
+
 int main(int argc, char* argv[]) {
     
     int nErrorCode;
@@ -24,7 +30,7 @@ int main(int argc, char* argv[]) {
     std::string persistorPassword = std::string(cpersistorPassword);
 
     // initialize agent with password persistor
-    std::string persistorPath = std::string(std::getenv("HOME")) + "/.ionicsecurity/profiles.pw";
+    std::string persistorPath = std::string(std::getenv(HOMEVAR)) + "/.ionicsecurity/profiles.pw";
     ISAgentDeviceProfilePersistorPassword persistor;
     persistor.setFilePath(persistorPath);
     persistor.setPassword(persistorPassword);
@@ -41,6 +47,10 @@ int main(int argc, char* argv[]) {
     nErrorCode = agent.getKey(keyId, response);
     if (nErrorCode != ISAGENT_OK) {
         std::cerr << "Error fetching key: " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
+        exit(1);
+    }
+    if (response.getKeys().size() == 0) {
+        std::cerr << "No key was returned (key does not exist or access was denied)" << std::endl;
         exit(1);
     }
     ISAgentGetKeysResponse::Key responseKey = response.getKeys().at(0);

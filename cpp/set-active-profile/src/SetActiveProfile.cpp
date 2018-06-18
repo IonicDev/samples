@@ -10,20 +10,36 @@
 #include <cstdlib>
 #include <iostream>
 
+#ifdef _WIN32
+    #define HOMEVAR "USERPROFILE"
+#else 
+    #define HOMEVAR "HOME"
+#endif
+
 int main(int argc, char* argv[]) {
 
     int nErrorCode;
     std::string persistorPath = "../../sample-data/persistors/sample-persistor.pt";
     std::string profileId = "ABcd.1.48sdf0-cs80-5802-sd80-d8s0df80sdfj";
 
+    // read persistor password from environment variable
+    char* cpersistorPassword = std::getenv("IONIC_PERSISTOR_PASSWORD");
+    if (cpersistorPassword == NULL) {
+        std::cerr << "[!] Please provide the persistor password as env variable: IONIC_PERSISTOR_PASSWORD" << std::endl;
+        exit(1);
+    }
+    std::string persistorPassword = std::string(cpersistorPassword);
+
     // initialize agent with password persistor
-    ISAgent agent;
+    std::string persistorPath = std::string(std::getenv(HOMEVAR)) + "/.ionicsecurity/profiles.pw";
     ISAgentDeviceProfilePersistorPassword persistor;
-    persistor.setFilePath(std::string(std::getenv("HOME")) + "/.ionicsecurity/profiles.pw");
-    persistor.setPassword(std::string(std::getenv("IONIC_PERSISTOR_PASSWORD")));
+    persistor.setFilePath(persistorPath);
+    persistor.setPassword(persistorPassword);
+    ISAgent agent;
     nErrorCode = agent.initialize(persistor);
     if (nErrorCode != ISAGENT_OK) {
-        std::cerr << "Error initializing agent: " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
+        std::cerr << "Failed to initialize agent from password persistor (" << persistorPath << ")" << std::endl;
+        std::cerr << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
         exit(1);
     }
 

@@ -11,9 +11,9 @@
 #include <iostream>
 
 #ifdef _WIN32
-    const char* HOMEVAR = "USERPROFILE";
+    #define HOMEVAR "USERPROFILE"
 #else 
-    const char* HOMEVAR = "HOME";
+    #define HOMEVAR "HOME"
 #endif
 
 int main(int argc, char* argv[]) {

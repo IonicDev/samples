@@ -11,6 +11,12 @@
 #include <cstdlib>
 #include <iostream>
 
+#ifdef _WIN32
+    #define HOMEVAR "USERPROFILE"
+#else 
+    #define HOMEVAR "HOME"
+#endif
+
 int main(int argc, char* argv[]) {
 
     int nErrorCode;
@@ -27,7 +33,7 @@ int main(int argc, char* argv[]) {
     std::string persistorPassword = std::string(cpersistorPassword);
 
     // initialize agent with password persistor
-    std::string persistorPath = std::string(std::getenv("HOME")) + "/.ionicsecurity/profiles.pw";
+    std::string persistorPath = std::string(std::getenv(HOMEVAR)) + "/.ionicsecurity/profiles.pw";
     ISAgentDeviceProfilePersistorPassword persistor;
     persistor.setFilePath(persistorPath);
     persistor.setPassword(persistorPassword);
@@ -51,6 +57,7 @@ int main(int argc, char* argv[]) {
     ISFileCryptoCipherGeneric cipher(agent);
 
     // encrypt
+    std::cout << "Encrypting message and saving to Ciphertext File : " << fileCiphertext << std::endl;
     nErrorCode = cipher.encrypt(fileOriginal, fileCiphertext, &fileCryptoAttributes);
     if (nErrorCode != ISCRYPTO_OK) {
         std::cerr << "Error: " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
@@ -58,6 +65,7 @@ int main(int argc, char* argv[]) {
     }
 
     // decrypt
+    std::cout << "Decrypting message and saving to Plaintext File  : " << filePlaintext << std::endl;
     cipher.decrypt(fileCiphertext, filePlaintext);
     if (nErrorCode != ISCRYPTO_OK) {
         std::cerr << "Error: " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
