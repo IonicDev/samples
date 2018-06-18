@@ -19,8 +19,9 @@
 int main(int argc, char* argv[]) {
     
     int nErrorCode;
-    std::string keyId1 = "HVzG5eMZrc8";
-    std::string keyId2 = "HVzG52MzpVI";
+    std::string keyId1 = "HVzG5uKl3yE";
+    std::string keyId2 = "HVzG3AJoHQU";
+    std::string keyId3 = "HVzG52Kj3to";
 
     // read persistor password from environment variable
     char* cpersistorPassword = std::getenv("IONIC_PERSISTOR_PASSWORD");
@@ -47,6 +48,7 @@ int main(int argc, char* argv[]) {
     ISAgentGetKeysRequest request;
     request.getKeyIds().push_back(keyId1);
     request.getKeyIds().push_back(keyId2);
+    request.getKeyIds().push_back(keyId3);
     ISAgentGetKeysResponse response;
     nErrorCode = agent.getKeys(request, response);
     if (nErrorCode != ISAGENT_OK) {

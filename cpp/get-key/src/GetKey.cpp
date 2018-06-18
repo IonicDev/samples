@@ -19,7 +19,7 @@
 int main(int argc, char* argv[]) {
     
     int nErrorCode;
-    std::string keyId = "HVzG5eMZrc8";
+    std::string keyId = "HVzG5uKl3yE";
 
     // read persistor password from environment variable
     char* cpersistorPassword = std::getenv("IONIC_PERSISTOR_PASSWORD");

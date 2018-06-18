@@ -1,100 +1,64 @@
 /*
- * (c) 2017 Ionic Security Inc.
+ * (c) 2018 Ionic Security Inc.
  * By using this code, I agree to the Terms & Conditions (https://dev.ionic.com/use.html)
  * and the Privacy Policy (https://www.ionic.com/privacy-notice/).
  */
 
 #include "ISAgent.h"
-#include "ISChunkCrypto.h"
 #include "ISAgentSDKError.h"
-#include "ISLog.h"
+#include <stdio.h>
 #include <cstdlib>
 #include <iostream>
 
-void setupLogging();
-bool makeLinuxHomeDirPath(std::string pathFromHomeDir, std::string & fullPath);
-
-int main(int argc, char* argv[]) {
-    setupLogging();
-
-    // Set input string
-    std::string input = "Hello World!";
-    int nErrorCode;
-
-    // Setup an agent object to talk to Ionic
-    ISAgent agent;
-#if __linux__
-    //NOTE: On Linux, you must add additional code here, see "Getting Started" for C++ on Linux.
-    std::string plainSepPath;
-    if (!makeLinuxHomeDirPath(".ionicsecurity/profiles.pt", plainSepPath)) { // Makes the absolute path for ~/.ionic/profiles.pt
-        std::cerr << "Error getting home directory path." << std::endl;
-        return -1;
-    }
-    ISAgentDeviceProfilePersistorPlaintext plainPersistor;
-    plainPersistor.setFilePath(plainSepPath);
-    std::cout << "Initializing agent..." << std::endl;
-    nErrorCode = agent.initialize(plainPersistor);
-    if (nErrorCode != ISAGENT_OK) {
-        std::cerr << "Error initializing agent: " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
-    } else {
-        std::cout << "A plaintext SEP was loaded from " << plainSepPath << std::endl;
-    }
-#else
-    nErrorCode = agent.initialize();
-    if (nErrorCode != ISAGENT_OK) {
-        std::cerr << "Error initializing agent: " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
-    }
+#ifdef _WIN32
+    #define HOMEVAR "USERPROFILE"
+#else 
+    #define HOMEVAR "HOME"
 #endif
 
-	// Check if there are profiles.
+int main(int argc, char* argv[]) {
+
+    int nErrorCode;
+
+    // read persistor password from environment variable
+    char* cpersistorPassword = std::getenv("IONIC_PERSISTOR_PASSWORD");
+    if (cpersistorPassword == NULL) {
+        std::cerr << "[!] Please provide the persistor password as env variable: IONIC_PERSISTOR_PASSWORD" << std::endl;
+        exit(1);
+    }
+    std::string persistorPassword = std::string(cpersistorPassword);
+
+    // initialize agent with password persistor
+    std::string persistorPath = std::string(std::getenv(HOMEVAR)) + "/.ionicsecurity/profiles.pw";
+    ISAgentDeviceProfilePersistorPassword persistor;
+    persistor.setFilePath(persistorPath);
+    persistor.setPassword(persistorPassword);
+    ISAgent agent;
+    nErrorCode = agent.initialize(persistor);
+    if (nErrorCode != ISAGENT_OK) {
+        std::cerr << "Failed to initialize agent from password persistor (" << persistorPath << ")" << std::endl;
+        std::cerr << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
+        exit(1);
+    }
+
+    // check if there are profiles.
 	if (!agent.hasAnyProfiles()) {
 		std::cout << "There are no device profiles on this device." << std::endl;
 		std::cout << "Register a device before continuing." << std::endl;
-		return -1;
+		exit(1);
 	}
 
-    // Setup a Chunk Crypto object to handle Ionic encryption
-    ISChunkCryptoCipherAuto chunkCrypto(agent);
+    // initialize chunk cipher object
+    ISChunkCryptoCipherAuto cipher(agent);
 
-    // Encrypt the string using an Ionic-managed Key
-    std::string encryptedText = "";
-    nErrorCode = chunkCrypto.encrypt(input, encryptedText);
-
-    // Validate the response
+    // encrypt the input with an Ionic-managed key
+    std::string ciphertext;
+    nErrorCode = cipher.encrypt(message, ciphertext);
     if (nErrorCode != ISCRYPTO_OK) {
-        std::cerr << "Error encrypting: " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
+        std::cerr << "Error: " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
+        exit(1);
     }
 
-    std::cout << "Plain Text: " << input << std::endl;
-    std::cout << "Ionic Chunk Encrypted Text: " << encryptedText << std::endl;
-
-    std::cout << "Press return to exit.";
-    getchar();
-}
-
-// UTILITY FUNCTIONS
-
-void setupLogging() {
-	ISLogFilterSeverity * pConsoleFilter = new ISLogFilterSeverity(SEV_DEBUG);
-	ISLogWriterConsole * pConsoleWriter = new ISLogWriterConsole();
-	pConsoleWriter->setFilter(pConsoleFilter);
-	// Initialize log sink(s)
-	ISLogSink * pSink = new ISLogSink();
-	pSink->registerChannelName(ISAGENT_LOG_CHANNEL);
-	pSink->registerWriter(pConsoleWriter);
-	// Initialize logger.
-	ISLogImpl * pLogger = new ISLogImpl(true);
-	pLogger->registerSink(pSink);
-	// Assign logger to static interface ISLog
-	ISLog::setSingleton(pLogger);
-}
-
-bool makeLinuxHomeDirPath(std::string pathFromHomeDir, std::string & fullPath) {
-    char const* tmp = getenv("HOME");
-    if (tmp == NULL) {
-        return false;
-    } else {
-        fullPath = std::string(tmp) + "/" + pathFromHomeDir;
-        return true;
-    }
+    std::cout << "Input: " << input << std::endl;
+    std::cout << "Ionic Chunk Encrypted Ciphertext: " << encryptedText << std::endl;
 }

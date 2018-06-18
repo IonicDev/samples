@@ -19,7 +19,7 @@
 int main(int argc, char* argv[]) {
     
     int nErrorCode;
-    std::string keyId = "HVzG5eMZrc8";
+    std::string keyId = "HVzG5uKl3yE";
     std::string delegatedUserEmail = "test@ionic.com";
 
     // read persistor password from environment variable
