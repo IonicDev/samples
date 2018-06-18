@@ -36,7 +36,7 @@ make
 **Build:**
 ```
 export IONIC_SDK_PATH=<PATH_TO_IONIC_SDK>
-cmake -Dplatform=MacOSX -Darchitecture=x86_64
+cmake -Dplatform=MacOSX -Darchitecture=universal
 make
 ```
 
