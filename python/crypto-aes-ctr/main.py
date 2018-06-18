@@ -9,10 +9,15 @@ import binascii
 
 message = "secret message"
 
+# read persistor password from environment variable
+persistorPassword = os.environ.get('IONIC_PERSISTOR_PASSWORD')
+if (persistorPassword == None):
+    print("[!] Please provide the persistor password as env variable: IONIC_PERSISTOR_PASSWORD")
+    sys.exit(1)
+
 # initialize agent with password persistor
 try:
     persistorPath = os.path.expanduser("~/.ionicsecurity/profiles.pw")
-    persistorPassword = os.environ.get('IONIC_PERSISTOR_PASSWORD')
     persistor = ionicsdk.DeviceProfilePersistorPasswordFile(persistorPath, persistorPassword)
     agent = ionicsdk.Agent(None, persistor)
 except ionicsdk.exceptions.IonicException as e:

@@ -8,13 +8,19 @@ import json
 import ionicsdk
 import binascii
 
-keyId1 = 'ABcd3INKQ7ww'
-keyId2 = 'ABcd3801380w'
+keyId1 = "HVzG5uKl3yE"
+keyId2 = "HVzG3AJoHQU"
+keyId3 = "HVzG52Kj3to"
+
+# read persistor password from environment variable
+persistorPassword = os.environ.get('IONIC_PERSISTOR_PASSWORD')
+if (persistorPassword == None):
+    print("[!] Please provide the persistor password as env variable: IONIC_PERSISTOR_PASSWORD")
+    sys.exit(1)
 
 # initialize agent with password persistor
 try:
     persistorPath = os.path.expanduser("~/.ionicsecurity/profiles.pw")
-    persistorPassword = os.environ.get('IONIC_PERSISTOR_PASSWORD')
     persistor = ionicsdk.DeviceProfilePersistorPasswordFile(persistorPath, persistorPassword)
     agent = ionicsdk.Agent(None, persistor)
 except ionicsdk.exceptions.IonicException as e:
@@ -23,7 +29,7 @@ except ionicsdk.exceptions.IonicException as e:
 
 # get multiple keys
 try:
-    keys = agent.getkeys([keyId1, keyId2])
+    keys = agent.getkeys([keyId1, keyId2, keyId3])
 except ionicsdk.exceptions.IonicException as e:
     print("Error fetching a key: {0}".format(e.message))
     sys.exit(-2)
