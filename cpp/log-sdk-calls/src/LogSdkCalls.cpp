@@ -8,6 +8,9 @@
 #include "ISChunkCrypto.h"
 #include "ISAgentSDKError.h"
 #include "ISLog.h"
+#include <stdio.h>
+#include <cstdlib>
+#include <iostream>
 
 #ifdef _WIN32
     #define HOMEVAR "USERPROFILE"
@@ -15,9 +18,9 @@
     #define HOMEVAR "HOME"
 #endif
 
-int main()
-{
-	int nErrorCode
+int main(int argc, char* argv[]) {
+
+	int nErrorCode;
 	std::string message = "Hello World!";
 
 	// initialize logger
@@ -29,7 +32,6 @@ int main()
 	pFileWriter->setFilter(pFileFilter);
 	ISLogSink * pSink = new ISLogSink();
 	pSink->registerChannelName(ISAGENT_LOG_CHANNEL);
-	pSink->registerChannelName(MY_APPLICATION_CHANNEL_NAME);
 	pSink->registerWriter(pConsoleWriter);
 	pSink->registerWriter(pFileWriter);
 	ISLogImpl * pLogger = new ISLogImpl(true);
@@ -61,22 +63,10 @@ int main()
 	ISChunkCryptoCipherAuto chunkCrypto(agent);
 
 	// Encrypt the string using an Ionic-managed Key
-	std::string encryptedText;
-	int nErrorCode = chunkCrypto.encrypt(plainText, encryptedText);
+	std::string ciphertext;
+	nErrorCode = chunkCrypto.encrypt(message, ciphertext);
 
-	// Validate the response
-	if (nErrorCode != ISCRYPTO_OK)
-	{
-		//std::cerr << "Error encrypting: " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
-		ISLOGF_ERROR(MY_APPLICATION_CHANNEL_NAME, "Error encrypting: %s\n", ISAgentSDKError::getErrorCodeString(nErrorCode).c_str());
-	}
-	else
-	{
-		std::cout << "Plain Text: " << plainText << std::endl;
-		std::cout << "Chunk-Encrypted String: " << encryptedText << std::endl;
-	}
-	ISLOGF_INFO(MY_APPLICATION_CHANNEL_NAME, "Press return to exit.");
-	std::getchar();
+	std::cout << "Input: " << message << std::endl;
+	std::cout << "Chunk-Encrypted String: " << ciphertext << std::endl;
 	return 0;
-	*/
 }

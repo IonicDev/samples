@@ -19,7 +19,12 @@
 int main(int argc, char* argv[]) {
 
     int nErrorCode;
-    std::string keyId = "HVzG5eMZrc8";
+    std::string keyId = ""; // TODO: provide key to update
+
+    if (keyId == "") {
+        std::cout << "Please set the 'keyId' variable to a key you have already created" << std::endl;
+        exit(1);
+    }
 
     // read persistor password from environment variable
     char* cpersistorPassword = std::getenv("IONIC_PERSISTOR_PASSWORD");

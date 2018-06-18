@@ -6,6 +6,7 @@
 
 #include "ISAgent.h"
 #include "ISAgentSDKError.h"
+#include <ISChunkCrypto.h>
 #include <stdio.h>
 #include <cstdlib>
 #include <iostream>
@@ -19,6 +20,7 @@
 int main(int argc, char* argv[]) {
 
     int nErrorCode;
+    std::string input = "Hello World!";
 
     // read persistor password from environment variable
     char* cpersistorPassword = std::getenv("IONIC_PERSISTOR_PASSWORD");
@@ -53,12 +55,12 @@ int main(int argc, char* argv[]) {
 
     // encrypt the input with an Ionic-managed key
     std::string ciphertext;
-    nErrorCode = cipher.encrypt(message, ciphertext);
+    nErrorCode = cipher.encrypt(input, ciphertext);
     if (nErrorCode != ISCRYPTO_OK) {
         std::cerr << "Error: " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
         exit(1);
     }
 
     std::cout << "Input: " << input << std::endl;
-    std::cout << "Ionic Chunk Encrypted Ciphertext: " << encryptedText << std::endl;
+    std::cout << "Ionic Chunk Encrypted Ciphertext: " << ciphertext << std::endl;
 }

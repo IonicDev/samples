@@ -6,7 +6,6 @@
 
 #include "ISAgent.h"
 #include "ISAgentSDKError.h"
-
 #include <stdio.h>
 #include <cstdlib>
 #include <iostream>

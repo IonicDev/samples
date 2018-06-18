@@ -22,25 +22,13 @@ int main(int argc, char* argv[]) {
     std::string persistorPath = "../../sample-data/persistors/sample-persistor.pt";
     std::string profileId = "ABcd.1.48sdf0-cs80-5802-sd80-d8s0df80sdfj";
 
-    // read persistor password from environment variable
-    char* cpersistorPassword = std::getenv("IONIC_PERSISTOR_PASSWORD");
-    if (cpersistorPassword == NULL) {
-        std::cerr << "[!] Please provide the persistor password as env variable: IONIC_PERSISTOR_PASSWORD" << std::endl;
-        exit(1);
-    }
-    std::string persistorPassword = std::string(cpersistorPassword);
-
-    // initialize agent with password persistor
-    std::string persistorPath = std::string(std::getenv(HOMEVAR)) + "/.ionicsecurity/profiles.pw";
-    ISAgentDeviceProfilePersistorPassword persistor;
-    persistor.setFilePath(persistorPath);
-    persistor.setPassword(persistorPassword);
+    // initialize agent with plaintext persistor
     ISAgent agent;
+    ISAgentDeviceProfilePersistorPlaintext persistor;
+    persistor.setFilePath(persistorPath);
     nErrorCode = agent.initialize(persistor);
     if (nErrorCode != ISAGENT_OK) {
-        std::cerr << "Failed to initialize agent from password persistor (" << persistorPath << ")" << std::endl;
-        std::cerr << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
-        exit(1);
+        std::cerr << "Error initializing agent: " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
     }
 
     // list all available profiles
