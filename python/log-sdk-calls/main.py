@@ -1,79 +1,61 @@
-#!/usr/bin/env python
-
-# (c) 2017 Ionic Security Inc.
-# By using this code, I agree to the Terms & Conditions (https://www.ionic.com/terms-of-use/)
+# (c) 2018 Ionic Security Inc.
+# By using this code, I agree to the Terms & Conditions (https://dev.ionic.com/use.html)
 # and the Privacy Policy (https://www.ionic.com/privacy-notice/).
 
-import ionicsdk
-
+import os
 import sys
-import platform
-import os.path
 import json
-from inspect import currentframe, getframeinfo
+import ionicsdk
+import binascii
 
-MY_APPLICATION_CHANNEL_NAME = "SampleLoggingApplication"
-INPUT_STRING = "Hello World!"
+message = "Hello World!"
 
-
-# Helpers for logging:
+# helpers for logging:
 linenumber = lambda: currentframe().f_back.f_lineno
 filename = lambda: getframeinfo(currentframe()).filename
 
-# Logging setup function:
-def setup_logging():
-  #NOTE: Depending on the severity and channel name, this can cause many of the Ionic internal SDK actions to be logged.
-  #	This is made available as it is useful for debugging, but you may want to filter on your channel instead
-  #	of "ISAgent" to see content only from your application.
+# initialize logger
+config = {
+  "sinks": [
+    {
+      "channels": ["ISAgent"],
+      "filter": {"type": "Severity", "level": "Info"},
+      "writers": [{"type": "Console"}]
+    },
+    {
+      "channels": ["ISAgent"],
+      "filter": {"type": "Severity", "level": "Debug"},
+      "writers": [{"type": "File", "filePattern": "sample.log"}]
+    }
+  ]
+}
+config_json = json.dumps(config)
+ionicsdk.log.setup_from_config_json(config_json)
 
-  config = {"sinks": [
-              {"channels": ["ISAgent", MY_APPLICATION_CHANNEL_NAME],
-               "filter": {"type": "Severity", "level": "Info"},
-               "writers": [
-                  {"type": "Console"}
-               ]
-              },
-              {"channels": ["ISAgent", MY_APPLICATION_CHANNEL_NAME],
-               "filter": {"type": "Severity", "level": "Debug"},
-               "writers": [
-                  {"type": "File", "filePattern": "sample.log"}
-               ]
-              }
-           ]}
-  config_json = json.dumps(config)
-  ionicsdk.log.setup_from_config_json(config_json)
+# read persistor password from environment variable
+persistorPassword = os.environ.get('IONIC_PERSISTOR_PASSWORD')
+if (persistorPassword == None):
+    print("[!] Please provide the persistor password as env variable: IONIC_PERSISTOR_PASSWORD")
+    sys.exit(1)
 
-
-if __name__ == "__main__":
-  setup_logging()
-
-  # Load a plaintext Device Profile, or SEP, from disk if on Linux (e.g., no default persistor).
-  persistor = None
-  if platform.system == 'Linux':
-    SEP_FILE_PATH = os.path.expanduser("~/.ionicsecurity/profiles.pt")
-    persistor = ionicsdk.DeviceProfilePersistorPlaintextFile(SEP_FILE_PATH)
-    ionicsdk.log.log(ionicsdk.log.SEV_INFO, MY_APPLICATION_CHANNEL_NAME, linenumber(), filename(),
-                     "A plaintext SEP will be loaded from {0}".format(SEP_FILE_PATH))
-
-  # Initialize the Ionic Agent (must be done before most Ionic operations).
-  agent = ionicsdk.Agent(None, persistor)
-
-  # Check if there are profiles.
-  if not agent.hasanyprofiles():
-    ionicsdk.log.log(ionicsdk.log.SEV_ERROR, MY_APPLICATION_CHANNEL_NAME, linenumber(), filename(),
-                     "There are no device profiles on this device. Register a device before continuing.")
-    sys.exit(-1)
-
-  # Initialize a Chunk Cipher for doing string encryption
-  cipher = ionicsdk.ChunkCipherAuto(agent)
-
-  # Encrypt the string using an Ionic-managed Key
-  try:
-    ciphertext = cipher.encryptstr(INPUT_STRING)
-  except ionicsdk.exceptions.IonicException as e:
-    ionicsdk.log.log(ionicsdk.log.SEV_ERROR, MY_APPLICATION_CHANNEL_NAME, linenumber(), filename(),
-                     "Error encrypting: {0}".format(e.message))
+# initialize agent with password persistor
+try:
+    persistorPath = os.path.expanduser("~/.ionicsecurity/profiles.pw")
+    persistor = ionicsdk.DeviceProfilePersistorPasswordFile(persistorPath, persistorPassword)
+    agent = ionicsdk.Agent(None, persistor)
+except ionicsdk.exceptions.IonicException as e:
+    print("Error initializing agent: {0}".format(e.message))
     sys.exit(-2)
 
-  print("Plain Text: " + INPUT_STRING)
-  print("Ionic Chunk Encrypted Text: " + ciphertext)
+# initialize chunk cipher object
+cipher = ionicsdk.ChunkCipherAuto(agent)
+
+# encrypt
+ciphertext = cipher.encryptbytes(message)
+
+# decrypt
+plaintext = cipher.decryptbytes(ciphertext)
+
+# display data
+print("Ciphertext : " + ciphertext)
+print("Plaintext  : " + plaintext)

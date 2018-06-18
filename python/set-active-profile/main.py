@@ -9,16 +9,9 @@ import ionicsdk
 profile_id = 'ABcd.1.48sdf0-cs80-5802-sd80-d8s0df80sdfj'
 persistor_path = '../../sample-data/persistors/sample-persistor.pt'
 
-# read persistor password from environment variable
-persistorPassword = os.environ.get('IONIC_PERSISTOR_PASSWORD')
-if (persistorPassword == None):
-    print("[!] Please provide the persistor password as env variable: IONIC_PERSISTOR_PASSWORD")
-    sys.exit(1)
-
-# initialize agent with password persistor
+# initialize agent with plaintext persistor
 try:
-    persistorPath = os.path.expanduser("~/.ionicsecurity/profiles.pw")
-    persistor = ionicsdk.DeviceProfilePersistorPasswordFile(persistorPath, persistorPassword)
+    persistor = ionicsdk.DeviceProfilePersistorPlaintextFile(persistor_path)
     agent = ionicsdk.Agent(None, persistor)
 except ionicsdk.exceptions.IonicException as e:
     print("Error initializing agent: {0}".format(e.message))
@@ -27,7 +20,7 @@ except ionicsdk.exceptions.IonicException as e:
 # list all profiles
 try:
     profiles = agent.getallprofiles()
-    print("Profiles:")
+    print("Available Profiles:")
     for profile in profiles:
         print(profile.deviceid)
 except ionicsdk.exceptions.IonicException as e:
@@ -35,6 +28,7 @@ except ionicsdk.exceptions.IonicException as e:
     sys.exit(-2)
 
 # change active profile
+print("\nSetting '{}' as active profile".format(profile_id))
 try:
     agent.setactiveprofile(profile_id)
     active_profile = agent.getactiveprofile()

@@ -34,7 +34,9 @@ mutable_attributes = {
 cipher = ionicsdk.FileCipherGeneric(agent)
 
 # encrypt
+print("Encrypting message and saving to Ciphertext File: {}".format(file_ciphertext))
 cipher.encrypt(file_original, file_ciphertext, mutableAttributes=mutable_attributes)
 
 # decrypt
+print("Decrypting ciphertext and saving to Plaintext File: {}".format(file_plaintext))
 cipher.decrypt(file_ciphertext, file_plaintext)

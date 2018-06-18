@@ -3,6 +3,9 @@
 # and the Privacy Policy (https://www.ionic.com/privacy-notice/).
 
 import os
+import sys
+import json
+import binascii
 import ionicsdk
 
 app_name = "MyApp"
@@ -28,3 +31,17 @@ agent.setmetadata({
     "ionic-application-name": app_name,
     "ionic-application-version": app_version
 })
+
+# create single key
+try:
+    key = agent.createkey()
+except ionicsdk.exceptions.IonicException as e:
+    print("Error creating a key: {0}".format(e.message))
+    sys.exit(-2)
+
+# display new key
+print("KeyId        : " + key.id)
+print("KeyBytes     : " + binascii.hexlify(key.bytes))
+print("FixedAttrs   : " + json.dumps(key.attributes))
+print("MutableAttrs : " + json.dumps(key.mutableAttributes))
+

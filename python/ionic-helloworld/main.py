@@ -34,10 +34,10 @@ cipher = ionicsdk.ChunkCipherAuto(agent)
 
 # encrypt the string using an Ionic-managed Key
 try:
-  ciphertext = cipher.encryptstr(INPUT_STRING)
+    ciphertext = cipher.encryptstr(input_string)
 except ionicsdk.exceptions.IonicException as e:
-  print("Error encrypting: {0}".format(e.message))
-  sys.exit(-2)
+    print("Error encrypting: {0}".format(e.message))
+    sys.exit(-2)
 
-print("Plain Text: " + INPUT_STRING)
-print("Ionic Chunk Encrypted Text: " + ciphertext)
+print("Input: " + input_string)
+print("Ionic Chunk Encrypted Ciphertext: " + ciphertext)

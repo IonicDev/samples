@@ -9,7 +9,11 @@ import ionicsdk
 import binascii
 
 # TODO: provide key to update
-# key_id = 
+key_id = None
+
+if (key_id == None):
+    print("Please set the 'key_id' variable to a key you have already created")
+    sys.exit(1)
 
 # read persistor password from environment variable
 persistorPassword = os.environ.get('IONIC_PERSISTOR_PASSWORD')
@@ -39,7 +43,9 @@ except ionicsdk.exceptions.IonicException as e:
     sys.exit(-2)
 
 # merge new and existing mutable attributes
-updated_attributes = {**copy.copy(dict(key.mutableAttributes)), **new_mutable_attributes}
+updated_attributes = copy.copy(dic(key.mutableAttributes))
+for key,value in new_mutable_attributes.items():
+    updated_attributes[key] = value
 
 # update key
 try:

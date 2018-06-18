@@ -11,3 +11,7 @@ try:
 except ionicsdk.exceptions.IonicException as e:
     print("Error initializing agent: {0}".format(e.message))
     sys.exit(-2)
+
+# display all profiles
+profiles = agent.getallprofiles()
+print("Initialized agent with {} profiles".format(len(profiles)))
