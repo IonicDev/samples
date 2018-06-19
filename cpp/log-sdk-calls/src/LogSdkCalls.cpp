@@ -1,12 +1,13 @@
 /*
- * (c) 2018 Ionic Security Inc.
+ * (c) 2017 Ionic Security Inc.
  * By using this code, I agree to the Terms & Conditions (https://dev.ionic.com/use.html)
  * and the Privacy Policy (https://www.ionic.com/privacy-notice/).
  */
 
 #include "ISAgent.h"
+#include "ISChunkCrypto.h"
 #include "ISAgentSDKError.h"
-#include <ISChunkCrypto.h>
+#include "ISLog.h"
 #include <stdio.h>
 #include <cstdlib>
 #include <iostream>
@@ -19,10 +20,25 @@
 
 int main(int argc, char* argv[]) {
 
-    int nErrorCode;
-    std::string input = "Hello World!";
+	int nErrorCode;
+	std::string message = "Hello World!";
 
-    // read persistor password from environment variable
+	// initialize logger
+	ISLogFilterSeverity * pConsoleFilter = new ISLogFilterSeverity(SEV_INFO); // INFO and above goes to console
+	ISLogWriterConsole * pConsoleWriter = new ISLogWriterConsole();
+	pConsoleWriter->setFilter(pConsoleFilter);
+	ISLogFilterSeverity * pFileFilter = new ISLogFilterSeverity(SEV_DEBUG); // DEBUG and above goes to file
+	ISLogWriterFile * pFileWriter = new ISLogWriterFile("sample.log");
+	pFileWriter->setFilter(pFileFilter);
+	ISLogSink * pSink = new ISLogSink();
+	pSink->registerChannelName(ISAGENT_LOG_CHANNEL);
+	pSink->registerWriter(pConsoleWriter);
+	pSink->registerWriter(pFileWriter);
+	ISLogImpl * pLogger = new ISLogImpl(true);
+	pLogger->registerSink(pSink);
+	ISLog::setSingleton(pLogger);
+
+	// read persistor password from environment variable
     char* cpersistorPassword = std::getenv("IONIC_PERSISTOR_PASSWORD");
     if (cpersistorPassword == NULL) {
         std::cerr << "[!] Please provide the persistor password as env variable: IONIC_PERSISTOR_PASSWORD" << std::endl;
@@ -43,24 +59,14 @@ int main(int argc, char* argv[]) {
         exit(1);
     }
 
-    // check if there are profiles.
-	if (!agent.hasAnyProfiles()) {
-		std::cout << "There are no device profiles on this device." << std::endl;
-		std::cout << "Register a device before continuing." << std::endl;
-		exit(1);
-	}
+	// Setup a Chunk Crypto object to handle Ionic encryption
+	ISChunkCryptoCipherAuto chunkCrypto(agent);
 
-    // initialize chunk cipher object
-    ISChunkCryptoCipherAuto cipher(agent);
+	// Encrypt the string using an Ionic-managed Key
+	std::string ciphertext;
+	nErrorCode = chunkCrypto.encrypt(message, ciphertext);
 
-    // encrypt the input with an Ionic-managed key
-    std::string ciphertext;
-    nErrorCode = cipher.encrypt(input, ciphertext);
-    if (nErrorCode != ISCRYPTO_OK) {
-        std::cerr << "Error: " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
-        exit(1);
-    }
-
-    std::cout << "Input: " << input << std::endl;
-    std::cout << "Ionic Chunk Encrypted Ciphertext: " << ciphertext << std::endl;
+	std::cout << "Input: " << message << std::endl;
+	std::cout << "Chunk-Encrypted String: " << ciphertext << std::endl;
+	return 0;
 }

@@ -6,7 +6,6 @@
 
 #include "ISAgent.h"
 #include "ISAgentSDKError.h"
-#include <ISChunkCrypto.h>
 #include <stdio.h>
 #include <cstdlib>
 #include <iostream>
@@ -18,9 +17,11 @@
 #endif
 
 int main(int argc, char* argv[]) {
-
+    
     int nErrorCode;
-    std::string input = "Hello World!";
+    std::string keyId1 = "HVzG5uKl3yE";
+    std::string keyId2 = "HVzG3AJoHQU";
+    std::string keyId3 = "HVzG52Kj3to";
 
     // read persistor password from environment variable
     char* cpersistorPassword = std::getenv("IONIC_PERSISTOR_PASSWORD");
@@ -43,24 +44,31 @@ int main(int argc, char* argv[]) {
         exit(1);
     }
 
-    // check if there are profiles.
-	if (!agent.hasAnyProfiles()) {
-		std::cout << "There are no device profiles on this device." << std::endl;
-		std::cout << "Register a device before continuing." << std::endl;
-		exit(1);
-	}
-
-    // initialize chunk cipher object
-    ISChunkCryptoCipherAuto cipher(agent);
-
-    // encrypt the input with an Ionic-managed key
-    std::string ciphertext;
-    nErrorCode = cipher.encrypt(input, ciphertext);
-    if (nErrorCode != ISCRYPTO_OK) {
-        std::cerr << "Error: " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
+    // get multiple keys
+    ISAgentGetKeysRequest request;
+    request.getKeyIds().push_back(keyId1);
+    request.getKeyIds().push_back(keyId2);
+    request.getKeyIds().push_back(keyId3);
+    ISAgentGetKeysResponse response;
+    nErrorCode = agent.getKeys(request, response);
+    if (nErrorCode != ISAGENT_OK) {
+        std::cerr << "Error creating key: " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
         exit(1);
     }
+    if (response.getKeys().size() == 0) {
+        std::cerr << "No key was returned (key does not exist or access was denied)" << std::endl;
+        exit(1);
+    }
+    std::vector<ISAgentGetKeysResponse::Key> responseKeysList = response.getKeys();
 
-    std::cout << "Input: " << input << std::endl;
-    std::cout << "Ionic Chunk Encrypted Ciphertext: " << ciphertext << std::endl;
+    // display fetched keys
+    for(int i = 0; i < responseKeysList.size(); i++) {
+        ISAgentGetKeysResponse::Key responseKey = responseKeysList.at(i);
+        ISCryptoHexString hexKey;
+        hexKey.fromBytes(responseKey.getKey());
+        std::cout << "---" << std::endl;
+        std::cout << "KeyId    : " << responseKey.getId() << std::endl;
+        std::cout << "KeyBytes : " << hexKey << std::endl;
+    }
 }
+

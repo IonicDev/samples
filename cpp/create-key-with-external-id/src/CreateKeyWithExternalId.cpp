@@ -6,7 +6,6 @@
 
 #include "ISAgent.h"
 #include "ISAgentSDKError.h"
-#include <ISChunkCrypto.h>
 #include <stdio.h>
 #include <cstdlib>
 #include <iostream>
@@ -20,7 +19,7 @@
 int main(int argc, char* argv[]) {
 
     int nErrorCode;
-    std::string input = "Hello World!";
+    std::string externalId = "d8ded396-4388-4489-9604-c2482205e55d";
 
     // read persistor password from environment variable
     char* cpersistorPassword = std::getenv("IONIC_PERSISTOR_PASSWORD");
@@ -43,24 +42,27 @@ int main(int argc, char* argv[]) {
         exit(1);
     }
 
-    // check if there are profiles.
-	if (!agent.hasAnyProfiles()) {
-		std::cout << "There are no device profiles on this device." << std::endl;
-		std::cout << "Register a device before continuing." << std::endl;
-		exit(1);
-	}
+    // define external id as fixed attribute
+    std::map< std::string, std::vector< std::string > > attributes;
+    std::vector<std::string> externalIdVal;
+    externalIdVal.push_back(externalId);
+    attributes["ionic-external-id"] = externalIdVal;
 
-    // initialize chunk cipher object
-    ISChunkCryptoCipherAuto cipher(agent);
-
-    // encrypt the input with an Ionic-managed key
-    std::string ciphertext;
-    nErrorCode = cipher.encrypt(input, ciphertext);
-    if (nErrorCode != ISCRYPTO_OK) {
-        std::cerr << "Error: " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
+    // create key with an external id
+    ISAgentCreateKeysRequest request;
+    ISAgentCreateKeysRequest::Key requestKey("refid1", 1, attributes);
+    request.getKeys().push_back(requestKey);
+    ISAgentCreateKeysResponse response;
+    nErrorCode = agent.createKeys(request, response);
+    if (nErrorCode != ISAGENT_OK) {
+        std::cerr << "Error creating key: " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
         exit(1);
     }
+    const ISAgentCreateKeysResponse::Key *responseKey = response.findKey("refid1");
 
-    std::cout << "Input: " << input << std::endl;
-    std::cout << "Ionic Chunk Encrypted Ciphertext: " << ciphertext << std::endl;
+    // display key
+    ISCryptoHexString hexKey;
+    hexKey.fromBytes(responseKey->getKey());
+    std::cout << "KeyId    : " << responseKey->getId() << std::endl;
+    std::cout << "KeyBytes : " << hexKey << std::endl;
 }
