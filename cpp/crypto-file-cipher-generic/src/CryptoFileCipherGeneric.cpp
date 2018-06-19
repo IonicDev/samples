@@ -6,7 +6,7 @@
 
 #include "ISAgent.h"
 #include "ISAgentSDKError.h"
-#include <ISChunkCrypto.h>
+#include <ISFileCrypto.h>
 #include <stdio.h>
 #include <cstdlib>
 #include <iostream>
@@ -20,7 +20,9 @@
 int main(int argc, char* argv[]) {
 
     int nErrorCode;
-    std::string input = "Hello World!";
+    std::string fileOriginal = "../../sample-data/files/Message.txt";
+    std::string fileCiphertext = "./Message-Protected.txt";
+    std::string filePlaintext = "./Message.txt";
 
     // read persistor password from environment variable
     char* cpersistorPassword = std::getenv("IONIC_PERSISTOR_PASSWORD");
@@ -43,24 +45,30 @@ int main(int argc, char* argv[]) {
         exit(1);
     }
 
-    // check if there are profiles.
-	if (!agent.hasAnyProfiles()) {
-		std::cout << "There are no device profiles on this device." << std::endl;
-		std::cout << "Register a device before continuing." << std::endl;
-		exit(1);
-	}
+    // define attributes (optional)
+    std::map< std::string, std::vector< std::string > > mutableAttributes;
+    std::vector<std::string> classificationVal;
+    classificationVal.push_back("Restricted");
+    mutableAttributes["classification"] = classificationVal;
+    ISFileCryptoEncryptAttributes fileCryptoAttributes;
+    fileCryptoAttributes.setMutableKeyAttributes(mutableAttributes);
 
-    // initialize chunk cipher object
-    ISChunkCryptoCipherAuto cipher(agent);
+    // initialize generic file cipher object
+    ISFileCryptoCipherGeneric cipher(agent);
 
-    // encrypt the input with an Ionic-managed key
-    std::string ciphertext;
-    nErrorCode = cipher.encrypt(input, ciphertext);
+    // encrypt
+    std::cout << "Encrypting message and saving to Ciphertext File : " << fileCiphertext << std::endl;
+    nErrorCode = cipher.encrypt(fileOriginal, fileCiphertext, &fileCryptoAttributes);
     if (nErrorCode != ISCRYPTO_OK) {
         std::cerr << "Error: " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
         exit(1);
     }
 
-    std::cout << "Input: " << input << std::endl;
-    std::cout << "Ionic Chunk Encrypted Ciphertext: " << ciphertext << std::endl;
+    // decrypt
+    std::cout << "Decrypting message and saving to Plaintext File  : " << filePlaintext << std::endl;
+    cipher.decrypt(fileCiphertext, filePlaintext);
+    if (nErrorCode != ISCRYPTO_OK) {
+        std::cerr << "Error: " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
+        exit(1);
+    }
 }

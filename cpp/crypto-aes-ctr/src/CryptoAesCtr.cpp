@@ -6,7 +6,6 @@
 
 #include "ISAgent.h"
 #include "ISAgentSDKError.h"
-#include <ISChunkCrypto.h>
 #include <stdio.h>
 #include <cstdlib>
 #include <iostream>
@@ -20,7 +19,8 @@
 int main(int argc, char* argv[]) {
 
     int nErrorCode;
-    std::string input = "Hello World!";
+    std::string message = "secret message";
+    std::string keyHex = "A0444B8B5A7209780823617A98986831B8240BAA851A0B1696B0329280286B17";
 
     // read persistor password from environment variable
     char* cpersistorPassword = std::getenv("IONIC_PERSISTOR_PASSWORD");
@@ -43,24 +43,36 @@ int main(int argc, char* argv[]) {
         exit(1);
     }
 
-    // check if there are profiles.
-	if (!agent.hasAnyProfiles()) {
-		std::cout << "There are no device profiles on this device." << std::endl;
-		std::cout << "Register a device before continuing." << std::endl;
-		exit(1);
-	}
+    // manually load key
+    ISCryptoHexString isKeyHex(keyHex);
+    ISCryptoBytes keyBytes;
+    isKeyHex.toBytes(keyBytes);
 
-    // initialize chunk cipher object
-    ISChunkCryptoCipherAuto cipher(agent);
+    // initialize aes cipher object
+    ISCryptoAesCtrCipher cipher(keyBytes);
 
-    // encrypt the input with an Ionic-managed key
-    std::string ciphertext;
-    nErrorCode = cipher.encrypt(input, ciphertext);
+    // encrypt
+    ISCryptoBytes ciphertext;
+    nErrorCode = cipher.encrypt(message, ciphertext);
     if (nErrorCode != ISCRYPTO_OK) {
         std::cerr << "Error: " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
         exit(1);
     }
 
-    std::cout << "Input: " << input << std::endl;
-    std::cout << "Ionic Chunk Encrypted Ciphertext: " << ciphertext << std::endl;
+    // decrypt
+    ISCryptoBytes plaintext;
+    cipher.decrypt(ciphertext, plaintext);
+    if (nErrorCode != ISCRYPTO_OK) {
+        std::cerr << "Error: " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
+        exit(1);
+    }
+
+    // display data
+    ISCryptoHexString ciphertextHex;
+    std::string plaintextString;
+    ciphertextHex.fromBytes(ciphertext);
+    plaintext.toString(plaintextString);
+    std::cout << "Ciphertext : " << ciphertextHex << std::endl;
+    std::cout << "Plaintext  : " << plaintextString << std::endl;
 }
+

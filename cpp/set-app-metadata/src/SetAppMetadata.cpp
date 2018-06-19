@@ -6,7 +6,6 @@
 
 #include "ISAgent.h"
 #include "ISAgentSDKError.h"
-#include <ISChunkCrypto.h>
 #include <stdio.h>
 #include <cstdlib>
 #include <iostream>
@@ -18,9 +17,10 @@
 #endif
 
 int main(int argc, char* argv[]) {
-
+    
     int nErrorCode;
-    std::string input = "Hello World!";
+    std::string appName = "cpp-sample-app";
+    std::string appVersion = "1.0.0";
 
     // read persistor password from environment variable
     char* cpersistorPassword = std::getenv("IONIC_PERSISTOR_PASSWORD");
@@ -43,24 +43,8 @@ int main(int argc, char* argv[]) {
         exit(1);
     }
 
-    // check if there are profiles.
-	if (!agent.hasAnyProfiles()) {
-		std::cout << "There are no device profiles on this device." << std::endl;
-		std::cout << "Register a device before continuing." << std::endl;
-		exit(1);
-	}
-
-    // initialize chunk cipher object
-    ISChunkCryptoCipherAuto cipher(agent);
-
-    // encrypt the input with an Ionic-managed key
-    std::string ciphertext;
-    nErrorCode = cipher.encrypt(input, ciphertext);
-    if (nErrorCode != ISCRYPTO_OK) {
-        std::cerr << "Error: " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
-        exit(1);
-    }
-
-    std::cout << "Input: " << input << std::endl;
-    std::cout << "Ionic Chunk Encrypted Ciphertext: " << ciphertext << std::endl;
+    // set app metadata
+    agent.setMetadata("ionic-application-name", appName);
+    agent.setMetadata("ionic-application-version", appVersion);
 }
+
