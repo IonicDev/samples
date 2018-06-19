@@ -6,7 +6,6 @@
 
 #include "ISAgent.h"
 #include "ISAgentSDKError.h"
-#include <ISChunkCrypto.h>
 #include <stdio.h>
 #include <cstdlib>
 #include <iostream>
@@ -20,7 +19,6 @@
 int main(int argc, char* argv[]) {
 
     int nErrorCode;
-    std::string input = "Hello World!";
 
     // read persistor password from environment variable
     char* cpersistorPassword = std::getenv("IONIC_PERSISTOR_PASSWORD");
@@ -43,24 +41,20 @@ int main(int argc, char* argv[]) {
         exit(1);
     }
 
-    // check if there are profiles.
-	if (!agent.hasAnyProfiles()) {
-		std::cout << "There are no device profiles on this device." << std::endl;
-		std::cout << "Register a device before continuing." << std::endl;
-		exit(1);
-	}
-
-    // initialize chunk cipher object
-    ISChunkCryptoCipherAuto cipher(agent);
-
-    // encrypt the input with an Ionic-managed key
-    std::string ciphertext;
-    nErrorCode = cipher.encrypt(input, ciphertext);
-    if (nErrorCode != ISCRYPTO_OK) {
-        std::cerr << "Error: " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
-        exit(1);
+    // request "classification" marking values
+    ISAgentGetResourcesRequest::Resource requestResource;
+    requestResource.setResourceId("marking-values");
+    requestResource.setArgs("classification");
+    ISAgentGetResourcesResponse response;
+    nErrorCode = agent.getResource(requestResource, response);
+    if (nErrorCode != ISAGENT_OK) {
+        std::cerr << "Error requesting resource: " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
     }
+    std::vector<ISAgentGetResourcesResponse::Resource> responseResourcesList = response.getResources();
 
-    std::cout << "Input: " << input << std::endl;
-    std::cout << "Ionic Chunk Encrypted Ciphertext: " << ciphertext << std::endl;
+    // display resources
+    for(int i = 0; i < responseResourcesList.size(); i++) {
+        ISAgentGetResourcesResponse::Resource responseResource = responseResourcesList.at(i);
+        std::cout << "'classification' values: " << responseResource.getData() << std::endl;
+    }
 }

@@ -6,7 +6,6 @@
 
 #include "ISAgent.h"
 #include "ISAgentSDKError.h"
-#include <ISChunkCrypto.h>
 #include <stdio.h>
 #include <cstdlib>
 #include <iostream>
@@ -18,9 +17,9 @@
 #endif
 
 int main(int argc, char* argv[]) {
-
+    
     int nErrorCode;
-    std::string input = "Hello World!";
+    int keyCount = 5;
 
     // read persistor password from environment variable
     char* cpersistorPassword = std::getenv("IONIC_PERSISTOR_PASSWORD");
@@ -43,24 +42,25 @@ int main(int argc, char* argv[]) {
         exit(1);
     }
 
-    // check if there are profiles.
-	if (!agent.hasAnyProfiles()) {
-		std::cout << "There are no device profiles on this device." << std::endl;
-		std::cout << "Register a device before continuing." << std::endl;
-		exit(1);
-	}
-
-    // initialize chunk cipher object
-    ISChunkCryptoCipherAuto cipher(agent);
-
-    // encrypt the input with an Ionic-managed key
-    std::string ciphertext;
-    nErrorCode = cipher.encrypt(input, ciphertext);
-    if (nErrorCode != ISCRYPTO_OK) {
-        std::cerr << "Error: " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
+    // create multiple keys
+    ISAgentCreateKeysRequest request;
+    ISAgentCreateKeysRequest::Key requestKey("refId", keyCount);
+    request.getKeys().push_back(requestKey);
+    ISAgentCreateKeysResponse response;
+    nErrorCode = agent.createKeys(request, response);
+    if (nErrorCode != ISAGENT_OK) {
+        std::cerr << "Error creating key: " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
         exit(1);
     }
+    std::vector<ISAgentCreateKeysResponse::Key> responseKeysList = response.getKeys();
 
-    std::cout << "Input: " << input << std::endl;
-    std::cout << "Ionic Chunk Encrypted Ciphertext: " << ciphertext << std::endl;
+    // display created keys
+    for(int i = 0; i < responseKeysList.size(); i++) {
+        ISAgentCreateKeysResponse::Key responseKey = responseKeysList.at(i);
+        ISCryptoHexString hexKey;
+        hexKey.fromBytes(responseKey.getKey());
+        std::cout << "---" << std::endl;
+        std::cout << "KeyId    : " << responseKey.getId() << std::endl;
+        std::cout << "KeyBytes : " << hexKey << std::endl;
+    }
 }
