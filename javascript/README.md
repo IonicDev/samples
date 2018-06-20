@@ -1,6 +1,6 @@
 # Ionic Javascript SDK Samples
 
-To build and run an Ionic Javascript SDK Sample, navigate into the directory of a specific sample task and open the HTML index page. Open the browser's console to view the output. 
+To build and run an Ionic Javascript SDK Sample, navigate into the directory of a specific sample task, serve the HTML index page (using a simple web server like http-server from NPM, and navigate to it on the browser. Open the browser's console to view the output. 
 
 Note: the samples expect a profile to exist in the browser with the following credentials:
 
