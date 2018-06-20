@@ -13,7 +13,7 @@ const appData = {
 
 const main = async () => {
     
-    const externalId = "d8ded396-4388-4489-9604-c2482205e55c"
+    const externalId = Math.random().toString(16).replace(/\./, "")
 
     // initialize agent
     const agent = new window.IonicSdk.ISAgent('https://dev-api.ionic.com/jssdk/latest/');
