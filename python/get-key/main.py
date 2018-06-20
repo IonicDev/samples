@@ -8,7 +8,7 @@ import json
 import ionicsdk
 import binascii
 
-keyId = 'HVzG5uKl3yE'
+keyId = 'HVzG34L2MVI'
 
 # read persistor password from environment variable
 persistorPassword = os.environ.get('IONIC_PERSISTOR_PASSWORD')
