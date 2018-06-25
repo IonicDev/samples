@@ -15,36 +15,34 @@ int main(int argc, char* argv[])
     int nErrorCode;
     ISAgent agent;
 
-    nErrorCode = agent.initialize();
+    // initialize agent with default persistor
+    ISAgentDeviceProfilePersistorDefault persistor;
+    nErrorCode = agent.initialize(persistor);
     if (nErrorCode != ISAGENT_OK) {
         std::cerr << "Error initializing agent: " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
+        exit(1);
     }
 
     // Check if there are profiles.
-    if (agent.hasAnyProfiles())
-    {
+    if (agent.hasAnyProfiles()) {
         std::vector< ISAgentDeviceProfile >::iterator iter;
         std::vector< ISAgentDeviceProfile > profiles = agent.getAllProfiles();
-        for (iter = profiles.begin(); iter != profiles.end(); ++iter)
-        {
+        for (iter = profiles.begin(); iter != profiles.end(); ++iter) {
             std::cout << "Name: " << iter->getName()
                 << ", Id: " << iter->getDeviceId() << std::endl;
         }
 
         // Check if there is an active profile.
-        if (agent.hasActiveProfile())
-        {
+        if (agent.hasActiveProfile()) {
             ISAgentDeviceProfile profile = agent.getActiveProfile();
             std::cout << std::endl << "Active profile, Name: " << profile.getName()
                 << ", Id: " << profile.getDeviceId() << std::endl;
         }
-        else
-        {
+        else {
             std::cerr << "There is not an active device profile selected on this device." <<  std::endl;
         }
     }
-    else
-    {
+    else {
         std::cerr << "There are no device profiles on this device." <<  std::endl;
     }
 
