@@ -8,22 +8,28 @@
 
 #include <iostream>
 #include <ISFileCrypto.h>
+#include <ISAgentSDKError.h>
 
 int main()
 {
-    std::string filepath;
-    ISFileCryptoFileInfo fileinfo;
+    int nErrorCode;
 
+    // prompt user for path to file
+    std::string filepath;
     std::cout << "Please enter the path to the file: ";
     std::getline(std::cin, filepath);
 
-    ISFileCrypto::getFileInfo(filepath, fileinfo);
-    if (fileinfo.isEncrypted())
-    {
+    // get file info
+    ISFileCryptoFileInfo fileinfo;
+    nErrorCode = ISFileCrypto::getFileInfo(filepath, fileinfo);
+    if (nErrorCode != ISCRYPTO_OK) {
+        std::cerr << "Failed to get file info: " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
+        exit(1);
+    }
+    if (fileinfo.isEncrypted()) {
         std::cout <<  "The file \"" << filepath  << "\" is encrypted using key " << fileinfo.getKeyId() << "." << std::endl;
     }
-    else
-    {
+    else {
         std::cout <<  "The file \"" << filepath  << "\" is not encrypted." << std::endl;
     }
 
