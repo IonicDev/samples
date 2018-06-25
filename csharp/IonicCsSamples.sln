@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IonicChunkDecrypt", "chunk-
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "logging", "logging\logging.csproj", "{6279B92D-FC66-4C25-AED2-EDE2DEA96F55}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckDefaultPersistor", "check-windows-default-persistor\CheckDefaultPersistor.csproj", "{CE5C8BE1-8D84-4BFC-A31D-1D2E67AC665E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetFileInfoSample", "get-fileInfo-sample\GetFileInfoSample.csproj", "{026834B3-48BD-42A0-BE91-E735C255EB8D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +55,14 @@ Global
 		{6279B92D-FC66-4C25-AED2-EDE2DEA96F55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6279B92D-FC66-4C25-AED2-EDE2DEA96F55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6279B92D-FC66-4C25-AED2-EDE2DEA96F55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE5C8BE1-8D84-4BFC-A31D-1D2E67AC665E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE5C8BE1-8D84-4BFC-A31D-1D2E67AC665E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE5C8BE1-8D84-4BFC-A31D-1D2E67AC665E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE5C8BE1-8D84-4BFC-A31D-1D2E67AC665E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{026834B3-48BD-42A0-BE91-E735C255EB8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{026834B3-48BD-42A0-BE91-E735C255EB8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{026834B3-48BD-42A0-BE91-E735C255EB8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{026834B3-48BD-42A0-BE91-E735C255EB8D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
