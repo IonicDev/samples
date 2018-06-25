@@ -44,15 +44,10 @@ namespace CheckProfiles
             // Create an agent object to talk to Ionic.
             Agent agent = new Agent();
 
-            // Create a password persistor for agent initialization.
             try
             {
-                DeviceProfilePersistorPassword persistor = new DeviceProfilePersistorPassword();
-                persistor.FilePath = homePath + "\\.ionicsecurity\\profiles.pw";
-                persistor.Password = persistorPassword;
-
-                agent.SetMetadata(Agent.MetaApplicationName, "Encrypting files generically");
-                agent.Initialize(persistor);
+                agent.SetMetadata(Agent.MetaApplicationName, "Initialize agent with default persistor");
+                agent.Initialize();
             }
             catch (SdkException sdkExp)
             {
@@ -67,7 +62,7 @@ namespace CheckProfiles
             {
                 Console.WriteLine("There are no device profiles on this device.");
                 WaitForInput();
-                return;
+                Environment.Exit(1);
             }
 
             foreach (DeviceProfile profile in agent.AllProfiles)
