@@ -21,7 +21,6 @@ cmake_install.cmake
 makefile
 *_linux
 *vcx*
-*.sln
 
 # Internal
 _configure_buildfiles
