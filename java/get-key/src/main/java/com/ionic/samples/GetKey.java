@@ -8,7 +8,7 @@
 
 package com.ionic.samples;
 
-import com.ionic.sdk.device.profile.persistor.DeviceProfilePersistorPlainText;
+import com.ionic.sdk.device.profile.persistor.DeviceProfilePersistorPassword;
 import com.ionic.sdk.agent.Agent;
 import com.ionic.sdk.agent.request.getkey.GetKeysResponse;
 import com.ionic.sdk.error.IonicException;
@@ -23,8 +23,12 @@ public class GetKey
         // initialize agent
         Agent agent = new Agent();
         try {
-            String persistorPath = System.getProperty("user.home") + "/.ionicsecurity/profiles.pt";
+            String persistorPath = System.getProperty("user.home") + "/.ionicsecurity/profiles.pw";
+            String persistorPassword = System.getenv("IONIC_PERSISTOR_PASSWORD");
+
             DeviceProfilePersistorPlainText persistor = new DeviceProfilePersistorPlainText(persistorPath);
+            persistor.setPassword(persistorPassword);
+
             agent.initialize(persistor);
         } catch(IonicException e) {
             System.out.println(e.getMessage());

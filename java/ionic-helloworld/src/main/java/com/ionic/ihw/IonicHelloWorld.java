@@ -6,11 +6,11 @@
 
 package com.ionic.ihw;
 
-import com.ionic.sdk.error.SdkException;
+import com.ionic.sdk.error.IonicException;
 import com.ionic.sdk.error.AgentErrorModuleConstants;
 import com.ionic.sdk.agent.Agent;
 import com.ionic.sdk.agent.cipher.chunk.ChunkCipherV2;
-import com.ionic.sdk.device.profile.persistor.DeviceProfilePersistorPlainText;
+import com.ionic.sdk.device.profile.persistor.DeviceProfilePersistorPassword;
 
 public class IonicHelloWorld
 {
@@ -19,9 +19,13 @@ public class IonicHelloWorld
         try {
             // Initialize Ionic agent
             Agent isAgent = new Agent();
-            String profilePath = System.getProperty("user.home") + "/.ionicsecurity/profiles.pt";
-            DeviceProfilePersistorPlainText ptPersistor = new DeviceProfilePersistorPlainText(profilePath);
-            isAgent.initialize(ptPersistor);
+            String profilePath = System.getProperty("user.home") + "/.ionicsecurity/profiles.pw";
+            String persistorPassword = System.getenv("IONIC_PERSISTOR_PASSWORD");
+
+            DeviceProfilePersistorPassword persistor = new DeviceProfilePersistorPassword(profilePath);
+            persistor.setPassword(persistorPassword);
+
+            isAgent.initialize(persistor);
 
             // Encrypt and decrypt string "hello world"
             ChunkCipherV2 cipher = new ChunkCipherV2(isAgent);
@@ -30,7 +34,7 @@ public class IonicHelloWorld
             System.out.println("Plain Text: " + plainText);
             System.out.println("Ionic Chunk Encrypted Text: " + cipherText);
 
-        } catch (SdkException e) {
+        } catch (IonicException e) {
             System.out.println(e);
             if(e.getReturnCode() == AgentErrorModuleConstants.ISAGENT_NO_DEVICE_PROFILE.value()) {
                 System.out.println("Profile does not exist");

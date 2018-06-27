@@ -8,7 +8,6 @@
 
 package com.ionic.samples;
 
-import com.ionic.sdk.device.profile.persistor.DeviceProfilePersistorPlainText;
 import com.ionic.sdk.device.profile.persistor.DeviceProfilePersistorPassword;
 import com.ionic.sdk.agent.Agent;
 import com.ionic.sdk.agent.request.getkey.GetKeysResponse;

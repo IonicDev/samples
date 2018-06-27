@@ -8,7 +8,6 @@
 
 package com.ionic.samples;
 
-import com.ionic.sdk.device.profile.persistor.DeviceProfilePersistorPlainText;
 import com.ionic.sdk.device.profile.persistor.DeviceProfilePersistorPassword;
 import com.ionic.sdk.agent.Agent;
 import com.ionic.sdk.error.IonicException;
@@ -20,8 +19,12 @@ public class SetAppMetadata
         // initialize agent
         Agent agent = new Agent();
         try {
-            String persistorPath = System.getProperty("user.home") + "/.ionicsecurity/profiles.pt";
-            DeviceProfilePersistorPlainText persistor = new DeviceProfilePersistorPlainText(persistorPath);
+            String persistorPath = System.getProperty("user.home") + "/.ionicsecurity/profiles.pw";
+            String persistorPassword = System.getenv("IONIC_PERSISTOR_PASSwORD");
+
+            DeviceProfilePersistorPassword persistor = new DeviceProfilePersistorPassword(persistorPath);
+            persistor.setPassword(persistorPassword);
+
             agent.initialize(persistor);
         } catch(IonicException e) {
             System.out.println(e.getMessage());
