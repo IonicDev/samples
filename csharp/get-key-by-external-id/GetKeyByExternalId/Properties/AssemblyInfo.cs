@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("GetKeysByExternalId")]
+[assembly: AssemblyTitle("GetKeyByExternalId")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Ionic Security Inc.")]
-[assembly: AssemblyProduct("GetKeysByExternalId")]
+[assembly: AssemblyProduct("GetKeyByExternalId")]
 [assembly: AssemblyCopyright("Copyright © 2018 Ionic Security Inc.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

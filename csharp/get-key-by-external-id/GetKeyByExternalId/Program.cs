@@ -11,7 +11,7 @@ using IonicSecurity.SDK;
 
 namespace Samples
 {
-    class GetKeysByExternalId
+    class GetKeyByExternalId
     {
         // Waits for any input for console applications.
         // This allows information to be displayed before the 
