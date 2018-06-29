@@ -30,25 +30,15 @@ namespace CheckProfiles
 
         static void Main(string[] args)
         {
-            // Get the user's home path and password persistor from the environment.
-            String homePath = Environment.GetEnvironmentVariable("USERPROFILE");
-
-            String persistorPassword = Environment.GetEnvironmentVariable("IONIC_PERSISTOR_PASSWORD");
-            if (persistorPassword == null || persistorPassword.Length == 0)
-            {
-                Console.WriteLine("Please provide the persistor password as env variable: IONIC_PERSISTOR_PASSWORD");
-                WaitForInput();
-                Environment.Exit(1);
-            }
-
-            // Create an agent object to talk to Ionic.
+            // Initialize agent with default persistor
+            DeviceProfilePersistorDefault persistor = new DeviceProfilePersistorDefault();
             Agent agent = new Agent();
 
             // Intialize Agent.
             try
             {
                 agent.SetMetadata(Agent.MetaApplicationName, "CheckProfiles Sample");
-                agent.Initialize();
+                agent.Initialize(persistor);
             }
             catch (SdkException sdkExp)
             {
