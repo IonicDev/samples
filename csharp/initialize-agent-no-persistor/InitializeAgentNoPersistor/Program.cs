@@ -26,7 +26,7 @@ namespace Samples
 
         static void Main(string[] args)
         {
-            // Initialize the agent.
+            // Create a blank agent.
             Agent agent = new Agent();
 
             try

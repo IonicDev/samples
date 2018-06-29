@@ -35,15 +35,8 @@ namespace Samples
         static int Main(string[] args)
         {
             // Please set keyId to a key you have already created.
-            String keyId = null;
+            String keyId = "HVzG34L2MVI";
 
-            if (keyId == null)
-            {
-                Console.WriteLine("Please set the keyId to a key you have already created.");
-                WaitForInput();
-                Environment.Exit(1);
-            }
-            
             // Get the user's home path and password persistor from the environment.
             String homePath = Environment.GetEnvironmentVariable("USERPROFILE");
 

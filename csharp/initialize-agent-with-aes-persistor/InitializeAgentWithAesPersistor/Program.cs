@@ -6,7 +6,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Web.Script.Serialization;
+using System.Text;
+
 using IonicSecurity.SDK;
 
 namespace Samples
@@ -26,30 +27,23 @@ namespace Samples
 
         static void Main(string[] args)
         {
-            // Get the user's home path and password persistor from the environment.
-            String homePath = Environment.GetEnvironmentVariable("USERPROFILE");
+            // Set the persistor's path, key value, and authorization data.
+            // Information can be found in ../../../../../../sample-data/persistors/README.md.
+            String persistorPath = "../../../../../../sample-data/persistors/sample-persistor.aes";
             string persistorKeyHex = "A0444B8B5A7209780823617A98986831B8240BAA851A0B1696B0329280286B17";
             string persistorAuthData = "persistor auth data";
-            
-            String persistorPassword = Environment.GetEnvironmentVariable("IONIC_PERSISTOR_PASSWORD");
-            if (persistorPassword == null || persistorPassword.Length == 0)
-            {
-                Console.WriteLine("Please provide the persistor password as env variable: IONIC_PERSISTOR_PASSWORD");
-                WaitForInput();
-                Environment.Exit(1);
-            }
 
-            // Initialize the agent.
+            // Create a blank agent.
             Agent agent = new Agent();
 
+            // Create an AES persistor and initialize agent.
             try
-            {
-                // Create a password persistor for agent initialization.
+            {               
                 DeviceProfilePersistorAesGcm persistor = new DeviceProfilePersistorAesGcm();
-                persistor.FilePath = homePath + "\\.ionicsecurity\\profiles.aes";
+                persistor.FilePath = persistorPath;
                 persistor.KeyHex = persistorKeyHex;
-                persistor.AuthDataHex = persistorAuthData;
- 
+                persistor.AuthDataBytes = Encoding.ASCII.GetBytes(persistorAuthData);
+
                 agent.SetMetadata(Agent.MetaApplicationName, "Initialize agent with AES persistor");
                 agent.Initialize(persistor);
             }

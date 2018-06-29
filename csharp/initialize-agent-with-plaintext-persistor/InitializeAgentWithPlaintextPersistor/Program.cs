@@ -26,17 +26,17 @@ namespace Samples
 
         static void Main(string[] args)
         {
-            // Get the user's home path and password persistor from the environment.
-            String homePath = Environment.GetEnvironmentVariable("USERPROFILE");
-            
-            // Initialize the agent.
+            // Set the persistor's path.
+            String persistorPath = "../../../../../../sample-data/persistors/sample-persistor.pt";
+
+            // Create a blank agent.
             Agent agent = new Agent();
 
+            // Create a plaintext persistor and initialize the agent.
             try
-            {
-                // Create a password persistor for agent initialization.
+            {              
                 DeviceProfilePersistorPlaintext persistor = new DeviceProfilePersistorPlaintext();
-                persistor.FilePath = homePath + "\\.ionicsecurity\\profiles.pt";
+                persistor.FilePath = persistorPath;
  
                 agent.SetMetadata(Agent.MetaApplicationName, "Initialize agent with plaintext persistor");
                 agent.Initialize(persistor);

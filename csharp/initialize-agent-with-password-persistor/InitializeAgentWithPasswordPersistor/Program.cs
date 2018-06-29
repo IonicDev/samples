@@ -6,7 +6,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Web.Script.Serialization;
+
 using IonicSecurity.SDK;
 
 namespace Samples
@@ -26,25 +26,19 @@ namespace Samples
 
         static void Main(string[] args)
         {
-            // Get the user's home path and password persistor from the environment.
-            String homePath = Environment.GetEnvironmentVariable("USERPROFILE");
-            
-            String persistorPassword = Environment.GetEnvironmentVariable("IONIC_PERSISTOR_PASSWORD");
-            if (persistorPassword == null || persistorPassword.Length == 0)
-            {
-                Console.WriteLine("Please provide the persistor password as env variable: IONIC_PERSISTOR_PASSWORD");
-                WaitForInput();
-                Environment.Exit(1);
-            }
+            // Set the persistors's path and password.
+            // Information can be found at ../../../../../../sample-data/perisstors/README.md.
+            String persistorPath = "../../../../../../sample-data/persistors/sample-persistor.pw";
+            String persistorPassword = "my secret password";
 
-            // Initialize the agent.
+            // Create a blank agent.
             Agent agent = new Agent();
 
+            // Create a password persistor and intialize agent.
             try
             {
-                // Create a password persistor for agent initialization.
                 DeviceProfilePersistorPassword persistor = new DeviceProfilePersistorPassword();
-                persistor.FilePath = homePath + "\\.ionicsecurity\\profiles.pw";
+                persistor.FilePath = persistorPath;
                 persistor.Password = persistorPassword;
  
                 agent.SetMetadata(Agent.MetaApplicationName, "Initialize agent with password persistor");
