@@ -48,7 +48,7 @@ const main = async () => {
     const ciphertext = encryptResponse.stringChunk
 
     // display data
-    console.log(`Plain Text  : ${message}`)
+    console.log(`Plain Text: ${message}`)
     console.log(`Ionic Chunk Encrypted Text: ${ciphertext}`)
 }
 
