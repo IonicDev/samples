@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C8B87FFA-1619-4D47-8540-E43C11D19B3E}</ProjectGuid>
+    <ProjectGuid>{9E8D876E-BDA1-4802-A777-89D9D9C88F94}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>CheckProfiles</RootNamespace>
-    <AssemblyName>CheckProfiles</AssemblyName>
+    <RootNamespace>InitializeAgentWithPlaintextPersistor</RootNamespace>
+    <AssemblyName>InitializeAgentWithPlaintextPersistor</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

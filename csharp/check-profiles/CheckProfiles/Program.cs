@@ -33,9 +33,11 @@ namespace CheckProfiles
             // Initialize agent with default persistor
             DeviceProfilePersistorDefault persistor = new DeviceProfilePersistorDefault();
             Agent agent = new Agent();
+
+            // Intialize Agent.
             try
             {
-                agent.SetMetadata(Agent.MetaApplicationName, "Initialize agent with default persistor");
+                agent.SetMetadata(Agent.MetaApplicationName, "CheckProfiles Sample");
                 agent.Initialize(persistor);
             }
             catch (SdkException sdkExp)

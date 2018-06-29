@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C8B87FFA-1619-4D47-8540-E43C11D19B3E}</ProjectGuid>
+    <ProjectGuid>{B98A9A72-C4C5-4354-A7FE-7C3E33CFA254}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>CheckProfiles</RootNamespace>
-    <AssemblyName>CheckProfiles</AssemblyName>
+    <RootNamespace>CreateKeyWithExternalId</RootNamespace>
+    <AssemblyName>CreateKeyWithExternalId</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
