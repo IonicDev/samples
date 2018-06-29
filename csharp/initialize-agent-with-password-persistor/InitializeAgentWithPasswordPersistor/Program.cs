@@ -41,7 +41,7 @@ namespace Samples
                 persistor.FilePath = persistorPath;
                 persistor.Password = persistorPassword;
  
-                agent.SetMetadata(Agent.MetaApplicationName, "Initialize agent with password persistor");
+                agent.SetMetadata(Agent.MetaApplicationName, "InitializeAgentWithPasswordPersistor Sample");
                 agent.Initialize(persistor);
             }
             catch (SdkException sdkExp)

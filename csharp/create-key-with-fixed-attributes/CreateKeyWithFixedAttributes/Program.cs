@@ -55,7 +55,7 @@ namespace Samples
                 persistor.FilePath = homePath + "\\.ionicsecurity\\profiles.pw";
                 persistor.Password = persistorPassword;
 
-                agent.SetMetadata(Agent.MetaApplicationName, "Create a Fixed Attribute Key");
+                agent.SetMetadata(Agent.MetaApplicationName, "CreateKeyWithFixedAttributes Sample");
                 agent.Initialize(persistor);
             }
             catch (SdkException sdkExp)
@@ -65,15 +65,15 @@ namespace Samples
                 Environment.Exit(1);
             }
 
-            // define fixed key attributes 
+            // Eefine fixed attributes.
             AttributesDictionary fixedKeyAttrs = new AttributesDictionary();
             fixedKeyAttrs.Add("data-type", new List<string> { "Finance" });
             fixedKeyAttrs.Add("region", new List<string> { "North America" });
 
-            // define mutable keys
+            // Define mutable keys.
             AttributesDictionary mutableKeyAttrs = new AttributesDictionary(); // empty map
 
-            // Create single key with fixed attributes
+            // Create single key with fixed attributes.
             CreateKeysResponse.Key key = null;
             try
             {              

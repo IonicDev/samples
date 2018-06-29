@@ -31,7 +31,7 @@ namespace Samples
 
             try
             {
-                agent.SetMetadata(Agent.MetaApplicationName, "Initialize agent with default persistor");
+                agent.SetMetadata(Agent.MetaApplicationName, "InitializeAgentWithDefaultPersistor Sample");
                 agent.Initialize();
             }
             catch (SdkException sdkExp)

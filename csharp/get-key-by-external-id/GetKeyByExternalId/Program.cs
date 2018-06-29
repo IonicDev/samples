@@ -58,7 +58,7 @@ namespace Samples
                 persistor.FilePath = homePath + "\\.ionicsecurity\\profiles.pw";
                 persistor.Password = persistorPassword;
 
-                agent.SetMetadata(Agent.MetaApplicationName, "Get Keys by external ID");
+                agent.SetMetadata(Agent.MetaApplicationName, "GetKeyByExternalId Sample");
                 agent.Initialize(persistor);
             }
             catch (SdkException sdkExp)
@@ -68,7 +68,7 @@ namespace Samples
                 Environment.Exit(1);
             }
 
-            // Create a key request for multiple keys.
+            // Create a key request by external ID.
             GetKeysRequest keyRequest = new GetKeysRequest();
             keyRequest.ExternalIds.AddRange(externalIds);
 

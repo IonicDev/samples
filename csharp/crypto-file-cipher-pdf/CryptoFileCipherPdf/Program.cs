@@ -52,7 +52,7 @@ namespace Samples
                 persistor.FilePath = homePath + "\\.ionicsecurity\\profiles.pw";
                 persistor.Password = persistorPassword;
 
-                agent.SetMetadata(Agent.MetaApplicationName, "Encrypting PDF file");
+                agent.SetMetadata(Agent.MetaApplicationName, "CryptoFileCipherPdf Sample");
                 agent.Initialize(persistor);
             }
             catch (SdkException sdkExp)
@@ -75,7 +75,7 @@ namespace Samples
                 Environment.Exit(1);
             }
 
-            // define mutable key attributes
+            // Define mutable attributes.
             AttributesDictionary mutableKeyAttrs = new AttributesDictionary();
             mutableKeyAttrs.Add("classification", new List<string> { "Restricted" });
             FileCryptoEncryptAttributes fileCryptoEncryptAttrs = new FileCryptoEncryptAttributes(mutableKeyAttrs);

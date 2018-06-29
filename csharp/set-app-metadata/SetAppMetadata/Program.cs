@@ -45,7 +45,7 @@ namespace Samples
                 persistor.FilePath = homePath + "\\.ionicsecurity\\profiles.pw";
                 persistor.Password = persistorPassword;
 
-                agent.SetMetadata(Agent.MetaApplicationName, "Set Application Metadata");
+                agent.SetMetadata(Agent.MetaApplicationName, "SetAppMetadata Sample");
                 agent.Initialize(persistor);
             }
             catch (SdkException sdkExp)

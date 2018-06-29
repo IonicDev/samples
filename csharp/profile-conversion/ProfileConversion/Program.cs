@@ -38,7 +38,7 @@ namespace Samples
                 DeviceProfilePersistorPlaintext persistor = new DeviceProfilePersistorPlaintext();
                 persistor.FilePath = persistorPath;
 
-                ptAgent.SetMetadata(Agent.MetaApplicationName, "Convert Profiles (plaintext persistor)");
+                ptAgent.SetMetadata(Agent.MetaApplicationName, "ProfileConversion Sample (plaintext persistor)");
                 ptAgent.Initialize(persistor);
             }
             catch (SdkException sdkExp)
@@ -71,7 +71,7 @@ namespace Samples
                 passwordPersistor.FilePath = passwordPersistorPath;
                 passwordPersistor.Password = persistorPassword;
 
-                pwAgent.SetMetadata(Agent.MetaApplicationName, "Convert Profiles (password persistor)");
+                pwAgent.SetMetadata(Agent.MetaApplicationName, "ProfileConversion Sample (password persistor)");
                 pwAgent.Initialize(passwordPersistor);
             }
             catch (SdkException sdkExp)

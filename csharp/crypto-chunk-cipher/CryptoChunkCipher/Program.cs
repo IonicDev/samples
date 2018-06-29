@@ -50,7 +50,7 @@ namespace Samples
                 persistor.FilePath = homePath + "\\.ionicsecurity\\profiles.pw";
                 persistor.Password = persistorPassword;
 
-                agent.SetMetadata(Agent.MetaApplicationName, "Encrypting with a chunk cipher");
+                agent.SetMetadata(Agent.MetaApplicationName, "CryptoChunkCipher Sample");
                 agent.Initialize(persistor);
             }
             catch (SdkException sdkExp)

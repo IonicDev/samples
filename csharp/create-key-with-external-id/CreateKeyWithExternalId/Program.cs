@@ -58,7 +58,7 @@ namespace Samples
                 persistor.FilePath = homePath + "\\.ionicsecurity\\profiles.pw";
                 persistor.Password = persistorPassword;
 
-                agent.SetMetadata(Agent.MetaApplicationName, "Create a Key with an external ID");
+                agent.SetMetadata(Agent.MetaApplicationName, "CreateKeyWithExternalId Sample");
                 agent.Initialize(persistor);
             }
             catch (SdkException sdkExp)
@@ -68,11 +68,11 @@ namespace Samples
                 Environment.Exit(1);
             }
 
-            // define fixed key attributes 
+            // Define ionic-external-id fixed attribute. 
             AttributesDictionary fixedKeyAttrs = new AttributesDictionary();
             fixedKeyAttrs.Add("ionic-external-id", new List<string> { externalId });
 
-            // define mutable keys
+            // Define mutable attributes.
             AttributesDictionary mutableKeyAttrs = new AttributesDictionary(); // empty map
 
             CreateKeysResponse.Key key = null;

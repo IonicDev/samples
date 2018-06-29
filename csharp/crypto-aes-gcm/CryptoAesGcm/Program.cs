@@ -51,7 +51,7 @@ namespace Samples
                 persistor.FilePath = homePath + "\\.ionicsecurity\\profiles.pw";
                 persistor.Password = persistorPassword;
 
-                agent.SetMetadata(Agent.MetaApplicationName, "Encrypting with AES Galois Counter Mode");
+                agent.SetMetadata(Agent.MetaApplicationName, "CryptoAesGcm Sample");
                 agent.Initialize(persistor);
             }
             catch (SdkException sdkExp)
@@ -76,7 +76,7 @@ namespace Samples
 
             byte[] keyBytes = key.KeyBytes;
 
-            // Initialize AES CTR cipher object.
+            // Initialize AES GCM (Galois Counter Mode) cipher object.
             AesGcmCipher aes = new AesGcmCipher();
             aes.KeyBytes = keyBytes;
             aes.AuthDataBytes = authData;

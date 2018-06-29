@@ -44,7 +44,7 @@ namespace Samples
                 persistor.KeyHex = persistorKeyHex;
                 persistor.AuthDataBytes = Encoding.ASCII.GetBytes(persistorAuthData);
 
-                agent.SetMetadata(Agent.MetaApplicationName, "Initialize agent with AES persistor");
+                agent.SetMetadata(Agent.MetaApplicationName, "InitializeAgentWithAesPersistor Sample");
                 agent.Initialize(persistor);
             }
             catch (SdkException sdkExp)

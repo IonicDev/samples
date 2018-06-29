@@ -38,7 +38,7 @@ namespace Samples
                 DeviceProfilePersistorPlaintext persistor = new DeviceProfilePersistorPlaintext();
                 persistor.FilePath = persistorPath;
  
-                agent.SetMetadata(Agent.MetaApplicationName, "Initialize agent with plaintext persistor");
+                agent.SetMetadata(Agent.MetaApplicationName, "InitializeAgentWithPlaintextPersistor Sample");
                 agent.Initialize(persistor);
             }
             catch (SdkException sdkExp)

@@ -45,7 +45,7 @@ namespace Samples
                 Environment.Exit(1);
             }
 
-            // Initialize the agent.
+            // Create an agent object to talk to Ionic.
             Agent agent = new Agent();
 
             // Create a password persistor for agent initialization.
@@ -55,7 +55,7 @@ namespace Samples
                 persistor.FilePath = homePath + "\\.ionicsecurity\\profiles.pw";
                 persistor.Password = persistorPassword;
  
-                agent.SetMetadata(Agent.MetaApplicationName, "Create a Key");
+                agent.SetMetadata(Agent.MetaApplicationName, "CreateKey Sample");
                 agent.Initialize(persistor);
             }
             catch (SdkException sdkExp)

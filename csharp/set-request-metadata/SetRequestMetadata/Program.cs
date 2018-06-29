@@ -57,7 +57,7 @@ namespace Samples
                 persistor.FilePath = homePath + "\\.ionicsecurity\\profiles.pw";
                 persistor.Password = persistorPassword;
 
-                agent.SetMetadata(Agent.MetaApplicationName, "Set Request Metadata");
+                agent.SetMetadata(Agent.MetaApplicationName, "SetRequestMetadata Sample");
                 agent.Initialize(persistor);
             }
             catch (SdkException sdkExp)
@@ -67,6 +67,7 @@ namespace Samples
                 Environment.Exit(1);
             }
 
+            // Create some request metadata.
             MetadataDictionary requestMetadata = new MetadataDictionary();
             requestMetadata.Add("application-status", "active");
 

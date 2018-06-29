@@ -44,9 +44,10 @@ namespace CheckProfiles
             // Create an agent object to talk to Ionic.
             Agent agent = new Agent();
 
+            // Intialize Agent.
             try
             {
-                agent.SetMetadata(Agent.MetaApplicationName, "Initialize agent with default persistor");
+                agent.SetMetadata(Agent.MetaApplicationName, "CheckProfiles Sample");
                 agent.Initialize();
             }
             catch (SdkException sdkExp)

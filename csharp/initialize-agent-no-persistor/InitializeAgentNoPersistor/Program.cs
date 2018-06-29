@@ -31,7 +31,7 @@ namespace Samples
 
             try
             {
-                agent.SetMetadata(Agent.MetaApplicationName, "Initialize agent with no persistor");
+                agent.SetMetadata(Agent.MetaApplicationName, "InitializeAgentWithNoPersistor Sample");
                 agent.InitializeWithoutProfiles();
             }
             catch (SdkException sdkExp)
@@ -41,7 +41,7 @@ namespace Samples
                 Environment.Exit(1);
             }
 
-            Console.WriteLine("Agent initialized with no profiles.");
+            Console.WriteLine("Agent initialized with no prosistor.");
             WaitForInput();
         }
     }

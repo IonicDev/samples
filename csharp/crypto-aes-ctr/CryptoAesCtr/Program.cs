@@ -50,7 +50,7 @@ namespace Samples
                 persistor.FilePath = homePath + "\\.ionicsecurity\\profiles.pw";
                 persistor.Password = persistorPassword;
 
-                agent.SetMetadata(Agent.MetaApplicationName, "Encrypting with AES Counter Mode");
+                agent.SetMetadata(Agent.MetaApplicationName, "CryptoAesCtr Sample");
                 agent.Initialize(persistor);
             }
             catch (SdkException sdkExp)
