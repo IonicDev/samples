@@ -17,5 +17,5 @@ mvn package
 java -jar target/ionic-helloworld.jar 
 ```
 
-> NOTE: This sample expects a plaintext profile in the user's home directory, e.g. `${HOME}/.ionicsecurity/profiles.pt`
-> or `C:\Users\username\.ionicsecurity\profiles.pt` on Windows.
+> NOTE: This sample expects a password profile in the user's home directory, e.g. `${HOME}/.ionicsecurity/profiles.pw`
+> or `C:\Users\username\.ionicsecurity\profiles.pw` on Windows.

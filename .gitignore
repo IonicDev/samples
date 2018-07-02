@@ -2,6 +2,9 @@
 *.class
 *.jar
 target/
+.classpath
+.project
+.settings
 
 # VS
 .vs/
