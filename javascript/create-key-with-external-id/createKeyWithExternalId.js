@@ -12,36 +12,33 @@ const appData = {
 }
 
 const main = async () => {
-    
-    const externalId = Math.random().toString(16).replace(/\./, "")
+  const externalId = Math.random().toString(16).replace(/\./, '')
 
-    // initialize agent
-    const agent = new window.IonicSdk.ISAgent('https://dev-api.ionic.com/jssdk/latest/');
-    await agent.loadUser(appData).catch((error) => {
-        console.log(`Error loading profile: ${error}`)
-        return
-    })
+  // initialize agent
+  const agent = new window.IonicSdk.ISAgent('https://dev-api.ionic.com/jssdk/latest/')
+  await agent.loadUser(appData).catch((error) => {
+    console.log(`Error loading profile: ${error}`)
+  })
 
-    // define external id as fixed attribute
-    const fixedAttributes = {
-        "ionic-external-id": [externalId]
-    }
+  // define external id as fixed attribute
+  const fixedAttributes = {
+    'ionic-external-id': [externalId]
+  }
 
-    // create single key with external id
-    const response = await agent.createKeys({
-        quantity: 1, 
-        attributes: fixedAttributes
-    }).catch((error) => {
-        console.log(`Error Creating Key: ${error}`)
-        return
-    })
-    const key = response.keys[0]
+  // create single key with external id
+  const response = await agent.createKeys({
+    quantity: 1,
+    attributes: fixedAttributes
+  }).catch((error) => {
+    console.log(`Error Creating Key: ${error}`)
+  })
+  const key = response.keys[0]
 
-    // display new key
-    console.log(`KeyId    : ${key.keyId}`)
-    console.log(`KeyBytes : ${key.key}`)
-    console.log(`FixedAttributes   : ${JSON.stringify(key.attributes,null,0)}`)
-    console.log(`MutableAttributes : ${JSON.stringify(key.mutableAttributes,null,0)}`)
+  // display new key
+  console.log(`KeyId    : ${key.keyId}`)
+  console.log(`KeyBytes : ${key.key}`)
+  console.log(`FixedAttributes   : ${JSON.stringify(key.attributes, null, 0)}`)
+  console.log(`MutableAttributes : ${JSON.stringify(key.mutableAttributes, null, 0)}`)
 }
 
-main();
+main()

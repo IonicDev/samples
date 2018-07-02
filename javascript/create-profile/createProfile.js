@@ -5,25 +5,23 @@
  */
 
 const appData = {
-    appId: 'ionic-js-samples',
-    userId: 'developer',
-    userAuth: 'password123',
-    enrollmentUrl: 'https://dev-enrollment.ionic.com/keyspace/HVzG/register'
+  appId: 'ionic-js-samples',
+  userId: 'developer',
+  userAuth: 'password123',
+  enrollmentUrl: 'https://dev-enrollment.ionic.com/keyspace/HVzG/register'
 }
 
 const main = async () => {
+  // initialize agent
+  const agent = new window.IonicSdk.ISAgent('https://dev-api.ionic.com/jssdk/latest/')
 
-    // initialize agent
-    const agent = new window.IonicSdk.ISAgent('https://dev-api.ionic.com/jssdk/latest/');
+  // create new profile
+  const response = await agent.enrollUser(appData).catch((error) => {
+    console.log(`Error loading profile: ${error}`)
+  })
 
-    // create new profile
-    const response = await agent.enrollUser(appData).catch((error) => {
-        console.log(`Error loading profile: ${error}`)
-        return
-    })
-    
-    // open new page to complete enrollment
-    window.open(response.redirect)
+  // open new page to complete enrollment
+  window.open(response.redirect)
 }
 
-main();
+main()
