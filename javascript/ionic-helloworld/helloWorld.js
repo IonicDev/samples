@@ -24,7 +24,7 @@ const main = async () => {
             error.sdkResponseCode &&
             (error.sdkResponseCode === 40022 || error.sdkResponseCode === 40002)
         ) {
-            resp = await agent.enrollUser(appData)
+            const resp = await agent.enrollUser(appData)
 
             if(resp) {
                 if (resp.redirect) {
