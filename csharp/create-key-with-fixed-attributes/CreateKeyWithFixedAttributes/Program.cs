@@ -65,7 +65,7 @@ namespace Samples
                 Environment.Exit(1);
             }
 
-            // Eefine fixed attributes.
+            // Define fixed attributes.
             AttributesDictionary fixedKeyAttrs = new AttributesDictionary();
             fixedKeyAttrs.Add("data-type", new List<string> { "Finance" });
             fixedKeyAttrs.Add("region", new List<string> { "North America" });
