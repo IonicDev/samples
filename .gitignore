@@ -24,3 +24,10 @@ makefile
 
 # Internal
 _configure_buildfiles
+_build
+
+# Samples
+*.docx
+*.pdf
+*.txt
+sample.log
