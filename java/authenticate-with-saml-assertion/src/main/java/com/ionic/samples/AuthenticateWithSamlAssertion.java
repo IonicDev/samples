@@ -2,6 +2,10 @@
  * (c) 2018 Ionic Security Inc.
  * By using this code, I agree to the Terms & Conditions (https://dev.ionic.com/use.html)
  * and the Privacy Policy (https://www.ionic.com/privacy-notice/).
+ * 
+ * This sample can be used to submit a SAML Assertion created through a user-workflow,
+ * or to submit a Generated SAML Assertion (e.g., from ionic-assertion).
+ * Ensure the correct enrollment endpoint is used for the key the assertion is signed with.
  */
 
 package com.ionic.samples;
