@@ -5,34 +5,32 @@
  */
 
 const appData = {
-    appId: 'ionic-js-samples',
-    userId: 'developer',
-    userAuth: 'password123',
-    enrollmentUrl: 'https://dev-enrollment.ionic.com/keyspace/HVzG/register'
+  appId: 'ionic-js-samples',
+  userId: 'developer',
+  userAuth: 'password123',
+  enrollmentUrl: 'https://dev-enrollment.ionic.com/keyspace/HVzG/register'
 }
 
 const main = async () => {
-    
-    const message = "secret message"
+  const message = 'secret message'
 
-    // initialize agent
-    const agent = new window.IonicSdk.ISAgent('https://dev-api.ionic.com/jssdk/latest/');
-    await agent.loadUser(appData).catch((error) => {
-        console.log(`Error loading profile: ${error}`)
-        return
-    })
+  // initialize agent
+  const agent = new window.IonicSdk.ISAgent('https://dev-api.ionic.com/jssdk/latest/')
+  await agent.loadUser(appData).catch((error) => {
+    console.log(`Error loading profile: ${error}`)
+  })
 
-    // encrypt message
-    const encryptResponse = await agent.encryptStringChunkCipher({stringData: message})
-    const ciphertext = encryptResponse.stringChunk
+  // encrypt message
+  const encryptResponse = await agent.encryptStringChunkCipher({stringData: message})
+  const ciphertext = encryptResponse.stringChunk
 
-    // decrypt message
-    const decryptResponse = await agent.decryptStringChunkCipher({stringData: ciphertext})
-    const plaintext = decryptResponse.stringChunk
+  // decrypt message
+  const decryptResponse = await agent.decryptStringChunkCipher({stringData: ciphertext})
+  const plaintext = decryptResponse.stringChunk
 
-    // display data
-    console.log(`Ciphertext : ${ciphertext}`)
-    console.log(`Plaintext  : ${plaintext}`)
+  // display data
+  console.log(`Ciphertext : ${ciphertext}`)
+  console.log(`Plaintext  : ${plaintext}`)
 }
 
-main();
+main()
