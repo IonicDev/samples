@@ -29,7 +29,7 @@ namespace Samples
             // Set the persistor's path.
             String persistorPath = "../../../../../../sample-data/persistors/sample-persistor.pt";
 
-            // Create a blank agent.
+            // Create an agent object to talk to Ionic.
             Agent agent = new Agent();
 
             // Create a plaintext persistor and initialize the agent.
