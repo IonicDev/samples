@@ -11,7 +11,7 @@ using IonicSecurity.SDK;
 
 namespace Samples
 {
-    class CreateKeyWithFixedAttributes
+    class CreateKeyWithProtectedAttributes
     {
         // Waits for any input for console applications.
         // This allows information to be displayed before the 
@@ -34,6 +34,9 @@ namespace Samples
 
         static int Main(string[] args)
         {
+            // Create a unique external ID with the 32 digits separated by hyphens.
+            List<string> protectedAttributes = new List<string> { "ORION" };
+
             // Get the user's home path and password persistor from the environment.
             String homePath = Environment.GetEnvironmentVariable("USERPROFILE");
 
@@ -50,12 +53,12 @@ namespace Samples
 
             // Create a password persistor for agent initialization.
             try
-            {             
+            {
                 DeviceProfilePersistorPassword persistor = new DeviceProfilePersistorPassword();
                 persistor.FilePath = homePath + "\\.ionicsecurity\\profiles.pw";
                 persistor.Password = persistorPassword;
 
-                agent.SetMetadata(Agent.MetaApplicationName, "CreateKeyWithFixedAttributes Sample");
+                agent.SetMetadata(Agent.MetaApplicationName, "CreateKeyWithProtectedAttributes Sample");
                 agent.Initialize(persistor);
             }
             catch (SdkException sdkExp)
@@ -65,18 +68,18 @@ namespace Samples
                 Environment.Exit(1);
             }
 
-            // Define fixed attributes.
+            // Define ionic-protected-project fixed attribute. 
             AttributesDictionary fixedKeyAttrs = new AttributesDictionary();
-            fixedKeyAttrs.Add("data-type", new List<string> { "Finance" });
-            fixedKeyAttrs.Add("region", new List<string> { "North America" });
+            fixedKeyAttrs.Add("ionic-protected-project", protectedAttributes);
 
-            // Define mutable keys.
+            // Define mutable attributes.
             AttributesDictionary mutableKeyAttrs = new AttributesDictionary(); // empty map
 
-            // Create single key with fixed attributes.
             CreateKeysResponse.Key key = null;
+
+            // Create single key with fixed attributes
             try
-            {              
+            {
                 key = agent.CreateKey(fixedKeyAttrs, mutableKeyAttrs).Keys[0];
             }
             catch (SdkException sdkExp

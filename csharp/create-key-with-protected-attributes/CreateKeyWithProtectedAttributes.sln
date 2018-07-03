@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2000
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateKeyWithProtectedAttributes", "CreateKeyWithProtectedAttributes\CreateKeyWithProtectedAttributes.csproj", "{B98A9A72-C4C5-4354-A7FE-7C3E33CFA254}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B98A9A72-C4C5-4354-A7FE-7C3E33CFA254}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B98A9A72-C4C5-4354-A7FE-7C3E33CFA254}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B98A9A72-C4C5-4354-A7FE-7C3E33CFA254}.Debug|x64.ActiveCfg = Debug|x64
+		{B98A9A72-C4C5-4354-A7FE-7C3E33CFA254}.Debug|x64.Build.0 = Debug|x64
+		{B98A9A72-C4C5-4354-A7FE-7C3E33CFA254}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B98A9A72-C4C5-4354-A7FE-7C3E33CFA254}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B98A9A72-C4C5-4354-A7FE-7C3E33CFA254}.Release|x64.ActiveCfg = Release|x64
+		{B98A9A72-C4C5-4354-A7FE-7C3E33CFA254}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1E7E6B83-D8B9-40BF-8E2C-D67292FB8FF3}
+	EndGlobalSection
+EndGlobal

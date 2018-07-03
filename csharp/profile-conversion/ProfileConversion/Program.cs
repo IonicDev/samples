@@ -111,7 +111,6 @@ namespace Samples
             // Save the profiles added to the password persistor.
             try
             {
-                //pwAgent.SaveProfiles();
                 pwAgent.SaveProfiles(passwordPersistor);
             }
             catch (SdkException sdkExp)
