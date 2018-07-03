@@ -34,9 +34,6 @@ namespace Samples
 
         static int Main(string[] args)
         {
-            // Create a unique external ID with the 32 digits separated by hyphens.
-            List<string> protectedAttributes = new List<string> { "ORION" };
-
             // Get the user's home path and password persistor from the environment.
             String homePath = Environment.GetEnvironmentVariable("USERPROFILE");
 
@@ -67,6 +64,9 @@ namespace Samples
                 WaitForInput();
                 Environment.Exit(1);
             }
+
+            // Create protected attributes.
+            List<string> protectedAttributes = new List<string> { "ORION" };
 
             // Define ionic-protected-project fixed attribute. 
             AttributesDictionary fixedKeyAttrs = new AttributesDictionary();
