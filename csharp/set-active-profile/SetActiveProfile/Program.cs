@@ -90,14 +90,14 @@ namespace Samples
                 return;
             }
 
+            // Find a profile that is not active and set it as active.
             try
             {
                 foreach (DeviceProfile profile in profiles)
                 {
                     if (profile.DeviceId != activeDeviceId)
                     {
-                        agent.SetActiveProfileById(activeDeviceId);
-                        //agent.SaveProfiles(persistor);
+                        agent.SetActiveProfileById(profile.DeviceId); 
                         break;
                     }
                 }
@@ -110,8 +110,8 @@ namespace Samples
                 Environment.Exit(1);
             }
 
-            // Get the profiles again.
-            profiles = agent.AllProfiles;
+            // Get the current active profile's device ID again.
+            activeDeviceId = agent.ActiveProfile.DeviceId;
 
             // Display modified profile information.
             Console.WriteLine("Modified Profiles");

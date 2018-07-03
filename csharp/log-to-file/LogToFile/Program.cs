@@ -27,7 +27,8 @@ namespace Samples
         static void Main(string[] args)
         {
             string sLogChannel = "ionic-csharp-sample";
-            string logFilePath = "../../../../../../sample-data/logs/sample.log";
+            string dateTime = DateTime.Now.ToString("yyyy-MM-dd_HH.mm");
+            string logFilePath = "../../../../../../sample-data/files/sample_" + dateTime + ".log";
 
             // Log servity debug and lower to a file.
             String sConfigJson =
@@ -39,19 +40,20 @@ namespace Samples
                "                         \n" +
                "              \"writers\": [\n" +
                "                           { \"type\": \"File\",\n" +
-               "                           \"filePattern\": \"sample-%Y.log\"},\n" +
+               "                           \"filePattern\": \"" + logFilePath + "\"}\n" +
                "                         ]\n" +
                "                }\n" +
                "              ]\n" +
                "}";
-        
-            Console.WriteLine(sConfigJson);
-            Console.ReadKey();
 
             // Initialize logger
             LogBase logger = LogFactory.Instance.CreateFromConfig(sConfigJson);
             Log.SetSingleton(logger);
 
+            Console.WriteLine("Logging to file: " + logFilePath);
+
+            // Log to file
+            Log.LogDebug(sLogChannel, "LogToFile Sample");
             Log.LogDebug(sLogChannel, "Sample log entry");
 
             WaitForInput();
