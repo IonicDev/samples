@@ -85,7 +85,7 @@ namespace Samples
             // If the number of profiles is equal to one, then there is nothing to set.
             if (profiles.Count == 1)
             {
-                Console.WriteLine("One one profile, nothing to change.");
+                Console.WriteLine("Only one profile, nothing to change.");
                 WaitForInput();
                 return;
             }

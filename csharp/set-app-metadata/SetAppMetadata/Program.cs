@@ -67,7 +67,7 @@ namespace Samples
             }
             catch (SdkException sdkExp)
             {
-                Console.WriteLine("Error setting the application metadata: ", sdkExp.Message);
+                Console.WriteLine("Error setting the application metadata: " + sdkExp.Message);
                 WaitForInput();
                 Environment.Exit(1);
             }

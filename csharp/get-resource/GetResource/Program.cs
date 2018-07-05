@@ -58,13 +58,14 @@ namespace Samples
                 Environment.Exit(1);
             }
 
-            // Create the resource request.
+            // Create a resource request for "classification" marking values.
+            // configured in the dashboard.
             GetResourcesRequest.Resource resourceRequest = new GetResourcesRequest.Resource();          
             resourceRequest.ResourceId = "marking-values";
             resourceRequest.Args = "classification";
             GetResourcesResponse resourcesResponse = null;
 
-            // Get the resources using the resources request.
+            // Fetch the resource "classification" marking values.
             try
             {
                 resourcesResponse = agent.GetResource(resourceRequest);
