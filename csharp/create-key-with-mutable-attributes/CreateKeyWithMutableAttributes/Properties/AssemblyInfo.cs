@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Ionic Security Inc.")]
 [assembly: AssemblyProduct("CreateKeyWithMutableAttributes")]
-[assembly: AssemblyCopyright("Copyright © 2018 Ionic Sercurity Inc.")]
+[assembly: AssemblyCopyright("Copyright © 2018 Ionic Security Inc.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

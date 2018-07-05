@@ -5,12 +5,14 @@
  */
 
 using System;
+using System.Collections.Generic;
 
 using IonicSecurity.SDK;
 
+
 namespace Samples
 {
-    class SetAppMetadata
+    class GetResource
     {
         // Waits for any input for console applications.
         // This allows information to be displayed before the 
@@ -22,7 +24,8 @@ namespace Samples
             return;
         }
 
-        static int Main(string[] args)
+
+        static void Main(string[] args)
         {
             // Get the user's home path and password persistor from the environment.
             String homePath = Environment.GetEnvironmentVariable("USERPROFILE");
@@ -40,12 +43,12 @@ namespace Samples
 
             // Create a password persistor for agent initialization.
             try
-            {         
+            {
                 DeviceProfilePersistorPassword persistor = new DeviceProfilePersistorPassword();
                 persistor.FilePath = homePath + "\\.ionicsecurity\\profiles.pw";
                 persistor.Password = persistorPassword;
 
-                agent.SetMetadata(Agent.MetaApplicationName, "SetAppMetadata Sample");
+                agent.SetMetadata(Agent.MetaApplicationName, "GetResource Sample");
                 agent.Initialize(persistor);
             }
             catch (SdkException sdkExp)
@@ -55,27 +58,40 @@ namespace Samples
                 Environment.Exit(1);
             }
 
-            // Application variables to set.
-            string appName = "app-sample-csharp";
-            string appVersion = "1.0.0";
+            // Create a resource request for "classification" marking values.
+            // configured in the dashboard.
+            GetResourcesRequest.Resource resourceRequest = new GetResourcesRequest.Resource();          
+            resourceRequest.ResourceId = "marking-values";
+            resourceRequest.Args = "classification";
+            GetResourcesResponse resourcesResponse = null;
 
-            // Set the application metadata.
+            // Fetch the resource "classification" marking values.
             try
             {
-                agent.SetMetadata("ionic-application-name", appName);
-                agent.SetMetadata("ionic-application-version", appVersion);
+                resourcesResponse = agent.GetResource(resourceRequest);
             }
             catch (SdkException sdkExp)
             {
-                Console.WriteLine("Error setting the application metadata: " + sdkExp.Message);
+                Console.WriteLine("Agent GetResources error: " + sdkExp.Message);
                 WaitForInput();
                 Environment.Exit(1);
             }
 
-            Console.WriteLine("Application metadata is set");
+            // Extract the resources from the get resources response.
+            List<GetResourcesResponse.Resource> resources = resourcesResponse.Resources;
+            if (resources.Count == 0) {
+                Console.WriteLine("There are no resources available");
+                WaitForInput();
+                Environment.Exit(1);
+            }
+
+            Console.WriteLine("Classification values:");
+            foreach (GetResourcesResponse.Resource resource in resources)
+            {
+                Console.WriteLine("Data   : " + resource.Data);
+            }
+
             WaitForInput();
-            return 0;
         }
     }
 }
-

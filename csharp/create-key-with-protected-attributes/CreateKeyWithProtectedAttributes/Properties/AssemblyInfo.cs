@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("CreateKeyWithProtectedAttributes")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Ionic Sercurity Inc.")]
+[assembly: AssemblyCompany("Ionic Security Inc.")]
 [assembly: AssemblyProduct("CreateKeyWithProtectedAttributes")]
-[assembly: AssemblyCopyright("Copyright © 2018 Ionic Sercurity Inc.")]
+[assembly: AssemblyCopyright("Copyright © 2018 Ionic Security Inc.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

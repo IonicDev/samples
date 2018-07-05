@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("CreateKeyWithFixedAttributes")]
+[assembly: AssemblyTitle("GetResource")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Ionic Security Inc.")]
-[assembly: AssemblyProduct("CreateKeyWithFixedAttributes")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("GetResource")]
 [assembly: AssemblyCopyright("Copyright © 2018 Ionic Security Inc.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("b98a9a72-c4c5-4354-a7fe-7c3e33cfa254")]
+[assembly: Guid("6f662d00-9732-4985-bb78-e2eb8674be70")]
 
 // Version information for an assembly consists of the following four values:
 //
