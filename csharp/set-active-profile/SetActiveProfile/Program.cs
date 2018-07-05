@@ -79,7 +79,7 @@ namespace Samples
             }
 
             // Display current profile information.
-            Console.WriteLine("Current Profiles");
+            Console.WriteLine("Current Profiles:");
             DisplayProfiles(profiles, activeDeviceId);
 
             // If the number of profiles is equal to one, then there is nothing to set.
@@ -90,21 +90,15 @@ namespace Samples
                 return;
             }
 
-            // Find a profile that is not active and set it as active.
+            // Set the active profile to the hard-coded profile device ID.
+            String profileDeviceId = "ABcd.1.48sdf0-cs80-5802-sd80-d8s0df80sdfj";
             try
-            {
-                foreach (DeviceProfile profile in profiles)
-                {
-                    if (profile.DeviceId != activeDeviceId)
-                    {
-                        agent.SetActiveProfileById(profile.DeviceId); 
-                        break;
-                    }
-                }
+            {              
+                 agent.SetActiveProfileById(profileDeviceId);    
             }
             catch (SdkException sdkExp)
             {
-                Console.WriteLine("Couldn't set active profile to: " + activeDeviceId);
+                Console.WriteLine("Couldn't set active profile to: " + profileDeviceId);
                 Console.WriteLine("SetActiveProfileById error: " + sdkExp.Message);
                 WaitForInput();
                 Environment.Exit(1);
@@ -114,7 +108,7 @@ namespace Samples
             activeDeviceId = agent.ActiveProfile.DeviceId;
 
             // Display modified profile information.
-            Console.WriteLine("Modified Profiles");
+            Console.WriteLine("Modified Profiles:");
             DisplayProfiles(profiles, activeDeviceId);
             
             WaitForInput();
