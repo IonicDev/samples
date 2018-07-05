@@ -85,12 +85,10 @@ namespace Samples
                 Environment.Exit(1);
             }
 
+            Console.WriteLine("Classification values:");
             foreach (GetResourcesResponse.Resource resource in resources)
             {
-                Console.WriteLine("-----");
-                Console.WriteLine("Ref ID : " + resource.RefId);
                 Console.WriteLine("Data   : " + resource.Data);
-                Console.WriteLine("Error  : " + resource.Error);
             }
 
             WaitForInput();
