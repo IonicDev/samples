@@ -47,6 +47,9 @@ namespace Samples
             // Set the persistor's path.
             String persistorPath = "../../../../../../sample-data/persistors/sample-persistor.pt";
 
+            // Set the active profile to the hard-coded profile device ID.
+            String profileDeviceId = "ABcd.1.48sdf0-cs80-5802-sd80-d8s0df80sdfj";
+
             // Create an agent object to talk to Ionic.
             Agent agent = new Agent();
 
@@ -66,11 +69,20 @@ namespace Samples
                 Environment.Exit(1);
             }
 
-            // Get the current active profile's device ID. 
-            String activeDeviceId = agent.ActiveProfile.DeviceId;
-
             // Get the profiles and check if the are any.
-            List<DeviceProfile> profiles = agent.AllProfiles;
+            List<DeviceProfile> profiles = null;
+            try
+            {         
+                profiles = agent.AllProfiles;
+            }
+            catch (SdkException sdkExp)
+            {
+                Console.WriteLine("Agent get all profiles error: " + sdkExp.Message);
+                WaitForInput();
+                Environment.Exit(1);
+            }
+
+            // Verify there is at one profile.
             if (profiles.Count == 0)
             {
                 Console.WriteLine("No profiles for plaintext persistor.");
@@ -79,8 +91,12 @@ namespace Samples
             }
 
             // Display current profile information.
-            Console.WriteLine("Current Profiles:");
-            DisplayProfiles(profiles, activeDeviceId);
+            Console.WriteLine("Available Profiles:");
+
+            foreach (DeviceProfile profile in profiles)
+            {
+                Console.WriteLine(profile.DeviceId);
+            }
 
             // If the number of profiles is equal to one, then there is nothing to set.
             if (profiles.Count == 1)
@@ -90,8 +106,8 @@ namespace Samples
                 return;
             }
 
-            // Set the active profile to the hard-coded profile device ID.
-            String profileDeviceId = "ABcd.1.48sdf0-cs80-5802-sd80-d8s0df80sdfj";
+            // Set the active profile with a profile device ID.
+            Console.WriteLine("\nSetting {0} as the active profile.", profileDeviceId);
             try
             {              
                  agent.SetActiveProfileById(profileDeviceId);    
@@ -104,13 +120,16 @@ namespace Samples
                 Environment.Exit(1);
             }
 
-            // Get the current active profile's device ID again.
-            activeDeviceId = agent.ActiveProfile.DeviceId;
+            // Get the current active profile
+            DeviceProfile activeProfile = agent.ActiveProfile;
 
-            // Display modified profile information.
-            Console.WriteLine("Modified Profiles:");
-            DisplayProfiles(profiles, activeDeviceId);
-            
+            // Display active profile information.
+            Console.WriteLine("\nActive Profile:");
+            Console.WriteLine("ID       : " + activeProfile.DeviceId);
+            Console.WriteLine("Name     : " + activeProfile.Name);
+            Console.WriteLine("Keyspace : " + activeProfile.KeySpace);
+            Console.WriteLine("API URL  : " + activeProfile.Server);
+
             WaitForInput();
         }
     }
