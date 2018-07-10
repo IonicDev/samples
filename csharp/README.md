@@ -6,9 +6,13 @@ Note: the sample apps expect a Password Persistor located at `~/.ionicsecurity/p
 
 In a DOS window do:
 
-```
+1. ```
 set IONIC_PERSISTOR_PASSWORD=password123
 ```
+
+2. ```
+set IONIC_SDK_PATH=<sdk-path>
+``` where `<sdk-path>` is the path where `ISAgentADKNetWrapper` is located.
 
 ## Windows
 
