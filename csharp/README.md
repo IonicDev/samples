@@ -1,23 +1,22 @@
 # Ionic C# SDK Samples
 
-To build and run an Ionic C# SDK Sample, navigate into the directory of a specific sample task and follow the steps below.
+To build and run an Ionic C# Sample, navigate into the directory of a specific sample task and 
+follow the steps below.  The Ionic Security C# SDK is used in all the samples.  Go to
+[Ionic Developer SDK Setup](https://dev.ionic.com/tutorials/getting-started/sdk-setup) and
+click on the C# icon.
 
 Note: the sample apps expect a Password Persistor located at `~/.ionicsecurity/profiles.pw`. The password needs to be provided as an environment variable.
 
 In a DOS window do:
 
-1. ```
-set IONIC_PERSISTOR_PASSWORD=password123
-```
-
-2. ```
-set IONIC_SDK_PATH=<sdk-path>
-``` where `<sdk-path>` is the path where `ISAgentADKNetWrapper` is located.
+1. `set IONIC_PERSISTOR_PASSWORD=password123`
+1. `set IONIC_SDK_PATH=<sdk-path>` where `<sdk-path>` is the path where `ISAgentADKNetWrapper` is located.
 
 ## Windows
 
 **Requirements:**
 - Visual Studio 2017
+- Ionic Security C# SDK
 
 **Build:**
 
