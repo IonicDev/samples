@@ -58,7 +58,7 @@ namespace Samples
                 Environment.Exit(1);
             }
 
-            // Create a resource request for "classification" marking values.
+            // Create a resource request for "classification" marking values
             // configured in the dashboard.
             GetResourcesRequest.Resource resourceRequest = new GetResourcesRequest.Resource();          
             resourceRequest.ResourceId = "marking-values";
@@ -72,7 +72,7 @@ namespace Samples
             }
             catch (SdkException sdkExp)
             {
-                Console.WriteLine("Agent GetResources error: " + sdkExp.Message);
+                Console.WriteLine("Error requesting resource: " + sdkExp.Message);
                 WaitForInput();
                 Environment.Exit(1);
             }
@@ -80,11 +80,12 @@ namespace Samples
             // Extract the resources from the get resources response.
             List<GetResourcesResponse.Resource> resources = resourcesResponse.Resources;
             if (resources.Count == 0) {
-                Console.WriteLine("There are no resources available");
+                Console.WriteLine("There are no resources available.");
                 WaitForInput();
                 Environment.Exit(1);
             }
 
+            // Display resources.
             Console.WriteLine("Classification values:");
             foreach (GetResourcesResponse.Resource resource in resources)
             {

@@ -48,7 +48,7 @@ namespace Samples
             String persistorPath = "../../../../../../sample-data/persistors/sample-persistor.pt";
 
             // Set the active profile to the hard-coded profile device ID.
-            String profileDeviceId = "ABcd.1.48sdf0-cs80-5802-sd80-d8s0df80sdfj";
+            String profileId = "ABcd.1.48sdf0-cs80-5802-sd80-d8s0df80sdfj";
 
             // Create an agent object to talk to Ionic.
             Agent agent = new Agent();
@@ -107,14 +107,14 @@ namespace Samples
             }
 
             // Set the active profile with a profile device ID.
-            Console.WriteLine("\nSetting {0} as the active profile.", profileDeviceId);
+            Console.WriteLine("\nSetting {0} as the active profile.", profileId);
             try
             {              
-                 agent.SetActiveProfileById(profileDeviceId);    
+                 agent.SetActiveProfileById(profileId);    
             }
             catch (SdkException sdkExp)
             {
-                Console.WriteLine("Couldn't set active profile to: " + profileDeviceId);
+                Console.WriteLine("Failed to set active profile to: " + profileId);
                 Console.WriteLine("SetActiveProfileById error: " + sdkExp.Message);
                 WaitForInput();
                 Environment.Exit(1);
