@@ -25,7 +25,7 @@ Ensure that your Ionic device credentials can be located at `${user.home}/.ionic
 
 ### VM argument
 
-When running the java application, the following flag should be added to link the SDK's native (JNI) libaries.
+When running the java application, the following flag should be added to link the SDK's native (JNI) libraries.
 
 For example:
 ```plain
@@ -35,10 +35,10 @@ For example:
 ### Using Maven and the run.sh script
 You can execute the code using the run script ala ```./run.sh myfile.doc myoutputfile.doc```. This uses mvn exec:java to launch the executable.
 
-## How to use Ionic SDK with FileCryptoCoverPageImpl class
+## How to use Ionic SDK with `FileCryptoCoverPageImpl` class
 
 The executable `FileCryptoAutoEncrypt` demonstrates how to use the `FileCryptoCoverPageImpl` in conjunction with the Ionic SDK in order to encrypt a file with a custom cover page.
-First, the cache is initiated with a call to the static cacheInit method.
+First, the cache is initiated with a call to the static `cacheInit` method.
 This is only called once, otherwise the original cache will be lost and replaced by a new, empty one. 
 
 Next, an `AutoFileCipher` is instantiated with the arguments being an agent, and a `FileCryptoCoverPageImpl` instance which has been instantiated with that same agent.
