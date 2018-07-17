@@ -6,7 +6,7 @@ import os
 import sys
 import json
 import binascii
-import datetime
+import time
 import inspect
 import ionicsdk
 
@@ -15,8 +15,10 @@ line_number = lambda: inspect.currentframe().f_back.f_lineno
 file_name = lambda: inspect.getframeinfo(inspect.currentframe()).filename
 
 sLogChannel = "ionic-python-sample"
-date_time = datetime.datetime.now().strftime("%Y-%m-%d_%h.%M")
-logFilePath = "../../sample-data/files/sample_" + date_time + ".log"
+
+# Create a log file name so that the name includes the creation time.
+log_name = "sample_" + time.strftime("%Y-%m-%d_%H.%M.%S") + ".log"
+logFilePath = os.path.join("..", "..", "sample-data", "files", log_name)
 
 # Log severity Debug and lower to a file.
 config = {
@@ -32,6 +34,7 @@ config = {
 # Initialize logger
 config_json = json.dumps(config)
 ionicsdk.log.setup_from_config_json(config_json)
+print("Logging to: {0}". format(logFilePath))
 
 # Log to file.
 ionicsdk.log.log(ionicsdk.log.SEV_DEBUG, sLogChannel, line_number(), file_name(), "LogToFile Sample")

@@ -8,7 +8,7 @@ import json
 import ionicsdk
 import binascii
 
-logFilePath = "../../sample-data/files/sample.log"
+logFilePath = os.path.join("..", "..", "sample-data", "files", "sample.log")
 appendFile = False
 
 # Setup SDK logging to a file.
@@ -44,9 +44,9 @@ plaintext = cipher.decryptstr(ciphertext)
 # Verify encrypt and decrypt worked.
 if (message != plaintext):
     print("Encryption/Decryption does not match!")
-    print("Message: " + message + " - PlainText: " + plainText)
+    print("Message: {0} - PlainText: {1}".format(plaintext, message))
     sys.exit(-2)
 
 # Display data
-print("Ciphertext : " + ciphertext)
-print("Plaintext  : " + plaintext)
+print("Ciphertext : {0}".format(ciphertext))
+print("Plaintext  : {0}".format(plaintext))
