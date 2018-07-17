@@ -8,37 +8,22 @@ import json
 import ionicsdk
 import binascii
 
-message = "Hello World!"
+logFilePath = "../../sample-data/files/sample.log"
+appendFile = False
 
-# helpers for logging:
-linenumber = lambda: currentframe().f_back.f_lineno
-filename = lambda: getframeinfo(currentframe()).filename
+# Setup SDK logging to a file.
+ionicsdk.log.setup_simple(logFilePath, appendFile, ionicsdk.log.SEV_DEBUG)
 
-# initialize logger
-config = {
-  "sinks": [
-    {
-      "channels": ["ISAgent"],
-      "filter": {"type": "Severity", "level": "Info"},
-      "writers": [{"type": "Console"}]
-    },
-    {
-      "channels": ["ISAgent"],
-      "filter": {"type": "Severity", "level": "Debug"},
-      "writers": [{"type": "File", "filePattern": "sample.log"}]
-    }
-  ]
-}
-config_json = json.dumps(config)
-ionicsdk.log.setup_from_config_json(config_json)
+# The message to encrypt.
+message = "top secret message"
 
-# read persistor password from environment variable
+# Read persistor password from environment variable
 persistorPassword = os.environ.get('IONIC_PERSISTOR_PASSWORD')
 if (persistorPassword == None):
     print("[!] Please provide the persistor password as env variable: IONIC_PERSISTOR_PASSWORD")
     sys.exit(1)
 
-# initialize agent with password persistor
+# Initialize agent with password persistor
 try:
     persistorPath = os.path.expanduser("~/.ionicsecurity/profiles.pw")
     persistor = ionicsdk.DeviceProfilePersistorPasswordFile(persistorPath, persistorPassword)
@@ -47,15 +32,21 @@ except ionicsdk.exceptions.IonicException as e:
     print("Error initializing agent: {0}".format(e.message))
     sys.exit(-2)
 
-# initialize chunk cipher object
+# Initialize chunk cipher object
 cipher = ionicsdk.ChunkCipherAuto(agent)
 
-# encrypt
-ciphertext = cipher.encryptbytes(message)
+# Encrypt
+ciphertext = cipher.encryptstr(message)
 
-# decrypt
-plaintext = cipher.decryptbytes(ciphertext)
+# Decrypt
+plaintext = cipher.decryptstr(ciphertext)
 
-# display data
+# Verify encrypt and decrypt worked.
+if (message != plaintext):
+    print("Encryption/Decryption does not match!")
+    print("Message: " + message + " - PlainText: " + plainText)
+    sys.exit(-2)
+
+# Display data
 print("Ciphertext : " + ciphertext)
 print("Plaintext  : " + plaintext)
