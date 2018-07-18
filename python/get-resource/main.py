@@ -10,7 +10,7 @@ import ionicsdk
 
 # Read persistor password from environment variable.
 persistorPassword = os.environ.get('IONIC_PERSISTOR_PASSWORD')
-if (persistorPassword == None):
+if persistorPassword == None:
     print("[!] Please provide the persistor password as env variable: IONIC_PERSISTOR_PASSWORD")
     sys.exit(1)
 
@@ -36,7 +36,7 @@ except ionicsdk.exceptions.IonicException as e:
     sys.exit(-2)
 
 # Check for errors.
-if (resource_resp.error is not None):
+if resource_resp.error is not None:
     print("Resource Error: {0}".format(resource_resp.error))
     sys.exit(-2)
 
