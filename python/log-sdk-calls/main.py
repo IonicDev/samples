@@ -19,7 +19,7 @@ message = "top secret message"
 
 # Read persistor password from environment variable
 persistorPassword = os.environ.get('IONIC_PERSISTOR_PASSWORD')
-if (persistorPassword == None):
+if persistorPassword == None:
     print("[!] Please provide the persistor password as env variable: IONIC_PERSISTOR_PASSWORD")
     sys.exit(1)
 
@@ -42,7 +42,7 @@ ciphertext = cipher.encryptstr(message)
 plaintext = cipher.decryptstr(ciphertext)
 
 # Verify encrypt and decrypt worked.
-if (message != plaintext):
+if message != plaintext:
     print("Encryption/Decryption does not match!")
     print("Message: {0} - PlainText: {1}".format(plaintext, message))
     sys.exit(-2)
