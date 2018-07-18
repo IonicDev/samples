@@ -25,7 +25,7 @@ except ionicsdk.exceptions.IonicException as e:
     sys.exit(-2)
 
 # Verify there is at least one profile.
-if (profiles.count == 0):
+if profiles.count == 0:
     print("No profiles for plaintext persistor")
     sys.exit(-2)
 
@@ -35,7 +35,7 @@ for profile in profiles:
     print(profile.deviceid)
 
 # If the number of profiles is equal to one, then there is nothing to set.
-if (profiles.count == 1):
+if profiles.count == 1:
     print("Only one profile, nothing to change")
     sys.exit(-2)
 
