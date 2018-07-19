@@ -26,7 +26,7 @@ namespace Samples
 
         static void Main(string[] args)
         {
-            string logFilePath = "../../../../../../sample-data/logs/sample.log";
+            string logFilePath = "sample.log";
             bool appendFile = false;
 
             // Log SDK to a file with serverity Debug and above.
