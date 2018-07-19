@@ -17,8 +17,7 @@ file_name = lambda: inspect.getframeinfo(inspect.currentframe()).filename
 sLogChannel = "ionic-python-sample"
 
 # Create a log file name so that the name includes the creation time.
-log_name = "sample_" + time.strftime("%Y-%m-%d_%H.%M.%S") + ".log"
-logFilePath = os.path.join("..", "..", "sample-data", "files", log_name)
+logFilePath = "sample_" + time.strftime("%Y-%m-%d_%H.%M.%S") + ".log"
 
 # Log severity Debug and lower to a file.
 config = {

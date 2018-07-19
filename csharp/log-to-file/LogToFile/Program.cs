@@ -28,7 +28,7 @@ namespace Samples
         {
             string sLogChannel = "ionic-csharp-sample";
             string dateTime = DateTime.Now.ToString("yyyy-MM-dd_HH.mm");
-            string logFilePath = "../../../../../../sample-data/files/sample_" + dateTime + ".log";
+            string logFilePath = "sample_" + dateTime + ".log";
 
             // Log servity debug and lower to a file.
             String sConfigJson =

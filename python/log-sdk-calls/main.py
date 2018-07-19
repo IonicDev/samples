@@ -8,7 +8,7 @@ import json
 import ionicsdk
 import binascii
 
-logFilePath = os.path.join("..", "..", "sample-data", "files", "sample.log")
+logFilePath = "sample.log"
 appendFile = False
 
 # Setup SDK logging to a file.
