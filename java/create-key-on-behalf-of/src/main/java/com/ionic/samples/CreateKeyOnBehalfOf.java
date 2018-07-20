@@ -2,23 +2,23 @@
  * (c) 2018 Ionic Security Inc.
  * By using this code, I agree to the Terms & Conditions (https://dev.ionic.com/use.html)
  * and the Privacy Policy (https://www.ionic.com/privacy-notice/).
- * 
- * Developed with Ionic Java SDK 2.1.0
  */
 
 package com.ionic.samples;
 
 import com.ionic.sdk.device.profile.persistor.DeviceProfilePersistorPassword;
+import com.ionic.sdk.agent.data.MetadataMap;
 import com.ionic.sdk.agent.Agent;
 import com.ionic.sdk.agent.request.createkey.CreateKeysResponse;
-import com.ionic.sdk.cipher.aes.AesCtrCipher;
 import com.ionic.sdk.error.IonicException;
 import javax.xml.bind.DatatypeConverter;
 
-public class CryptoAesCtr
+public class CreateKeyOnBehalfOf
 {
     public static void main(String[] args)
     {
+        String delegatedUserEmail = "test@ionic.com";
+
         // read persistor password from environment variable
         String persistorPassword = System.getenv("IONIC_PERSISTOR_PASSWORD");
         if (persistorPassword == null) {
@@ -38,47 +38,23 @@ public class CryptoAesCtr
             System.exit(1);
         }
 
-        String message = "this is a secret message";
+        // define on-behalf-of user in the request metadata
+        MetadataMap requestMetadata = new MetadataMap();
+        requestMetadata.set("ionic-delegated-email", delegatedUserEmail);
 
-        // create new key
+        // create single key
         CreateKeysResponse.Key key = null;
         try {
-            key = agent.createKey().getKeys().get(0);
+            key = agent.createKey(requestMetadata).getKeys().get(0);
         } catch(IonicException e) {
             System.out.println(e.getMessage());
             System.exit(1);
         }
 
-        // initialize aes cipher object
-        AesCtrCipher cipher = null;
-        try {
-            cipher = new AesCtrCipher();
-            cipher.setKey(key.getKey());
-        } catch(IonicException e) {
-            System.out.println(e.getMessage());
-            System.exit(1);
-        }
-
-        // encrypt
-        byte[] ciphertext = null;
-        try {
-            ciphertext = cipher.encrypt(message.getBytes());
-        } catch(IonicException e) {
-            System.out.println(e.getMessage());
-            System.exit(1);
-        }
-
-        // decrypt
-        byte[] plaintext = null;
-        try { 
-            plaintext = cipher.decrypt(ciphertext);
-        } catch(IonicException e) {
-            System.out.println(e.getMessage());
-            System.exit(1);
-        }
-
-        // display data
-        System.out.println("Ciphertext  : " + DatatypeConverter.printHexBinary(ciphertext));
-        System.out.println("Plaintext   : " + new String(plaintext));
+        // display new key
+        System.out.println("KeyId        : " + key.getId());
+        System.out.println("KeyBytes     : " + DatatypeConverter.printHexBinary(key.getKey()));
+        System.out.println("FixedAttrs   : " + key.getAttributesMap());
+        System.out.println("MutableAttrs : " + key.getMutableAttributes());
     }
 }

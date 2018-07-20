@@ -9,6 +9,7 @@
 package com.ionic.samples;
 
 import com.ionic.sdk.agent.Agent;
+import com.ionic.sdk.device.profile.DeviceProfile;
 import com.ionic.sdk.device.profile.persistor.DeviceProfilePersistorPassword;
 import com.ionic.sdk.error.IonicException;
 import java.util.List;
@@ -17,7 +18,7 @@ public class InitializeAgentWithPasswordPersistor
 {
     public static void main(String[] args)
     {
-        String persistorPath = "../../sample-data/persistors/sample-persistor.aes";
+        String persistorPath = "../../sample-data/persistors/sample-persistor.pw";
         String persistorPassword = "my secret password";
 
         // initialize agent with password persistor
@@ -32,8 +33,9 @@ public class InitializeAgentWithPasswordPersistor
         }
 
         // display all profiles in persistor
-        List<DeviceProfile> profiles = agent.getAllProfile();
+        List<DeviceProfile> profiles = agent.getAllProfiles();
         for (DeviceProfile profile : profiles) {
+            System.out.println("---");
             System.out.println("Id       : " + profile.getDeviceId());
             System.out.println("Name     : " + profile.getName());
             System.out.println("Keyspace : " + profile.getKeySpace());

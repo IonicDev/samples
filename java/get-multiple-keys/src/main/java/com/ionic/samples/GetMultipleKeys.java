@@ -20,28 +20,34 @@ public class GetMultipleKeys
 {
     public static void main(String[] args)
     {
+        String keyId1 = "HVzG3wEE_MM";
+        String keyId2 = "HVzG3IEK_5w";
+        String keyId3 = "HVzG5-GBKWM";
+
+        // read persistor password from environment variable
+        String persistorPassword = System.getenv("IONIC_PERSISTOR_PASSWORD");
+        if (persistorPassword == null) {
+            System.out.println("[!] Please provide the persistor password as env variable: IONIC_PERSISTOR_PASSWORD");
+            System.exit(1);
+        }        
+
         // initialize agent
         Agent agent = new Agent();
         try {
             String persistorPath = System.getProperty("user.home") + "/.ionicsecurity/profiles.pw";
-            String persistorPassword = System.getenv("IONIC_PERSISTOR_PASSWORD");
-
             DeviceProfilePersistorPassword persistor = new DeviceProfilePersistorPassword(persistorPath);
             persistor.setPassword(persistorPassword);
-
             agent.initialize(persistor);
         } catch(IonicException e) {
             System.out.println(e.getMessage());
             System.exit(1);
         }
-        
-        String keyId1 = "HVzG3oKSL7A";
-        String keyId2 = "HVzG4fqePwk";
 
         // get multiple keys
         GetKeysRequest request = new GetKeysRequest();
         request.add(keyId1);
         request.add(keyId2);
+        request.add(keyId3);
         List<GetKeysResponse.Key> keys = null;
         try {
             keys = agent.getKeys(request).getKeys();

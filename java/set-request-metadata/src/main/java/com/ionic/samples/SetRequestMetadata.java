@@ -19,23 +19,27 @@ public class SetRequestMetadata
 {
     public static void main(String[] args)
     {
+        String keyId = "HVzG4flO-KE";
+
+        // read persistor password from environment variable
+        String persistorPassword = System.getenv("IONIC_PERSISTOR_PASSWORD");
+        if (persistorPassword == null) {
+            System.out.println("[!] Please provide the persistor password as env variable: IONIC_PERSISTOR_PASSWORD");
+            System.exit(1);
+        }        
+
         // initialize agent
         Agent agent = new Agent();
         try {
             String persistorPath = System.getProperty("user.home") + "/.ionicsecurity/profiles.pw";
-            String persistorPassword = System.getenv("IONIC_PERSISTOR_PASSWORD");
-
             DeviceProfilePersistorPassword persistor = new DeviceProfilePersistorPassword(persistorPath);
             persistor.setPassword(persistorPassword);
-
             agent.initialize(persistor);
         } catch(IonicException e) {
             System.out.println(e.getMessage());
             System.exit(1);
         }
         
-        String keyId = "HVzG3oKSL7A";
-
         // define request metadata
         MetadataMap requestMetadata = new MetadataMap();
         requestMetadata.set("application-status", "active");

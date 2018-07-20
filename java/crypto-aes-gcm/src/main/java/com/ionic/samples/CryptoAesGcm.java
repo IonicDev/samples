@@ -19,23 +19,27 @@ public class CryptoAesGcm
 {
     public static void main(String[] args)
     {
+        String message = "secret message";
+        byte[] messageAuthData = "data to authenticate".getBytes();
+
+        // read persistor password from environment variable
+        String persistorPassword = System.getenv("IONIC_PERSISTOR_PASSWORD");
+        if (persistorPassword == null) {
+            System.out.println("[!] Please provide the persistor password as env variable: IONIC_PERSISTOR_PASSWORD");
+            System.exit(1);
+        }
+
         // initialize agent
         Agent agent = new Agent();
         try {
             String persistorPath = System.getProperty("user.home") + "/.ionicsecurity/profiles.pw";
-            String persistorPassword = System.getenv("IONIC_PERSISTOR_PASSWORD");
-
             DeviceProfilePersistorPassword persistor = new DeviceProfilePersistorPassword(persistorPath);
             persistor.setPassword(persistorPassword);
-
             agent.initialize(persistor);
         } catch(IonicException e) {
             System.out.println(e.getMessage());
             System.exit(1);
         }
-
-        String message = "secret message";
-        byte[] messageAuthData = "data to authenticate".getBytes();
 
         // create new key
         CreateKeysResponse.Key key = null;

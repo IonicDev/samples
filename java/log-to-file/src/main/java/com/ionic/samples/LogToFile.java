@@ -10,9 +10,10 @@ package com.ionic.samples;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.logging.ConsoleHandler;
+import java.util.logging.FileHandler;
+import java.io.IOException;
 
-public class LogToConsole
+public class LogToFile
 {
     public static void main(String[] args)
     {
@@ -20,8 +21,14 @@ public class LogToConsole
         String sLogPath = "./sample-log.txt";
 
         // initialize logger
+        FileHandler fh = null;
+        try {
+            fh = new FileHandler(sLogPath);
+        } catch (IOException e) {
+            System.out.println("Failed to open file handle to: " + sLogPath);
+            System.exit(1);
+        }
         final Logger logger = Logger.getLogger(sLogChannel);
-        FileHandler fh = new FileHandler(sLogPath);
         logger.addHandler(fh);
         logger.setLevel(Level.INFO);
 

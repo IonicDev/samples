@@ -15,23 +15,28 @@ import com.ionic.sdk.agent.request.createkey.CreateKeysRequest;
 import com.ionic.sdk.agent.key.KeyAttributesMap;
 import com.ionic.sdk.error.IonicException;
 import javax.xml.bind.DatatypeConverter;
+import static java.util.UUID.randomUUID;
 import static java.util.Arrays.asList;
 
 public class CreateKeyWithExternalId
 {
     public static void main(String[] args)
     {
-        String externalId = "d8ded396-4388-4489-9604-c2482205e55c";
+        String externalId = randomUUID().toString();
+
+        // read persistor password from environment variable
+        String persistorPassword = System.getenv("IONIC_PERSISTOR_PASSWORD");
+        if (persistorPassword == null) {
+            System.out.println("[!] Please provide the persistor password as env variable: IONIC_PERSISTOR_PASSWORD");
+            System.exit(1);
+        }
 
         // initialize agent
         Agent agent = new Agent();
         try {
             String persistorPath = System.getProperty("user.home") + "/.ionicsecurity/profiles.pw";
-            String persistorPassword = System.getenv("IONIC_PERSISTOR_PASSWORD");
-
             DeviceProfilePersistorPassword persistor = new DeviceProfilePersistorPassword(persistorPath);
             persistor.setPassword(persistorPassword);
-
             agent.initialize(persistor);
         } catch(IonicException e) {
             System.out.println(e.getMessage());

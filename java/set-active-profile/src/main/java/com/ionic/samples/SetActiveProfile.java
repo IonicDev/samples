@@ -30,6 +30,12 @@ public class SetActiveProfile
             System.exit(1);
         }
         
+        // verify there is at least one profile
+        if (agent.getAllProfiles().size() == 0) {
+            System.out.println("No profiles found in persistor");
+            System.exit(1);
+        }
+        
         // list all profiles
         System.out.println("All Profiles:");
         for (DeviceProfile profile : agent.getAllProfiles()) {
@@ -41,6 +47,7 @@ public class SetActiveProfile
         agent.setActiveProfile(profileId);
 
         // display agent active profile
+        System.out.println("\nNew Active Profile:");
         DeviceProfile profile = agent.getActiveProfile();
         System.out.println("Id       : " + profile.getDeviceId());
         System.out.println("Name     : " + profile.getName());
