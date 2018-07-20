@@ -38,6 +38,7 @@ public class InitializeAgentWithAesPersistor
         // display all profiles in persistor
         List<DeviceProfile> profiles = agent.getAllProfiles();
         for (DeviceProfile profile : profiles) {
+            System.out.println("---");
             System.out.println("Id       : " + profile.getDeviceId());
             System.out.println("Name     : " + profile.getName());
             System.out.println("Keyspace : " + profile.getKeySpace());

@@ -31,8 +31,8 @@ public class SetActiveProfile
         }
         
         // verify there is at least one profile
-        if (agent.getAllProfiles().size == 0) {
-            System.println("No profiles found in persistor");
+        if (agent.getAllProfiles().size() == 0) {
+            System.out.println("No profiles found in persistor");
             System.exit(1);
         }
         
@@ -43,18 +43,15 @@ public class SetActiveProfile
             System.out.println(profile.getDeviceId());
         }
 
-        // 
-
-        /*
         // set active profile
         agent.setActiveProfile(profileId);
 
         // display agent active profile
+        System.out.println("\nNew Active Profile:");
         DeviceProfile profile = agent.getActiveProfile();
         System.out.println("Id       : " + profile.getDeviceId());
         System.out.println("Name     : " + profile.getName());
         System.out.println("Keyspace : " + profile.getKeySpace());
         System.out.println("ApiUrl   : " + profile.getServer());
-        */
     }
 }
