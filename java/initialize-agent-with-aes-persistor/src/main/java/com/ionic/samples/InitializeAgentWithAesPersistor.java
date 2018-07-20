@@ -13,6 +13,7 @@ import com.ionic.sdk.device.profile.DeviceProfile;
 import com.ionic.sdk.device.profile.persistor.DeviceProfilePersistorAesGcm;
 import com.ionic.sdk.error.IonicException;
 import java.util.List;
+import javax.xml.bind.DatatypeConverter;
 
 public class InitializeAgentWithAesPersistor
 {
@@ -35,7 +36,7 @@ public class InitializeAgentWithAesPersistor
         }
 
         // display all profiles in persistor
-        List<DeviceProfile> profiles = agent.getAllProfile();
+        List<DeviceProfile> profiles = agent.getAllProfiles();
         for (DeviceProfile profile : profiles) {
             System.out.println("Id       : " + profile.getDeviceId());
             System.out.println("Name     : " + profile.getName());

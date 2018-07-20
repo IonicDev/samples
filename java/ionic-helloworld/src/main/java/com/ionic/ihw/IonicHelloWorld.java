@@ -17,14 +17,19 @@ public class IonicHelloWorld
     public static void main(String[] args)
     {
         try {
-            // Initialize Ionic agent
+
+            // read persistor password from environment variable
+            String persistorPassword = System.getenv("IONIC_PERSISTOR_PASSWORD");
+            if (persistorPassword == null) {
+                System.out.println("[!] Please provide the persistor password as env variable: IONIC_PERSISTOR_PASSWORD");
+                System.exit(1);
+            }
+
+            // initialize agent with password persistor
             Agent isAgent = new Agent();
             String profilePath = System.getProperty("user.home") + "/.ionicsecurity/profiles.pw";
-            String persistorPassword = System.getenv("IONIC_PERSISTOR_PASSWORD");
-
             DeviceProfilePersistorPassword persistor = new DeviceProfilePersistorPassword(profilePath);
             persistor.setPassword(persistorPassword);
-
             isAgent.initialize(persistor);
 
             // Encrypt and decrypt string "hello world"
@@ -36,10 +41,10 @@ public class IonicHelloWorld
 
         } catch (IonicException e) {
             System.out.println(e);
-            if(e.getReturnCode() == AgentErrorModuleConstants.ISAGENT_NO_DEVICE_PROFILE.value()) {
+            if(e.getReturnCode() == AgentErrorModuleConstants.ISAGENT_NO_DEVICE_PROFILE) {
                 System.out.println("Profile does not exist");
             }
-            if(e.getReturnCode() == AgentErrorModuleConstants.ISAGENT_KEY_DENIED.value()) {
+            if(e.getReturnCode() == AgentErrorModuleConstants.ISAGENT_KEY_DENIED) {
                 System.out.println("Key request denied");
             }
         }

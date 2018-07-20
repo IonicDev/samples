@@ -30,6 +30,12 @@ public class SetActiveProfile
             System.exit(1);
         }
         
+        // verify there is at least one profile
+        if (agent.getAllProfiles().size == 0) {
+            System.println("No profiles found in persistor");
+            System.exit(1);
+        }
+        
         // list all profiles
         System.out.println("All Profiles:");
         for (DeviceProfile profile : agent.getAllProfiles()) {
@@ -37,6 +43,9 @@ public class SetActiveProfile
             System.out.println(profile.getDeviceId());
         }
 
+        // 
+
+        /*
         // set active profile
         agent.setActiveProfile(profileId);
 
@@ -46,5 +55,6 @@ public class SetActiveProfile
         System.out.println("Name     : " + profile.getName());
         System.out.println("Keyspace : " + profile.getKeySpace());
         System.out.println("ApiUrl   : " + profile.getServer());
+        */
     }
 }

@@ -9,6 +9,7 @@
 package com.ionic.samples;
 
 import com.ionic.sdk.agent.Agent;
+import com.ionic.sdk.device.profile.DeviceProfile;
 import com.ionic.sdk.device.profile.persistor.DeviceProfilePersistorPassword;
 import com.ionic.sdk.error.IonicException;
 import java.util.List;
@@ -32,7 +33,7 @@ public class InitializeAgentWithPasswordPersistor
         }
 
         // display all profiles in persistor
-        List<DeviceProfile> profiles = agent.getAllProfile();
+        List<DeviceProfile> profiles = agent.getAllProfiles();
         for (DeviceProfile profile : profiles) {
             System.out.println("Id       : " + profile.getDeviceId());
             System.out.println("Name     : " + profile.getName());

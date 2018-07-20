@@ -16,15 +16,19 @@ public class SetAppMetadata
 {
     public static void main(String[] args)
     {
+        // read persistor password from environment variable
+        String persistorPassword = System.getenv("IONIC_PERSISTOR_PASSWORD");
+        if (persistorPassword == null) {
+            System.out.println("[!] Please provide the persistor password as env variable: IONIC_PERSISTOR_PASSWORD");
+            System.exit(1);
+        }        
+
         // initialize agent
         Agent agent = new Agent();
         try {
             String persistorPath = System.getProperty("user.home") + "/.ionicsecurity/profiles.pw";
-            String persistorPassword = System.getenv("IONIC_PERSISTOR_PASSwORD");
-
             DeviceProfilePersistorPassword persistor = new DeviceProfilePersistorPassword(persistorPath);
             persistor.setPassword(persistorPassword);
-
             agent.initialize(persistor);
         } catch(IonicException e) {
             System.out.println(e.getMessage());

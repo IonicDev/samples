@@ -12,6 +12,7 @@ import com.ionic.sdk.device.profile.persistor.DeviceProfilePersistorPassword;
 import com.ionic.sdk.agent.Agent;
 import com.ionic.sdk.agent.request.getkey.GetKeysResponse;
 import com.ionic.sdk.agent.request.updatekey.UpdateKeysResponse;
+import com.ionic.sdk.agent.request.updatekey.UpdateKeysRequest;
 import com.ionic.sdk.error.IonicException;
 import com.ionic.sdk.agent.key.KeyAttributesMap;
 import java.util.List;
@@ -22,17 +23,27 @@ public class UpdateKey
 {
     public static void main(String[] args)
     {
-        String keyId = "HVzG5eMZrc8";
+        // TODO: provide key to update
+        String keyId = null;
+
+        if (keyId == null) {
+            System.out.println("Please set the 'keyId' variable to a key you have already created");
+            System.exit(1);
+        }
+
+        // read persistor password from environment variable
+        String persistorPassword = System.getenv("IONIC_PERSISTOR_PASSWORD");
+        if (persistorPassword == null) {
+            System.out.println("[!] Please provide the persistor password as env variable: IONIC_PERSISTOR_PASSWORD");
+            System.exit(1);
+        }
 
         // initialize agent
         Agent agent = new Agent();
         try {
             String persistorPath = System.getProperty("user.home") + "/.ionicsecurity/profiles.pw";
-            String persistorPassword = System.getenv("IONIC_PERSISTOR_PASSWORD");
-
             DeviceProfilePersistorPassword persistor = new DeviceProfilePersistorPassword(persistorPath);
             persistor.setPassword(persistorPassword);
-
             agent.initialize(persistor);
         } catch(IonicException e) {
             System.out.println(e.getMessage());
@@ -55,12 +66,15 @@ public class UpdateKey
         // merge new and existing attributes
         KeyAttributesMap updatedAttributes = new KeyAttributesMap(fetchedKey.getMutableAttributes());
         updatedAttributes.putAll(newMutableAttributes);
-        fetchedKey.setMutableAttributes(updatedAttributes);
+        
+        // create update request key
+        UpdateKeysRequest.Key updateRequestKey = new UpdateKeysRequest.Key(fetchedKey);
+        updateRequestKey.setMutableAttributes(updatedAttributes);
 
         // update key
         UpdateKeysResponse.Key key = null;
         try {
-            key = agent.updateKey(fetchedKey, false).getKeys().get(0);
+            key = agent.updateKey(updateRequestKey).getKeys().get(0);
         } catch(IonicException e) {
             System.out.println(e.getMessage());
             System.exit(1);

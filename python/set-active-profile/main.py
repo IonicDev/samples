@@ -17,16 +17,16 @@ except ionicsdk.exceptions.IonicException as e:
     print("Error initializing agent: {0}".format(e.message))
     sys.exit(-2)
 
+# Verify there is at least one profile.
+if profiles.count == 0:
+    print("No profiles for plaintext persistor")
+    sys.exit(-2)
+
 # List all profiles.
 try:
     profiles = agent.getallprofiles()
 except ionicsdk.exceptions.IonicException as e:
     print("Error getting all profiles: {0}".format(e.message))
-    sys.exit(-2)
-
-# Verify there is at least one profile.
-if profiles.count == 0:
-    print("No profiles for plaintext persistor")
     sys.exit(-2)
 
 # Display all profiles for the persistor.

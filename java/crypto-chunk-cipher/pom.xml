@@ -1,7 +1,7 @@
 <project>
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.ionic.samples</groupId>
-  <artifactId>crypto-chunkcipher</artifactId>
+  <artifactId>crypto-chunk-cipher</artifactId>
   <packaging>jar</packaging>
   <version>1.0</version>
   <dependencies>
