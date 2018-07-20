@@ -5,18 +5,16 @@
 import os
 import sys
 import json
-import ionicsdk
 import binascii
+import ionicsdk
 
-external_ids = ['a3968349-e08f-4a96-820e-8ce3763fcd48']
-
-# read persistor password from environment variable
+# Read persistor password from environment variable.
 persistorPassword = os.environ.get('IONIC_PERSISTOR_PASSWORD')
-if (persistorPassword == None):
+if persistorPassword == None:
     print("[!] Please provide the persistor password as env variable: IONIC_PERSISTOR_PASSWORD")
     sys.exit(1)
 
-# initialize agent with password persistor
+# Initialize agent with password persistor.
 try:
     persistorPath = os.path.expanduser("~/.ionicsecurity/profiles.pw")
     persistor = ionicsdk.DeviceProfilePersistorPasswordFile(persistorPath, persistorPassword)
@@ -25,17 +23,22 @@ except ionicsdk.exceptions.IonicException as e:
     print("Error initializing agent: {0}".format(e.message))
     sys.exit(-2)
 
-# get key by external id
+# Create a resource request for "classification" marking values
+# configured in the dashboard.
+resource_id = "marking-values"
+args = "classification"
+
+# Fetch the resource "classification" marking values.
 try:
-    keys = agent.getkeys2([], externalkeyids=external_ids)[0]
+    resource_resp = agent.getresource(resource_id, args)
 except ionicsdk.exceptions.IonicException as e:
-    print("Error fetching a key: {0}".format(e.message))
+    print("Error getting a resource: {0}".format(e.message))
     sys.exit(-2)
 
-# display fetched key
-for key in keys:
-    print("---")
-    print("KeyId        : " + key.id)
-    print("KeyBytes     : " + binascii.hexlify(key.bytes))
-    print("FixedAttrs   : " + json.dumps(key.attributes))
-    print("MutableAttrs : " + json.dumps(key.mutableAttributes))
+# Check for errors.
+if resource_resp.error is not None:
+    print("Resource Error: {0}".format(resource_resp.error))
+    sys.exit(-2)
+
+print("Classification values:")
+print("Data   : {0}".format(resource_resp.data))

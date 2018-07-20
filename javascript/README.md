@@ -10,4 +10,4 @@ userId: 'developer',
 userAuth: 'password123',
 ```
 
-If you have an existing profile, update the `appData` variable in the sample app before runnig it. Alternatively, run the `initialize-agent-with-default-persistor` sample app which will create a profile with the settings above. 
+If you have an existing profile, update the `appData` variable in the sample app before running it. Alternatively, run the `initialize-agent-with-default-persistor` sample app which will create a profile with the settings above. 
