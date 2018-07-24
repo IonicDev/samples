@@ -41,7 +41,7 @@ public class CreateKeyWithProtectedAttributes
 
         // define protected attributes
         KeyAttributesMap fixedAttributes = new KeyAttributesMap();
-        fixedAttributes.put("project", asList("ORION"));
+        fixedAttributes.put("ionic-protected-project", asList("ORION"));
 
         // create single key with mutable attributes
         CreateKeysResponse.Key key = null;
