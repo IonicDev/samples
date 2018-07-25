@@ -20,8 +20,6 @@ public class GetResource
 {
     public static void main(String[] args)
     {
-        String keyId = "HVzG4flO-KE";
-
         // read persistor password from environment variable
         String persistorPassword = System.getenv("IONIC_PERSISTOR_PASSWORD");
         if (persistorPassword == null) {
@@ -52,7 +50,7 @@ public class GetResource
             new GetResourcesRequest.Resource(refId, resourceId, suppArgs);
         GetResourcesResponse resourcesResponse = null;
 
-     // Fetch the resource "classification" marking values.
+        // Fetch the resource "classification" marking values.
         try
         {
             resourcesResponse = agent.getResource(resourceRequest);
@@ -63,7 +61,7 @@ public class GetResource
             System.exit(1);
         }
         
-     // Extract the resources from the get resources response.
+        // Extract the resources from the get resources response.
         List<GetResourcesResponse.Resource> resources = resourcesResponse.getResources();
         if (resources.size() == 0) {
             System.out.println("There are no resources available.");
