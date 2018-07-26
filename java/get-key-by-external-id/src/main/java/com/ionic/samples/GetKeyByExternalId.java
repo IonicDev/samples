@@ -47,7 +47,6 @@ public class GetKeyByExternalId
         keysRequest.addExternalId(externalId);
 
         // Get one or more keys with an external ID.
-        GetKeysResponse keysResponse = null;
         List<GetKeysResponse.Key> keys = null;
         try {
             keys = agent.getKeys(keysRequest).getKeys();
@@ -57,11 +56,13 @@ public class GetKeyByExternalId
         }
 
         if (keys.size() == 0) {
-            System.out.println("No keys returned for external IDs.");
+            System.out.println("No keys returned for external ID: " + externalId);
+            System.out.println("There were no keys or access was denied to the keys");
             System.exit(1);
         }
             
         // Display fetched keys.
+        System.out.println("Keys fetch for external ID: " + externalId );
         for (GetKeysResponse.Key key : keys) {
             System.out.println("---");
             System.out.println("KeyId        : " + key.getId());
