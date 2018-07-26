@@ -20,7 +20,7 @@ public class LogToFile
         String sLogChannel = "com.ionic.sdk.sampleapp";
         String sLogPath = "./sample-log.txt";
 
-        // initialize logger
+        // Open file to log into.
         FileHandler fh = null;
         try {
             fh = new FileHandler(sLogPath);
@@ -28,6 +28,8 @@ public class LogToFile
             System.out.println("Failed to open file handle to: " + sLogPath);
             System.exit(1);
         }
+        
+        // initialize logger
         final Logger logger = Logger.getLogger(sLogChannel);
         logger.addHandler(fh);
         logger.setLevel(Level.INFO);

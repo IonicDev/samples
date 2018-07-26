@@ -42,7 +42,7 @@ public class GetResource
 
         // Create a resource request for "classification" marking values
         // configured in the dashboard.
-        String refId = new String("java demo");
+        String refId = new String("office resource");
         String resourceId = new String("marking-values");
         String suppArgs = new String("classification");
         
