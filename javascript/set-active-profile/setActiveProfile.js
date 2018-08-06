@@ -18,31 +18,6 @@ const main = async () => {
     // initialize agent
     const agent = new window.IonicSdk.ISAgent('https://dev-api.ionic.com/jssdk/latest/');
 
-    await agent.loadUser(appData).catch(async (error) => {
-        if (
-            error &&
-            error.sdkResponseCode &&
-            (error.sdkResponseCode === 40022 || error.sdkResponseCode === 40002)
-        ) {
-            const resp = await agent.enrollUser(appData)
-
-            if(resp) {
-                if (resp.redirect) {
-                    window.open(resp.redirect);
-                    return resp.Notifier;
-                }
-            }
-            else {
-                console.log(`Error loading profile: ${error}`)
-                return Promise.reject("Error enrolling");
-            }
-        }
-        else {
-            console.log(`Error loading profile: ${error}`)
-            return
-        }
-    })
-
     // Get all the profiles.
     const response = await agent.queryProfiles(appData).catch((error) => {
         console.log(`Query profiles error: ${error}`)
