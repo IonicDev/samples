@@ -17,6 +17,9 @@ const main = async () => {
 
     // initialize agent
     const agent = new window.IonicSdk.ISAgent('https://dev-api.ionic.com/jssdk/latest/');
+    await agent.loadUser(appData).catch((error) => {
+    console.log(`Error loading profile: ${error}`)
+    })
 
     // Get all the profiles.
     const response = await agent.queryProfiles(appData).catch((error) => {
