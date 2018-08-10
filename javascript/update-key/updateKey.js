@@ -18,12 +18,12 @@ const main = async () => {
   // initialize agent
   const agent = new window.IonicSdk.ISAgent('https://dev-api.ionic.com/jssdk/latest/')
   await agent.loadUser(appData).catch((error) => {
-    console.log(`Error loading profile: ${error}`)
+    console.log('Error loading profile: ', error)
   })
 
   // get key
   const response = await agent.getKeys({keyIds: [keyId]}).catch((error) => {
-    console.log(`Error Creating Key: ${error}`)
+    console.log('Error Creating Key: ', error)
   })
   const key = response.keys[0]
 
@@ -36,16 +36,16 @@ const main = async () => {
       }
     }]
   }).catch((error) => {
-    console.log(`Error Updating Key: ${error}`)
+    console.log('Error Updating Key: ', error)
   })
   const updated_key = update_resp.keys[0]
 
   // display updated key
-  console.log(`Updated key`)
-  console.log(`KeyId             : ${updated_key.keyId}`)
-  console.log(`KeyBytes          : ${updated_key.key}`)
-  console.log(`FixedAttributes   : ${JSON.stringify(updated_key.attributes, null, 0)}`)
-  console.log(`MutableAttributes : ${JSON.stringify(updated_key.mutableAttributes, null, 0)}`)
+  console.log('Updated key')
+  console.log('KeyId             : ', updated_key.keyId)
+  console.log('KeyBytes          : ', updated_key.key)
+  console.log('FixedAttributes   : ', JSON.stringify(updated_key.attributes, null, 0))
+  console.log('MutableAttributes : ', JSON.stringify(updated_key.mutableAttributes, null, 0))
 }
 
 main()
