@@ -13,7 +13,7 @@ const appData = {
 
 const main = async () => {
     
-    const message = "secret message"
+    const message = 'secret message'
 
     // initialize agent
     const agent = new window.IonicSdk.ISAgent('https://dev-api.ionic.com/jssdk/latest/');
@@ -33,12 +33,12 @@ const main = async () => {
                 }
             }
             else {
-                console.log("Error loading profile: ", error)
-                return Promise.reject("Error enrolling");
+                console.log('Error loading profile: ', error)
+                return Promise.reject('Error enrolling');
             }
         }
         else {
-            console.log("Error loading profile: ", error)
+            console.log('Error loading profile: ', error)
             return
         }
     })
@@ -48,8 +48,8 @@ const main = async () => {
     const ciphertext = encryptResponse.stringChunk
 
     // display data
-    console.log("Plain Text: ", message)
-    console.log("Ionic Chunk Encrypted Text: ", ciphertext)
+    console.log('Plain Text: ', message)
+    console.log('Ionic Chunk Encrypted Text: ', ciphertext)
 }
 
 main();

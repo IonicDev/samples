@@ -17,7 +17,7 @@ const main = async () => {
   // initialize agent
   const agent = new window.IonicSdk.ISAgent('https://dev-api.ionic.com/jssdk/latest/')
   await agent.loadUser(appData).catch((error) => {
-    console.log("Error loading profile: ", error)
+    console.log('Error loading profile: ', error)
   })
 
   // encrypt message
@@ -29,8 +29,8 @@ const main = async () => {
   const plaintext = decryptResponse.stringChunk
 
   // display data
-  console.log("Ciphertext : ", ciphertext)
-  console.log("Plaintext  : ", plaintext)
+  console.log('Ciphertext : ', ciphertext)
+  console.log('Plaintext  : ', plaintext)
 }
 
 main()

@@ -17,23 +17,23 @@ const main = async () => {
   // initialize agent
   const agent = new window.IonicSdk.ISAgent('https://dev-api.ionic.com/jssdk/latest/')
   await agent.loadUser(appData).catch((error) => {
-    console.log("Error loading profile: ", error)
+    console.log('Error loading profile: ', error)
   })
 
   // create multiple keys
   const response = await agent.createKeys({
     quantity: keyCount
   }).catch((error) => {
-    console.log("Error Creating Key: ", error)
+    console.log('Error Creating Key: ', error)
   })
 
   // display new keys
   response.keys.forEach((key) => {
-    console.log("---")
-    console.log("KeyId    : ", key.keyId)
-    console.log("KeyBytes : ", key.key)
-    console.log("FixedAttributes   : ", JSON.stringify(key.attributes, null, 0))
-    console.log("MutableAttributes : ", JSON.stringify(key.mutableAttributes, null, 0))
+    console.log('---')
+    console.log('KeyId    : ', key.keyId)
+    console.log('KeyBytes : ', key.key)
+    console.log('FixedAttributes   : ', JSON.stringify(key.attributes, null, 0))
+    console.log('MutableAttributes : ', JSON.stringify(key.mutableAttributes, null, 0))
   })
 }
 

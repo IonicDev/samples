@@ -13,17 +13,17 @@ const appData = {
 
 const main = async () => {
     
-    const message = "secret message"
+    const message = 'secret message'
 
     // initialize agent
     const agent = new window.IonicSdk.ISAgent('https://dev-api.ionic.com/jssdk/latest/');
     await agent.loadUser(appData).catch((error) => {
-    console.log("Error loading profile: ", error)
+    console.log('Error loading profile: ', error)
     })
 
     // Get all the profiles.
     const response = await agent.queryProfiles(appData).catch((error) => {
-        console.log("Query profiles error: ", error)
+        console.log('Query profiles error: ', error)
     })
     const profiles = response.profiles 
 
@@ -35,7 +35,7 @@ const main = async () => {
         
     // List all profiles.
     var index, len, passive_device_id
-    console.log("Available Profiles: ");
+    console.log('Available Profiles: ');
     for (index = 0, len = profiles.length; index < len; ++index) {
         console.log(profiles[index].deviceId);
 
@@ -47,7 +47,7 @@ const main = async () => {
 
     // If the number of profiles is equal to one, then there is nothing to set.
     if (profiles.length == 1) {
-        console.log("Only one profile, nothing to change");
+        console.log('Only one profile, nothing to change');
         return
     }
         
@@ -59,23 +59,23 @@ const main = async () => {
           deviceId: passive_device_id
         }
     
-    console.log("\nSetting " + passive_device_id + " as active profile")
+    console.log('\nSetting ' + passive_device_id + ' as active profile')
 
     // Set the active profile.
     const set_active_profile_resp = await agent.setActiveProfile(profile_to_set).catch((error) => {
-        console.log("Set active profile error: ", error)
+        console.log('Set active profile error: ', error)
     })
 
     // Loop through the list of profiles looking for active profile,
     // and output information about the active profile.
     const updated_profiles = set_active_profile_resp.profiles 
-    console.log("\nActive Profile: ");
+    console.log('\nActive Profile: ');
     for (index = 0, len = updated_profiles.length; index < len; ++index) {
         if (updated_profiles[index].active) {
-            console.log("ID       : ", updated_profiles[index].deviceId);
-            console.log("Created  : ", updated_profiles[index].created);
-            console.log("Keyspace : ", updated_profiles[index].keyspace);
-            console.log("API URL  : ", updated_profiles[index].server);
+            console.log('ID       : ', updated_profiles[index].deviceId);
+            console.log('Created  : ', updated_profiles[index].created);
+            console.log('Keyspace : ', updated_profiles[index].keyspace);
+            console.log('API URL  : ', updated_profiles[index].server);
         }
     }
 }
