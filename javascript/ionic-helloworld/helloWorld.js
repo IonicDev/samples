@@ -33,12 +33,12 @@ const main = async () => {
                 }
             }
             else {
-                console.log(`Error loading profile: ${error}`)
+                console.log("Error loading profile: ", error)
                 return Promise.reject("Error enrolling");
             }
         }
         else {
-            console.log(`Error loading profile: ${error}`)
+            console.log("Error loading profile: ", error)
             return
         }
     })
@@ -48,8 +48,8 @@ const main = async () => {
     const ciphertext = encryptResponse.stringChunk
 
     // display data
-    console.log(`Plain Text: ${message}`)
-    console.log(`Ionic Chunk Encrypted Text: ${ciphertext}`)
+    console.log("Plain Text: ", message)
+    console.log("Ionic Chunk Encrypted Text: ", ciphertext)
 }
 
 main();

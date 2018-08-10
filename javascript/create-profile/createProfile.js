@@ -17,7 +17,7 @@ const main = async () => {
 
   // create new profile
   const response = await agent.enrollUser(appData).catch((error) => {
-    console.log(`Error loading profile: ${error}`)
+    console.log("Error loading profile: ", error)
   })
 
   // open new page to complete enrollment
