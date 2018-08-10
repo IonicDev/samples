@@ -32,6 +32,7 @@ const main = async () => {
 
   // display fetched keys
   keys.forEach((key) => {
+    console.log("---")
     console.log("KeyId             : ", key.keyId)
     console.log("KeyBytes          : ", key.key)
     console.log("FixedAttributes   : ", JSON.stringify(key.attributes, null, 0))

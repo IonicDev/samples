@@ -21,6 +21,7 @@ const main = async () => {
   // display all profiles in persistor
   const profiles = response.profiles
   profiles.forEach((profile) => {
+    console.log("---")
     console.log("Id       : ", profile.deviceId)
     console.log("Keyspace : ", profile.keyspace)
     console.log("ApiUrl   : ", profile.server)
