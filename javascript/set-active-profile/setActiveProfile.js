@@ -13,8 +13,6 @@ const appData = {
 
 const main = async () => {
     
-    const message = 'secret message'
-
     // initialize agent
     const agent = new window.IonicSdk.ISAgent('https://dev-api.ionic.com/jssdk/latest/');
     await agent.loadUser(appData).catch((error) => {
@@ -28,7 +26,7 @@ const main = async () => {
     const profiles = response.profiles 
 
     // Verify there is at least one profile.
-    if (profiles.length == 0) {
+    if (profiles.length === 0) {
         console.log(`No profiles for this persistor`);
         return
     }
@@ -46,7 +44,7 @@ const main = async () => {
     }
 
     // If the number of profiles is equal to one, then there is nothing to set.
-    if (profiles.length == 1) {
+    if (profiles.length === 1) {
         console.log('Only one profile, nothing to change');
         return
     }
