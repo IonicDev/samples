@@ -18,6 +18,6 @@ mvn package
 
 **Run:**
 ```
-java -jar /target/<app>.jar
+java -jar target/<app>.jar
 ```
   
