@@ -16,7 +16,6 @@ import com.ionic.sdk.agent.cipher.file.GenericFileCipher;
 import com.ionic.sdk.agent.cipher.file.data.FileCryptoEncryptAttributes;
 import com.ionic.sdk.agent.cipher.file.data.FileCipher.Generic;
 import com.ionic.sdk.error.IonicException;
-import javax.xml.bind.DatatypeConverter;
 import static java.util.Arrays.asList;
 import java.io.IOException;
 import java.nio.file.Files;
