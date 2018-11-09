@@ -22,7 +22,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 
-public class CryptoFileGeneric
+public class CryptoFileCipherGeneric
 {
     public static void main(String[] args)
     {
