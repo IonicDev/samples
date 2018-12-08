@@ -43,11 +43,13 @@ public class CryptoFileCipherCsv
 
         // initialize agent
         Agent agent = new Agent();
+        agent.setMetadata("ionic-application-name", "CryptoFileCipherCsv");
+        agent.setMetadata("ionic-application-version", "1.0.0");
+
         try {
             String persistorPath = System.getProperty("user.home") + "/.ionicsecurity/profiles.pw";
             DeviceProfilePersistorPassword persistor = new DeviceProfilePersistorPassword(persistorPath);
             persistor.setPassword(persistorPassword);
-            //agent.setMetadata(Agent.APPLICATION_NAME, "CryptoFileCipherCsv Sample");
             agent.initialize(persistor);
         } catch(IonicException e) {
             System.out.println(e.getMessage());
@@ -110,7 +112,7 @@ public class CryptoFileCipherCsv
 
         // Verify encrypt and decrypt worked.
         if (! message.equals(plainText)) {
-            System.out.println("Encryption/Decrption does not match!");
+            System.out.println("Encryption/Decryption does not match!");
             System.out.format("Original:%n%s", message);
             System.out.format("Decrypted:%n%s", plainText);
         }
