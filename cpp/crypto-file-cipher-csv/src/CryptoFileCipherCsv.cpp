@@ -45,7 +45,7 @@ int main(int argc, char* argv[]) {
         exit(1);
     }
 
-    // define attributes (optional)
+    // define key attributes (optional)
     std::map< std::string, std::vector< std::string > > mutableAttributes;
     std::vector<std::string> classificationVal;
     classificationVal.push_back("Restricted");
