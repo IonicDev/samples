@@ -53,7 +53,7 @@ int main(int argc, char* argv[]) {
     ISFileCryptoEncryptAttributes fileCryptoAttributes;
     fileCryptoAttributes.setMutableKeyAttributes(mutableAttributes);
 
-    // initialize generic file cipher object
+    // initialize CSV file cipher object
     ISFileCryptoCipherCsv cipher(agent);
 
     // encrypt
