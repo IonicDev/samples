@@ -25,7 +25,7 @@ namespace Samples
 
 
         // Prints a message, waits for any input, and exits.
-	// This is for exiting with an error.
+        // This is for exiting with an error.
         static void ErrorExitWithMessage(String message)
         {
             Console.WriteLine(message);
