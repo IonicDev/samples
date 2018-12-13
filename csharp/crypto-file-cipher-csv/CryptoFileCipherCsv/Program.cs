@@ -24,6 +24,16 @@ namespace Samples
         }
 
 
+        // Prints a message, waits for any input, and exits.
+	// This is for exiting with an error.
+        static void ErrorExitWithMessage(String message)
+        {
+            Console.WriteLine(message);
+            WaitForInput();
+            Environment.Exit(1);
+        }
+
+
         static int Main(string[] args)
         {
             // The files to encrypt from and decrypt to.
@@ -37,9 +47,7 @@ namespace Samples
             String persistorPassword = Environment.GetEnvironmentVariable("IONIC_PERSISTOR_PASSWORD");
             if (persistorPassword == null || persistorPassword.Length == 0)
             {
-                Console.WriteLine("Please provide the persistor password as env variable: IONIC_PERSISTOR_PASSWORD");
-                WaitForInput();
-                Environment.Exit(1);
+                ErrorExitWithMessage("Please provide the persistor password as env variable: IONIC_PERSISTOR_PASSWORD");
             }
 
             // Create an agent object to talk to Ionic.
@@ -58,9 +66,7 @@ namespace Samples
             }
             catch (SdkException sdkExp)
             {
-                Console.WriteLine("Agent initialization error: " + sdkExp.Message);
-                WaitForInput();
-                Environment.Exit(1);
+                ErrorExitWithMessage("Agent initialization error: " + sdkExp.Message);
             }
 
             // Create single key without attributes.
@@ -71,9 +77,7 @@ namespace Samples
             }
             catch (SdkException sdkExp)
             {
-                Console.WriteLine("Key creation error: " + sdkExp.Message);
-                WaitForInput();
-                Environment.Exit(1);
+                ErrorExitWithMessage("Key creation error: " + sdkExp.Message);
             }
 
             // Define mutable attributes.
@@ -92,9 +96,7 @@ namespace Samples
             }
             catch (SdkException sdkExp)
             {
-                Console.WriteLine("CSV file cipher encrypt error: " + sdkExp.Message);
-                WaitForInput();
-                Environment.Exit(1);
+                ErrorExitWithMessage("CSV file cipher encrypt error: " + sdkExp.Message);
             }
    
             // Decrypt
@@ -105,9 +107,7 @@ namespace Samples
             }
             catch (SdkException sdkExp)
             {
-                Console.WriteLine("CSV file cipher decrypt error: " + sdkExp.Message);
-                WaitForInput();
-                Environment.Exit(1);
+                ErrorExitWithMessage("CSV file cipher decrypt error: " + sdkExp.Message);
             }
 
             // Read the files for comparison.
