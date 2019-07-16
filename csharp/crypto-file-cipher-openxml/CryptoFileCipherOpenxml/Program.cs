@@ -75,10 +75,12 @@ namespace Samples
                 Environment.Exit(1);
             }
 
-            // Define mutable attributes.
+            // Define mutable attributes and empty fixed attributes.
             AttributesDictionary mutableKeyAttrs = new AttributesDictionary();
+            AttributesDictionary fixedKeyAttrs = new AttributesDictionary();
             mutableKeyAttrs.Add("classification", new List<string> { "Restricted" });
-            FileCryptoEncryptAttributes fileCryptoEncryptAttrs = new FileCryptoEncryptAttributes(mutableKeyAttrs);
+            FileCryptoEncryptAttributes fileCryptoEncryptAttrs =
+            new FileCryptoEncryptAttributes(fixedKeyAttrs, mutableKeyAttrs);
 
             // Initialize OpenXML file cipher object.
             OpenXmlFileCipher cipher = new OpenXmlFileCipher(agent);
@@ -94,7 +96,7 @@ namespace Samples
                 Console.WriteLine("Generic file cipher encrypt error: " + sdkExp.Message);
                 WaitForInput();
                 Environment.Exit(1);
-            }
+            }            
    
             // Decrypt
             try

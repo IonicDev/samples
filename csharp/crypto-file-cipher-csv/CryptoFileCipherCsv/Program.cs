@@ -80,10 +80,12 @@ namespace Samples
                 ErrorExitWithMessage("Key creation error: " + sdkExp.Message);
             }
 
-            // Define mutable attributes.
+            // Define mutable attributes and empty fixed attributes.
             AttributesDictionary mutableKeyAttrs = new AttributesDictionary();
+            AttributesDictionary fixedKeyAttrs = new AttributesDictionary();
             mutableKeyAttrs.Add("classification", new List<string> { "Restricted" });
-            FileCryptoEncryptAttributes fileCryptoEncryptAttrs = new FileCryptoEncryptAttributes(mutableKeyAttrs);
+            FileCryptoEncryptAttributes fileCryptoEncryptAttrs =
+            new FileCryptoEncryptAttributes(fixedKeyAttrs, mutableKeyAttrs);
 
             // Initialize OpenXML file cipher object.
             CsvFileCipher cipher = new CsvFileCipher(agent);
