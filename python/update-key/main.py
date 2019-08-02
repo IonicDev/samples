@@ -9,8 +9,6 @@ import json
 import ionicsdk
 import binascii
 
-external_id = str(uuid.uuid4())
-
 # read persistor password from environment variable
 persistorPassword = os.environ.get('IONIC_PERSISTOR_PASSWORD')
 if (persistorPassword == None):
