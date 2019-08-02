@@ -4,7 +4,6 @@
 
 import os
 import sys
-import uuid
 import json
 import ionicsdk
 import binascii
@@ -36,8 +35,7 @@ print("KeyId        : " + key.id)
 print("KeyBytes     : " + binascii.hexlify(key.bytes))
 print("FixedAttrs   : " + json.dumps(key.attributes))
 print("MutableAttrs : " + json.dumps(key.mutableAttributes))
-print('-' * 20)
-print('\n')
+print('-' * 20 + '\n')
 
 # create mutable attribute
 add_mutable_attributes = {
@@ -60,5 +58,4 @@ print("Updated KeyId        : " + updatedKey.id)
 print("Updated KeyBytes     : " + binascii.hexlify(updatedKey.bytes))
 print("Updated FixedAttrs   : " + json.dumps(updatedKey.attributes))
 print("Updated MutableAttrs : " + json.dumps(updatedKey.mutableAttributes))
-print('-' * 20)
-print('\n')
+print('-' * 20 + '\n')
