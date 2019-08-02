@@ -38,7 +38,8 @@ print("KeyId        : " + key.id)
 print("KeyBytes     : " + binascii.hexlify(key.bytes))
 print("FixedAttrs   : " + json.dumps(key.attributes))
 print("MutableAttrs : " + json.dumps(key.mutableAttributes))
-print('-' * 90)
+print('-' * 20)
+print('\n')
 
 # create mutable attribute
 add_mutable_attributes = {
@@ -61,19 +62,5 @@ print("Updated KeyId        : " + updatedKey.id)
 print("Updated KeyBytes     : " + binascii.hexlify(updatedKey.bytes))
 print("Updated FixedAttrs   : " + json.dumps(updatedKey.attributes))
 print("Updated MutableAttrs : " + json.dumps(updatedKey.mutableAttributes))
-print('-' * 90)
-
-# fetch key to show the new attribute was stored
-try:
-    fetchedKey = agent.getkey(key.id)
-except ionicsdk.exceptions.IonicException as e:
-    print("Error fetching a key: {0}".format(e.message))
-    sys.exit(-2)
-
-# display fetched key
-print("Fetched KeyId        : " + fetchedKey.id)
-print("Fetched KeyBytes     : " + binascii.hexlify(fetchedKey.bytes))
-print("Fetched FixedAttrs   : " + json.dumps(fetchedKey.attributes))
-print("Fetched MutableAttrs : " + json.dumps(fetchedKey.mutableAttributes))
-print('-' * 90)
-
+print('-' * 20)
+print('\n')
