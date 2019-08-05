@@ -9,6 +9,13 @@ import ionicsdk
 file_original = '../../sample-data/files/Message.pdf'
 file_ciphertext = './Message-Protected.pdf'
 file_plaintext = './Message.pdf'
+source_dir = 'github-samples/python/crypto-file-cipher-pdf'
+this_dir = os.getcwd()
+
+# run only from source directory
+if not this_dir.endswith(source_dir): 
+    print("[!] Please run this sample from inside " + source_dir)
+    sys.exit(1)
 
 # read persistor password from environment variable
 persistorPassword = os.environ.get('IONIC_PERSISTOR_PASSWORD')
