@@ -1,8 +1,16 @@
+import os
 import sys
 import ionicsdk
 
 persistorPath = '../../sample-data/persistors/sample-persistor.pw'
 persistorPassword = 'my secret password'
+source_dir = 'github-samples/python/initialize-agent-with-password-persistor'
+this_dir = os.getcwd()
+
+# run only from source directory
+if not this_dir.endswith(source_dir): 
+    print("[!] Please run this sample from inside " + source_dir)
+    sys.exit(1)
 
 # initialize agent with password persistor
 try:
