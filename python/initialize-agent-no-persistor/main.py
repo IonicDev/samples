@@ -2,6 +2,8 @@
 # By using this code, I agree to the Terms & Conditions (https://dev.ionic.com/use.html)
 # and the Privacy Policy (https://www.ionic.com/privacy-notice/).
 
+from __future__ import print_function
+
 import sys
 import ionicsdk
 
