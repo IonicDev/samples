@@ -1,8 +1,20 @@
-# (c) 2018 Ionic Security Inc.
+# (c) 2018-2019 Ionic Security Inc.
 # By using this code, I agree to the Terms & Conditions (https://dev.ionic.com/use.html)
 # and the Privacy Policy (https://www.ionic.com/privacy-notice/).
 
+import os
+import sys
 import ionicsdk
+
+plaintext_file = '../../sample-data/files/Message.pdf'
+protected_file = '../../sample-data/files/protected-sample.txt'
+source_dir = 'github-samples/python/get-file-info'
+this_dir = os.getcwd()
+
+# run only from source directory
+if not this_dir.endswith(source_dir):
+    print ("[!] Please run this sample from inside" + source_dir)
+    sys.exit(1)
 
 # prompt user for path to file
 filepath = input("Please enter the path to the file: ")
@@ -19,5 +31,3 @@ if fileinfo.isencrypted:
     print ("The file \"{}\" is encrypted using key {}.".format(filepath, fileinfo.keyid))
 else:
     print ("The file \"{}\" is not encrypted.".format(filepath))
-
-raw_input("\nPress Enter to continue...")

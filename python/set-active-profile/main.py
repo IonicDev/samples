@@ -1,4 +1,4 @@
-# (c) 2018 Ionic Security Inc.
+# (c) 2018-2019 Ionic Security Inc.
 # By using this code, I agree to the Terms & Conditions (https://dev.ionic.com/use.html)
 # and the Privacy Policy (https://www.ionic.com/privacy-notice/).
 
@@ -8,6 +8,13 @@ import ionicsdk
 
 profile_id = 'ABcd.1.48sdf0-cs80-5802-sd80-d8s0df80sdfj'
 persistor_path = os.path.join("..", "..", "sample-data", "persistors", "sample-persistor.pt")
+source_dir = 'github-samples/python/set-active-profile'
+this_dir = os.getcwd()
+
+# run only from source directory
+if not this_dir.endswith(source_dir):
+    print("[!] Please run this sample from inside " + source_dir)
+    sys.exit(1)
 
 # Initialize agent with plaintext persistor.
 try:
