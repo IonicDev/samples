@@ -16,19 +16,18 @@ if not this_dir.endswith(source_dir):
     print ("[!] Please run this sample from inside" + source_dir)
     sys.exit(1)
 
-print ("plaintext file: " + plaintext_file)
-print ("protected file: " + protected_file)
+# prompt user for path to file
+filepath = input("Please enter the path to the file: ")
 
 # get file info
 try:
-    for filepath in [plaintext_file, protected_file]:
-        fileinfo = ionicsdk.FileCrypto.getinfo(filepath)
-
-        # display file info
-        if fileinfo.isencrypted:
-            print ("The file \"{}\" is encrypted using key {}.".format(filepath, fileinfo.keyid))
-        else:
-            print ("The file \"{}\" is not encrypted.".format(filepath))
+    fileinfo = ionicsdk.FileCrypto.getinfo(filepath)
 except ionicsdk.exceptions.IonicException as e:
     print ("Error reading file: {}".format(e.message))
     sys.exit(1)
+
+# display file info
+if fileinfo.isencrypted:
+    print ("The file \"{}\" is encrypted using key {}.".format(filepath, fileinfo.keyid))
+else:
+    print ("The file \"{}\" is not encrypted.".format(filepath))
