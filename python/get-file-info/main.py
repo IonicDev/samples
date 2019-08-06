@@ -18,7 +18,7 @@ if not this_dir.endswith(source_dir):
     print ("[!] Please run this sample from inside" + source_dir)
     sys.exit(1)
 
-# prompt user for path to file
+# prompt user for path to file  wrap input in quotes for python2.7
 filepath = input("Please enter the path to the file: ")
 
 # get file info

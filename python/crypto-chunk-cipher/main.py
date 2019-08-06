@@ -8,7 +8,7 @@ import os
 import sys
 import ionicsdk
 
-message = "secret message"
+message = b'secret message'
 
 # read persistor password from environment variable
 persistorPassword = os.environ.get('IONIC_PERSISTOR_PASSWORD')
@@ -36,4 +36,4 @@ plaintext = cipher.decryptbytes(ciphertext)
 
 # display data
 print("Ciphertext : " + ciphertext)
-print("Plaintext  : " + plaintext)
+print("Plaintext  : " + plaintext.decode())

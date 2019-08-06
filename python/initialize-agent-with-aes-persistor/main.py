@@ -11,7 +11,7 @@ import binascii
 
 persistorPath = '../../sample-data/persistors/sample-persistor.aes'
 persistorKey = binascii.unhexlify('A0444B8B5A7209780823617A98986831B8240BAA851A0B1696B0329280286B17')
-persistorAuthData = 'persistor auth data'
+persistorAuthData = b'persistor auth data'
 source_dir = 'github-samples/python/initialize-agent-with-aes-persistor'
 this_dir = os.getcwd()
 
