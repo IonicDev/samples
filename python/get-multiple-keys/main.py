@@ -40,6 +40,6 @@ except ionicsdk.exceptions.IonicException as e:
 for key in keys:
     print('---')
     print("KeyId        : " + key.id)
-    print("KeyBytes     : " + binascii.hexlify(key.bytes))
+    print("KeyBytes     : " + binascii.hexlify(key.bytes).decode("ascii"))
     print("FixedAttrs   : " + json.dumps(key.attributes))
     print("MutableAttrs : " + json.dumps(key.mutableAttributes))

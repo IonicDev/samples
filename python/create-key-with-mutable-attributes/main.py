@@ -39,6 +39,6 @@ except ionicsdk.exceptions.IonicException as e:
 
 # display new key
 print("KeyId        : " + key.id)
-print("KeyBytes     : " + binascii.hexlify(key.bytes))
+print("KeyBytes     : " + binascii.hexlify(key.bytes).decode("ascii"))
 print("FixedAttrs   : " + json.dumps(key.attributes))
 print("MutableAttrs : " + json.dumps(key.mutableAttributes))

@@ -34,7 +34,7 @@ except ionicsdk.exceptions.IonicException as e:
 
 # display key
 print("KeyId        : " + key.id)
-print("KeyBytes     : " + binascii.hexlify(key.bytes))
+print("KeyBytes     : " + binascii.hexlify(key.bytes).decode("ascii"))
 print("FixedAttrs   : " + json.dumps(key.attributes))
 print("MutableAttrs : " + json.dumps(key.mutableAttributes))
 print('-' * 20 + '\n')
@@ -57,7 +57,7 @@ except ionicsdk.exceptions.IonicException as e:
 
 # display updated key
 print("Updated KeyId        : " + updatedKey.id)
-print("Updated KeyBytes     : " + binascii.hexlify(updatedKey.bytes))
+print("Updated KeyBytes     : " + binascii.hexlify(updatedKey.bytes).decode("ascii"))
 print("Updated FixedAttrs   : " + json.dumps(updatedKey.attributes))
 print("Updated MutableAttrs : " + json.dumps(updatedKey.mutableAttributes))
 print('-' * 20 + '\n')

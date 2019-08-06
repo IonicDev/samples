@@ -45,5 +45,5 @@ ciphertext = cipher.encryptbytes(message)
 plaintext = cipher.decryptbytes(ciphertext)
 
 # display
-print("Ciphertext : " + binascii.hexlify(ciphertext))
+print("Ciphertext : " + binascii.hexlify(ciphertext).decode("ascii"))
 print("Plaintext  : " + plaintext)
