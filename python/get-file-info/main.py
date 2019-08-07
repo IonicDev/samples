@@ -8,6 +8,9 @@ import os
 import sys
 import ionicsdk
 
+#Python 2.7 use raw_input, Python3 use input
+if hasattr(__builtins__, 'raw_input'): input = raw_input
+
 plaintext_file = '../../sample-data/files/Message.pdf'
 protected_file = '../../sample-data/files/protected-sample.txt'
 source_dir = 'github-samples/python/get-file-info'
@@ -19,11 +22,7 @@ if not this_dir.endswith(source_dir):
     sys.exit(1)
 
 # prompt user for path to file  wrap input in quotes for python2.7
-try:
-    file_path = input("Please enter the path to the file: ")
-except NameError as e:
-    print ("Oops! Please wrap that path in quotes.")
-    sys.exit(1)
+file_path = input("Please enter the path to the file: ")
 
 # get file info
 try:
