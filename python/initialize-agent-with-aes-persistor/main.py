@@ -9,9 +9,9 @@ import sys
 import ionicsdk
 import binascii
 
-persistorPath = '../../sample-data/persistors/sample-persistor.aes'
-persistorKey = binascii.unhexlify('A0444B8B5A7209780823617A98986831B8240BAA851A0B1696B0329280286B17')
-persistorAuthData = b'persistor auth data'
+persistor_path = '../../sample-data/persistors/sample-persistor.aes'
+persistor_key = binascii.unhexlify('A0444B8B5A7209780823617A98986831B8240BAA851A0B1696B0329280286B17')
+persistor_auth_data = b'persistor auth data'
 source_dir = 'github-samples/python/initialize-agent-with-aes-persistor'
 this_dir = os.getcwd()
 
@@ -22,7 +22,7 @@ if not this_dir.endswith(source_dir):
 
 # initialize agent with aes persistor
 try:
-    persistor = ionicsdk.DeviceProfilePersistorAesGcmFile(persistorPath, persistorKey, persistorAuthData)
+    persistor = ionicsdk.DeviceProfilePersistorAesGcmFile(persistor_path, persistor_key, persistor_auth_data)
     agent = ionicsdk.Agent(None, persistor)
 except ionicsdk.exceptions.IonicException as e:
     print("Error initializing agent: {0}".format(e.message))
