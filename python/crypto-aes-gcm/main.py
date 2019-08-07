@@ -9,8 +9,8 @@ import sys
 import ionicsdk
 import binascii
 
-message = "secret message"
-auth_data = "data to authenticate"
+message = b"secret message"
+auth_data = b"data to authenticate"
 
 # read persistor password from environment variable
 persistorPassword = os.environ.get('IONIC_PERSISTOR_PASSWORD')
@@ -46,4 +46,4 @@ plaintext = cipher.decryptbytes(ciphertext)
 
 # display
 print("Ciphertext : " + binascii.hexlify(ciphertext).decode("ascii"))
-print("Plaintext  : " + plaintext)
+print("Plaintext  : " + plaintext.decode())
