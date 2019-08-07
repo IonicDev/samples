@@ -16,18 +16,18 @@ import ionicsdk
 line_number = lambda: inspect.currentframe().f_back.f_lineno
 file_name = lambda: inspect.getframeinfo(inspect.currentframe()).filename
 
-sLogChannel = "ionic-python-sample"
+log_channel = "ionic-python-sample"
 
 # Create a log file name so that the name includes the creation time.
-logFilePath = "sample_" + time.strftime("%Y-%m-%d_%H.%M.%S") + ".log"
+log_path = "sample_" + time.strftime("%Y-%m-%d_%H.%M.%S") + ".log"
 
 # Log severity Debug and lower to a file.
 config = {
   "sinks": [
     {
-      "channels": [sLogChannel],
+      "channels": [log_channel],
       "filter": {"type": "Severity", "level": "Debug"},
-      "writers": [{"type": "File", "filePattern": logFilePath}]
+      "writers": [{"type": "File", "filePattern": log_path}]
     }
   ]
 }
@@ -35,8 +35,8 @@ config = {
 # Initialize logger
 config_json = json.dumps(config)
 ionicsdk.log.setup_from_config_json(config_json)
-print("Logging to: {0}". format(logFilePath))
+print("Logging to: {0}". format(log_path))
 
 # Log to file.
-ionicsdk.log.log(ionicsdk.log.SEV_DEBUG, sLogChannel, line_number(), file_name(), "LogToFile Sample")
-ionicsdk.log.log(ionicsdk.log.SEV_DEBUG, sLogChannel, line_number(), file_name(), "Sample log entry")
+ionicsdk.log.log(ionicsdk.log.SEV_DEBUG, log_channel, line_number(), file_name(), "LogToFile Sample")
+ionicsdk.log.log(ionicsdk.log.SEV_DEBUG, log_channel, line_number(), file_name(), "Sample log entry")

@@ -19,17 +19,21 @@ if not this_dir.endswith(source_dir):
     sys.exit(1)
 
 # prompt user for path to file  wrap input in quotes for python2.7
-filepath = input("Please enter the path to the file: ")
+try:
+    file_path = input("Please enter the path to the file: ")
+except NameError as e:
+    print ("Oops! Please wrap that path in quotes.")
+    sys.exit(1)
 
 # get file info
 try:
-    fileinfo = ionicsdk.FileCrypto.getinfo(filepath)
+    file_info = ionicsdk.FileCrypto.getinfo(file_path)
 except ionicsdk.exceptions.IonicException as e:
     print ("Error reading file: {}".format(e.message))
     sys.exit(1)
 
 # display file info
-if fileinfo.isencrypted:
-    print ("The file \"{}\" is encrypted using key {}.".format(filepath, fileinfo.keyid))
+if file_info.isencrypted:
+    print ("The file \"{}\" is encrypted using key {}.".format(file_path, file_info.keyid))
 else:
-    print ("The file \"{}\" is not encrypted.".format(filepath))
+    print ("The file \"{}\" is not encrypted.".format(file_path))

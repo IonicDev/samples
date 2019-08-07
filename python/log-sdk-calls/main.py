@@ -10,25 +10,25 @@ import json
 import ionicsdk
 import binascii
 
-logFilePath = "sample.log"
-appendFile = False
+log_file_path = "sample.log"
+append_file = False
 
 # Setup SDK logging to a file.
-ionicsdk.log.setup_simple(logFilePath, appendFile, ionicsdk.log.SEV_DEBUG)
+ionicsdk.log.setup_simple(log_file_path, append_file, ionicsdk.log.SEV_DEBUG)
 
 # The message to encrypt.
 message = "top secret message"
 
 # Read persistor password from environment variable
-persistorPassword = os.environ.get('IONIC_PERSISTOR_PASSWORD')
-if persistorPassword == None:
+persistor_password = os.environ.get('IONIC_PERSISTOR_PASSWORD')
+if persistor_password == None:
     print("[!] Please provide the persistor password as env variable: IONIC_PERSISTOR_PASSWORD")
     sys.exit(1)
 
 # Initialize agent with password persistor
 try:
-    persistorPath = os.path.expanduser("~/.ionicsecurity/profiles.pw")
-    persistor = ionicsdk.DeviceProfilePersistorPasswordFile(persistorPath, persistorPassword)
+    persistor_path = os.path.expanduser("~/.ionicsecurity/profiles.pw")
+    persistor = ionicsdk.DeviceProfilePersistorPasswordFile(persistor_path, persistor_password)
     agent = ionicsdk.Agent(None, persistor)
 except ionicsdk.exceptions.IonicException as e:
     print("Error initializing agent: {0}".format(e.message))

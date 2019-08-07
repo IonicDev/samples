@@ -13,15 +13,15 @@ import binascii
 external_ids = ['a3968349-e08f-4a96-820e-8ce3763fcd48']
 
 # read persistor password from environment variable
-persistorPassword = os.environ.get('IONIC_PERSISTOR_PASSWORD')
-if (persistorPassword == None):
+persistor_password = os.environ.get('IONIC_PERSISTOR_PASSWORD')
+if (persistor_password == None):
     print("[!] Please provide the persistor password as env variable: IONIC_PERSISTOR_PASSWORD")
     sys.exit(1)
 
 # initialize agent with password persistor
 try:
-    persistorPath = os.path.expanduser("~/.ionicsecurity/profiles.pw")
-    persistor = ionicsdk.DeviceProfilePersistorPasswordFile(persistorPath, persistorPassword)
+    persistor_path = os.path.expanduser("~/.ionicsecurity/profiles.pw")
+    persistor = ionicsdk.DeviceProfilePersistorPasswordFile(persistor_path, persistor_password)
     agent = ionicsdk.Agent(None, persistor)
 except ionicsdk.exceptions.IonicException as e:
     print("Error initializing agent: {0}".format(e.message))

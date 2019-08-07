@@ -10,18 +10,18 @@ import json
 import ionicsdk
 import binascii
 
-keyId = 'HVzG4flO-KE'
+key_id = 'HVzG4flO-KE'
 
 # read persistor password from environment variable
-persistorPassword = os.environ.get('IONIC_PERSISTOR_PASSWORD')
-if (persistorPassword == None):
+persistor_password = os.environ.get('IONIC_PERSISTOR_PASSWORD')
+if (persistor_password == None):
     print("[!] Please provide the persistor password as env variable: IONIC_PERSISTOR_PASSWORD")
     sys.exit(1)
 
 # initialize agent with password persistor
 try:
-    persistorPath = os.path.expanduser("~/.ionicsecurity/profiles.pw")
-    persistor = ionicsdk.DeviceProfilePersistorPasswordFile(persistorPath, persistorPassword)
+    persistor_path = os.path.expanduser("~/.ionicsecurity/profiles.pw")
+    persistor = ionicsdk.DeviceProfilePersistorPasswordFile(persistor_path, persistor_password)
     agent = ionicsdk.Agent(None, persistor)
 except ionicsdk.exceptions.IonicException as e:
     print("Error initializing agent: {0}".format(e.message))
@@ -29,7 +29,7 @@ except ionicsdk.exceptions.IonicException as e:
 
 # get key
 try:
-    key = agent.getkey(keyId)
+    key = agent.getkey(key_id)
 except ionicsdk.exceptions.IonicException as e:
     print("Error fetching a key: {0}".format(e.message))
     sys.exit(-2)
