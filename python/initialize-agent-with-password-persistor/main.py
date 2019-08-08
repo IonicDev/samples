@@ -2,12 +2,14 @@
 # By using this code, I agree to the Terms & Conditions (https://dev.ionic.com/use.html)
 # and the Privacy Policy (https://www.ionic.com/privacy-notice/).
 
+from __future__ import print_function
+
 import os
 import sys
 import ionicsdk
 
-persistorPath = '../../sample-data/persistors/sample-persistor.pw'
-persistorPassword = 'my secret password'
+persistor_path = '../../sample-data/persistors/sample-persistor.pw'
+persistor_password = 'my secret password'
 source_dir = 'github-samples/python/initialize-agent-with-password-persistor'
 this_dir = os.getcwd()
 
@@ -18,7 +20,7 @@ if not this_dir.endswith(source_dir):
 
 # initialize agent with password persistor
 try:
-    persistor = ionicsdk.DeviceProfilePersistorPasswordFile(persistorPath, persistorPassword)
+    persistor = ionicsdk.DeviceProfilePersistorPasswordFile(persistor_path, persistor_password)
     agent = ionicsdk.Agent(None, persistor)
 except ionicsdk.exceptions.IonicException as e:
     print("Error initializing agent: {0}".format(e.message))
