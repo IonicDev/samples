@@ -31,16 +31,19 @@ jobs:
             export IONIC_PERSISTOR_PASSWORD='my secret password'
             mkdir ../.ionicsecurity
             cp sample-data/persistors/sample-persistor.pw ../.ionicsecurity/persistor.pw
-      #      cd python
-      #      ls
-      # At the very least, directory navigation is not persistant between -run commands... ?new shells?
-      #To Do snag the sample persistor
+      # navigation is not persistant between -run commands... file handling is
       - run:
           name: initialize-agent-with-password-persistor
           command: |
             cd python/initialize-agent-with-password-persistor
             python main.py
       - run:
-          name: about persistors
+          name: get-key
           command: |
-            ls ../.ionicsecurity
+            cd python/get-key
+            python main.py
+      - run:
+          name: crypto-chunk-cipher
+          command: |
+            cd python/crypto-chunk-cipher
+            python main.py
