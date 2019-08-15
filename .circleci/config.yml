@@ -5,4 +5,4 @@ jobs:
       - image: circleci/python:latest
     steps:
       - checkout
-      - run cat /etc/issue; python -V
+      - run: cat /etc/issue; python -V
