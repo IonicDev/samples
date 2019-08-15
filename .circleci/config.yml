@@ -5,4 +5,4 @@ jobs:
       - image: centos:latest #ubuntu:latest #circleci/python:latest note that this is Debian
     steps:
       - checkout
-      - run: cat /etc/redhat-release; yum -y install python37u; python -V #for ubuntu: /etc/issue
+      - run: cat /etc/redhat-release; yum -y install python36u; python -V #for ubuntu: /etc/issue
