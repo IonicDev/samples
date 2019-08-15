@@ -6,6 +6,11 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Update OS and Install packages
+          command: |
+            yum -y update
+            yum -y install python-pip
+      - run:
           name: Install Ionic SDK
           command: |
             pip install ionicsdk
