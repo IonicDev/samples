@@ -25,15 +25,15 @@ jobs:
       # wait for python3 will need more than just this: yum -y install python36u
       # See https://www.digitalocean.com/community/tutorials/how-to-install-python-3-and-set-up-a-local-programming-environment-on-centos-7
       # for ubuntu OS ID: cat /etc/issue
-      - run:
-          name: Before Python Testing
-          command: |
-            cd python
-            ls
+      # - run:
+      #    name: Before Python Testing
+      #    command: |
+      #      cd python
+      #      ls
+      # At the very least, directory navigation is not persistant between -run commands... ?new shells?
       #To Do snag the sample persistor
       - run:
           name: initialize-agent-with-password-persistor
           command: |
-            ls
-      #      cd initialize-agent-with-password-persistor
-      #      python main.py
+            cd python/initialize-agent-with-password-persistor
+            python main.py
