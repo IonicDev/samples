@@ -6,7 +6,6 @@ jobs:
     steps:
       - checkout
       - run: 
-        name: Canary
         command: cat /etc/redhat-release; python -V 
       # wait for python3 oh and will need more than just this: yum -y install python36u
       # See https://www.digitalocean.com/community/tutorials/how-to-install-python-3-and-set-up-a-local-programming-environment-on-centos-7
