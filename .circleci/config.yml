@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: centos:latest #ubuntu:latest #circleci/python:latest
+      - image: centos:latest #ubuntu:latest #circleci/python:latest note that this is Debian
     steps:
       - checkout
-      - run: cat /etc/issue  #; python -V
+      - run: cat /etc/redhat-release #for ubuntu: /etc/issue  #; python -V
