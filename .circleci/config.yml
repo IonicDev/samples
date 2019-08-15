@@ -29,9 +29,10 @@ jobs:
           name: Before Python Testing
           command: |
             cd python
+            ls
       # To Do snag the sample persistor
-      - run:
-          name: initialize-agent-with-password-persistor
-          command: |
-            cd initialize-agent-with-password-persistor
-            python main.py
+      #- run:
+      #    name: initialize-agent-with-password-persistor
+      #    command: |
+      #      cd initialize-agent-with-password-persistor
+      #      python main.py
