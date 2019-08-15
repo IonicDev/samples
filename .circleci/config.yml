@@ -5,4 +5,7 @@ jobs:
       - image: centos:latest #ubuntu:latest #circleci/python:latest note that this is Debian
     steps:
       - checkout
-      - run: cat /etc/redhat-release; yum -y install python36u; python -V #for ubuntu: /etc/issue
+      - run: cat /etc/redhat-release; python -V 
+      # wait for python3 oh and will need more than just this: yum -y install python36u
+      # See https://www.digitalocean.com/community/tutorials/how-to-install-python-3-and-set-up-a-local-programming-environment-on-centos-7
+      # for ubuntu OS ID: cat /etc/issue
