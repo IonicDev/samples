@@ -5,6 +5,10 @@ jobs:
       - image: centos:latest #ubuntu:latest #circleci/python:latest note that this is Debian
     steps:
       - checkout
+      - run:
+          name: Install Ionic SDK
+          command: |
+            pip install ionicsdk
       - run: 
           name: Canary
           command: |
