@@ -5,8 +5,4 @@ jobs:
       - image: centos:latest #ubuntu:latest #circleci/python:latest note that this is Debian
     steps:
       - checkout
-      - run:
-        name: Install Python 3.7
-        command:
-          apt-get install python3.7
-      - run: cat /etc/redhat-release; python -V #for ubuntu: /etc/issue
+      - run: cat /etc/redhat-release; yum -y install python37u; python -V #for ubuntu: /etc/issue
