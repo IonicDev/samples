@@ -40,6 +40,7 @@ jobs:
       - run:
           name: get-key
           command: |
+            export IONIC_PERSISTOR_PASSWORD='my secret password'
             cd python/get-key
             python main.py
       - run:
