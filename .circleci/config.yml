@@ -33,12 +33,17 @@ jobs:
             cd python/initialize-agent-with-password-persistor
             python main.py
       - run:
-          name: get-key
+          name: hello world
           command: |
-            cd python/get-key
+            cd python/ionic-helloworld
             python main.py
-      - run:
-          name: crypto-chunk-cipher
-          command: |
-            cd python/crypto-chunk-cipher
-            python main.py
+#      - run:
+#          name: get-key
+#          command: |
+#            cd python/get-key
+#            python main.py
+#      - run:
+#          name: crypto-chunk-cipher
+#          command: |
+#            cd python/crypto-chunk-cipher
+#            python main.py
