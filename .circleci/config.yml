@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: centos:latest #ubuntu:latest #circleci/python:latest note that this is Debian
+      - image: centos:latest
     steps:
       - checkout
       - run:
@@ -16,22 +16,17 @@ jobs:
           command: |
             pip install --upgrade pip
             pip install ionicsdk
-            pip show ionicsdk
       - run: 
           name: Canary
           command: |
             cat /etc/redhat-release
-            python -V 
-      # wait for python3 will need more than just this: yum -y install python36u
-      # See https://www.digitalocean.com/community/tutorials/how-to-install-python-3-and-set-up-a-local-programming-environment-on-centos-7
-      # for ubuntu OS ID: cat /etc/issue
+            python -V
+            pip show ionicsdk
       - run:
-          name: Before Python Testing
+          name: Import Profile
           command: |
-            export IONIC_PERSISTOR_PASSWORD='my secret password'
             mkdir ../.ionicsecurity
-            cp sample-data/persistors/sample-persistor.pw ../.ionicsecurity/persistor.pw
-      # navigation is not persistant between -run commands... file handling is
+            echo $IONIC_PROFILE | base64 --decode > ../.ionicsecurity/profile.pw
       - run:
           name: initialize-agent-with-password-persistor
           command: |
@@ -40,7 +35,6 @@ jobs:
       - run:
           name: get-key
           command: |
-            export IONIC_PERSISTOR_PASSWORD='my secret password'
             cd python/get-key
             python main.py
       - run:
