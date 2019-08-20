@@ -28,15 +28,20 @@ jobs:
             mkdir ../.ionicsecurity
             echo $IONIC_PROFILE | base64 --decode > ../.ionicsecurity/profile.pw
       - run:
+          name: Activate Profile
+          command: |
+            (echo $ACTIVATE_IONIC4 && echo $ACTIVATE_IONIC3 && echo $ACTIVATE_IONIC2 && $ACTIVATE_IONIC1) > activate_ionic.py
+            cat activate_ionic.py
+      - run:
           name: initialize-agent-with-password-persistor
           command: |
             cd python/initialize-agent-with-password-persistor
             python main.py
-      - run:
-          name: hello world
-          command: |
-            cd python/ionic-helloworld
-            python main.py
+#      - run:
+#          name: hello world
+#          command: |
+#            cd python/ionic-helloworld
+#            python main.py
 #      - run:
 #          name: get-key
 #          command: |
