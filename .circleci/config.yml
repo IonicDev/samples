@@ -33,7 +33,6 @@ jobs:
             cp python/set-active-profile/main.py set-active-profile.py
             echo stepOne
             sed -i '/persistor_path.=./ c\persistor_path = \"'$PROFILE_PATH'\"' set-active-profile.py
-            diff python/set-active-profile/main.py set-active-profile.py
             echo stepTwoA
             sed -i '/profile_id.=./ c\profile_id = \"'$PROFILE_ID'\"' set-active-profile.py
             echo stepTwoB
