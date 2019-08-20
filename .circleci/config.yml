@@ -27,7 +27,7 @@ jobs:
           command: |
             mkdir ../.ionicsecurity
             echo $IONIC_PROFILE | base64 --decode > ../.ionicsecurity/profile.pw
-            md5sum .ionicsecurity/profiles.pw
+            md5sum .ionicsecurity/profile.pw
       - run:
           name: Activate Profile
           command: |
