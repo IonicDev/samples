@@ -33,8 +33,8 @@ jobs:
             cp python/set-active-profile/main.py set-active-profile.py
             sed -i '/persistor_path.=./ c\persistor_path = \"'$PROFILE_PATH'\"' set-active-profile.py
             diff python/set-active-profile/main.py set-active-profile.py
-            sed -i ./profile_id.=./ c\profile_id = \"'$PROFILE_ID'\"' set-active-profile.py
-            cat set-active-profile.py
+            sed -i '/profile_id.=./ c\profile_id = \"'$PROFILE_ID'\"' set-active-profile.py
+            diff python/set-active-profile/main.py set-active-profile.py
       - run:
           name: initialize-agent-with-password-persistor
           command: |
