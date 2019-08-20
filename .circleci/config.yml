@@ -34,6 +34,8 @@ jobs:
             cp python/set-active-profile/main.py set-active-profile.py
             sed -i '/persistor_path.=./ c\persistor_path = \"'$PROFILE_PATH'\"' set-active-profile.py
             sed -i '/profile_id.=./ c\profile_id = \"'$PROFILE_ID'\"' set-active-profile.py
+            sed -i '/import sys/a\import json' set-active-profile.py
+            sed -i '/persistor_path.=./a\ionicsdk.log.setup_from_config_json\(json.dumps\(\{\"sinks\":\[\{\"channels\": \[\"ionic-python-sample\"\], \"filter\": \{\"type\": \"Severity\", \"level\": \"Debug\"\},\"writers\": \[\{\"type\": \"Console\"\}\]\}\]\}\)\)' set-active-profile.py
       - run:
           name: initialize-agent-with-password-persistor
           command: |
