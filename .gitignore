@@ -18,7 +18,6 @@ obj/
 # C++
 Makefile
 CMakeFiles
-CMakeCache.txt
 target
 cmake_install.cmake
 makefile
