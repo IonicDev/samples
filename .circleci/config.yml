@@ -36,7 +36,7 @@ jobs:
             sed -i '/profile_id.=./ c\profile_id = \"'$PROFILE_ID'\"' set-active-profile.py
             sed -i '/persistor.=./ c\    persistor = ionicsdk.DeviceProfilePersistorPasswordFile(persistor_path, \"'$IONIC_PERSISTOR_PASSWORD'\")' set-active-profile.py
             sed -i '/import sys/a\import json' set-active-profile.py
-            sed -i '/persistor_path.=./a\ionicsdk.log.setup_from_config_json\(json.dumps\(\{\"sinks\":\[\{\"channels\": \[\*\], \"filter\": \{\"type\": \"Severity\", \"level\": \"TRACE\"\},\"writers\": \[\{\"type\": \"Console\"\}\]\}\]\}\)\)' set-active-profile.py
+            sed -i '/persistor_path.=./a\ionicsdk.log.setup_from_config_json\(json.dumps\(\{\"sinks\":\[\{\"channels\": \[\"*\"\], \"filter\": \{\"type\": \"Severity\", \"level\": \"TRACE\"\},\"writers\": \[\{\"type\": \"Console\"\}\]\}\]\}\)\)' set-active-profile.py
       - run:
           name: initialize-agent-with-password-persistor
           command: |
