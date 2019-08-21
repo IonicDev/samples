@@ -27,17 +27,6 @@ jobs:
           command: |
             mkdir ../.ionicsecurity
             echo $IONIC_PROFILE | base64 --decode > ../.ionicsecurity/profiles.pw
-            md5sum ../.ionicsecurity/profiles.pw
-      - run:
-          name: Modify Script to Activate Profile
-          command: |
-            md5sum ../.ionicsecurity/profiles.pw
-            cp python/set-active-profile/main.py set-active-profile.py
-            sed -i '/persistor_path.=./ c\persistor_path = \"..\/.ionicsecurity\/profiles.pw\"' set-active-profile.py
-            sed -i '/profile_id.=./ c\profile_id = \"'$PROFILE_ID'\"' set-active-profile.py
-            sed -i '/persistor.=./ c\    persistor = ionicsdk.DeviceProfilePersistorPasswordFile(persistor_path, \"'$IONIC_PERSISTOR_PASSWORD'\")' set-active-profile.py
-            sed -i '/import sys/a\import json' set-active-profile.py
-            sed -i '/persistor_path.=./a\ionicsdk.log.setup_from_config_json\(json.dumps\(\{\"sinks\":\[\{\"channels\": \[\"*\"\], \"filter\": \{\"type\": \"Severity\", \"level\": \"TRACE\"\},\"writers\": \[\{\"type\": \"Console\"\}\]\}\]\}\)\)' set-active-profile.py
       - run:
           name: initialize-agent-with-password-persistor
           command: |
@@ -46,16 +35,15 @@ jobs:
       - run:
           name: hello world
           command: |
-            # python set-active-profile.py
             cd python/ionic-helloworld
             python main.py
-#      - run:
-#          name: get-key
-#          command: |
-#            cd python/get-key
-#            python main.py
-#      - run:
-#          name: crypto-chunk-cipher
-#          command: |
-#            cd python/crypto-chunk-cipher
-#            python main.py
+      - run:
+          name: get-key
+          command: |
+            cd python/get-key
+            python main.py
+      - run:
+          name: crypto-chunk-cipher
+          command: |
+            cd python/crypto-chunk-cipher
+            python main.py
