@@ -1,0 +1,34 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: centos:latest
+    steps:
+      - checkout
+      - run:
+          name: Update OS and Install packages
+          command: |
+            yum -y update
+            yum -y install epel-release
+            yum -y install python-pip
+      - run:
+          name: Install Ionic SDK
+          command: |
+            pip install --upgrade pip
+            pip install ionicsdk
+      - run: 
+          name: Canary
+          command: |
+            cat /etc/redhat-release
+            python -V
+            pip show ionicsdk
+      - run:
+          name: Import Profile
+          command: |
+            mkdir ../.ionicsecurity
+            echo $IONIC_PROFILE | base64 --decode > ../.ionicsecurity/profiles.pw
+      - run:
+          name: hello world
+          command: |
+            cd python/ionic-helloworld
+            python main.py
