@@ -32,3 +32,13 @@ jobs:
           command: |
             cd python/ionic-helloworld
             python main.py
+  build:
+    docker:
+      - image: ubuntu:latest
+    steps:
+      - checkout
+      - run:
+        name: Canary
+        command: |
+          cat /etc/os-release
+          python -V
