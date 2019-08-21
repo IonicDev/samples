@@ -31,7 +31,7 @@ jobs:
       - run:
           name: Modify Script to Activate Profile
           command: |
-            md5sum ../.ionicsecurity/profile.pw
+            md5sum ../.ionicsecurity/profiles.pw
             cp python/set-active-profile/main.py set-active-profile.py
             sed -i '/persistor_path.=./ c\persistor_path = \"..\/.ionicsecurity\/profiles.pw\"' set-active-profile.py
             sed -i '/profile_id.=./ c\profile_id = \"'$PROFILE_ID'\"' set-active-profile.py
