@@ -2,8 +2,10 @@ version: 2.1
 jobs:
   build:
     docker:
+      # Default CircleCI Linux Images for Python is Debian
       - image: centos:latest
     steps:
+      # Checkout this repo
       - checkout
       - run:
           name: Update OS and Install packages
