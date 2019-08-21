@@ -29,7 +29,7 @@ jobs:
             echo $IONIC_PROFILE | base64 --decode > ../.ionicsecurity/profile.pw
             md5sum ../.ionicsecurity/profile.pw
       - run:
-          name: Activate Profile
+          name: Modify Script to Activate Profile
           command: |
             md5sum ../.ionicsecurity/profile.pw
             cp python/set-active-profile/main.py set-active-profile.py
