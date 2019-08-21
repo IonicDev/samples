@@ -26,14 +26,14 @@ jobs:
           name: Import Profile
           command: |
             mkdir ../.ionicsecurity
-            echo $IONIC_PROFILE | base64 --decode > ../.ionicsecurity/profile.pw
+            echo $IONIC_PROFILE | base64 --decode > ../.ionicsecurity/profiles.pw
             md5sum ../.ionicsecurity/profile.pw
       - run:
           name: Modify Script to Activate Profile
           command: |
             md5sum ../.ionicsecurity/profile.pw
             cp python/set-active-profile/main.py set-active-profile.py
-            sed -i '/persistor_path.=./ c\persistor_path = \"'$PROFILE_PATH'\"' set-active-profile.py
+            sed -i '/persistor_path.=./ c\persistor_path = \"..\/.ionicsecurity\/profiles.pw\"' set-active-profile.py
             sed -i '/profile_id.=./ c\profile_id = \"'$PROFILE_ID'\"' set-active-profile.py
             sed -i '/persistor.=./ c\    persistor = ionicsdk.DeviceProfilePersistorPasswordFile(persistor_path, \"'$IONIC_PERSISTOR_PASSWORD'\")' set-active-profile.py
             sed -i '/import sys/a\import json' set-active-profile.py
@@ -46,7 +46,7 @@ jobs:
       - run:
           name: hello world
           command: |
-            python set-active-profile.py
+            # python set-active-profile.py
             cd python/ionic-helloworld
             python main.py
 #      - run:
