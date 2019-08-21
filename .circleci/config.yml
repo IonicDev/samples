@@ -8,14 +8,13 @@ jobs:
       # Checkout this repo
       - checkout
       - run:
-          name: Update OS and Install packages
+          name: Update OS
           command: |
             yum -y update
-            #yum -y install epel-release
-            #yum -y install python-pip
       - run:
-          name: Install Ionic SDK
+          name: Install pip and Ionic SDK for Python
           command: |
+            # pip and SDK version depends on Python version installed on the OS
             yum -y install epel-release
             yum -y install python-pip
             pip install --upgrade pip
@@ -23,16 +22,20 @@ jobs:
       - run: 
           name: Canary
           command: |
-            cat /etc/redhat-release
+            # After updates and installs, ID versions under test
+            cat /etc/redhat-release   # For CentOS/Red Hat
+            #cat /etc/os-release      # For Ubuntu
             python -V
             pip show ionicsdk
       - run:
           name: Import Profile
           command: |
+            # Extract and decode base64 string (Active Profile) to ~/.ionicsecurity/profiles.pw, most samples require this profile
+            # IONIC_PROFILE and IONIC_PERSISTOR_PASSWORD are Environemntal Values stored on the CircleCI Dashboard.
             mkdir ../.ionicsecurity
             echo $IONIC_PROFILE | base64 --decode > ../.ionicsecurity/profiles.pw
       - run:
-          name: hello world
+          name: Run hello world Python Sample 
           command: |
             cd python/ionic-helloworld
             python main.py
