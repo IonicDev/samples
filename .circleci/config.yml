@@ -28,22 +28,7 @@ jobs:
             mkdir ../.ionicsecurity
             echo $IONIC_PROFILE | base64 --decode > ../.ionicsecurity/profiles.pw
       - run:
-          name: initialize-agent-with-password-persistor
-          command: |
-            cd python/initialize-agent-with-password-persistor
-            python main.py
-      - run:
           name: hello world
           command: |
             cd python/ionic-helloworld
-            python main.py
-      - run:
-          name: get-key
-          command: |
-            cd python/get-key
-            python main.py
-      - run:
-          name: crypto-chunk-cipher
-          command: |
-            cd python/crypto-chunk-cipher
             python main.py
