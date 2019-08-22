@@ -23,23 +23,40 @@ try:
     agent = ionicsdk.Agent(None, persistor)
 except ionicsdk.exceptions.IonicException as e:
     print("Error initializing agent: {0}".format(e.message))
-    sys.exit(-2)
+    sys.exit(1)
 
 # check if there are profiles.
 if not agent.hasactiveprofile():
     print("There is not an active device profile selected on this device.")
     print("Register (and select an active profile) this device before continuing.")
-    sys.exit(-1)
+    sys.exit(1)
+
+# define data markings
+data_markings = {
+    "classification": ["secret"]
+}
 
 # initialize a Chunk Cipher for doing string encryption
 cipher = ionicsdk.ChunkCipherAuto(agent)
 
 # encrypt the string using an Ionic-managed Key
 try:
-    ciphertext = cipher.encryptstr(input_string)
+    ciphertext = cipher.encryptstr(input_string, attributes=data_markings)
 except ionicsdk.exceptions.IonicException as e:
     print("Error encrypting: {0}".format(e.message))
-    sys.exit(-2)
+    sys.exit(1)
 
+# decrypt
+try:
+   plaintext = cipher.decryptstr(ciphertext)
+except ionicsdk.exceptions.IonicException as e:
+    print("Error decrypting ciphertext: {0}".format(e.message))
+    print("You don't have the correct clearance.")
+    print("")
+    sys.exit(1)
+
+print("")
 print("Input: " + input_string)
 print("Ionic Chunk Encrypted Ciphertext: " + ciphertext)
+print("Plaintext: " + plaintext)
+print("")
