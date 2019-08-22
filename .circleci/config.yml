@@ -1,0 +1,40 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      # Default CircleCI Linux Images for Python is Debian
+      - image: centos:latest
+    steps:
+      # Checkout this repo
+      - checkout
+      - run:
+          name: Update OS
+          command: |
+            yum -y update
+      - run:
+          name: Install pip and Ionic SDK for Python
+          command: |
+            # pip and SDK version depends on Python version installed on the OS
+            yum -y install epel-release
+            yum -y install python-pip
+            pip install --upgrade pip
+            pip install ionicsdk
+      - run: 
+          name: Canary
+          command: |
+            # After updates and installs, ID versions under test
+            cat /etc/redhat-release
+            python -V
+            pip show ionicsdk
+      - run:
+          name: Import Profile
+          command: |
+            # Extract and decode base64 string (Active Profile) to ~/.ionicsecurity/profiles.pw, most samples require a profile there
+            # IONIC_PROFILE and IONIC_PERSISTOR_PASSWORD are Environemntal Values stored on the CircleCI Dashboard.
+            mkdir ../.ionicsecurity
+            echo $IONIC_PROFILE | base64 --decode > ../.ionicsecurity/profiles.pw
+      - run:
+          name: Run hello world Python Sample 
+          command: |
+            cd python/ionic-helloworld
+            python main.py
