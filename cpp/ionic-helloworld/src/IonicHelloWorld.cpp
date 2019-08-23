@@ -1,5 +1,5 @@
 /*
- * (c) 2018 Ionic Security Inc.
+ * (c) 2019 Ionic Security Inc.
  * By using this code, I agree to the Terms & Conditions (https://dev.ionic.com/use.html)
  * and the Privacy Policy (https://www.ionic.com/privacy-notice/).
  */
@@ -7,6 +7,7 @@
 #include "ISAgent.h"
 #include "ISAgentSDKError.h"
 #include <ISChunkCrypto.h>
+#include <ISChunkCryptoEncryptAttributes.h>
 #include <stdio.h>
 #include <cstdlib>
 #include <iostream>
@@ -20,7 +21,10 @@
 int main(int argc, char* argv[]) {
 
     int nErrorCode;
-    std::string input = "Hello World!";
+    std::string appName = "policy-test";
+    std::string appVersion = "1.0.0";
+
+    std::string message = "Hello World!";
 
     // read persistor password from environment variable
     char* cpersistorPassword = std::getenv("IONIC_PERSISTOR_PASSWORD");
@@ -43,24 +47,44 @@ int main(int argc, char* argv[]) {
         exit(1);
     }
 
-    // check if there are profiles.
-	if (!agent.hasAnyProfiles()) {
-		std::cout << "There are no device profiles on this device." << std::endl;
-		std::cout << "Register a device before continuing." << std::endl;
-		exit(1);
-	}
+    // set app metadata
+    agent.setMetadata("ionic-application-name", appName);
+    agent.setMetadata("ionic-application-version", appVersion);
+
+    // define and set data marking clearance-level.
+    std::map< std::string, std::vector< std::string > > dataMarkings;
+    std::vector<std::string> clearanceLevel;
+    clearanceLevel.push_back("secret");
+    dataMarkings["clearance-level"] = clearanceLevel;
+    ISChunkCryptoEncryptAttributes cipherAttributes;
+    cipherAttributes.setKeyAttributes(dataMarkings);
 
     // initialize chunk cipher object
     ISChunkCryptoCipherAuto cipher(agent);
 
-    // encrypt the input with an Ionic-managed key
+    // encrypt
     std::string ciphertext;
-    nErrorCode = cipher.encrypt(input, ciphertext);
+    nErrorCode = cipher.encrypt(message, ciphertext, &cipherAttributes);
     if (nErrorCode != ISCRYPTO_OK) {
-        std::cerr << "Error: " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
+        std::cerr << "Encryption Error: " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
         exit(1);
     }
 
-    std::cout << "Input: " << input << std::endl;
-    std::cout << "Ionic Chunk Encrypted Ciphertext: " << ciphertext << std::endl;
+    // decrypt
+    std::string plaintext;
+    nErrorCode = cipher.decrypt(ciphertext, plaintext);
+    if (nErrorCode != ISCRYPTO_OK) {
+        std::cerr << "Decryption Error: " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
+        std::cerr << "You don't have the correct clearance." << std::endl;
+        std::cerr << std::endl;
+        exit(1);
+    }
+
+    // display data
+    std::cout << std::endl;
+    std::cout << "Input : " << message << std::endl;
+    std::cout << "Ionic Chunk Encrypted Ciphertext : " << ciphertext << std::endl;
+    std::cout << "Plaintext  : " << plaintext << std::endl;
+    std::cout << std::endl;
 }
+
