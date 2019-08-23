@@ -33,7 +33,7 @@ if not agent.hasactiveprofile():
 
 # define data markings
 data_markings = {
-    "classification": ["secret"]
+    "clearance-level": ["secret"]
 }
 
 # initialize a Chunk Cipher for doing string encryption
