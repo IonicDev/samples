@@ -39,5 +39,13 @@ except ionicsdk.exceptions.IonicException as e:
     print("Error encrypting: {0}".format(e.message))
     sys.exit(-2)
 
+# decrypt the string using the same Ionic-managed Key
+try:
+    plaintext = cipher.decryptstr(ciphertext)
+except ionicsdk.exceptions.IonicException as e:
+    print("Error decrypting: {0}".format(e.message))
+    sys.exit(-2)
+
 print("Input: " + input_string)
 print("Ionic Chunk Encrypted Ciphertext: " + ciphertext)
+print("Ionic Chunk decrypted Plaintext: " + plaintext)
