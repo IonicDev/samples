@@ -1,14 +1,19 @@
 <project>
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.ionic.samples</groupId>
-  <artifactId>get-resource</artifactId>
+  <artifactId>policy-test</artifactId>
   <packaging>jar</packaging>
-  <version>1.1</version>
+  <version>1.0</version>
   <dependencies>
     <dependency>
       <groupId>com.ionic</groupId>
       <artifactId>ionic-sdk</artifactId>
       <version>2.4.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.bouncycastle</groupId>
+      <artifactId>bcprov-jdk15on</artifactId>
+      <version>1.62</version>
     </dependency>
   </dependencies>
   <build>
@@ -27,7 +32,7 @@
           <configuration>
             <transformers>
               <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                <mainClass>com.ionic.samples.GetResource</mainClass>
+                <mainClass>com.ionic.samples.PolicyTest</mainClass>
               </transformer>
               <transformer implementation="org.apache.maven.plugins.shade.resource.DontIncludeResourceTransformer">
                <resources>

@@ -1,5 +1,5 @@
 # (c) 2018-2019 Ionic Security Inc.
-# By using this code, I agree to the Terms & Conditions (https://www.ionic.com/terms-of-use/)
+# By using this code, I agree to the Terms & Conditions (https://dev.ionic.com/use.html)
 # and the Privacy Policy (https://www.ionic.com/privacy-notice/).
 
 from __future__ import print_function
@@ -8,7 +8,7 @@ import os
 import sys
 import ionicsdk
 
-input_string = "Hello World!"
+message = 'secret message requiring secrect clearance'
 
 # read persistor password from environment variable
 persistor_password = os.environ.get('IONIC_PERSISTOR_PASSWORD')
@@ -25,25 +25,25 @@ except ionicsdk.exceptions.IonicException as e:
     print("Error initializing agent: {0}".format(e.message))
     sys.exit(1)
 
-# check if there are profiles.
-if not agent.hasactiveprofile():
-    print("There is not an active device profile selected on this device.")
-    print("Register (and select an active profile) this device before continuing.")
-    sys.exit(1)
+# set appplication metadata
+agent.setmetadata({
+    "ionic-application-name": "Policy-test Tutorial",
+    "ionic-application-version": "1.0.0"
+})
 
 # define data markings
 data_markings = {
     "clearance-level": ["secret"]
 }
 
-# initialize a Chunk Cipher for doing string encryption
+# initialize chunk cipher object
 cipher = ionicsdk.ChunkCipherAuto(agent)
 
-# encrypt the string using an Ionic-managed Key
+# encrypt
 try:
-    ciphertext = cipher.encryptstr(input_string, attributes=data_markings)
+   ciphertext = cipher.encryptstr(message, attributes=data_markings)
 except ionicsdk.exceptions.IonicException as e:
-    print("Error encrypting: {0}".format(e.message))
+    print("Error encrypting plaintext: {0}".format(e.message))
     sys.exit(1)
 
 # decrypt
@@ -55,8 +55,7 @@ except ionicsdk.exceptions.IonicException as e:
     print("")
     sys.exit(1)
 
-print("")
-print("Input: " + input_string)
-print("Ionic Chunk Encrypted Ciphertext: " + ciphertext)
-print("Plaintext: " + plaintext)
+# display data
+print("Ciphertext: " + ciphertext)
+print("Plaintext : " + plaintext)
 print("")

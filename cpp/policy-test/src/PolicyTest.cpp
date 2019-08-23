@@ -24,7 +24,7 @@ int main(int argc, char* argv[]) {
     std::string appName = "policy-test";
     std::string appVersion = "1.0.0";
 
-    std::string message = "Hello World!";
+    std::string message = "secret message requiring secrect clearance";
 
     // read persistor password from environment variable
     char* cpersistorPassword = std::getenv("IONIC_PERSISTOR_PASSWORD");
@@ -51,7 +51,7 @@ int main(int argc, char* argv[]) {
     agent.setMetadata("ionic-application-name", appName);
     agent.setMetadata("ionic-application-version", appVersion);
 
-    // define and set data marking clearance-level.
+    // define data markings
     std::map< std::string, std::vector< std::string > > dataMarkings;
     std::vector<std::string> clearanceLevel;
     clearanceLevel.push_back("secret");
@@ -81,9 +81,7 @@ int main(int argc, char* argv[]) {
     }
 
     // display data
-    std::cout << std::endl;
-    std::cout << "Input : " << message << std::endl;
-    std::cout << "Ionic Chunk Encrypted Ciphertext : " << ciphertext << std::endl;
+    std::cout << "Ciphertext : " << ciphertext << std::endl;
     std::cout << "Plaintext  : " << plaintext << std::endl;
     std::cout << std::endl;
 }
