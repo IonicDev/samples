@@ -24,7 +24,7 @@ int main(int argc, char* argv[]) {
     std::string appName = "policy-test";
     std::string appVersion = "1.0.0";
 
-    std::string message = "Hello World!";
+    std::string message = "Hello, World!";
 
     // read persistor password from environment variable
     char* cpersistorPassword = std::getenv("IONIC_PERSISTOR_PASSWORD");

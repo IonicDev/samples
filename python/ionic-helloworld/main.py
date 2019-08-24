@@ -8,7 +8,7 @@ import os
 import sys
 import ionicsdk
 
-input_string = "Hello World!"
+input_string = "Hello, World!"
 
 # read persistor password from environment variable
 persistor_password = os.environ.get('IONIC_PERSISTOR_PASSWORD')
