@@ -20,7 +20,7 @@ public class IonicHelloWorld
 {
     public static void main(String[] args)
     {
-        String message = "Hello World!";
+        String message = "Hello, World!";
 
         // read persistor password from environment variable
         String persistorPassword = System.getenv("IONIC_PERSISTOR_PASSWORD");

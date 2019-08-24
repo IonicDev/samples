@@ -59,7 +59,7 @@ namespace Samples
             // Setup the Chunk Crypto object.
             ChunkCipherAuto chunkCrypto = new ChunkCipherAuto(agent);
 
-            string clearText = "Hello World";
+            string clearText = "Hello, World!";
             string encryptedText = null;
 
             // Encrypt the string using an Ionic-managed key.
