@@ -1,5 +1,5 @@
 ﻿/*
- * (c) 2018 Ionic Security Inc.
+ * (c) 2018-2019 Ionic Security Inc.
  * By using this code, I agree to the Terms & Conditions (https://dev.ionic.com/use.html)
  * and the Privacy Policy (https://www.ionic.com/privacy-notice/).
  */
@@ -13,7 +13,7 @@ namespace Samples
     class IonicHelloworld
     {
         // Waits for any input for console applications.
-        // This allows information to be displayed before the 
+        // This allows information to be displayed before the
         // console application window closes.
         static void WaitForInput()
         {
@@ -62,11 +62,19 @@ namespace Samples
             string clearText = "Hello, World!";
             string encryptedText = null;
 
+            // Define data markings
+            AttributesDictionary dataMarkings = new AttributesDictionary();
+            dataMarkings.Add("clearance-level", new List<string> { "secret" });
+
             // Encrypt the string using an Ionic-managed key.
-            chunkCrypto.Encrypt(clearText, ref encryptedText);
+            chunkCrypto.Encrypt(clearText, ref encryptedText, dataMarkings);
+
+            string decryptedText = null;
+            chunkCrypto.Decrypt(encryptedText, decryptedText);
 
             Console.WriteLine("Plain Text: {0}", clearText);
             Console.WriteLine("Ionic Chunk Encrypted Text: {0}", encryptedText);
+            Console.WriteLine("Decrypted text: {0}", decryptedText);
 
             WaitForInput();
         }
