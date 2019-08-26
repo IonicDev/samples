@@ -26,6 +26,7 @@ jobs:
             cat /etc/redhat-release   # For CentOS/Red Hat
             #cat /etc/os-release      # For Ubuntu
             python -V
+            robot --version || true
             pip show ionicsdk
       - run:
           name: Import Profile
