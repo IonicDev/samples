@@ -12,8 +12,13 @@ const appData = {
 }
 
 const main = async () => {
-    
+
     const message = 'Hello, World!'
+
+    // define data markings
+    const dataMarkings = {
+      'clearance-level': ['secret']
+    }
 
     // initialize agent
     const agent = new window.IonicSdk.ISAgent('https://dev-api.ionic.com/jssdk/latest/');
@@ -44,12 +49,14 @@ const main = async () => {
     })
 
     // encrypt message
-    const encryptResponse = await agent.encryptStringChunkCipher({stringData: message})
+    const encryptResponse = await agent.encryptStringChunkCipher({stringData: message, attributes: dataMarkings})
     const ciphertext = encryptResponse.stringChunk
+    const decryptedText = await agent.decryptStringChunkCipher({stringData: ciphertext})
 
     // display data
     console.log('Plain Text: ', message)
     console.log('Ionic Chunk Encrypted Text: ', ciphertext)
+    console.log('Decrypted Text: ' decryptedText)
 }
 
 main();
