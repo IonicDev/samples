@@ -56,7 +56,7 @@ const main = async () => {
     // display data
     console.log('Plain Text: ', message)
     console.log('Ionic Chunk Encrypted Text: ', ciphertext)
-    console.log('Decrypted Text: ' decryptedText)
+    console.log('Decrypted Text: ', decryptedText)
 }
 
 main();
