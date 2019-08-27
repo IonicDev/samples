@@ -8,12 +8,12 @@ const appData = {
   appId: 'ionic-js-samples',
   userId: 'developer',
   userAuth: 'password123',
-  enrollmentUrl: 'https://dev-enrollment.ionic.com/keyspace/HVzG/register'
+  enrollmentUrl: 'https://preview-enrollment.ionic.com/keyspace/HVzG/register'
 }
 
 const main = async () => {
   // initialize agent with default persistor
-  const agent = new window.IonicSdk.ISAgent('https://dev-api.ionic.com/jssdk/latest/')
+  const agent = new window.IonicSdk.ISAgent()
   const response = await agent.loadUser(appData).catch((error) => {
     console.log('Error loading profile: ', error)
   })

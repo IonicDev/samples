@@ -19,7 +19,7 @@ const appData = {
 const main = async () => {
   // Initialize agent.
   // The URL is optional.
-  const agent = new window.IonicSdk.ISAgent('https://dev-api.ionic.com/jssdk/latest/');
+  const agent = new window.IonicSdk.ISAgent();
   await agent.loadUser(appData).catch((error) => {
     console.log('Error loading profile: ', error);
   });
