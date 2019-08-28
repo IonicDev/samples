@@ -1,5 +1,5 @@
 /*
- * (c) 2019 Ionic Security Inc.
+ * (c) 2019-2019 Ionic Security Inc.
  * By using this code, I agree to the Terms & Conditions (https://dev.ionic.com/use.html)
  * and the Privacy Policy (https://www.ionic.com/privacy-notice/).
  */
@@ -19,7 +19,7 @@ const appData = {
 const main = async () => {
   // Initialize agent.
   // The URL is optional.
-  const agent = new window.IonicSdk.ISAgent('https://dev-api.ionic.com/jssdk/latest/');
+  const agent = new window.IonicSdk.ISAgent();
   await agent.loadUser(appData).catch((error) => {
     console.log('Error loading profile: ', error);
   });
