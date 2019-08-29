@@ -50,6 +50,7 @@ const main = async () => {
 
     // encrypt message
     const encryptResponse = await agent.encryptStringChunkCipher({stringData: message, attributes: dataMarkings})
+    // Note: Decryption only works if the policy allows it.
     const ciphertext = encryptResponse.stringChunk
     const decryptedText = await agent.decryptStringChunkCipher({stringData: ciphertext})
 

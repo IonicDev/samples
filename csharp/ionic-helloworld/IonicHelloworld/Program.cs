@@ -70,6 +70,8 @@ namespace Samples
             chunkCrypto.Encrypt(clearText, ref encryptedText, dataMarkings);
 
             string decryptedText = null;
+
+            // Note: Decryption only works if the policy allows it.
             chunkCrypto.Decrypt(encryptedText, decryptedText);
 
             Console.WriteLine("Plain Text: {0}", clearText);
