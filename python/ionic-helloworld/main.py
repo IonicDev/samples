@@ -46,7 +46,7 @@ except ionicsdk.exceptions.IonicException as e:
     print("Error encrypting: {0}".format(e.message))
     sys.exit(1)
 
-# decrypt
+# Note: Decryption only works if the policy allows it.
 try:
    plaintext = cipher.decryptstr(ciphertext)
 except ionicsdk.exceptions.IonicException as e:

@@ -71,6 +71,8 @@ public class IonicHelloWorld
 
         // decrypt
         String plaintext = null;
+
+        // Note: Decryption only works if the policy allows it.
         try { 
             plaintext = cipher.decrypt(ciphertext);
         } catch(IonicException e) {

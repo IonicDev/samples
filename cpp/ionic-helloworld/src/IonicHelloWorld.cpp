@@ -72,6 +72,8 @@ int main(int argc, char* argv[]) {
 
     // decrypt
     std::string plaintext;
+
+    // Note: Decryption only works if the policy allows it.
     nErrorCode = cipher.decrypt(ciphertext, plaintext);
     if (nErrorCode != ISCRYPTO_OK) {
         std::cerr << "Decryption Error: " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
