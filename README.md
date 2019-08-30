@@ -9,7 +9,7 @@ The code samples contain tasks for:
 * encryption/decryption with different algorithms
 * logging
 
-The SDK documentation is [here](https://dev.ionic.com/sdk/docs).
+[SDK documentation](https://dev.ionic.com/sdk/docs)
 
 To start using these code samples, please go to [Ionic Developers](http://ionic.com/developers)
 for more information.
