@@ -13,7 +13,7 @@ const appData = {
 
 const main = async () => {
     
-    const message = 'secret message'
+    const message = 'Hello, World!'
 
     // initialize agent
     const agent = new window.IonicSdk.ISAgent('https://dev-api.ionic.com/jssdk/latest/');
