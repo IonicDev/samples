@@ -59,9 +59,10 @@ public class CreateProfile
                 ionicAssertion, 
                 esPubKey
             );
+            // enroll device to specified Ionic key tenant server
             CreateDeviceResponse createDeviceResponse = agent.createDevice(createDeviceRequest);
             profile = createDeviceResponse.getDeviceProfile();
-
+            // add the newly created profile to the existing profile set in the Ionic Secure Enrollment Profile file
             String persistorPath = System.getProperty("user.home") + "/.ionicsecurity/profiles.pw";
             DeviceProfilePersistorPassword persistor = new DeviceProfilePersistorPassword(persistorPath);
             persistor.setPassword(persistorPassword);
@@ -75,9 +76,9 @@ public class CreateProfile
         }
 
         // display profile
-        System.out.println("Id       : " + profile.getDeviceId());
+        System.out.println("Device ID: " + profile.getDeviceId());
         System.out.println("Name     : " + profile.getName());
         System.out.println("Keyspace : " + profile.getKeySpace());
-        System.out.println("ApiUrl   : " + profile.getServer());
+        System.out.println("API URL  : " + profile.getServer());
     }
 }
