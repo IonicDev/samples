@@ -10,6 +10,7 @@ import com.ionic.sdk.agent.Agent;
 import com.ionic.sdk.agent.request.createdevice.CreateDeviceRequest;
 import com.ionic.sdk.agent.request.createdevice.CreateDeviceResponse;
 import com.ionic.sdk.device.profile.DeviceProfile;
+import com.ionic.sdk.device.profile.persistor.DeviceProfilePersistorPassword;
 import com.ionic.sdk.error.IonicException;
 import java.util.Scanner;
 
@@ -17,6 +18,13 @@ public class CreateProfile
 {
     public static void main(String[] args)
     {
+        // read persistor password from environment variable
+        String persistorPassword = System.getenv("IONIC_PERSISTOR_PASSWORD");
+        if (persistorPassword == null) {
+            System.out.println("[!] Please provide the persistor password as env variable: IONIC_PERSISTOR_PASSWORD");
+            System.exit(1);
+        }
+
         // prompt user for auth components
         Scanner scanner = new Scanner(System.in);
         System.out.println("\nKEYSPACE: ");
@@ -51,18 +59,26 @@ public class CreateProfile
                 ionicAssertion, 
                 esPubKey
             );
+            // enroll device to specified Ionic key tenant server
             CreateDeviceResponse createDeviceResponse = agent.createDevice(createDeviceRequest);
-            createDeviceResponse = agent.createDevice(createDeviceRequest);
             profile = createDeviceResponse.getDeviceProfile();
+            // add the newly created profile to the existing profile set in the Ionic Secure Enrollment Profile file
+            String persistorPath = System.getProperty("user.home") + "/.ionicsecurity/profiles.pw";
+            DeviceProfilePersistorPassword persistor = new DeviceProfilePersistorPassword(persistorPath);
+            persistor.setPassword(persistorPassword);
+            agent.loadProfiles(persistor);
+            agent.addProfile(profile);
+            agent.setActiveProfile(profile.getDeviceId());
+            agent.saveProfiles(persistor);
         } catch (IonicException e) {
             System.out.println("Failed to create profile: " + e);
             System.exit(1);
         }
 
         // display profile
-        System.out.println("Id       : " + profile.getDeviceId());
+        System.out.println("Device ID: " + profile.getDeviceId());
         System.out.println("Name     : " + profile.getName());
         System.out.println("Keyspace : " + profile.getKeySpace());
-        System.out.println("ApiUrl   : " + profile.getServer());
+        System.out.println("API URL  : " + profile.getServer());
     }
 }
