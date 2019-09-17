@@ -54,6 +54,8 @@ public class CreateProfileStartForFree {
             String persistorPath = System.getProperty("user.home") + "/.ionicsecurity/profiles.pw";
             DeviceProfilePersistorPassword persistor = new DeviceProfilePersistorPassword(persistorPath);
             persistor.setPassword(persistorPassword);
+            // create a new Agent instance to add the newly created profile to the existing profile set
+            // in the Ionic Secure Enrollment Profile file
             final Agent agent = new Agent();
             agent.initializeWithoutProfiles();
             agent.loadProfiles(persistor);
