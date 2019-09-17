@@ -14,6 +14,7 @@ import com.ionic.sdk.agent.key.KeyAttributesMap;
 import com.ionic.sdk.agent.cipher.chunk.data.ChunkCryptoEncryptAttributes;
 import com.ionic.sdk.agent.cipher.chunk.ChunkCipherAuto;
 import com.ionic.sdk.error.IonicException;
+import com.ionic.sdk.error.AgentErrorModuleConstants;
 import static java.util.Arrays.asList;
 
 public class IonicHelloWorld
