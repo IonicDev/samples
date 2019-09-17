@@ -31,7 +31,7 @@ public class CreateProfileStartForFree {
         System.out.println("\nACCOUNT_NAME: ");
         String accountName = scanner.nextLine();
         System.out.println("\nACCOUNT_PASSWORD: ");
-        String accountPassword = scanner.nextLine();
+        char[] accountPassword = System.console().readPassword();
 
         // lookup enrollment URL associated with specified keyspace
         String urlEnrollment = "";
@@ -48,7 +48,7 @@ public class CreateProfileStartForFree {
             final EnrollIonicAuth enrollIonicAuth = new EnrollIonicAuth(urlEnrollment, new Agent(), null);
             // enroll device to specified Ionic key tenant server
             final CreateDeviceResponse createDeviceResponse = enrollIonicAuth.enroll(
-                    accountName, accountPassword, "example");
+                    accountName, new String(accountPassword), "example");
             profile = createDeviceResponse.getDeviceProfile();
             // add the newly created profile to the existing profile set in the Ionic Secure Enrollment Profile file
             String persistorPath = System.getProperty("user.home") + "/.ionicsecurity/profiles.pw";
