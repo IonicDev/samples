@@ -21,6 +21,10 @@ private:
 	std::chrono::time_point<clock_> beg_;
 };
 
+// Simple benchmarking program to compare different ways to initialize an Agent
+// verses several uses so you can compare the relative 'heft' of each.
+// Accumulates data and prints results so far at increasing intervals so you
+// don't have to wait for it to complete to get an idea of the trend.
 int main()
 {
 	// initialize our persistant agent
