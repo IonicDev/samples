@@ -25,6 +25,7 @@ private:
 // verses several uses so you can compare the relative 'heft' of each.
 // Accumulates data and prints results so far at increasing intervals so you
 // don't have to wait for it to complete to get an idea of the trend.
+// More information here: https://ionic.com/analysis-managing-machina-sdk-agents
 int main()
 {
 	// initialize our persistant agent
