@@ -17,7 +17,7 @@ import com.ionic.sdk.error.IonicException;
 import com.ionic.sdk.error.AgentErrorModuleConstants;
 import static java.util.Arrays.asList;
 
-public class IonicHelloWorld
+public class IonicHelloworld
 {
     public static void main(String[] args)
     {
