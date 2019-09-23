@@ -26,6 +26,7 @@ private:
 // Accumulates data and prints results so far at increasing intervals so you
 // don't have to wait for it to complete to get an idea of the trend.
 // More information here: https://ionic.com/analysis-managing-machina-sdk-agents
+// NOTE: Running this may use up a significant number of transactions.
 int main()
 {
 	// initialize our persistant agent
@@ -61,7 +62,9 @@ int main()
 	int totalTestCount = 0;
 	
 	// Incrementally generate more data, so we don't have to wait forever to see a trend
-	for (int j = 9; j <= 100000; j *= 10)
+	// It will run 9 tests, print results, run 90 more, print, etc.
+	// Be careful increasing this number!  100 test runs will make ~800 transactions
+	for (int j = 9; j <= 90; j *= 10)
 	{
 		for (int i = 0; i < j; i += testBlockSize)
 		{
