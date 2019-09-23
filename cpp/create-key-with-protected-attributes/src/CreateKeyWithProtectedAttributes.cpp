@@ -47,7 +47,7 @@ int main(int argc, char* argv[]) {
     projectVal.push_back("ORION");
     fixedAttributes["ionic-protected-project"] = projectVal;
 
-    // create key with protected fixed attribute
+    // create key with fixed attribute
     ISAgentCreateKeysRequest request;
     ISAgentCreateKeysRequest::Key requestKey("refid1", 1, fixedAttributes);
     request.getKeys().push_back(requestKey);

@@ -30,7 +30,7 @@ fixed_attributes = {
     "ionic-protected-project": ["ORION"]
 }
 
-# create single key with fixed protected attributes
+# create single key with fixed attributes
 try:
     key = agent.createkey(attributes=fixed_attributes)
 except ionicsdk.exceptions.IonicException as e:

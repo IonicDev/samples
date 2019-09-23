@@ -43,7 +43,7 @@ public class CreateKeyWithProtectedAttributes
         KeyAttributesMap fixedAttributes = new KeyAttributesMap();
         fixedAttributes.put("ionic-protected-project", asList("ORION"));
 
-        // create single key with fixed protected attributes
+        // create single key with fixed attributes
         CreateKeysResponse.Key key = null;
         try {
             key = agent.createKey(fixedAttributes).getKeys().get(0);
