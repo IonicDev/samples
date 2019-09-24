@@ -18,12 +18,12 @@ const main = async () => {
     console.log('Error loading profile: ', error)
   })
 
-  // define protected fixed attributes
+  // define protected attributes
   const fixedAttributes = {
     'ionic-protected-project': ['ORION']
   }
 
-  // create single key with protected fixed attributes
+  // create single key with fixed attributes
   const response = await agent.createKeys({
     quantity: 1,
     attributes: fixedAttributes
