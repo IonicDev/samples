@@ -16,7 +16,7 @@ set IONIC_PERSISTOR_PASSWORD=password123
 ```
 
 **Requirements**:
-- Python 3.7+ or Python 2.7+
+- Python 3.5+ or Python 2.7+
 
 **Run:**
 ```
