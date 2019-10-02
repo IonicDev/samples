@@ -14,7 +14,6 @@ import com.ionic.sdk.agent.request.getkey.GetKeysRequest;
 import com.ionic.sdk.agent.request.getkey.GetKeysResponse;
 import com.ionic.sdk.error.IonicException;
 import java.util.List;
-import javax.json.JsonValue;
 import javax.xml.bind.DatatypeConverter;
 
 public class GetKeyByExternalId
