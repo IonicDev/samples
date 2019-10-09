@@ -13,7 +13,7 @@ if hasattr(__builtins__, 'raw_input'): input = raw_input
 
 plaintext_file = '../../sample-data/files/Message.pdf'
 protected_file = '../../sample-data/files/protected-sample.txt'
-source_dir = 'github-samples/python/get-file-info'
+source_dir = 'python/get-file-info'
 this_dir = os.getcwd()
 
 # run only from source directory

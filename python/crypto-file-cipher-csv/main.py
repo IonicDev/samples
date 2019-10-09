@@ -11,11 +11,11 @@ import ionicsdk
 file_original = '../../sample-data/files/info.csv'
 file_ciphertext = './info-Protected.csv'
 file_plaintext = './info.csv'
-source_dir = 'github-samples/python/crypto-file-cipher-csv'
+source_dir = 'python/crypto-file-cipher-csv'
 this_dir = os.getcwd()
 
 # run only from source directory
-if not this_dir.endswith(source_dir): 
+if not this_dir.endswith(source_dir):
     print("[!] Please run this sample from inside " + source_dir)
     sys.exit(1)
 
