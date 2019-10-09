@@ -6,11 +6,11 @@
 
 package com.ionic.samples;
 
+import com.ionic.sdk.crypto.CryptoUtils;
 import com.ionic.sdk.device.profile.persistor.DeviceProfilePersistorPassword;
 import com.ionic.sdk.agent.Agent;
 import com.ionic.sdk.agent.request.createkey.CreateKeysResponse;
 import com.ionic.sdk.error.IonicException;
-import javax.xml.bind.DatatypeConverter;
 
 public class CreateKey
 {
@@ -46,7 +46,7 @@ public class CreateKey
 
         // display new key
         System.out.println("KeyId        : " + key.getId());
-        System.out.println("KeyBytes     : " + DatatypeConverter.printHexBinary(key.getKey()));
+        System.out.println("KeyBytes     : " + CryptoUtils.binToHex(key.getKey()));
         System.out.println("FixedAttrs   : " + key.getAttributesMap());
         System.out.println("MutableAttrs : " + key.getMutableAttributes());
     }
