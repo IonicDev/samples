@@ -10,7 +10,7 @@ import ionicsdk
 
 profile_id = 'ABcd.1.48sdf0-cs80-5802-sd80-d8s0df80sdfj'
 persistor_path = os.path.join("..", "..", "sample-data", "persistors", "sample-persistor.pt")
-source_dir = 'github-samples/python/set-active-profile'
+source_dir = 'python/set-active-profile'
 this_dir = os.getcwd()
 
 # run only from source directory

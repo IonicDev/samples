@@ -11,11 +11,11 @@ import ionicsdk
 file_original = '../../sample-data/files/Message.docx'
 file_ciphertext = './Message-Protected.docx'
 file_plaintext = './Message.docx'
-source_dir = 'github-samples/python/crypto-file-cipher-openxml'
+source_dir = 'python/crypto-file-cipher-openxml'
 this_dir = os.getcwd()
 
 # run only from source directory
-if not this_dir.endswith(source_dir): 
+if not this_dir.endswith(source_dir):
     print("[!] Please run this sample from inside " + source_dir)
     sys.exit(1)
 
@@ -37,7 +37,7 @@ except ionicsdk.exceptions.IonicException as e:
 # define attributes (optional)
 mutable_attributes = {
     "classification": "Restricted"
-}   
+}
 
 # initialize aes cipher object
 cipher = ionicsdk.FileCipherOpenXml(agent)
