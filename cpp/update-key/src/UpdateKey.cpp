@@ -78,5 +78,12 @@ int main(int argc, char* argv[]) {
     hexKey.fromBytes(updatedKey.getKey());
     std::cout << "KeyId    : " << updateKey.getId() << std::endl;
     std::cout << "KeyBytes : " << hexKey << std::endl;
-    std::cout << updatedKey.getMutableAttributes() << std::endl;
+
+    // display updated attributes
+    for (auto const& key : updatedKey.getMutableAttributes()) {
+        std::cout << key.first << ": [ ";
+        for(auto const& value : key.second)
+          std::cout << value << " ";
+        std::cout << "]" << std::endl ;
+    }
 }
