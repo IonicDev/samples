@@ -8,7 +8,7 @@ const appData = {
     appId: 'ionic-js-samples',
     userId: 'developer',
     userAuth: 'password123',
-    enrollmentUrl: 'https://preview-enrollment.ionic.com/keyspace/HVzG/register'
+    enrollmentUrl: 'https://preview-enrollment.ionic.com/keyspace/Magv/register'
 }
 
 const main = async () => {

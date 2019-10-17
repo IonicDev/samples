@@ -29,8 +29,8 @@ const main = async () => {
   const plaintext = decryptResponse.stringChunk
 
   // display data
-  console.log('Ciphertext : ', ciphertext)
-  console.log('Plaintext  : ', plaintext)
+  console.log('Ciphertext : ' + ciphertext)
+  console.log('Plaintext  : ' + plaintext)
 }
 
 main()
