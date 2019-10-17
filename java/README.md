@@ -13,7 +13,7 @@ export IONIC_PERSISTOR_PASSWORD=password123
 
 **Build:**
 ```
-mvn package
+mvn clean package
 ```
 
 **Run:**

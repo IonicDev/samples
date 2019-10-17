@@ -3,47 +3,59 @@
   <groupId>com.ionic.samples</groupId>
   <artifactId>policy-test</artifactId>
   <packaging>jar</packaging>
-  <version>1.0</version>
+  <version>1.1</version>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
+    <dependency.locations.enabled>false</dependency.locations.enabled>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>com.ionic</groupId>
       <artifactId>ionic-sdk</artifactId>
-      <version>2.4.0</version>
+      <version>2.5.0</version>
     </dependency>
     <dependency>
       <groupId>org.bouncycastle</groupId>
-      <artifactId>bcprov-jdk15on</artifactId>
+      <artifactId>bcprov-jdk15to18</artifactId>
       <version>1.62</version>
     </dependency>
   </dependencies>
   <build>
-  <finalName>${project.artifactId}</finalName>
-  <plugins>
-    <plugin>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-shade-plugin</artifactId>
-      <version>3.1.1</version>
-      <executions>
-        <execution>
-          <phase>package</phase>
-          <goals>
-            <goal>shade</goal>
-          </goals>
-          <configuration>
-            <transformers>
-              <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                <mainClass>com.ionic.samples.PolicyTest</mainClass>
-              </transformer>
-              <transformer implementation="org.apache.maven.plugins.shade.resource.DontIncludeResourceTransformer">
-               <resources>
-                 <resource>.SF</resource>
-               </resources>
-              </transformer>
-            </transformers>
-          </configuration>
-        </execution>
-      </executions>
-    </plugin>
+    <finalName>${project.artifactId}</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.1.2</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <classpathPrefix>lib/</classpathPrefix>
+              <mainClass>com.ionic.samples.PolicyTest</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy-dependencies</id>
+            <phase>package</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/lib</outputDirectory>
+              <includeScope>runtime</includeScope>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 </project>

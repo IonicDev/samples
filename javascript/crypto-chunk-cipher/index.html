@@ -1,10 +1,24 @@
 <html>
-    <head>
-        <title>Ionic</title>
-        <h1>Crypto ChunkCipher</h1>
-    </head>
-    <body>
-        <script src='https://preview-api.ionic.com/jssdk/latest/libs/sdk.bundle.js'></script>
-        <script src='cryptoChunkCipher.js'></script>
-    </body>
+  <head>
+    <title>Crypto ChunkCipher</title>
+  </head>
+  <body>
+    <h2>Crypto ChunkCipher</h2>
+    <script>
+      (function(){
+        var oldLog = console.log;
+        console.log = function (message) {
+        var output_area = document.getElementById("output-area");
+          output_area.innerHTML += message + '<br>';
+          oldLog.apply(console, arguments);
+        };
+      })();
+    </script>
+
+    <script src='https://preview-api.ionic.com/jssdk/latest/libs/sdk.bundle.js'></script>
+    <script src='cryptoChunkCipher.js'></script>
+
+    <p id="output-area">
+    </p>
+  </body>
 </html>
