@@ -1,63 +1,50 @@
 /*
- * (c) 2018-2019 Ionic Security Inc.
+ * (c) 2019-2020 Ionic Security Inc.
  * By using this code, I agree to the Terms & Conditions (https://dev.ionic.com/use.html)
  * and the Privacy Policy (https://www.ionic.com/privacy-notice/).
  */
 
+// AppData for all Javascript samples.
 const appData = {
     appId: 'ionic-js-samples',
     userId: 'developer',
     userAuth: 'password123',
-    enrollmentUrl: 'https://preview-enrollment.ionic.com/keyspace/HVzG/register'
 }
 
 const main = async () => {
 
-    const message = 'Hello, World!'
+  const message = 'Hello, World!'
 
-    // define data markings
-    const dataMarkings = {
-      'clearance-level': ['secret']
-    }
+  // define data markings
+  const dataMarkings = {
+    'clearance-level': ['secret']
+  }
 
-    // initialize agent
-    const agent = new window.IonicSdk.ISAgent();
+  // initialize agent
+  const agent = new window.IonicSdk.ISAgent()
+  await agent.loadUser(appData).catch((error) => {
+    console.log('Error loading profile: ' + error)
+  })
 
-    await agent.loadUser(appData).catch(async (error) => {
-        if (
-            error &&
-            error.sdkResponseCode &&
-            (error.sdkResponseCode === 40022 || error.sdkResponseCode === 40002)
-        ) {
-            const resp = await agent.enrollUser(appData)
+  // Set the app metadata.
+  await agent.setMetadata({
+    'ionic-application-name': 'JavaScript helloWorld',
+    'ionic-application-verison': '1.1.0',
+  }).catch((error) => {
+    console.log('Error setting metadata: ' + error)
+  })
 
-            if(resp) {
-                if (resp.redirect) {
-                    window.open(resp.redirect);
-                    return resp.Notifier;
-                }
-            }
-            else {
-                console.log('Error loading profile: ', error)
-                return Promise.reject('Error enrolling');
-            }
-        }
-        else {
-            console.log('Error loading profile: ', error)
-            return
-        }
-    })
+  // encrypt message
+  const encryptResponse = await agent.encryptStringChunkCipher({stringData: message, attributes: dataMarkings})
 
-    // encrypt message
-    const encryptResponse = await agent.encryptStringChunkCipher({stringData: message, attributes: dataMarkings})
-    // Note: Decryption only works if the policy allows it.
-    const ciphertext = encryptResponse.stringChunk
-    const decryptedText = await agent.decryptStringChunkCipher({stringData: ciphertext})
+  // Note: Decryption only works if the policy allows it.
+  const ciphertext = encryptResponse.stringChunk
+  const decryptedText = await agent.decryptStringChunkCipher({stringData: ciphertext})
 
-    // display data
-    console.log('Plain Text: ', message)
-    console.log('Ionic Chunk Encrypted Text: ', ciphertext)
-    console.log('Decrypted Text: ', decryptedText)
+  // display data
+  console.log('Plain Text: ' + message)
+  console.log('Ionic Chunk Encrypted Text: ' + ciphertext)
+  console.log('Decrypted Text: ' + decryptedText.stringChunk)
 }
 
 main();

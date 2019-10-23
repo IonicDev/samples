@@ -11,3 +11,19 @@ userAuth: 'password123',
 ```
 
 If you have an existing profile, update the `appData` variable in the sample app before running it. Alternatively, run the `create-profile` sample app which will create a profile with the settings above. 
+
+**Step 1**: Clone Ionic samples repo from github, and navigate to the JavaScript HelloWorld directory:
+~~~bash
+git clone https://github.com/IonicDev/samples
+cd samples/javascript/ionic-helloworld
+~~~
+
+**Step 2**: Start a local webserver (example: [http-server](https://www.npmjs.com/package/http-server))
+~~~bash
+http-server
+~~~
+
+**Step 3**: Open Chrome and navigate to the HelloWorld webpage
+
+`http://localhost:8080`
+
