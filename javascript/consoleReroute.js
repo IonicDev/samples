@@ -9,10 +9,10 @@
 
 var oldLog = console.log;
 console.log = function (message) {
-
-  // Initialize output-area.  Light gainsburo background, monospace font, and 100% size.
+  var output_area = document.getElementById("output-area");
   if (message === '') {
-    output_area.innerHTML = ''
+    // Initialize output-area.  Light gainsburo background, monospace font, and 100% size.
+    output_area.innerHTML = '';
     output_area.style.backgroundColor = '#EDEDED';
     output_area.style.fontFamily = 'courier';
     output_area.style.fontSize = '100%';

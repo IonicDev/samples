@@ -31,7 +31,7 @@ const appData = {
   appId: 'ionic-js-samples',
   userId: 'developer',
   userAuth: 'password123',
-  enrollmentUrl: enrollmentUrl
+  enrollmentUrl: enrollmentUrl,
   metadata: {
     'ionic-application-name': 'Enroll Device',
     'ionic-application-version': '1.1.0'

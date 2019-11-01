@@ -13,12 +13,12 @@ const appData = {
 const main = async () => {
   // initialize agent with default persistor
   const agent = new window.IonicSdk.ISAgent()
-  const response = await agent.loadUser(appData).catch((error) => {
+  let response = await agent.loadUser(appData).catch((error) => {
     console.log('Error loading profile: ', error)
   })
 
   // Set the app metadata.
-  let response = await agent.setMetadata({
+  response = await agent.setMetadata({
     'ionic-application-name': 'JavaScript initializeAgentWithDefaultPersistor',
     'ionic-application-verison': '1.1.0',
   })

@@ -27,7 +27,7 @@ const main = async () => {
   })
 
   // get key
-  const response = await agent.getKeys({keyIds: [keyId]}).catch((error) => {
+  response = await agent.getKeys({keyIds: [keyId]}).catch((error) => {
     console.log('Error Getting Key: ', error)
   })
   const key = response.keys[0]

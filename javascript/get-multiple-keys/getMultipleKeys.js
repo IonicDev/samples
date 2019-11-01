@@ -28,7 +28,7 @@ const main = async () => {
   })
 
   // get multiple keys
-  const response = await agent.getKeys({
+  response = await agent.getKeys({
     keyIds: [keyId1, keyId2, keyId3]
   }).catch((error) => {
     console.log('Error Creating Key: ', error)
