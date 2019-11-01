@@ -1,5 +1,5 @@
 /*
- * (c) 2018-2019 Ionic Security Inc.
+ * (c) 2019-2020 Ionic Security Inc.
  * By using this code, I agree to the Terms & Conditions (https://dev.ionic.com/use.html)
  * and the Privacy Policy (https://www.ionic.com/privacy-notice/).
  */
@@ -7,12 +7,11 @@
 const appData = {
   appId: 'ionic-js-samples',
   userId: 'developer',
-  userAuth: 'password123',
-  enrollmentUrl: 'https://preview-enrollment.ionic.com/keyspace/HVzG/register'
+  userAuth: 'password123'
 }
 
 const main = async () => {
-  const keyCount = 5
+  const keyCount = 3
 
   // initialize agent
   const agent = new window.IonicSdk.ISAgent()
@@ -28,12 +27,13 @@ const main = async () => {
   })
 
   // display new keys
+  console.log('');
   response.keys.forEach((key) => {
-    console.log('---')
-    console.log('KeyId    : ', key.keyId)
-    console.log('KeyBytes : ', key.key)
-    console.log('FixedAttributes   : ', JSON.stringify(key.attributes, null, 0))
-    console.log('MutableAttributes : ', JSON.stringify(key.mutableAttributes, null, 0))
+    console.log('---');
+    console.log('KeyId    : ', key.keyId);
+    console.log('KeyBytes : ', key.key);
+    console.log('FixedAttributes   : ', JSON.stringify(key.attributes, null, 0));
+    console.log('MutableAttributes : ', JSON.stringify(key.mutableAttributes, null, 0));
   })
 }
 

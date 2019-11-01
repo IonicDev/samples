@@ -1,5 +1,5 @@
 /*
- * (c) 2018-2019 Ionic Security Inc.
+ * (c) 2019-2020 Ionic Security Inc.
  * By using this code, I agree to the Terms & Conditions (https://dev.ionic.com/use.html)
  * and the Privacy Policy (https://www.ionic.com/privacy-notice/).
  */
@@ -8,7 +8,6 @@ const appData = {
   appId: 'ionic-js-samples',
   userId: 'developer',
   userAuth: 'password123',
-  enrollmentUrl: 'https://preview-enrollment.ionic.com/keyspace/HVzG/register'
 }
 
 const main = async () => {
@@ -29,6 +28,7 @@ const main = async () => {
   const plaintext = decryptResponse.stringChunk
 
   // display data
+  console.log('');
   console.log('Ciphertext : ' + ciphertext)
   console.log('Plaintext  : ' + plaintext)
 }

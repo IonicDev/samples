@@ -23,14 +23,19 @@ const keyspace = ''
 const tenantId = ''
 const enrollmentUrl = 'https://enrollment.ionic.com/keyspace/' + keyspace + '/idc/' + tenantId + '/default/register'
 
-// The appData defines the persistor for the browser.  Currently, the appId, userId, and userAuth are
-// set for all the Javascript samples.  However, in production, these values should be modified
-// accordingly.
+// The appData is used for look-up, encryption, and decryption of the device profile information.
+// Currently, the appId, userId, and userAuth are set to defaults for all the Javascript samples.
+// However, in production, these values should be modified accordingly.
+// See https://api.ionic.com/jssdk/latest/Docs/global.html#ProfileInfo for parameter description.
 const appData = {
   appId: 'ionic-js-samples',
   userId: 'developer',
   userAuth: 'password123',
   enrollmentUrl: enrollmentUrl
+  metadata: {
+    'ionic-application-name': 'Enroll Device',
+    'ionic-application-version': '1.1.0'
+  }
 }
 
 const main = async () => {

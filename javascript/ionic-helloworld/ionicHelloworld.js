@@ -35,16 +35,17 @@ const main = async () => {
   })
 
   // encrypt message
-  const encryptResponse = await agent.encryptStringChunkCipher({stringData: message, attributes: dataMarkings})
+  const encryptResponse = await agent.encryptStringChunkCipher({stringData: message, attributes: dataMarkings});
 
   // Note: Decryption only works if the policy allows it.
-  const ciphertext = encryptResponse.stringChunk
-  const decryptedText = await agent.decryptStringChunkCipher({stringData: ciphertext})
+  const ciphertext = encryptResponse.stringChunk;
+  const decryptedText = await agent.decryptStringChunkCipher({stringData: ciphertext});
 
   // display data
-  console.log('Plain Text: ' + message)
-  console.log('Ionic Chunk Encrypted Text: ' + ciphertext)
-  console.log('Decrypted Text: ' + decryptedText.stringChunk)
+  console.log('');
+  console.log('Plain Text: ' + message);
+  console.log('Ionic Chunk Encrypted Text: ' + ciphertext);
+  console.log('Decrypted Text: ' + decryptedText.stringChunk);
 }
 
 main();
