@@ -4,12 +4,23 @@
  * and the Privacy Policy (https://www.ionic.com/privacy-notice/).
  */
 
-// AppData for all Javascript samples.
+/*
+ * WARNING *
+ * Calling agent.enrollUser() successfully is a pre-requisite before using this code.
+ * This is done enrollDevice.js.
+ */
+
+// AppData for all Javascript samples: appId, userId, and userAuth needs to be the same
+// as the appData that was used for enrollment.
 const appData = {
-    appId: 'ionic-js-samples',
-    userId: 'developer',
-    userAuth: 'password123',
-}
+  appId: 'ionic-js-samples',
+  userId: 'developer',
+  userAuth: 'password123',
+  metadata: {
+    'ionic-application-name': 'Javascript Hello, World!',
+    'ionic-application-version': '1.3.0'
+  }
+};
 
 const main = async () => {
 
@@ -21,31 +32,31 @@ const main = async () => {
   }
 
   // initialize agent
-  const agent = new window.IonicSdk.ISAgent()
-  await agent.loadUser(appData).catch((error) => {
-    console.log('Error loading profile: ' + error)
-  })
+  try {
+    const resp = await new window.IonicSdk.ISAgent(appData);
+    const agent = resp.agent;
 
-  // Set the app metadata.
-  await agent.setMetadata({
-    'ionic-application-name': 'JavaScript helloWorld',
-    'ionic-application-verison': '1.1.0',
-  }).catch((error) => {
-    console.log('Error setting metadata: ' + error)
-  })
+    // encrypt message
+    try {
+      const encryptResponse = await agent.encryptStringChunkCipher({stringData: message, attributes: dataMarkings});
+      const ciphertext = encryptResponse.stringChunk;
+  
+      // Note: Decryption only works if the policy allows it.
+      const decryptedText = await agent.decryptStringChunkCipher({stringData: ciphertext});
+  
+      // display data
+      console.log('');
+      console.log('Plain Text: ' + message);
+      console.log('Ionic Chunk Encrypted Text: ' + ciphertext);
+      console.log('Decrypted Text: ' + decryptedText.stringChunk);
+    } catch (SdkErrorResponse) {
+      console.log('Encryption/Decrption error: ' + SdkErrorResponse.error);
+    }
 
-  // encrypt message
-  const encryptResponse = await agent.encryptStringChunkCipher({stringData: message, attributes: dataMarkings});
+  } catch (SdkErrorResponse) {
+    console.log('Obtianing agent error: ' + SdkErrorResponse.error);
+  }
 
-  // Note: Decryption only works if the policy allows it.
-  const ciphertext = encryptResponse.stringChunk;
-  const decryptedText = await agent.decryptStringChunkCipher({stringData: ciphertext});
-
-  // display data
-  console.log('');
-  console.log('Plain Text: ' + message);
-  console.log('Ionic Chunk Encrypted Text: ' + ciphertext);
-  console.log('Decrypted Text: ' + decryptedText.stringChunk);
 }
 
 main();
