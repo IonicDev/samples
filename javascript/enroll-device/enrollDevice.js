@@ -11,7 +11,7 @@
 // Ionic Authentication format:
 // https://enrollment.ionic.com/keyspace/<keyspace>/idc/<tenant_id>/default/register
 // Example:
-// https://: https://enrollment.ionic.com/keyspace/BKAl/idc/6d8d832785f3a66824ae2c23/default/register
+// https://: https://enrollment.ionic.com/keyspace/HvzG/idc/6d8d832785f3a66824ae2c23/default/register
 //
 // Multiple authentication format:
 // https://<domain>/keyspace/<keyspace>/register
@@ -23,10 +23,9 @@ const keyspace = ''
 const tenantId = ''
 const enrollmentUrl = 'https://enrollment.ionic.com/keyspace/' + keyspace + '/idc/' + tenantId + '/default/register'
 
-// The appData is used for look-up, encryption, and decryption of the device profile information.
-// Currently, the appId, userId, and userAuth are set to defaults for all the Javascript samples.
+// The appData defines the agent configuration for the browser.  Currently, the appId, userId, and userAuth
+// are set the same for all the Javascript samples.
 // However, in production, these values should be modified accordingly.
-// See https://api.ionic.com/jssdk/latest/Docs/global.html#ProfileInfo for parameter description.
 const appData = {
   appId: 'ionic-js-samples',
   userId: 'developer',
@@ -42,32 +41,33 @@ const main = async () => {
 
   // initialize agent
   const agent = new window.IonicSdk.ISAgent();
-  console.log("Enrolling at: " + enrollmentUrl)
 
-  await agent.loadUser(appData).catch(async (error) => {
-    if ( error &&
-         error.sdkResponseCode &&
-         (error.sdkResponseCode === 40022 || error.sdkResponseCode === 40002)
-        ) {
-      const resp = await agent.enrollUser(appData)
+  // Load the user.  If an error, then enroll the user.
+  try {
+    await agent.loadUser(appData);
+    console.log('Already enrolled for app "' + appData.appId + '" and  user "' + appData.userId + '" in keyspace "' + keyspace + '" and tenant "' + tenantId + '".');
+  } catch (error) {
+    try {
+      // enrollUser() returns a redirect URL.
+      let resp = await agent.enrollUser(appData);
+      if (resp.redirect) {
+        const enrollWindow = window.open(resp.redirect);
 
-      if(resp) {
-        if (resp.redirect) {
-          window.open(resp.redirect);
-          return resp.Notifier;
+        // Now wait for the enrollment to finish.
+        try {
+          await resp.notifier;
+          console.log('Enrolled for app "' + appData.appId + '" and  user "' + appData.userId + '" in keyspace "' + keyspace + '" and tenant "' + tenantId + '".');
+          enrollWindow.close();
+        } catch (error) {
+          console.log('Error with enrollment response: ' + error)
         }
+        
       }
-      else {
-        console.log('Error loading profile: ', error)
-        return Promise.reject('Error enrolling');
-      }
+    } catch (error) {
+      console.log('Error loading profile: ' + error);
+      return;
     }
-    else {
-      console.log('Error loading profile: ', error)
-      return
-    }
-  })
-  console.log("Enrolled!")
+  }
 }
 
 main();
