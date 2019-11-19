@@ -1,29 +1,39 @@
-# Ionic Javascript SDK Samples
+# Machina Javascript SDK Samples
 
-To build and run an Ionic Javascript SDK Sample, navigate into the directory of a specific sample task, serve the HTML index page (using a simple web server like http-server from NPM, and navigate to it on the browser. Open the browser's console to view the output. 
+You will need a Machina instance to execute these samples.  You can create a Machina instance from our [Machina Developers Portal](https://dev.ionic.com) by clicking on the *"Start For Free*" link. You will receive an e-mail which contains your keyspace, tenant ID, and user name (e-mail).  Please save these for future use.
 
-Note: the samples expect a profile to exist in the browser with the following credentials:
+If you already have a Machina instance, you will need the keyspace, tenant ID, and user name (e-mail).
 
-```
-appId: 'ionic-js-samples',
-userId: 'developer',
-userAuth: 'password123',
-```
+## Start-up
+To run the Machina Javascript samples, you will need to do:
 
-If you have an existing profile, update the `appData` variable in the sample app before running it. Alternatively, run the `create-profile` sample app which will create a profile with the settings above. 
+**Step 1**: Clone Ionic samples repo from Github.
 
-**Step 1**: Clone Ionic samples repo from github, and navigate to the JavaScript HelloWorld directory:
 ~~~bash
 git clone https://github.com/IonicDev/samples
-cd samples/javascript/ionic-helloworld
+cd samples/javascript/
 ~~~
 
-**Step 2**: Start a local webserver (example: [http-server](https://www.npmjs.com/package/http-server))
+**Step 2**: Open jssdkConfig.js in your favorite editor and modify `const keyspace = ''` with your keyspace and `const tenant = ''` with your tenant ID.  You should have received them in your welcome e-mail.  **Note:** All the samples use the jssdkConfig.js for configuration.
+
+**Step 3**: Start a local webserver (example: [http-server](https://www.npmjs.com/package/http-server)) in the `samples/javascript` directory.
+
 ~~~bash
-http-server
+node http-server
 ~~~
 
-**Step 3**: Open Chrome and navigate to the HelloWorld webpage
+## Create Device Credentials
 
-`http://localhost:8080`
+After the http server has been started, use a Chrome or Firefox browser go to URL: `http: 127.0.0.1:8080`. Under the "*Machina Javascript Create Device Credentials*" heading, you can click either:
+
+1. enroll-device
+2. jssdk-helloworld
+
+Enroll-device will only create device credentials, while jssdk-helloworld will create device credentials and encrypt/decrypt strings.  Jssdk-hellowold is adapted from the Javascript SDK [code sample](https://api.ionic.com/jssdk/latest/Docs/tutorial-helloWorld_index.js.html).  You can read more about enrollment in the [Javascript documentation](https://api.ionic.com/jssdk/latest/Docs/tutorial-device_enrollment.html) and in the [DevPortal](https://dev.ionic.com/platform/enrollment).
+
+## Sample Execution
+After you have created the device credentials, you can run some of the samples without modification, like `ionic-helloworld`, and `create-key`. Some of the others, like `get-key`, need to be modified with a created key in your tenant. **Note:** It is recommended to copy created keys into a text file for later use.
+
+## Documentation
+Most of the samples are documented in the [DevPortal](https://dev.ionic.com/sdk/features).  The Javascript SDK documentation is located [here](https://api.ionic.com/jssdk/latest/Docs/index.html).
 

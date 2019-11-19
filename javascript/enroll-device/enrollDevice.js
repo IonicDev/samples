@@ -1,5 +1,5 @@
 /*
- * (c) 2019 Ionic Security Inc.
+ * (c) 2018-2020 Ionic Security Inc.
  * By using this code, I agree to the Terms & Conditions (https://dev.ionic.com/use.html)
  * and the Privacy Policy (https://www.ionic.com/privacy-notice/).
  */
@@ -11,36 +11,32 @@
 // Ionic Authentication format:
 // https://enrollment.ionic.com/keyspace/<keyspace>/idc/<tenant_id>/default/register
 // Example:
-// https://: https://enrollment.ionic.com/keyspace/HvzG/idc/6d8d832785f3a66824ae2c23/default/register
+// https://enrollment.ionic.com/keyspace/HvzG/idc/6d8d832785f3a66824ae2c23/default/register
 //
 // Multiple authentication format:
 // https://<domain>/keyspace/<keyspace>/register
 // Example:
 // https://preview-enrollment.ionic.com/keyspace/HVzG/register
 
-// Please modify keyspace and tenant ID to your keyspace and tennant ID.
-const keyspace = ''
-const tenantId = ''
-const enrollmentUrl = 'https://enrollment.ionic.com/keyspace/' + keyspace + '/idc/' + tenantId + '/default/register'
+// Another code enrollment code example is at: https://api.ionic.com/jssdk/latest/Docs/tutorial-helloWorld_index.js.html
 
-// The appData defines the agent configuration for the browser.  Currently, the appId, userId, and userAuth
-// are set the same for all the Javascript samples.
-// However, in production, these values should be modified accordingly.
-const appData = {
-  appId: 'ionic-js-samples',
-  userId: 'developer',
-  userAuth: 'password123',
-  enrollmentUrl: enrollmentUrl,
-  metadata: {
-    'ionic-application-name': 'Enroll Device',
-    'ionic-application-version': '1.1.0'
-  }
-}
+import {getAgentConfig} from '../jssdkConfig.js';
+import {getKeyspace} from '../jssdkConfig.js';
+import {getTenant} from '../jssdkConfig.js';
+
+// Please modify keyspace and tenant to your keyspace and tennant in jssdkConfig.js.
+const keyspace = getKeyspace();
+const tenantId = getTenant();
+const enrollmentUrl = 'https://enrollment.ionic.com/keyspace/' + keyspace + '/idc/' + tenantId + '/default/register';
 
 const main = async () => {
 
   // initialize agent
   const agent = new window.IonicSdk.ISAgent();
+
+  // Get the appData and add enrollment URL.
+  let appData = getAgentConfig('Javascript Enroll Device');
+  appData = Object.assign(this.appData, {enrollmentUrl: this.enrollmentUrl});
 
   // Load the user.  If an error, then enroll the user.
   try {

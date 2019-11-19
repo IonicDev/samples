@@ -13,32 +13,25 @@
 import {getAgentConfig} from '../jssdkConfig.js';
 
 const main = async () => {
-  const keyId = 'BKAlG3-96nY';
+  const appData = getAgentConfig('Javascript Set Application Metadata');
 
-  const appData = getAgentConfig('Javascript Get Key');
-
-  // initialize agent
+  // Initialize agent.
   try {
     const resp = await new window.IonicSdk.ISAgent(appData);
     const agent = resp.agent;
 
     try {
-      // get key
-      response = await agent.getKeys({keyIds: [keyId]});
-      const key = response.keys[0];
-  
-      // display fetched key
-      console.log('');
-      console.log('KeyId             : ' + key.keyId);
-      console.log('KeyBytes          : ' + key.key);
-      console.log('FixedAttributes   : ' + JSON.stringify(key.attributes, null, 0));
-      console.log('MutableAttributes : ' + JSON.stringify(key.mutableAttributes, null, 0));
+      // Set the app metadata.
+      let response = await agent.setMetadata({
+        'ionic-application-name': 'JavaScript Set App Metadata',
+        'ionic-application-verison': '1.3.0',
+      });
     } catch (sdkErrorResponse) {
-      console.log('Error getting Key: ' + sdkErrorResponse.error);
+      console.log('Error setting app metadata: ' + sdkErrorResponse.error);
     }
   } catch (sdkErrorResponse) {
     console.log('Obtaining agent error: ' + sdkErrorResponse.error);
   }
 }
 
-main()
+main();
