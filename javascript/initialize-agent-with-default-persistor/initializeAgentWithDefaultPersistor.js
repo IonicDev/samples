@@ -18,10 +18,9 @@ const main = async () => {
   // initialize agent with default persistor
   try {
     const resp = await new window.IonicSdk.ISAgent(appData);
-    const agent = resp.agent;
 
     // display all profiles in persistor
-    const profiles = response.profiles;
+    const profiles = resp.profiles;
     console.log('');
     profiles.forEach((profile) => {
       console.log('---');

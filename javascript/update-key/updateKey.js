@@ -20,16 +20,16 @@ const main = async () => {
     // get key
     let key;
     try {
-      response = await agent.getKeys({keyIds: [keyId]})
+      const response = await agent.getKeys({keyIds: [keyId]})
       key = response.keys[0];
 
       // Display original key attributes.
       console.log('');
       console.log('Original key:');
-      console.log('KeyId             : ' + updated_key.keyId);
-      console.log('KeyBytes          : ' + updated_key.key);
-      console.log('FixedAttributes   : ' + JSON.stringify(updated_key.attributes, null, 0));
-      console.log('MutableAttributes : ' + JSON.stringify(updated_key.mutableAttributes, null, 0));
+      console.log('KeyId             : ' + key.keyId);
+      console.log('KeyBytes          : ' + key.key);
+      console.log('FixedAttributes   : ' + JSON.stringify(key.attributes, null, 0));
+      console.log('MutableAttributes : ' + JSON.stringify(key.mutableAttributes, null, 0));
     } catch (sdkErrorResponse) {
       console.log('Error getting key: ' + sdkErrorResponse.error);
     }

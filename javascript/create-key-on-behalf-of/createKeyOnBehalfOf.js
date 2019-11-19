@@ -24,7 +24,7 @@ const main = async () => {
     // Define on-behalf-of as request metadata.
     const delegatedUserEmail = 'test@ionic.com';
     const requestMetadata = {
-        'ionic-delegated-email': delegatedUserEmail;
+        'ionic-delegated-email': delegatedUserEmail,
     }
 
     // create key

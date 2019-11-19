@@ -36,7 +36,7 @@ const main = async () => {
 
   // Get the appData and add enrollment URL.
   let appData = getAgentConfig('Javascript Enroll Device');
-  appData = Object.assign(this.appData, {enrollmentUrl: this.enrollmentUrl});
+  appData = Object.assign(this.appData, {enrollmentUrl: enrollmentUrl});
 
   // Load the user.  If an error, then enroll the user.
   try {

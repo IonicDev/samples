@@ -24,7 +24,7 @@ const main = async () => {
 
     try {
       // get key
-      response = await agent.getKeys({keyIds: [keyId]});
+      const response = await agent.getKeys({keyIds: [keyId]});
       const key = response.keys[0];
   
       // display fetched key

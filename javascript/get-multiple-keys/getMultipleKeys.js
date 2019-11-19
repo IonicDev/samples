@@ -25,6 +25,7 @@ const main = async () => {
     const resp = await new window.IonicSdk.ISAgent(appData);
     const agent = resp.agent;
 
+    let response;
     try {
       // get multiple keys
       response = await agent.getKeys({

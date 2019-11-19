@@ -26,7 +26,7 @@ const main = async () => {
   
     // Get keys with external ID.
     try {
-      response = await agent.getKeys({
+      const response = await agent.getKeys({
         externalIds: externalIds,
       });
       const key = response.keys[0];

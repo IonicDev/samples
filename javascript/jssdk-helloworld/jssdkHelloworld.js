@@ -203,7 +203,7 @@ const NS = {
 
     // the userId/userAuth form events handler
     onCredsFormAction: function(e) {
-        if (e.target.tagName != 'BUTTON' || !e.target.value) {
+        if (e.target.tagName !== 'BUTTON' || !e.target.value) {
             // reject the click action
             return true;
         }
@@ -230,7 +230,7 @@ const NS = {
 
     // the encrypt/decrypt text form events handler
     onDataFormAction: function(e) {
-        if (e.target.tagName != 'BUTTON' || !e.target.value) {
+        if (e.target.tagName !== 'BUTTON' || !e.target.value) {
             return true;
         }
 

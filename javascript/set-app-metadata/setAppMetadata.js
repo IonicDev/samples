@@ -22,7 +22,7 @@ const main = async () => {
 
     try {
       // Set the app metadata.
-      let response = await agent.setMetadata({
+      await agent.setMetadata({
         'ionic-application-name': 'JavaScript Set App Metadata',
         'ionic-application-verison': '1.3.0',
       });
