@@ -54,7 +54,6 @@ const main = async () => {
   } catch (SdkErrorResponse) {
     console.log('Obtaining agent error: ' + SdkErrorResponse.error);
   }
-
 }
 
 main();
