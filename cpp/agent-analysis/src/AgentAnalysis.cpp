@@ -1,10 +1,11 @@
 #include <ISAgent.h>
+#include "ISAgentSDKError.h"
 #include <ISChunkCrypto.h>
 
 #include <iostream>
 #include <iomanip>
-
 #include <chrono>
+
 class Timer
 {
 public:
@@ -27,11 +28,20 @@ private:
 // don't have to wait for it to complete to get an idea of the trend.
 // More information here: https://ionic.com/analysis-managing-machina-sdk-agents
 // NOTE: Running this may use up a significant number of transactions.
+// NOTE: This sample assumes you have an active profile on the platfroms default
+// persistor. Linux does not currently have a default persistor so this sample
+// should be run on Windows or OSX.
 int main()
 {
+	int nErrorCode;
+
 	// initialize our persistant agent
 	ISAgent agent;
 	agent.initialize();
+	if (nErrorCode != ISAGENT_OK) {
+			std::cerr << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
+			exit(1);
+	}
 	ISAgentDeviceProfile profile = agent.getActiveProfile();
 
 	// set up a disk-based persistor to try
@@ -42,7 +52,11 @@ int main()
 
 	// set up our key to fetch (We don't need to be creating millions of keys just to performance test)
 	ISAgentCreateKeysResponse createResponse;
-	agent.createKey(createResponse);
+	nErrorCode = agent.createKey(createResponse);
+	if (nErrorCode != ISAGENT_OK) {
+			std::cerr << "Error creating key: " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
+			exit(1);
+	}
 	std::string keyId = createResponse.getKeys()[0].getId();
 	ISAgentGetKeysResponse getResponse;
 
@@ -60,7 +74,7 @@ int main()
 	static const int testBlockSize = 9;
 
 	int totalTestCount = 0;
-	
+
 	// Incrementally generate more data, so we don't have to wait forever to see a trend
 	// It will run 9 tests, print results, run 90 more, print, etc.
 	// Be careful increasing this number!  100 test runs will make ~800 transactions

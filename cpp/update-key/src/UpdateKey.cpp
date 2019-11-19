@@ -12,7 +12,7 @@
 
 #ifdef _WIN32
     #define HOMEVAR "USERPROFILE"
-#else 
+#else
     #define HOMEVAR "HOME"
 #endif
 
@@ -50,7 +50,7 @@ int main(int argc, char* argv[]) {
     // define new mutable attributes
     std::vector<std::string> classificationVal;
     classificationVal.push_back("Highly Restricted");
-    
+
     // fetch key
     ISAgentGetKeysResponse response;
     nErrorCode = agent.getKey(keyId, response);
@@ -78,5 +78,12 @@ int main(int argc, char* argv[]) {
     hexKey.fromBytes(updatedKey.getKey());
     std::cout << "KeyId    : " << updateKey.getId() << std::endl;
     std::cout << "KeyBytes : " << hexKey << std::endl;
-    std::cout << updatedKey.getMutableAttributes() << std::endl;
+
+    // display updated attributes (ISKeyAttributesMap is a map of vectors)
+    for (auto const& key : updatedKey.getMutableAttributes()) {
+        std::cout << key.first << ": [ ";
+        for(auto const& value : key.second)
+          std::cout << value << " ";
+        std::cout << "]" << std::endl ;
+    }
 }

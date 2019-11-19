@@ -12,7 +12,7 @@
 
 #ifdef _WIN32
     #define HOMEVAR "USERPROFILE"
-#else 
+#else
     #define HOMEVAR "HOME"
 #endif
 
@@ -50,6 +50,15 @@ int main(int argc, char* argv[]) {
     request.getKeyIds().push_back(keyId);
     ISAgentGetKeysResponse response;
     nErrorCode = agent.getKeys(request, response);
+    if (nErrorCode != ISAGENT_OK) {
+        std::cerr << "Error fetching key: " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
+        exit(1);
+    }
+    if (response.getKeys().size() == 0) {
+        std::cerr << "No key was returned (key does not exist or access was denied)" << std::endl;
+        exit(1);
+    }
+
     ISAgentGetKeysResponse::Key responseKey = response.getKeys().at(0);
 
     // display fetched key
@@ -58,4 +67,3 @@ int main(int argc, char* argv[]) {
     std::cout << "KeyId    : " << responseKey.getId() << std::endl;
     std::cout << "KeyBytes : " << hexKey << std::endl;
 }
-

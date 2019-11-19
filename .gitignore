@@ -33,3 +33,7 @@ _build
 *.pdf
 *.txt
 sample.log
+
+# Do not ignore the CMakeLists.txt 
+# It would other wise be ignored by *.txt
+!**/CMakeLists.txt
