@@ -4,6 +4,12 @@
  * and the Privacy Policy (https://www.ionic.com/privacy-notice/).
  */
 
+/*
+ * WARNING *
+ * Calling agent.enrollUser() successfully is a prerequisite before using this code.
+ * This is done using enrollDevice.js.
+ */
+
 import {getAgentConfig} from '../jssdkConfig.js';
 
 const main = async () => {
@@ -59,7 +65,7 @@ const main = async () => {
     }
 
   } catch (sdkErrorResponse) {
-    console.log('Obtaining agent error: ' + sdkErrorResponse.error);
+    console.log('Initializing agent error: ' + sdkErrorResponse.error);
   }
 }
 

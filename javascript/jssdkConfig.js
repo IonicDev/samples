@@ -4,7 +4,7 @@
  * and the Privacy Policy (https://www.ionic.com/privacy-notice/).
  */
 
-// Returns comman agent configuration.
+// Returns common agent configuration.
 export function getAgentConfig(applicationName) {
 
   // This is the comman agent configuration for the Javascript SDK samples.  The appId, userId,

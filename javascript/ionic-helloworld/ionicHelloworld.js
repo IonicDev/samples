@@ -6,8 +6,8 @@
 
 /*
  * WARNING *
- * Calling agent.enrollUser() successfully is a pre-requisite before using this code.
- * This is done enrollDevice.js.
+ * Calling agent.enrollUser() successfully is a prerequisite before using this code.
+ * This is done using enrollDevice.js.
  */
 
 import {getAgentConfig} from '../jssdkConfig.js';
@@ -52,7 +52,7 @@ const main = async () => {
     }
 
   } catch (SdkErrorResponse) {
-    console.log('Obtaining agent error: ' + SdkErrorResponse.error);
+    console.log('Initializing agent error: ' + SdkErrorResponse.error);
   }
 }
 
