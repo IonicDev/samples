@@ -27,6 +27,22 @@ cd samples/javascript/
 node http-server
 ~~~
 
+## Prerequisites
+
+* An existing enrollment profile stored in browser localStorage during a previous call to agent.enrollUser().
+* Specified appId, userId, and userAuth are used for look up and decryption of device profile information.
+
+You can create an enrollment profile by following the instructions below in "[Create Device Credentials](#Create Device Credentials)". The Javascript samples currently use the following appId, userId, and userAuth from `jssdkConfig.js`:
+
+~~~Javascript
+const agentConfig = {
+    appId: 'ionic-js-samples',
+    userId: 'developer',
+    userAuth: 'password123',
+  };
+~~~
+**Note:** Failure to find any profiles may indicate that the device credentials were not created; or that the specified parameters aren't a match to those used during enrollment.
+
 ## Create Device Credentials
 
 After the http server has been started, use a Chrome or Firefox browser.
