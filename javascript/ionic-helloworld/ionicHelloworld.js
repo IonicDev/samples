@@ -35,6 +35,7 @@ const main = async () => {
       ciphertext = encryptResponse.stringChunk;
     } catch (SdkErrorResponse) {
       console.log('Encryption error: ' + SdkErrorResponse.error);
+      return;
     }
   
     // Note: Decryption only works if the policy allows it.
