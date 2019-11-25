@@ -1,0 +1,85 @@
+<!-- Adapted from: https://api.ionic.com/jssdk/latest/Docs/tutorial-helloWorld_index.html.html -->
+<html>
+
+<head>
+    <title>Ionic JS-SDK Hello World</title>
+    <style>
+        body {
+            display:flex;
+            flex-flow: column;
+            align-items: center;
+            font-family: sans-serif;
+        }
+        button {
+            font-weight: 600;
+            margin-left: .5em;
+        }
+        input, button, .display-text {
+            padding: 7px;
+        }
+        input[type="text"], input[type="password"],
+        .display-text {
+            display: inline-block;
+            min-width: 300px;
+            color: blue;
+        }
+        .hide {
+            display: none;
+        }
+        .inline-frame {
+            border: none;
+            width: 100%;
+            min-height: 600px;
+            resize:both;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .credsForm label + button {
+            margin-left: 3.5em;
+        }
+        </style>
+</head>
+
+<body>
+    <h1>Machina Security's Device Enrollment Tutorial</h1>
+    <p id="messagesBloc"></p>
+    <form id="credsForm" class="credsForm" enctype="application/x-www-form-urlencoded">
+        <div>
+        <p>
+            <label>User ID: <input name="userId" type="text" placeholder="User ID..." required></label>
+        </p>
+        <p>
+            <label>Password: <input name="userAuth" type="password" placeholder="Password..." required></label>
+        </p>
+        <p class="text-center">
+            <button type="button" value="SAVE">Enroll</button>
+        </p>
+        </div>
+    </form>
+
+    <form id="dataForm" class="hide" enctype="application/x-www-form-urlencoded">
+
+        <p>
+            <label>Plain Text Input: <input name="plainText" type="text" placeholder="Enter text to be encrypted..."></label>
+            <button type="button" value="ENCRYPT">Encrypt</button>
+        </p>
+
+        <p id="encryptedBloc" class="hide">
+            <label>Encrypted Text: <span class="display-text"></span></label>
+            <button type="button" value="DECRYPT">Decrypt</button>
+        </p>
+
+
+        <p id="decryptedBloc" class="hide">
+            <label>Decrypted Text: <span class="display-text"></span></label>
+        </p>
+    </form>
+
+
+    <script src="https://api.ionic.com/jssdk/latest/libs/sdk.bundle.js"></script>
+    <script type="module" src="jssdkHelloworld.js"></script>
+</body>
+
+</html>
+

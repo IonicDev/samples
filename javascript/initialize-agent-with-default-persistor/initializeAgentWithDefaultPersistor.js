@@ -1,31 +1,36 @@
 /*
- * (c) 2018-2019 Ionic Security Inc.
+ * (c) 2018-2020 Ionic Security Inc.
  * By using this code, I agree to the Terms & Conditions (https://dev.ionic.com/use.html)
  * and the Privacy Policy (https://www.ionic.com/privacy-notice/).
  */
 
-const appData = {
-  appId: 'ionic-js-samples',
-  userId: 'developer',
-  userAuth: 'password123',
-  enrollmentUrl: 'https://preview-enrollment.ionic.com/keyspace/HVzG/register'
-}
+/*
+ * WARNING *
+ * Calling agent.enrollUser() successfully is a prerequisite before using this code.
+ * This is done using enrollDevice.js.
+ */
+
+import {getAgentConfig} from '../jssdkConfig.js';
 
 const main = async () => {
-  // initialize agent with default persistor
-  const agent = new window.IonicSdk.ISAgent()
-  const response = await agent.loadUser(appData).catch((error) => {
-    console.log('Error loading profile: ', error)
-  })
+  const appData = getAgentConfig('Javascript Initialize Agent with Default Persistor');
 
-  // display all profiles in persistor
-  const profiles = response.profiles
-  profiles.forEach((profile) => {
-    console.log('---')
-    console.log('Id       : ', profile.deviceId)
-    console.log('Keyspace : ', profile.keyspace)
-    console.log('ApiUrl   : ', profile.server)
-  })
+  // initialize agent with default persistor
+  try {
+    const resp = await new window.IonicSdk.ISAgent(appData);
+
+    // display all profiles in persistor
+    const profiles = resp.profiles;
+    console.log('');
+    profiles.forEach((profile) => {
+      console.log('---');
+      console.log('Id       : ' + profile.deviceId);
+      console.log('Keyspace : ' + profile.keyspace);
+      console.log('ApiUrl   : ' + profile.server);
+    });
+  } catch (sdkErrorResponse) {
+    console.log('Initializing agent error: ' + sdkErrorResponse.error);
+  }
 }
 
 main()
