@@ -24,7 +24,7 @@ public class UpdateKey
     public static void main(String[] args)
     {
         // TODO: provide key to update
-        String keyId = null;
+        String keyId = "MagvIP7jrcE";
 
         if (keyId == null) {
             System.out.println("Please set the 'keyId' variable to a key you have already created");
@@ -57,19 +57,23 @@ public class UpdateKey
         // fetch key
         GetKeysResponse.Key fetchedKey = null;
         try {
-            fetchedKey = agent.getKey(keyId).getKeys().get(0);
+            GetKeysResponse keyResp = agent.getKey(keyId);
+            if (keyResp.getKeys().size() == 0) {
+                throw new IonicException(100, "No keys from getKeys().");
+            }
+            fetchedKey = keyResp.getKeys().get(0);
         } catch(IonicException e) {
             System.out.println(e.getMessage());
             System.exit(1);
         }
 
         // merge new and existing attributes
-        KeyAttributesMap updatedAttributes = new KeyAttributesMap(fetchedKey.getMutableAttributes());
+        KeyAttributesMap updatedAttributes = new KeyAttributesMap(fetchedKey.getMutableAttributesMap());
         updatedAttributes.putAll(newMutableAttributes);
         
         // create update request key
         UpdateKeysRequest.Key updateRequestKey = new UpdateKeysRequest.Key(fetchedKey);
-        updateRequestKey.setMutableAttributes(updatedAttributes);
+        updateRequestKey.setMutableAttributesMap(updatedAttributes);
 
         // update key
         UpdateKeysResponse.Key key = null;
@@ -84,6 +88,6 @@ public class UpdateKey
         System.out.println("KeyId        : " + key.getId());
         System.out.println("KeyBytes     : " + DatatypeConverter.printHexBinary(key.getKey()));
         System.out.println("FixedAttrs   : " + key.getAttributesMap());
-        System.out.println("MutableAttrs : " + key.getMutableAttributes());
+        System.out.println("MutableAttrs : " + key.getMutableAttributesMap());
     }
 }

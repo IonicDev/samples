@@ -48,7 +48,11 @@ public class GetKeyOnBehalfOf
         // get key with request metadata
         GetKeysResponse.Key key = null;
         try {
-            key = agent.getKey(keyId, requestMetadata).getKeys().get(0);
+            GetKeysResponse keyResp = agent.getKey(keyId, requestMetadata);
+            if (keyResp.getKeys().size() == 0) {
+                throw new IonicException(100, "No keys from getKey()");
+            }
+            key = keyResp.getKeys().get(0);
         } catch(IonicException e) {
             System.out.println(e.getMessage());
             System.exit(1);
@@ -58,6 +62,6 @@ public class GetKeyOnBehalfOf
         System.out.println("KeyId        : " + key.getId());
         System.out.println("KeyBytes     : " + DatatypeConverter.printHexBinary(key.getKey()));
         System.out.println("FixedAttrs   : " + key.getAttributesMap());
-        System.out.println("MutableAttrs : " + key.getMutableAttributes());
+        System.out.println("MutableAttrs : " + key.getMutableAttributesMap());
     }
 }
