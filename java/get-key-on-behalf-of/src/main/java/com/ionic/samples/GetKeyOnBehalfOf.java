@@ -19,8 +19,8 @@ public class GetKeyOnBehalfOf
 {
     public static void main(String[] args)
     {
-        String keyId = "HVzG4flO-KE";
-        String delegatedUserEmail = "test@ionic.com";
+        String keyId = null;  // Modify null to a valid key ID.
+        String delegatedUserEmail = null;  // Modify null to a valid external ID.
 
         // read persistor password from environment variable
         String persistorPassword = System.getenv("IONIC_PERSISTOR_PASSWORD");

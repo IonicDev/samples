@@ -20,7 +20,7 @@ public class GetKeyByExternalId
 {
     public static void main(String[] args)
     {
-        String externalId = "02e09520-e52c-42aa-b21c-a60698cf31a2";
+        String externalId = null;  // Modify null to a valid key ID.
 
         // read persistor password from environment variable
         String persistorPassword = System.getenv("IONIC_PERSISTOR_PASSWORD");

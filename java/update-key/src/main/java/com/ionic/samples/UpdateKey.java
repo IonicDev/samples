@@ -23,8 +23,7 @@ public class UpdateKey
 {
     public static void main(String[] args)
     {
-        // TODO: provide key to update
-        String keyId = "MagvIP7jrcE";
+        String keyId = null;  // Modify null to a valid key ID.
 
         if (keyId == null) {
             System.out.println("Please set the 'keyId' variable to a key you have already created");

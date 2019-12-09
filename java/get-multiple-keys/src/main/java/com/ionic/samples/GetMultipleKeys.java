@@ -20,9 +20,10 @@ public class GetMultipleKeys
 {
     public static void main(String[] args)
     {
-        String keyId1 = "HVzG3wEE_MM";
-        String keyId2 = "HVzG3IEK_5w";
-        String keyId3 = "HVzG5-GBKWM";
+        // Modify nulls to a valid key IDs.
+        String keyId1 = null;
+        String keyId2 = null;
+        String keyId3 = null;
 
         // read persistor password from environment variable
         String persistorPassword = System.getenv("IONIC_PERSISTOR_PASSWORD");
