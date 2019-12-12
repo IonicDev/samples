@@ -19,7 +19,7 @@ public class SetRequestMetadata
 {
     public static void main(String[] args)
     {
-        String keyId = "HVzG4flO-KE";
+        String keyId = null;  // Modify null to a valid key ID.
 
         // read persistor password from environment variable
         String persistorPassword = System.getenv("IONIC_PERSISTOR_PASSWORD");
@@ -57,6 +57,6 @@ public class SetRequestMetadata
         System.out.println("KeyId        : " + key.getId());
         System.out.println("KeyBytes     : " + DatatypeConverter.printHexBinary(key.getKey()));
         System.out.println("FixedAttrs   : " + key.getAttributesMap());
-        System.out.println("MutableAttrs : " + key.getMutableAttributes());
+        System.out.println("MutableAttrs : " + key.getMutableAttributesMap());
     }
 }

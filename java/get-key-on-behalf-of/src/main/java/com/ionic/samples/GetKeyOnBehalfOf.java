@@ -19,8 +19,8 @@ public class GetKeyOnBehalfOf
 {
     public static void main(String[] args)
     {
-        String keyId = "HVzG4flO-KE";
-        String delegatedUserEmail = "test@ionic.com";
+        String keyId = null;  // Modify null to a valid key ID.
+        String delegatedUserEmail = null;  // Modify null to a valid external ID.
 
         // read persistor password from environment variable
         String persistorPassword = System.getenv("IONIC_PERSISTOR_PASSWORD");
@@ -48,7 +48,11 @@ public class GetKeyOnBehalfOf
         // get key with request metadata
         GetKeysResponse.Key key = null;
         try {
-            key = agent.getKey(keyId, requestMetadata).getKeys().get(0);
+            GetKeysResponse keyResp = agent.getKey(keyId, requestMetadata);
+            if (keyResp.getKeys().size() == 0) {
+                throw new IonicException(100, "No keys from getKey()");
+            }
+            key = keyResp.getKeys().get(0);
         } catch(IonicException e) {
             System.out.println(e.getMessage());
             System.exit(1);
@@ -58,6 +62,6 @@ public class GetKeyOnBehalfOf
         System.out.println("KeyId        : " + key.getId());
         System.out.println("KeyBytes     : " + DatatypeConverter.printHexBinary(key.getKey()));
         System.out.println("FixedAttrs   : " + key.getAttributesMap());
-        System.out.println("MutableAttrs : " + key.getMutableAttributes());
+        System.out.println("MutableAttrs : " + key.getMutableAttributesMap());
     }
 }

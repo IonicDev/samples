@@ -56,6 +56,5 @@ public class CreateKeyWithProtectedAttributes
         System.out.println("KeyId        : " + key.getId());
         System.out.println("KeyBytes     : " + DatatypeConverter.printHexBinary(key.getKey()));
         System.out.println("FixedAttrs   : " + key.getAttributesMap());
-        System.out.println("MutableAttrs : " + key.getMutableAttributes());
     }
 }

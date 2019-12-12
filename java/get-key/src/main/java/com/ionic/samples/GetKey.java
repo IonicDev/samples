@@ -18,7 +18,7 @@ public class GetKey
 {
     public static void main(String[] args)
     {
-        String keyId = "HVzG4flO-KE";
+        String keyId = null;  // Modify null to a valid key ID.
 
         // read persistor password from environment variable
         String persistorPassword = System.getenv("IONIC_PERSISTOR_PASSWORD");
@@ -34,17 +34,22 @@ public class GetKey
             DeviceProfilePersistorPassword persistor = new DeviceProfilePersistorPassword(persistorPath);
             persistor.setPassword(persistorPassword);
             agent.initialize(persistor);
-        } catch(IonicException e) {
-            System.out.println(e.getMessage());
+        } catch(IonicException ie) {
+            System.out.println(ie.getMessage());
             System.exit(1);
         }
 
         // get single key
         GetKeysResponse.Key key = null;
         try {
-            key = agent.getKey(keyId).getKeys().get(0);
-        } catch(IonicException e) {
-            System.out.println(e.getMessage());
+            GetKeysResponse keyResp = agent.getKey(keyId);
+            if (keyResp.getKeys().size() == 0) {
+                throw new IonicException(100, "No keys from getKey()");    
+            }
+            key = keyResp.getKeys().get(0);
+            
+        } catch(IonicException ie) {
+            System.out.println(ie.getMessage());
             System.exit(1);
         }
 
@@ -52,6 +57,6 @@ public class GetKey
         System.out.println("KeyId        : " + key.getId());
         System.out.println("KeyBytes     : " + DatatypeConverter.printHexBinary(key.getKey()));
         System.out.println("FixedAttrs   : " + key.getAttributesMap());
-        System.out.println("MutableAttrs : " + key.getMutableAttributes());
+        System.out.println("MutableAttrs : " + key.getMutableAttributesMap());
     }
 }

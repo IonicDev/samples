@@ -20,9 +20,10 @@ public class GetMultipleKeys
 {
     public static void main(String[] args)
     {
-        String keyId1 = "HVzG3wEE_MM";
-        String keyId2 = "HVzG3IEK_5w";
-        String keyId3 = "HVzG5-GBKWM";
+        // Modify nulls to a valid key IDs.
+        String keyId1 = null;
+        String keyId2 = null;
+        String keyId3 = null;
 
         // read persistor password from environment variable
         String persistorPassword = System.getenv("IONIC_PERSISTOR_PASSWORD");
@@ -56,13 +57,18 @@ public class GetMultipleKeys
             System.exit(1);
         }
 
+        if (keys.size() == 0) {
+            System.out.println("There were no keys or access was denied to the keys");
+            System.exit(1);
+        }
+
         // display fetched keys
         for (GetKeysResponse.Key key : keys) {
             System.out.println("---");
             System.out.println("KeyId        : " + key.getId());
             System.out.println("KeyBytes     : " + DatatypeConverter.printHexBinary(key.getKey()));
             System.out.println("FixedAttrs   : " + key.getAttributesMap());
-            System.out.println("MutableAttrs : " + key.getMutableAttributes());
+            System.out.println("MutableAttrs : " + key.getMutableAttributesMap());
         }
     }
 }
