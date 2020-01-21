@@ -18,7 +18,7 @@ fi
 set -e
 
 # Set the current applications name and version
-ClinetMetadata="ionic-application-name:Ciphers CLI Tutorial,ionic-application-version:1.0.0"
+ClientMetadata="ionic-application-name:Ciphers CLI Tutorial,ionic-application-version:1.0.0"
 
 # Sample message to encrypt
 MESSAGE='this is a secret message!'
@@ -26,12 +26,12 @@ echo "ORIGINAL TEXT      : ${MESSAGE}"
 
 # Encrypt a string (The key is automatically created)
 ENCRYPTED_MESSAGE=$(ionicsdk --devicetype password --devicefile ${PERSISTOR_PATH} --devicepw ${IONIC_PERSISTOR_PASSWORD} \
-    chunk encrypt -s "${MESSAGE}" --metas "${ClinetMetadata}")
+    chunk encrypt -s "${MESSAGE}" --metas "${ClientMetadata}")
 
 echo "CIPHER TEXT        : ${ENCRYPTED_MESSAGE}"
 
 # Decrypt a string (The correlating key is automatically fetched)
 MESSAGE=$(ionicsdk --devicetype password --devicefile ${PERSISTOR_PATH} --devicepw ${IONIC_PERSISTOR_PASSWORD} \
-    chunk decrypt -s "${ENCRYPTED_MESSAGE}" --metas "${ClinetMetadata}")
+    chunk decrypt -s "${ENCRYPTED_MESSAGE}" --metas "${ClientMetadata}")
 
 echo "PLAIN TEXT         : ${MESSAGE}"
