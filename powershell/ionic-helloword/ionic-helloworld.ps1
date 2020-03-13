@@ -20,12 +20,15 @@ $ClientMetadata="ionic-application-name:Keys CLI Tutorial,ionic-application-vers
 $MESSAGE="'this is a secret message!'"
 echo "ORIGINAL TEXT      : ${MESSAGE}"
 
+<# Define data markings #>
+$MutableAttrs="'clearance-level:secret'"
+
 <# Encrypt a string (The key is automatically created) #>
 $ENCRYPTED_MESSAGE=$(machina `
   --devicetype password `
   --devicefile ${PERSISTOR_PATH} `
   --devicepw ${IONIC_PERSISTOR_PASSWORD} `
-    chunk encrypt --instr "${MESSAGE}" --metas "${ClientMetadata}")
+    chunk encrypt --instr "${MESSAGE}" --mattrs "${MutableAttrs}" --metas "${ClientMetadata}")
 
 echo "CIPHER TEXT        : ${ENCRYPTED_MESSAGE}"
 
