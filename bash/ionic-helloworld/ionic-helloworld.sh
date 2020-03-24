@@ -8,15 +8,15 @@
 
 # Confirm that the profile persistor password is set as an environment variable
 if [[ -z "${IONIC_PERSISTOR_PASSWORD}" ]]; then
-echo "[!] Please provide the persistor password as env variable: IONIC_PERSISTOR_PASSWORD"
-exit 1
+  echo "[!] Please provide the persistor password as env variable: IONIC_PERSISTOR_PASSWORD"
+  exit 1
 fi
 
 # Confirm that the profile persistor file exists
 PERSISTOR_PATH="${HOME}/.ionicsecurity/profiles.pw"
 if [[ ! -f "$PERSISTOR_PATH" ]]; then
-echo "[!] '$PERSISTOR_PATH' does not exist"
-exit 1
+  echo "[!] '$PERSISTOR_PATH' does not exist"
+  exit 1
 fi
 
 # Configure this script to exit when any command fails
