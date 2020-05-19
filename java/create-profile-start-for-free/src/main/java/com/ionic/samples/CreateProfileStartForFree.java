@@ -8,6 +8,7 @@ package com.ionic.samples;
 
 import com.ionic.sdk.agent.Agent;
 import com.ionic.sdk.agent.request.createdevice.CreateDeviceResponse;
+import com.ionic.sdk.device.create.EnrollIonicAuth;
 import com.ionic.sdk.device.profile.DeviceProfile;
 import com.ionic.sdk.device.profile.persistor.DeviceProfilePersistorPassword;
 import com.ionic.sdk.error.IonicException;
