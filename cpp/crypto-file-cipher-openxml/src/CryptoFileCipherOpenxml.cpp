@@ -1,5 +1,5 @@
 /*
- * (c) 2018 Ionic Security Inc.
+ * (c) 2018-2020 Ionic Security Inc.
  * By using this code, I agree to the Terms & Conditions (https://dev.ionic.com/use.html)
  * and the Privacy Policy (https://www.ionic.com/privacy-notice/).
  */
@@ -32,11 +32,13 @@ int main(int argc, char* argv[]) {
     }
     std::string persistorPassword = std::string(cpersistorPassword);
 
-    // initialize agent with password persistor
+    // get password persistor
     std::string persistorPath = std::string(std::getenv(HOMEVAR)) + "/.ionicsecurity/profiles.pw";
     ISAgentDeviceProfilePersistorPassword persistor;
     persistor.setFilePath(persistorPath);
     persistor.setPassword(persistorPassword);
+
+    // initialize agent with password persistor
     ISAgent agent;
     nErrorCode = agent.initialize(persistor);
     if (nErrorCode != ISAGENT_OK) {
@@ -46,7 +48,7 @@ int main(int argc, char* argv[]) {
     }
 
     // define attributes (optional)
-    std::map< std::string, std::vector< std::string > > mutableAttributes;
+    std::map<std::string, std::vector<std::string>> mutableAttributes;
     std::vector<std::string> classificationVal;
     classificationVal.push_back("Restricted");
     mutableAttributes["classification"] = classificationVal;
@@ -66,7 +68,7 @@ int main(int argc, char* argv[]) {
 
     // decrypt
     std::cout << "Decrypting message and saving to Plaintext File  : " << filePlaintext << std::endl;
-    cipher.decrypt(fileCiphertext, filePlaintext);
+    nErrorCode = cipher.decrypt(fileCiphertext, filePlaintext);
     if (nErrorCode != ISCRYPTO_OK) {
         std::cerr << "Error: " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
         exit(1);
