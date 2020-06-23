@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("IonicHelloworld")]
-[assembly: AssemblyCopyright("Copyright © 2018 Ionic Security Inc.")]
+[assembly: AssemblyCopyright("Copyright © 2018-2020 Ionic Security Inc.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
