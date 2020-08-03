@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-
 #import <IonicAgentSDK/IonicAgentSDK.h>
 #import <IonicAgentSDK/IonicAgentDeviceProfilePersistor.h>
 
