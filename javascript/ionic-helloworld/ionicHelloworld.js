@@ -49,7 +49,7 @@ const main = async () => {
       console.log('Decrypted Text: ' + decryptedText.stringChunk);
     } catch (SdkErrorResponse) {
       console.log('Error decrypting cipertext: ' + SdkErrorResponse.error);
-      console.log('You do not have the correct clearance.');
+      console.log('Insufficient clearance to access this data.');
     }
 
   } catch (SdkErrorResponse) {

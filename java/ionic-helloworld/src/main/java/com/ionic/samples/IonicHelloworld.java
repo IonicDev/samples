@@ -78,7 +78,7 @@ public class IonicHelloworld
             plaintext = cipher.decrypt(ciphertext);
         } catch(IonicException e) {
             System.out.println("Error decrypting ciphertext: " + e.getMessage());
-            System.out.println("You don't have the correct clearance.");
+            System.out.println("Insufficient clearance to access this data.");
             System.out.println("");
             System.exit(1);
         }

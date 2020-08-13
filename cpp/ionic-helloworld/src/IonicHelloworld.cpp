@@ -77,7 +77,7 @@ int main(int argc, char* argv[]) {
     nErrorCode = cipher.decrypt(ciphertext, plaintext);
     if (nErrorCode != ISCRYPTO_OK) {
         std::cerr << "Decryption Error: " << ISAgentSDKError::getErrorCodeString(nErrorCode) << std::endl;
-        std::cerr << "You don't have the correct clearance." << std::endl;
+        std::cerr << "Insufficient clearance to access this data." << std::endl;
         std::cerr << std::endl;
         exit(1);
     }
