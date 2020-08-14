@@ -51,7 +51,7 @@ try:
    plaintext = cipher.decryptstr(ciphertext)
 except ionicsdk.exceptions.IonicException as e:
     print("Error decrypting ciphertext: {0}".format(e.message))
-    print("You don't have the correct clearance.")
+    print("Insufficient clearance to access this data.")
     print("")
     sys.exit(1)
 
