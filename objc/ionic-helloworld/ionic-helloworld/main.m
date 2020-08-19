@@ -49,21 +49,21 @@ int main(int argc, const char * argv[]) {
         [agent setMetadataValue:@"ionic-application-name" forField:@"ionic-helloworld-objc"];
         [agent setMetadataValue:@"ionic-application-version" forField:@"1.0.0"];
         
+#pragma - mark SENDER
+        
         // Define data marking clearance-level
         NSDictionary * dataMarkings = @{
                                         @"clearance-level": @[@"secret"]
-                                       };
+                                        };
         IonicChunkCryptoEncryptAttributes* keyAttributes =
-            [[IonicChunkCryptoEncryptAttributes alloc] initWithKeyAttributes:dataMarkings];
-        
-#pragma - mark SENDER
-        
-        NSString* message = @"this is a secret message!";
+        [[IonicChunkCryptoEncryptAttributes alloc] initWithKeyAttributes:dataMarkings];
         
         // initialize aes cipher object
         IonicChunkCryptoCipherAuto* senderCipher = [[IonicChunkCryptoCipherAuto alloc] initWithAgent:agent ];
         
-        // encrypt data
+        NSString* message = @"this is a secret message!";
+        
+        // encrypt with data marking
         NSString* cipherText = [senderCipher encryptText:message
                                           withAttributes:keyAttributes
                                                    error:&error];
