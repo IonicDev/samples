@@ -22,7 +22,8 @@ try:
     persistor = ionicsdk.DeviceProfilePersistorPasswordFile(persistor_path, persistor_password)
     agent = ionicsdk.Agent(None, persistor)
 except ionicsdk.exceptions.IonicException as e:
-    print("Error initializing agent: {0}".format(e.message))
+    print("Failed to initialize agent from password persistor ({0})".format(persistor_path))
+    print(e.message)
     sys.exit(1)
 
 # check if there are profiles.

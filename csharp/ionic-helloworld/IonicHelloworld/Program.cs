@@ -36,22 +36,23 @@ namespace Samples
                 Environment.Exit(1);
             }
 
-            // Create an agent object to talk to Ionic.
-            Agent agent = new Agent();
-
             // Create a password persistor for agent initialization.
+            String persistorPath = homePath + "\\.ionicsecurity\\profiles.pw"
+            DeviceProfilePersistorPassword persistor = new DeviceProfilePersistorPassword();
+            persistor.FilePath = persistorPath;
+            persistor.Password = persistorPassword;
+
             try
             {
-                DeviceProfilePersistorPassword persistor = new DeviceProfilePersistorPassword();
-                persistor.FilePath = homePath + "\\.ionicsecurity\\profiles.pw";
-                persistor.Password = persistorPassword;
-
+                // Create an agent object to talk to Ionic.
+                Agent agent = new Agent();
                 agent.SetMetadata(Agent.MetaApplicationName, "IonicHelloWorld Sample");
                 agent.Initialize(persistor);
             }
             catch (SdkException sdkExp)
             {
-                Console.WriteLine("Agent initialization error: " + sdkExp.Message);
+                Console.WriteLine("Failed to initialize agent from password persistor ({0})", persistorPath);
+                Console.WriteLine(sdkExp.Message);
                 WaitForInput();
                 Environment.Exit(1);
             }
