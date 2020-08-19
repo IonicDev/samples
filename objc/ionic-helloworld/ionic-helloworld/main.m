@@ -46,7 +46,7 @@ int main(int argc, const char * argv[]) {
         }
         
         // set app metadata
-        [agent setMetadataValue:@"ionic-application-name" forField:@"ionic-ciphers-objc-tutorial"];
+        [agent setMetadataValue:@"ionic-application-name" forField:@"ionic-helloworld-objc"];
         [agent setMetadataValue:@"ionic-application-version" forField:@"1.0.0"];
         
         // Define data marking clearance-level
