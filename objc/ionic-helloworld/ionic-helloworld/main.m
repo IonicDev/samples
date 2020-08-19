@@ -1,6 +1,6 @@
 //
 //  main.m
-//  ionic-ciphers
+//  ionic-helloworld
 //
 //  Copyright © 2020 Ionic Security Inc. All rights reserved.
 //  By using this code, I agree to the Terms & Conditions (https://dev.ionic.com/use.html) and the Privacy Policy (https://www.ionic.com/privacy-notice/).
