@@ -26,7 +26,7 @@
 
 /* Begin PBXFileReference section */
 		0D5474D42478488B00F35133 /* ionic-helloworld */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "ionic-helloworld"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0D5474D72478488B00F35133 /* ionic-helloworld.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "ionic-helloworld.m"; sourceTree = "<group>"; };
+		0D5474D72478488B00F35133 /* ionic-helloworld.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "ionic-helloworld.m"; path = "ionic-helloworld/ionic-helloworld.m"; sourceTree = "<group>"; };
 		0D5474DF247853A300F35133 /* IonicAgentSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IonicAgentSDK.framework; path = "../../../../../Production/Sdks/MachinaToolsSDKObjC-1.8.0-OSX/ISAgentSDKObjC/IonicAgentSDK.framework"; sourceTree = "<group>"; };
 		0D5474E22478569800F35133 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -47,7 +47,7 @@
 		0D5474CB2478488B00F35133 = {
 			isa = PBXGroup;
 			children = (
-				0D5474D62478488B00F35133 /* ionic-helloworld */,
+				0D5474D72478488B00F35133 /* ionic-helloworld.m */,
 				0D5474D52478488B00F35133 /* Products */,
 				0D5474DE247853A200F35133 /* Frameworks */,
 			);
@@ -59,14 +59,6 @@
 				0D5474D42478488B00F35133 /* ionic-helloworld */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		0D5474D62478488B00F35133 /* ionic-helloworld */ = {
-			isa = PBXGroup;
-			children = (
-				0D5474D72478488B00F35133 /* ionic-helloworld.m */,
-			);
-			path = "ionic-helloworld";
 			sourceTree = "<group>";
 		};
 		0D5474DE247853A200F35133 /* Frameworks */ = {
