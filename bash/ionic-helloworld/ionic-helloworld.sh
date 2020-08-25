@@ -23,7 +23,7 @@ fi
 set -e
 
 # Set the current applications name and version
-ClientMetadata="ionic-application-name:Ciphers CLI Tutorial,ionic-application-version:1.0.0"
+ClientMetadata="ionic-application-name:ionic-helloworld-bash,ionic-application-version:1.0.0"
 
 # Sample message to encrypt
 MESSAGE='this is a secret message!'

@@ -21,7 +21,7 @@ const main = async () => {
     'clearance-level': ['secret']
   }
 
-  const appData = getAgentConfig('Javascript Hello, World!');
+  const appData = getAgentConfig('ionic-helloworld-javascript');
 
   // initialize agent
   try {
@@ -37,11 +37,11 @@ const main = async () => {
       console.log('Encryption error: ' + SdkErrorResponse.error);
       return;
     }
-  
+
     // Note: Decryption only works if the policy allows it.
     try {
       const decryptedText = await agent.decryptStringChunkCipher({stringData: ciphertext});
-  
+
       // display data
       console.log('');
       console.log('Plain Text: ' + message);

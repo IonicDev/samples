@@ -14,14 +14,14 @@
 
 #ifdef _WIN32
     #define HOMEVAR "USERPROFILE"
-#else 
+#else
     #define HOMEVAR "HOME"
 #endif
 
 int main(int argc, char* argv[]) {
 
     int nErrorCode;
-    std::string appName = "policy-test";
+    std::string appName = "ionic-helloworld-cpp";
     std::string appVersion = "1.0.0";
 
     std::string message = "Hello, World!";
@@ -89,4 +89,3 @@ int main(int argc, char* argv[]) {
     std::cout << "Plaintext  : " << plaintext << std::endl;
     std::cout << std::endl;
 }
-
