@@ -2,7 +2,7 @@
  * (c) 2017-2020 Ionic Security Inc.
  * By using this code, I agree to the Terms & Conditions (https://dev.ionic.com/use.html)
  * and the Privacy Policy (https://www.ionic.com/privacy-notice/).
- * 
+ *
  * Developed with Ionic Java SDK 2.4.0
  */
 
@@ -28,7 +28,7 @@ public class IonicHelloworld
         if (persistorPassword == null) {
             System.out.println("[!] Please provide the persistor password as env variable: IONIC_PERSISTOR_PASSWORD");
             System.exit(1);
-        }        
+        }
 
         // initialize agent with password persistor
         Agent agent = new Agent();
@@ -50,8 +50,8 @@ public class IonicHelloworld
         }
 
         // set application metadata
-        agent.setMetadata("ionic-application-name", "ionic-helloworld");
-        agent.setMetadata("ionic-application-version", "1.1.0");
+        agent.setMetadata("ionic-application-name", "Hello World!");
+        agent.setMetadata("ionic-application-version", "1.0.0");
 
         // Define data marking clearance-level
         KeyAttributesMap dataMarkings = new KeyAttributesMap();
@@ -74,7 +74,7 @@ public class IonicHelloworld
         String plaintext = null;
 
         // Note: Decryption only works if the policy allows it.
-        try { 
+        try {
             plaintext = cipher.decrypt(ciphertext);
         } catch(IonicException e) {
             System.out.println("Error decrypting ciphertext: " + e.getMessage());

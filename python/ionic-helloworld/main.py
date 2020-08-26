@@ -32,6 +32,12 @@ if not agent.hasactiveprofile():
     print("Register (and select an active profile) this device before continuing.")
     sys.exit(1)
 
+# set app metadata
+agent.setmetadata({
+    "ionic-application-name": "Hello World!",
+    "ionic-application-version": "1.0.0"
+})
+
 # define data markings
 data_markings = {
     "clearance-level": ["secret"]

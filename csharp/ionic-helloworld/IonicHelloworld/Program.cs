@@ -46,7 +46,7 @@ namespace Samples
             {
                 // Create an agent object to talk to Ionic.
                 Agent agent = new Agent();
-                agent.SetMetadata(Agent.MetaApplicationName, "IonicHelloWorld Sample");
+                agent.SetMetadata(Agent.MetaApplicationName, "Hello World!");
                 agent.Initialize(persistor);
             }
             catch (SdkException sdkExp)

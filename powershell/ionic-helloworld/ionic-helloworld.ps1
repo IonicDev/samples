@@ -20,7 +20,7 @@ if (-not (Test-Path -path $PERSISTOR_PATH)) {
 }
 
 <# Set the current applications name and version #>
-$ClientMetadata="ionic-application-name:Keys CLI Tutorial,ionic-application-version:1.0.0"
+$ClientMetadata="ionic-application-name:Hello World!,ionic-application-version:1.0.0"
 
 <# Sample message to encrypt #>
 $MESSAGE="'this is a secret message!'"
