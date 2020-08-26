@@ -50,8 +50,8 @@ public class IonicHelloworld
         }
 
         // set application metadata
-        agent.setMetadata("ionic-application-name", "ionic-helloworld-java");
-        agent.setMetadata("ionic-application-version", "1.1.0");
+        agent.setMetadata("ionic-application-name", "Hello World!");
+        agent.setMetadata("ionic-application-version", "1.0.0");
 
         // Define data marking clearance-level
         KeyAttributesMap dataMarkings = new KeyAttributesMap();

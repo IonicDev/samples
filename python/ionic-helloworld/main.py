@@ -34,7 +34,7 @@ if not agent.hasactiveprofile():
 
 # set app metadata
 agent.setmetadata({
-    "ionic-application-name": "ionic-helloworld-python",
+    "ionic-application-name": "Hello World!",
     "ionic-application-version": "1.0.0"
 })
 

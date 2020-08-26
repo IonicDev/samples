@@ -21,7 +21,7 @@
 int main(int argc, char* argv[]) {
 
     int nErrorCode;
-    std::string appName = "ionic-helloworld-cpp";
+    std::string appName = "Hello World!";
     std::string appVersion = "1.0.0";
 
     std::string message = "Hello, World!";

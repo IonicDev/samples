@@ -21,7 +21,7 @@ const main = async () => {
     'clearance-level': ['secret']
   }
 
-  const appData = getAgentConfig('ionic-helloworld-javascript');
+  const appData = getAgentConfig('Hello World!');
 
   // initialize agent
   try {
