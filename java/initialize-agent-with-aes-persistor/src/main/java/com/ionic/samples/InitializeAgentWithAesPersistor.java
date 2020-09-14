@@ -19,7 +19,7 @@ public class InitializeAgentWithAesPersistor
 {
     public static void main(String[] args)
     {
-        String persistorPath = "../../sample-data/persistors/sample-persistor.aes";
+        String persistorPath = "../../sample-data/persistors/sample-persistor.aesgcm";
         byte[] persistorKey = DatatypeConverter.parseHexBinary("A0444B8B5A7209780823617A98986831B8240BAA851A0B1696B0329280286B17");
         byte[] persistorAuthData = "persistor auth data".getBytes();
 

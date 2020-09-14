@@ -29,7 +29,7 @@ namespace Samples
         {
             // Set the persistor's path, key value, and authorization data.
             // Information can be found in ../../../../../../sample-data/persistors/README.md.
-            String persistorPath = "../../../../../../sample-data/persistors/sample-persistor.aes";
+            String persistorPath = "../../../../../../sample-data/persistors/sample-persistor.aesgcm";
             string persistorKeyHex = "A0444B8B5A7209780823617A98986831B8240BAA851A0B1696B0329280286B17";
             string persistorAuthData = "persistor auth data";
 

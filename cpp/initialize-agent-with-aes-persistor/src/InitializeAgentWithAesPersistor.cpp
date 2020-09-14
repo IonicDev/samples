@@ -13,7 +13,7 @@
 int main(int argc, char* argv[]) {
 
     int nErrorCode;
-    std::string persistorPath = "../../sample-data/persistors/sample-persistor.aes";
+    std::string persistorPath = "../../sample-data/persistors/sample-persistor.aesgcm";
     std::string persistorKeyHex = "A0444B8B5A7209780823617A98986831B8240BAA851A0B1696B0329280286B17";
     std::string persistorAuthDataStr = "persistor auth data";
 
