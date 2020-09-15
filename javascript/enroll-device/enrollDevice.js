@@ -8,9 +8,9 @@
 // Ionic Authentication, and multiple authentication selection.  For free tenants, it
 // is highly recommended to use the Ionic Authentication enrollment endpoint URL.
 // This code enrolls a browser device by using the keyspace specified in the
-// text input. The keyspace is used to obtain the tenant ID and teh enrollment URL.
-// The enrollment URL is for different ways to authenticate.  For free tenants, it
-// is recommended to select 'Ionic Authentication'.
+// text input. The keyspace is used to obtain the tenant ID and enrollment URL.
+// The enrollment URL is for different ways to authenticate.  For the Pro tier, we
+// recommend selecting "Ionic Authentication".
 //
 
 import {getAgentConfig} from '../jssdkConfig.js';
@@ -46,7 +46,7 @@ async function keyspaceSubmit () {
   enrollDevice(enrollUrl, keyspace, tenantId);
 }
 
-// Check with the Key Naming Server (KNS) to see if the keyspace is valid.
+// Check with the Keyspace Name Server (KNS) to see if the keyspace is valid.
 async function getKeyspaceInfo (keyspace) {
 
   const response = await fetch('https://api.ionic.com/v2.4/kns/keyspaces/' + keyspace);
@@ -57,7 +57,7 @@ async function getKeyspaceInfo (keyspace) {
 // Enroll the device, but first check if we're already enrolled.
 async function enrollDevice (enrollUrl, keyspace, tenantId) {
 
-  // Get the standard appData and add enrollmentURL.
+  // Get the standard appData and add enrollmentUrl.
   let appData = getAgentConfig('Javascript Enroll Device');
   appData = Object.assign(appData, {enrollmentUrl: enrollUrl});
 
