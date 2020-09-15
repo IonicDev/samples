@@ -1,9 +1,41 @@
 <html>
   <head>
+    <style>
+      button {
+        background-color: rgb(33, 133, 208);;
+        color: white;
+        font-size: 18;
+      }
+      input {
+        font-size: 18;
+      }
+      label {
+        font-size: 18;
+      }
+      textarea {
+        font-size: 18;
+        resize: none;
+      }
+      th, td {
+        padding: 5px;
+        text-align: left;
+      }
+    </style>
     <title>Ionic - Enroll Device</title>
   </head>
   <body>
     <h2>Enroll Device</h2>
+    <p>
+      Please enter your four letter keyspace to enroll your device and create device credentials.
+    </p>
+    <table>
+      <tr>
+        <td><label>Keyspace: </label></td>
+        <td><input id="keyspaceText" name="keyspaceText" autofocus required placeholder="AbyZ" size="5" maxlength="4"></td>
+        <td><button id="submitButton" background-color="blue">Submit</button> </td>
+      </tr>
+    </table>
+
     <script src='../consoleReroute.js'></script>
 
     <script src='https://api.ionic.com/jssdk/latest/libs/sdk.bundle.js'></script>
