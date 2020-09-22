@@ -14,7 +14,7 @@ import {getAgentConfig} from '../jssdkConfig.js';
 
 const main = async () => {
 
-  const appData = getAgentConfig('Javascript Create Key with External ID');
+  const appData = getAgentConfig('JavaScript Create Key with External ID');
 
   // initialize agent
   try {

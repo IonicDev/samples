@@ -16,7 +16,7 @@ const main = async () => {
 
   // initialize agent
   try {
-    const appData = getAgentConfig('Javascript Set Active Profile');
+    const appData = getAgentConfig('JavaScript Set Active Profile');
 
     const resp = await new window.IonicSdk.ISAgent(appData);
     const agent = resp.agent;

@@ -14,7 +14,7 @@ import {getAgentConfig} from '../jssdkConfig.js';
 
 const main = async () => {
 
-  const appData = getAgentConfig('Javascript Set Request Metadata');
+  const appData = getAgentConfig('JavaScript Set Request Metadata');
 
   // initialize agent
   try {

@@ -13,7 +13,7 @@
 import {getAgentConfig} from '../jssdkConfig.js';
 
 const main = async () => {
-  const appData = getAgentConfig('Javascript Get Key by External ID');
+  const appData = getAgentConfig('JavaScript Get Key by External ID');
 
   // initialize agent
   try {

@@ -16,7 +16,7 @@ const main = async () => {
   // keyId can be changed to any key you have already created.
   const keyId = 'HVzG5uKl3yE'
 
-  const appData = getAgentConfig('Javascript Update Key');
+  const appData = getAgentConfig('JavaScript Update Key');
 
   // initialize agent
   try {

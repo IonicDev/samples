@@ -15,7 +15,7 @@ import {getAgentConfig} from '../jssdkConfig.js';
 const main = async () => {
   const keyId = 'BKAlG3-96nY';
 
-  const appData = getAgentConfig('Javascript Get Key');
+  const appData = getAgentConfig('JavaScript Get Key');
 
   // initialize agent
   try {

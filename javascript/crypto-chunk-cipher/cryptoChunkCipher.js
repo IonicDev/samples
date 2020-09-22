@@ -15,7 +15,7 @@ import {getAgentConfig} from '../jssdkConfig.js';
 const main = async () => {
   const message = 'secret message'
 
-  const appData = getAgentConfig('Javascript Crypto Chunk Cipher');
+  const appData = getAgentConfig('JavaScript Crypto Chunk Cipher');
 
   // initialize agent
   try {

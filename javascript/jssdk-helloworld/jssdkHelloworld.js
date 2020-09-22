@@ -131,7 +131,7 @@ const NS = {
 
         // Get the appData and add enrollment URL.
         // Pins appData to this NameSpace for convenience.
-        this.appData = getAgentConfig('Javascript SDK Hello World');
+        this.appData = getAgentConfig('JavaScript SDK Hello World');
         this.appData = Object.assign(this.appData, {enrollmentUrl: this.enrollmentUrl});
 
         return Promise.resolve('Using provided credentials.');

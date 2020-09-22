@@ -13,7 +13,7 @@
 import {getAgentConfig} from '../jssdkConfig.js';
 
 const main = async () => {
-  const appData = getAgentConfig('Javascript Initialize Agent with Default Persistor');
+  const appData = getAgentConfig('JavaScript Initialize Agent with Default Persistor');
 
   // initialize agent with default persistor
   try {
