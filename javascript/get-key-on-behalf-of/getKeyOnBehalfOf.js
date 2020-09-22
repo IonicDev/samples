@@ -17,7 +17,7 @@ const main = async () => {
   const keyId = 'HVzG4XpcAMA';
   const delegatedUserEmail = 'test@ionic.com';
 
-  const appData = getAgentConfig('Javascript Get Key on Behalf of');
+  const appData = getAgentConfig('JavaScript Get Key on Behalf of');
 
   // initialize agent
   try {

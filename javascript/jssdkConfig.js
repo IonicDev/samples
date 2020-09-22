@@ -7,7 +7,7 @@
 // Returns common agent configuration.
 export function getAgentConfig(applicationName) {
 
-  // This is the common agent configuration for the Javascript SDK samples.  The appId, userId,
+  // This is the common agent configuration for the JavaScript SDK samples.  The appId, userId,
   //  and userAuth needs to be the same as the agent configuration that was used in enrollment.
   const agentConfig = {
     appId: 'ionic-js-samples',

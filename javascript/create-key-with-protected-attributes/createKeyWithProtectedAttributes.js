@@ -13,7 +13,7 @@
 import {getAgentConfig} from '../jssdkConfig.js';
 
 const main = async () => {
-  const appData = getAgentConfig('Javascript Create Key with Protected Attributes');
+  const appData = getAgentConfig('JavaScript Create Key with Protected Attributes');
 
   // initialize agent
   try {

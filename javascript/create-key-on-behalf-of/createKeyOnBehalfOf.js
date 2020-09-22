@@ -14,7 +14,7 @@ import {getAgentConfig} from '../jssdkConfig.js';
 
 const main = async () => {
 
-  const appData = getAgentConfig('Javascript Create Key on Behalf of');
+  const appData = getAgentConfig('JavaScript Create Key on Behalf of');
 
   // initialize agent
   try {

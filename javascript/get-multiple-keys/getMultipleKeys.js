@@ -18,7 +18,7 @@ const main = async () => {
   const keyId2 = 'HVzG3AJoHQU'
   const keyId3 = 'HVzG52Kj3to'
 
-  const appData = getAgentConfig('Javascript Get Multiple Keys');
+  const appData = getAgentConfig('JavaScript Get Multiple Keys');
 
   // initialize agent
   try {

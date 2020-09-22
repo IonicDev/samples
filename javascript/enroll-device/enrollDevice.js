@@ -58,7 +58,7 @@ async function getKeyspaceInfo (keyspace) {
 async function enrollDevice (enrollUrl, keyspace, tenantId) {
 
   // Get the standard appData and add enrollmentUrl.
-  let appData = getAgentConfig('Javascript Enroll Device');
+  let appData = getAgentConfig('JavaScript Enroll Device');
   appData = Object.assign(appData, {enrollmentUrl: enrollUrl});
 
   // Initialize Ionic Agent.

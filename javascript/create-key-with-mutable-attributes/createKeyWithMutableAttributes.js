@@ -14,7 +14,7 @@ import {getAgentConfig} from '../jssdkConfig.js';
 
 const main = async () => {
 
-  const appData = getAgentConfig('Javascript Create Key with Mutable Attributes');
+  const appData = getAgentConfig('JavaScript Create Key with Mutable Attributes');
 
   // initialize agent
   try {
