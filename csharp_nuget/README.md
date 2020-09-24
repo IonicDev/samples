@@ -4,6 +4,10 @@ These C# examples use the C# SDK 2.0.0 along with the NuGet package manager.  Th
 that you don't have to download the C# SDK manually.  In this directory, there is one
 solution file for all the examples.
 
+All the `.csproj` files point to source files in the appropriate csharp directory.  This implies
+that the code is the same for both directories csharp and csharp_nuget.  If you want to modify
+code, please modify in the csharp directory.
+
 The C# SDK 2.0.0 is not FIPS 140-2 compliant.  If you want to use a FIPS 140-2 compliant SDK, please
 use C# SDK 1.8.0 in the charp directory.
 For more information, see [Machina SDK Releases and FIPS 140-2](https://ionic.com/developers/machina-sdk-releases-and-fips-140-2/).
