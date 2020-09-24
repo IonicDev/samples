@@ -1,10 +1,11 @@
 ﻿/*
- * (c) 2018-2020-2019 Ionic Security Inc.
+ * (c) 2018-2020 Ionic Security Inc.
  * By using this code, I agree to the Terms & Conditions (https://dev.ionic.com/use.html)
  * and the Privacy Policy (https://www.ionic.com/privacy-notice/).
  */
 
 using System;
+using System.Collections.Generic;
 using IonicSecurity.SDK;
 
 
@@ -36,23 +37,23 @@ namespace Samples
                 Environment.Exit(1);
             }
 
-            // Create a password persistor for agent initialization.
-            String persistorPath = homePath + "\\.ionicsecurity\\profiles.pw"
-            DeviceProfilePersistorPassword persistor = new DeviceProfilePersistorPassword();
-            persistor.FilePath = persistorPath;
-            persistor.Password = persistorPassword;
+            // Create an agent object to talk to Ionic.
+            Agent agent = new Agent();
 
+            // Create a password persistor for agent initialization.
             try
-            {
-                // Create an agent object to talk to Ionic.
-                Agent agent = new Agent();
-                agent.SetMetadata(Agent.MetaApplicationName, "Hello World!");
+            {         
+                DeviceProfilePersistorPassword persistor = new DeviceProfilePersistorPassword();
+                persistor.FilePath = homePath + "\\.ionicsecurity\\profiles.pw";
+                persistor.Password = persistorPassword;
+
+                agent.SetMetadata(Agent.MetaApplicationName, "Hello, World!");
+                agent.SetMetadata(Agent.MetaApplicationVersion, "2.0");
                 agent.Initialize(persistor);
             }
             catch (SdkException sdkExp)
             {
-                Console.WriteLine("Failed to initialize agent from password persistor ({0})", persistorPath);
-                Console.WriteLine(sdkExp.Message);
+                Console.WriteLine("Agent initialization error: " + sdkExp.Message);
                 WaitForInput();
                 Environment.Exit(1);
             }
@@ -64,16 +65,17 @@ namespace Samples
             string encryptedText = null;
 
             // Define data markings
-            AttributesDictionary dataMarkings = new AttributesDictionary();
-            dataMarkings.Add("clearance-level", new List<string> { "secret" });
+            AttributesDictionary attributes = new AttributesDictionary();
+            attributes.Add("clearance-level", new List<string> { "secret" });
+	    ChunkCryptoEncryptAttributes dataMarkings = new ChunkCryptoEncryptAttributes(attributes);
 
             // Encrypt the string using an Ionic-managed key.
-            chunkCrypto.Encrypt(clearText, ref encryptedText, dataMarkings);
+            chunkCrypto.Encrypt(clearText, ref encryptedText, ref dataMarkings);
 
             string decryptedText = null;
 
             // Note: Decryption only works if the policy allows it.
-            chunkCrypto.Decrypt(encryptedText, decryptedText);
+            chunkCrypto.Decrypt(encryptedText, ref decryptedText);
 
             Console.WriteLine("Plain Text: {0}", clearText);
             Console.WriteLine("Ionic Chunk Encrypted Text: {0}", encryptedText);
