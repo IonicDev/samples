@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateKeyWithMutableAttributes", "CreateKeyWithMutableAttributes\CreateKeyWithMutableAttributes.csproj", "{5B47FAF1-3741-41A3-8E4C-C81AD125D4E8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateKeyWithMutableAttributes", "old\CreateKeyWithMutableAttributes.csproj", "{5B47FAF1-3741-41A3-8E4C-C81AD125D4E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
