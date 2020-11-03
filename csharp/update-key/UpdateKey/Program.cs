@@ -115,7 +115,6 @@ namespace Samples
                 Environment.Exit(1);
             }
 
-            
             Console.WriteLine("Key ID             : " + key.Id);
             Console.WriteLine("Key Bytes          : " + BitConverter.ToString(key.KeyBytes).Replace("-", String.Empty));
             Console.WriteLine("Fixed Attributes   : " + JsonDump(key.Attributes));

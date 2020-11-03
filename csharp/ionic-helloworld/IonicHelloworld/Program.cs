@@ -67,7 +67,7 @@ namespace Samples
             // Define data markings
             AttributesDictionary attributes = new AttributesDictionary();
             attributes.Add("clearance-level", new List<string> { "secret" });
-	    ChunkCryptoEncryptAttributes dataMarkings = new ChunkCryptoEncryptAttributes(attributes);
+            ChunkCryptoEncryptAttributes dataMarkings = new ChunkCryptoEncryptAttributes(attributes);
 
             // Encrypt the string using an Ionic-managed key.
             chunkCrypto.Encrypt(clearText, ref encryptedText, ref dataMarkings);
