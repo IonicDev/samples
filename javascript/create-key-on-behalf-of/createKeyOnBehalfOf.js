@@ -1,5 +1,5 @@
 /*
- * (c) 2018-2020 Ionic Security Inc.
+ * (c) 2018-2021 Ionic Security Inc.
  * By using this code, I agree to the Terms & Conditions (https://dev.ionic.com/use.html)
  * and the Privacy Policy (https://www.ionic.com/privacy-notice/).
  */
@@ -22,7 +22,8 @@ const main = async () => {
     const agent = resp.agent;
 
     // Define on-behalf-of as request metadata.
-    const delegatedUserEmail = 'test@ionic.com';
+    // User with email needs to be in Machina.
+    const delegatedUserEmail = 'testy@ionic.com';
     const requestMetadata = {
         'ionic-delegated-email': delegatedUserEmail,
     }

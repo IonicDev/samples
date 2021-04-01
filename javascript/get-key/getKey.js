@@ -1,5 +1,5 @@
 /*
- * (c) 2018-2020 Ionic Security Inc.
+ * (c) 2018-2021 Ionic Security Inc.
  * By using this code, I agree to the Terms & Conditions (https://dev.ionic.com/use.html)
  * and the Privacy Policy (https://www.ionic.com/privacy-notice/).
  */
@@ -13,7 +13,7 @@
 import {getAgentConfig} from '../jssdkConfig.js';
 
 const main = async () => {
-  const keyId = 'BKAlG3-96nY';
+  const keyId = '';
 
   const appData = getAgentConfig('JavaScript Get Key');
 
@@ -22,8 +22,22 @@ const main = async () => {
     const resp = await new window.IonicSdk.ISAgent(appData);
     const agent = resp.agent;
 
+    // create single key
+    console.log('');
     try {
-      // get key
+      const response = await agent.createKeys({quantity: 1});
+      const key = response.keys[0];
+    
+      // display new key
+      console.log('New Key with key ID: ' + key.keyId);
+      keyId = key.keyId;
+    } catch (sdkErrorResponse) {
+        console.log('Error Creating Key: ' + sdkErrorResponse.error);
+    }
+    console.log(' ')
+
+    // get key
+    try {
       const response = await agent.getKeys({keyIds: [keyId]});
       const key = response.keys[0];
   
