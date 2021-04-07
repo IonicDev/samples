@@ -1,5 +1,5 @@
 /*
- * (c) 2018-2020 Ionic Security Inc.
+ * (c) 2018-2021 Ionic Security Inc.
  * By using this code, I agree to the Terms & Conditions (https://dev.ionic.com/use.html)
  * and the Privacy Policy (https://www.ionic.com/privacy-notice/).
  */
@@ -13,23 +13,42 @@
 import {getAgentConfig} from '../jssdkConfig.js';
 
 const main = async () => {
-  // Modify keys to keys you have obtained.
-  const keyId1 = 'HVzG5uKl3yE'
-  const keyId2 = 'HVzG3AJoHQU'
-  const keyId3 = 'HVzG52Kj3to'
+  const keyCount = 3;
 
   const appData = getAgentConfig('JavaScript Get Multiple Keys');
+  console.log('');
 
   // initialize agent
   try {
     const resp = await new window.IonicSdk.ISAgent(appData);
     const agent = resp.agent;
 
+    console.log('');
     let response;
+    try {
+      // create multiple keys
+      response = await agent.createKeys({
+        quantity: keyCount
+      });
+
+      // display new keys
+      response.keys.forEach((key) => {
+        console.log('New Key with key ID: ' + key.keyId);
+      });
+    } catch (sdkErrorResponse) {
+      console.log('Creating multiple keys error: ' + sdkErrorResponse.error);
+    }
+
+    // Put keys in separate variables
+    const keyId1 = response.keys[0];
+    const keyId2 = response.keys[1];
+    const keyId3 = response.keys[2];
+
+    console.log(' ');
     try {
       // get multiple keys
       response = await agent.getKeys({
-        keyIds: [keyId1, keyId2, keyId3]
+        keyIds: [keyId1.keyId, keyId2.keyId, keyId3.keyId]
       });
     } catch (sdkErrorResponse) {
       console.log('Error getting multiple keys: ' + sdkErrorResponse.error);
@@ -37,7 +56,6 @@ const main = async () => {
     const keys = response.keys;
   
     // display fetched keys
-    console.log('');
     keys.forEach((key) => {
       console.log('---');
       console.log('KeyId             : ' + key.keyId);

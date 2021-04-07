@@ -26,18 +26,46 @@ const main = async () => {
       'application-state': 'active'
     };
   
+    console.log('');
+    let keyId = '';
+
+    // create key on behalf of
+    try {
+      const response = await agent.createKeys({
+        quantity: 1,
+        metadata: {
+          requestMetadata
+        }
+      });
+
+      const key = response.keys[0];
+
+      // display created key
+      console.log('New Key with key ID: ' + key.keyId);
+      console.log('  with application-state set to active');
+      console.log('KeyBytes          : ' + key.key);
+      console.log('FixedAttributes   : ' + JSON.stringify(key.attributes,null,0));
+      console.log('MutableAttributes : ' + JSON.stringify(key.mutableAttributes,null,0));
+
+      keyId = key.keyId;
+    } catch (sdkErrorResponse) {
+        console.log('Error Creating Key: ' + sdkErrorResponse.error);
+    }
+
     // get key with request metadata
-    const keyId = 'HVzG34L2MVI'
+    console.log(' ');
     try {
       const response = await agent.getKeys({
         keyIds: [keyId],
-        metadata: requestMetadata
+        metadata: {
+          requestMetadata
+        }
       });
 
       const key = response.keys[0];
     
       // display fetched key
-      console.log('');
+      console.log('Getting key with application state set to active');
       console.log('KeyId             : ' + key.keyId);
       console.log('KeyBytes          : ' + key.key);
       console.log('FixedAttributes   : ' + JSON.stringify(key.attributes, null, 0));
