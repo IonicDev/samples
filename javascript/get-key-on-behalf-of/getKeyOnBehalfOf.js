@@ -55,7 +55,6 @@ const main = async () => {
     console.log(' ');
     try {
       const profilesResult = await agent.loadUser(appData);
-      const browserProfiles = profilesResult.profiles;
 
       // get key
       const response = await agent.getKeys({
