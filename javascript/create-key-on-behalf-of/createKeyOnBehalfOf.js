@@ -22,7 +22,7 @@ const main = async () => {
     const agent = resp.agent;
 
     // Define on-behalf-of as request metadata.
-    // User with email needs to be in Machina.
+    // Replace email with user's email that is enrolled in the same keyspace.
     const delegatedUserEmail = 'testy@ionic.com';
     const requestMetadata = {
         'ionic-delegated-email': delegatedUserEmail,
@@ -39,6 +39,7 @@ const main = async () => {
   
       // display created key
       console.log('');
+      console.log('Created key on behalf of: ' + delegatedUserEmail);
       console.log('KeyId             : ' + key.keyId);
       console.log('KeyBytes          : ' + key.key);
       console.log('FixedAttributes   : ' + JSON.stringify(key.attributes,null,0));

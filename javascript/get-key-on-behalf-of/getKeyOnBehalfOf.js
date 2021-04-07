@@ -22,7 +22,7 @@ const main = async () => {
     const agent = resp.agent;
 
     // Define on-behalf-of as request metadata.
-    // User with email needs to be in Machina.
+    // Replace email with user's email that is enrolled in the same keyspace.
     const delegatedUserEmail = 'testy@ionic.com';
     const requestMetadata = {
         'ionic-delegated-email': delegatedUserEmail,
@@ -54,12 +54,13 @@ const main = async () => {
 
     console.log(' ');
     try {
+      const profilesResult = await agent.loadUser(appData);
+      const browserProfiles = profilesResult.profiles;
+
       // get key
       const response = await agent.getKeys({
         keyIds: [keyId],
-        metadata: {
-          requestMetadata
-        }
+        metadata: requestMetadata
       });
       const key = response.keys[0];
     

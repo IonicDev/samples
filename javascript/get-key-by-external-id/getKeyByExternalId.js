@@ -44,9 +44,6 @@ const main = async () => {
     }
     console.log(' ');
 
-    // Define external ID in an array.
-    const externalIds = [externalId];
-  
     // Get keys with external ID.
     try {
       const response = await agent.getKeys({
@@ -55,6 +52,7 @@ const main = async () => {
       const key = response.keys[0];
     
       // Display fetched key.
+      console.log('Fetching key by external ID: ' + externalId);
       console.log('KeyId             : ' + key.keyId);
       console.log('KeyBytes          : ' + key.key);
       console.log('FixedAttributes   : ' + JSON.stringify(key.attributes, null, 0));

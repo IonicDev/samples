@@ -48,7 +48,7 @@ const main = async () => {
     try {
       // get multiple keys
       response = await agent.getKeys({
-        keyIds: [keyId1, keyId2, keyId3]
+        keyIds: [keyId1.keyId, keyId2.keyId, keyId3.keyId]
       });
     } catch (sdkErrorResponse) {
       console.log('Error getting multiple keys: ' + sdkErrorResponse.error);
