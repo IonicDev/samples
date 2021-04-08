@@ -22,12 +22,12 @@ const main = async () => {
     const agent = resp.agent;
 
     // define request metadata
-    const appName = window.navigator.appName;
-    const appVersion = window.navigator.appVersion;
+    const appStatus = 'active';
+    const appLocation = 'Gondwanaland';
 
     const requestMetadata = {
-      'ionic-client-type': appName,
-      'ionic-client-version': appVersion
+      'application-status': appStatus,
+      'application-location': appLocation
     };
   
     console.log('');
@@ -44,7 +44,7 @@ const main = async () => {
 
       // display created key
       console.log('New Key with key ID: ' + key.keyId);
-      console.log('  with ionic-client-type = ' + appName + ' and ionic-client_version = ' + appVersion);
+      console.log('  with application-status = ' + appStatus + ' and application-location = ' + appLocation);
       console.log('KeyBytes          : ' + key.key);
       console.log('FixedAttributes   : ' + JSON.stringify(key.attributes,null,0));
       console.log('MutableAttributes : ' + JSON.stringify(key.mutableAttributes,null,0));
@@ -65,7 +65,7 @@ const main = async () => {
       const key = response.keys[0];
     
       // display fetched key
-      console.log('Getting key with ionic-client-type = ' + appName + ' and ionic-client_version = ' + appVersion);
+      console.log('Getting key with application-status = ' + appStatus + ' and application-location = ' + appLocation);
       console.log('KeyId             : ' + key.keyId);
       console.log('KeyBytes          : ' + key.key);
       console.log('FixedAttributes   : ' + JSON.stringify(key.attributes, null, 0));
