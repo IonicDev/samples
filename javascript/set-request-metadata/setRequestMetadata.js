@@ -22,8 +22,12 @@ const main = async () => {
     const agent = resp.agent;
 
     // define request metadata
+    const appStatus = 'active';
+    const appLocation = 'Gondwanaland';
+
     const requestMetadata = {
-      'application-state': 'active'
+      'application-status': appStatus,
+      'application-location': appLocation
     };
   
     console.log('');
@@ -33,16 +37,14 @@ const main = async () => {
     try {
       const response = await agent.createKeys({
         quantity: 1,
-        metadata: {
-          requestMetadata
-        }
+        metadata: requestMetadata
       });
 
       const key = response.keys[0];
 
       // display created key
       console.log('New Key with key ID: ' + key.keyId);
-      console.log('  with application-state set to active');
+      console.log('  with application-status = ' + appStatus + ' and application-location = ' + appLocation);
       console.log('KeyBytes          : ' + key.key);
       console.log('FixedAttributes   : ' + JSON.stringify(key.attributes,null,0));
       console.log('MutableAttributes : ' + JSON.stringify(key.mutableAttributes,null,0));
@@ -57,15 +59,13 @@ const main = async () => {
     try {
       const response = await agent.getKeys({
         keyIds: [keyId],
-        metadata: {
-          requestMetadata
-        }
+        metadata: requestMetadata
       });
 
       const key = response.keys[0];
     
       // display fetched key
-      console.log('Getting key with application state set to active');
+      console.log('Getting key with application-status = ' + appStatus + ' and application-location = ' + appLocation);
       console.log('KeyId             : ' + key.keyId);
       console.log('KeyBytes          : ' + key.key);
       console.log('FixedAttributes   : ' + JSON.stringify(key.attributes, null, 0));

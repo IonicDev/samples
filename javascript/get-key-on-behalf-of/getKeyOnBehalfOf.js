@@ -54,8 +54,6 @@ const main = async () => {
 
     console.log(' ');
     try {
-      const profilesResult = await agent.loadUser(appData);
-
       // get key
       const response = await agent.getKeys({
         keyIds: [keyId],
