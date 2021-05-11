@@ -7,10 +7,6 @@ from __future__ import print_function
 import sys
 import ionicsdk
 
-# default persistor not supported in Linux
-if "linux" in sys.platform:
-    print("Error default persistor not supported in Linux")
-
 # initialize agent with default persistor
 try:
     agent = ionicsdk.Agent()
