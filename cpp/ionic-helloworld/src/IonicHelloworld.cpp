@@ -1,16 +1,19 @@
 /*
- * (c) 2017-2020 Ionic Security Inc.
+ * (c) 2017-2021 Ionic Security Inc.
  * By using this code, I agree to the Terms & Conditions (https://dev.ionic.com/use.html)
  * and the Privacy Policy (https://www.ionic.com/privacy-notice/).
  */
 
 #include "ISAgent.h"
 #include "ISAgentSDKError.h"
+#include <ISCrypto.h>
 #include <ISChunkCrypto.h>
 #include <ISChunkCryptoEncryptAttributes.h>
 #include <stdio.h>
 #include <cstdlib>
 #include <iostream>
+#include <unistd.h>
+#include "CrossPlatform.h"
 
 #ifdef _WIN32
     #define HOMEVAR "USERPROFILE"
@@ -33,6 +36,16 @@ int main(int argc, char* argv[]) {
         exit(1);
     }
     std::string persistorPassword = std::string(cpersistorPassword);
+
+    // read SDK path to use to load the crypto libs from environment variable
+    char* cSdkPath = std::getenv("IONIC_SDK_PATH");
+    if (cSdkPath == NULL) {
+        std::cerr << "[!] Please provide the SDK path as env variable: IONIC_SDK_PATH" << std::endl;
+        exit(1);
+    }
+    std::string sdkPath = std::string(cSdkPath);
+    std::string cryptoPath = sdkPath + "/ISAgentSDKCpp/Lib/" + OS + "/Release/" + ARCH;
+    ISCrypto::setCryptoSharedLibraryCustomDirectory(cryptoPath);
 
     // initialize agent with password persistor
     std::string persistorPath = std::string(std::getenv(HOMEVAR)) + "/.ionicsecurity/profiles.pw";
