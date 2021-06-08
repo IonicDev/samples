@@ -1,5 +1,5 @@
 /*
- * (c) 2018-2020 Ionic Security Inc.
+ * (c) 2018-2021 Ionic Security Inc.
  * By using this code, I agree to the Terms & Conditions (https://dev.ionic.com/use.html)
  * and the Privacy Policy (https://www.ionic.com/privacy-notice/).
  */
@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <cstdlib>
 #include <iostream>
+#include "CrossPlatform.h"
 
 #ifdef _WIN32
     #define HOMEVAR "USERPROFILE"
@@ -20,6 +21,16 @@ int main(int argc, char* argv[]) {
     
     int nErrorCode;
     std::string delegatedUserEmail = "test@ionic.com";
+
+    // read SDK path to use to load the crypto libs from environment variable
+    char* cSdkPath = std::getenv("IONIC_SDK_PATH");
+    if (cSdkPath == NULL) {
+        std::cerr << "[!] Please provide the SDK path as env variable: IONIC_SDK_PATH" << std::endl;
+        exit(1);
+    }
+    std::string sdkPath = std::string(cSdkPath);
+    std::string cryptoPath = sdkPath + "/ISAgentSDKCpp/Lib/" + OS + "/Release/" + ARCH;
+    ISCrypto::setCryptoSharedLibraryCustomDirectory(cryptoPath);
 
     // read persistor password from environment variable
     char* cpersistorPassword = std::getenv("IONIC_PERSISTOR_PASSWORD");
@@ -46,7 +57,7 @@ int main(int argc, char* argv[]) {
     ISAgentCreateKeysRequest request;
     request.getMetadata()["ionic-delegated-email"] = delegatedUserEmail;
 
-    // create key on behalf of user
+    // create key on behalf of usero
     ISAgentCreateKeysRequest::Key requestKey("refid1", 1);
     request.getKeys().push_back(requestKey);
     ISAgentCreateKeysResponse response;

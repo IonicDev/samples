@@ -8,7 +8,6 @@ project(ionic-sample C CXX)
 set(CMAKE_CXX_STANDARD 14)
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/target)
 add_definitions(-D_GLIBCXX_USE_CXX11_ABI=0)
-include_directories("$ENV{IONIC_SDK_PATH}/ISAgentSDKCpp/Include")
 link_directories("$ENV{IONIC_SDK_PATH}/ISAgentSDKCpp/Lib/${platform}/Release/${architecture}")
 include_directories("src")
 file(GLOB IONIC_REGISTER_SOURCE src/*.cpp )
@@ -24,6 +23,8 @@ if ( platform STREQUAL "MacOSX" )
         "-framework Security"
         "-framework Foundation"
     )
+     # definition needed for Catalina
+    set (CATALINA_HEADERS "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/include/")
 endif()
 
 # linux specific
@@ -35,6 +36,7 @@ if ( platform STREQUAL "Linux" )
         "stdc++"
         "m"
         "rt"
+        "dl"
     )
     link_directories("/usr/lib")
 endif()
@@ -47,3 +49,6 @@ if ( platform STREQUAL "Windows" )
     set(CMAKE_CXX_FLAGS_RELEASE "/MT /D NDEBUG")
     set(CMAKE_CXX_FLAGS_DEBUG "/MTd")
 endif()
+
+set (LOCAL_SAMPLE_HEADERS "../include")  # definition needed for cross platform compilation headers
+include_directories("$ENV{IONIC_SDK_PATH}/ISAgentSDKCpp/Include" ${LOCAL_SAMPLE_HEADERS} ${CATALINA_HEADERS})

@@ -24,18 +24,12 @@
 int main(int argc, char* argv[]) {
 
     int nErrorCode;
+    ISAgent agent;
+
     std::string appName = "Hello World!";
     std::string appVersion = "1.0.0";
 
     std::string message = "Hello, World!";
-
-    // read persistor password from environment variable
-    char* cpersistorPassword = std::getenv("IONIC_PERSISTOR_PASSWORD");
-    if (cpersistorPassword == NULL) {
-        std::cerr << "[!] Please provide the persistor password as env variable: IONIC_PERSISTOR_PASSWORD" << std::endl;
-        exit(1);
-    }
-    std::string persistorPassword = std::string(cpersistorPassword);
 
     // read SDK path to use to load the crypto libs from environment variable
     char* cSdkPath = std::getenv("IONIC_SDK_PATH");
@@ -47,12 +41,19 @@ int main(int argc, char* argv[]) {
     std::string cryptoPath = sdkPath + "/ISAgentSDKCpp/Lib/" + OS + "/Release/" + ARCH;
     ISCrypto::setCryptoSharedLibraryCustomDirectory(cryptoPath);
 
+    // read persistor password from environment variable
+    char* cpersistorPassword = std::getenv("IONIC_PERSISTOR_PASSWORD");
+    if (cpersistorPassword == NULL) {
+        std::cerr << "[!] Please provide the persistor password as env variable: IONIC_PERSISTOR_PASSWORD" << std::endl;
+        exit(1);
+    }
+    std::string persistorPassword = std::string(cpersistorPassword);
+
     // initialize agent with password persistor
     std::string persistorPath = std::string(std::getenv(HOMEVAR)) + "/.ionicsecurity/profiles.pw";
     ISAgentDeviceProfilePersistorPassword persistor;
     persistor.setFilePath(persistorPath);
     persistor.setPassword(persistorPassword);
-    ISAgent agent;
     nErrorCode = agent.initialize(persistor);
     if (nErrorCode != ISAGENT_OK) {
         std::cerr << "Failed to initialize agent from password persistor (" << persistorPath << ")" << std::endl;
