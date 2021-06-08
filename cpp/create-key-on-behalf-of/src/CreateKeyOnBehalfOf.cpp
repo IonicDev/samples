@@ -57,7 +57,7 @@ int main(int argc, char* argv[]) {
     ISAgentCreateKeysRequest request;
     request.getMetadata()["ionic-delegated-email"] = delegatedUserEmail;
 
-    // create key on behalf of usero
+    // create key on behalf of user
     ISAgentCreateKeysRequest::Key requestKey("refid1", 1);
     request.getKeys().push_back(requestKey);
     ISAgentCreateKeysResponse response;
