@@ -1,6 +1,5 @@
 ### Xcode ###
 build
-**/*.xcodeproj/**
-#create-key-on-behalf-of/create-key-on-behalf-of.xcodeproj/project.xcworkspace/xcuserdata/
-!**/*.xcodeproj/project.pbxproj
-!**/*.xcworkspace/contents.xcworkspacedata
+
+## User settings
+xcuserdata/
