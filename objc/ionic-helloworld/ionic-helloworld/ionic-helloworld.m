@@ -31,14 +31,12 @@ int main(int argc, const char * argv[]) {
         }
         
         NSString* sdkPath = [[[NSProcessInfo processInfo] environment] objectForKey:@"IONIC_SDK_PATH"];
-        NSString* cryptoPath = [sdkPath stringByAppendingPathComponent:@"IonicAgentSDK.framework"];
-        if( ! cryptoPath) {
+        if( ! sdkPath) {
             IonicLog_Error(TAG, @"[!] Please provide the path to the SDK as env variable: IONIC_SDK_PATH");
             return 3;
         }
         
-        [IonicCrypto setCryptoSharedLibraryCustomDirectory:cryptoPath];
-        //[IonicCrypto setCryptoSharedLibraryCustomDirectory:@"/Users/nvautier/Development/Ionic/SDKs/Cpp/ISAgentSDK/Lib/MacOSX/Release/universal"];
+        [IonicCrypto setCryptoSharedLibraryCustomDirectory:sdkPath];
         
         // initialize agent with password persistor
         IonicAgentDeviceProfilePersistorPassword* persistor = [[IonicAgentDeviceProfilePersistorPassword alloc] init];
