@@ -30,6 +30,14 @@ int main(int argc, const char * argv[]) {
             return 2;
         }
         
+        NSString* sdkPath = [[[NSProcessInfo processInfo] environment] objectForKey:@"IONIC_SDK_PATH"];
+        if( ! sdkPath) {
+            IonicLog_Error(TAG, @"[!] Please provide the path to the SDK as env variable: IONIC_SDK_PATH");
+            return 3;
+        }
+        
+        [IonicCrypto setCryptoSharedLibraryCustomDirectory:sdkPath];
+        
         // initialize agent with password persistor
         IonicAgentDeviceProfilePersistorPassword* persistor = [[IonicAgentDeviceProfilePersistorPassword alloc] init];
         persistor.filePath = persistorPath;

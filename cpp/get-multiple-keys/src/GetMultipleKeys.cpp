@@ -1,5 +1,5 @@
 /*
- * (c) 2018-2020 Ionic Security Inc.
+ * (c) 2018-2021 Ionic Security Inc.
  * By using this code, I agree to the Terms & Conditions (https://dev.ionic.com/use.html)
  * and the Privacy Policy (https://www.ionic.com/privacy-notice/).
  */
@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <cstdlib>
 #include <iostream>
+#include "CrossPlatform.h"
 
 #ifdef _WIN32
     #define HOMEVAR "USERPROFILE"
@@ -19,9 +20,25 @@
 int main(int argc, char* argv[]) {
     
     int nErrorCode;
-    std::string keyId1 = "HVzG5uKl3yE";
-    std::string keyId2 = "HVzG3AJoHQU";
-    std::string keyId3 = "HVzG52Kj3to";
+
+    std::string keyId1 = ""; // TODO: provide key to get
+    std::string keyId2 = ""; // TODO: provide key to get
+    std::string keyId3 = ""; // TODO: provide key to get
+
+    if (keyId1 == "" || keyId2 == "" || keyId3 == "") {
+        std::cout << "Please set the 'keyId' variables to keys you have already created" << std::endl;
+        exit(1);
+    }
+
+    // read SDK path to use to load the crypto libs from environment variable
+    char* cSdkPath = std::getenv("IONIC_SDK_PATH");
+    if (cSdkPath == NULL) {
+        std::cerr << "[!] Please provide the SDK path as env variable: IONIC_SDK_PATH" << std::endl;
+        exit(1);
+    }
+    std::string sdkPath = std::string(cSdkPath);
+    std::string cryptoPath = sdkPath + "/ISAgentSDKCpp/Lib/" + OS + "/Release/" + ARCH;
+    ISCrypto::setCryptoSharedLibraryCustomDirectory(cryptoPath);
 
     // read persistor password from environment variable
     char* cpersistorPassword = std::getenv("IONIC_PERSISTOR_PASSWORD");
