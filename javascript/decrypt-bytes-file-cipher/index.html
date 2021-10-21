@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <style type="text/css">
+      button {
+        font-size: 18;
+      }
+      input {
+        font-size: 18;
+      }
+      label {
+        font-size: 18;
+      }
+      textarea {
+        font-size: 18;
+        resize: none;
+      }
+      th, td {
+        padding: 5px;
+        text-align: left;
+      }
+    </style>
+    <title>Ionic - Decrypt Bytes File Cipher</title>
+  </head>
+  <body>
+    <h2>Decrypt Bytes File Cipher</h2>
+    <p>
+      1. (Optional) Download a Machina Protected Sample file 
+      <a id="sampleLink" href="path" download="protectedSample.txt"><button type="button" id="sampleButton" disabled> Download File </button></a>
+    </p>
+    <p>
+      2. (Optional) Select a file to protect 
+      <input type="file" name="inputfile" id="inputfile">
+    </p>
+      3. Decrypt (If no file was selected, the sample file is decrypted) <button type="button" id="decryptButton" disabled> Decrypt </button>
+    <p>
+      4. Click to download protected file 
+      <a id="fileLink" href="path" download="MachinaProtected.txt"><button type="button" id="downloadButton" disabled> Download File</button></a>
+    </p>
+
+    <script src='../consoleReroute.js'></script>
+    <script src='https://api.ionic.com/jssdk/latest/libs/sdk.bundle.js'></script>
+    <script type='module' src='decryptBytesFileCipher.js'></script>
+
+    <pre id="output-area" />
+  </body>
+</html>

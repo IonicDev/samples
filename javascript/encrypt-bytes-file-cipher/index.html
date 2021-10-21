@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <style type="text/css">
+      button {
+        font-size: 18;
+      }
+      input {
+        font-size: 18;
+      }
+      label {
+        font-size: 18;
+      }
+      textarea {
+        font-size: 18;
+        resize: none;
+      }
+      th, td {
+        padding: 5px;
+        text-align: left;
+      }
+    </style>
+    <title>Ionic - Encyrpt Bytes File Cipher</title>
+  </head>
+  <body>
+    <h2>Encrypt Bytes File Cipher</h2>
+    <p>
+      Please select a file to protect.
+    </p>
+      <input type="file" name="inputfile" id="inputfile">
+    <p>
+      Then click to download protected file.
+    </p>
+      <a id="fileLink" href="path" download="MachinaProtected.txt"><button type="button" id="downloadButton" disabled> Download File</button></a>
+
+    <script src='../consoleReroute.js'></script>
+
+    <script src='https://api.ionic.com/jssdk/latest/libs/sdk.bundle.js'></script>
+    <script type='module' src='encryptBytesFileCipher.js'></script>
+
+    <pre id="output-area" />
+  </body>
+</html>
