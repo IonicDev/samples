@@ -15,10 +15,10 @@ import {getAgentConfig} from '../jssdkConfig.js';
 const appData = getAgentConfig('JavaScript Encrypt Bytes File Cipher');
 
 /*
-* Functions
+* A. Functions
 */
 
-// A. Encrypt File Contents
+// Encrypt File Contents
 const encryptFile = async (plaintextBytes) => {
     // initialize agent
     try {
@@ -36,7 +36,7 @@ const encryptFile = async (plaintextBytes) => {
     }
 }
 
-// B. Update Filename
+// Update Filename
 const makeNewFilename = function(oldFilename = "", fillText = "") {
     let lastDot = oldFilename.lastIndexOf('.');
     let baseName = "";
@@ -51,7 +51,7 @@ const makeNewFilename = function(oldFilename = "", fillText = "") {
 }
 
 /*
-* Listener - user clicks "Choose File"
+* B. Listener - user clicks "Choose File"
 */
 
 document.getElementById('inputfile').addEventListener('change', function() {

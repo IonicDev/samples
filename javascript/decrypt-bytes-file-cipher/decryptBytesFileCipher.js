@@ -12,7 +12,7 @@
 
 import {getAgentConfig} from '../jssdkConfig.js';
 
-const appData = getAgentConfig('JavaScript decrypt Bytes File Cipher');
+const appData = getAgentConfig('JavaScript Decrypt Bytes File Cipher');
 
 /*
 * A. Utility Functions
