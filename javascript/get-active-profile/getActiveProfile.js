@@ -14,31 +14,31 @@ import {getAgentConfig} from '../jssdkConfig.js';
 
 const main = async () => {
 
-  const appData = getAgentConfig('JavaScript Get Active Profile');
+    const appData = getAgentConfig('JavaScript Get Active Profile');
 
-  // initialize agent
-  try {
-    const resp = await new window.IonicSdk.ISAgent(appData);
-    const agent = resp.agent;
-
-    // get active profile
-    console.log('');
+    // initialize agent
     try {
-      const response = await agent.getActiveProfile();
+        const resp = await new window.IonicSdk.ISAgent(appData);
+        const agent = resp.agent;
+        console.log('');
 
-      console.log('Active Profile : ' + response.active);
-      console.log('Created        : ' + response.created);
-      console.log('Device Id      : ' + response.deviceId);
-      console.log('keyspace       : ' + response.keyspace);
-      console.log('server         : ' + response.server);
+        try {
+            // get active profile
+            const response = await agent.getActiveProfile();
+
+            console.log('Active Profile : ' + response.active);
+            console.log('Created        : ' + response.created);
+            console.log('Device Id      : ' + response.deviceId);
+            console.log('keyspace       : ' + response.keyspace);
+            console.log('server         : ' + response.server);
  
-    } catch (sdkErrorResponse) {
-      console.log('Error Getting Active Profile: ' + sdkErrorResponse.error);
-    }
+        } catch (sdkErrorResponse) {
+            console.log('Error Getting Active Profile: ' + sdkErrorResponse.error);
+        }
 
-  } catch (sdkErrorResponse) {
-    console.log('Initializing agent error: ' + sdkErrorResponse.error);
-  }
+    } catch (sdkErrorResponse) {
+        console.log('Initializing agent error: ' + sdkErrorResponse.error);
+    }
 }
 
 main()

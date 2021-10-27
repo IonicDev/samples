@@ -14,33 +14,33 @@ import {getAgentConfig} from '../jssdkConfig.js';
 
 const main = async () => {
 
-  const appData = getAgentConfig('JavaScript Get Keyspace');
+    const appData = getAgentConfig('JavaScript Get Keyspace');
 
-  // initialize agent
-  try {
-    const resp = await new window.IonicSdk.ISAgent(appData);
-    const agent = resp.agent;
-    console.log('');
-
+    // initialize agent
     try {
-      // get active keyspace id
-      const this_profile = await agent.getActiveProfile();
+        const resp = await new window.IonicSdk.ISAgent(appData);
+        const agent = resp.agent;
+        console.log('');
 
-      // get active keyspace
-      const response = await agent.getKeyspace({keyspace: this_profile.keyspace});
+        try {
+            // get active keyspace id
+            const this_profile = await agent.getActiveProfile();
 
-      console.log('keyspace          : ' + response.keyspace);
-      console.log('ttl seconds       : ' + response.ttlSeconds);
-      console.log('fqdn              : ' + response.fqdn);
-      console.log('enrollment url(s) : ' + response.answers.enroll);
-      console.log('tenant id(s)      : ' + response.answers.tenantid); 
-      console.log('url(s)            : ' + response.answers.url);
+            // get active keyspace
+            const response = await agent.getKeyspace({keyspace: this_profile.keyspace});
+
+            console.log('keyspace          : ' + response.keyspace);
+            console.log('ttl seconds       : ' + response.ttlSeconds);
+            console.log('fqdn              : ' + response.fqdn);
+            console.log('enrollment url(s) : ' + response.answers.enroll);
+            console.log('tenant id(s)      : ' + response.answers.tenantid); 
+            console.log('url(s)            : ' + response.answers.url);
+        } catch (sdkErrorResponse) {
+            console.log('Error Getting Keyspace Data: ' + sdkErrorResponse.error);
+        }
     } catch (sdkErrorResponse) {
-      console.log('Error Getting Keyspace Data: ' + sdkErrorResponse.error);
+        console.log('Initializing agent error: ' + sdkErrorResponse.error);
     }
-  } catch (sdkErrorResponse) {
-    console.log('Initializing agent error: ' + sdkErrorResponse.error);
-  }
 }
 
 main()
