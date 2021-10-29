@@ -36,6 +36,10 @@ const decryptFile = async (encryptedBytes) => {
 }
 
 // encrypt file body
+// A file to decrypt is required for this sample.  The user may upload a protected file; alternately,
+// an encrypted file is generated via encrpytFile and the user can tackle encryptBytesFileCipher.js and
+// decryptBytesFileCipher.js in an order of their choosing.
+
 const encryptFile = async (plaintextBytes) => {
     // initialize agent
     try {
