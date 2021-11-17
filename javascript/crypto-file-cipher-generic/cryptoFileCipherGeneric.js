@@ -18,24 +18,6 @@ const appData = getAgentConfig('JavaScript Encrypt Bytes File Cipher');
 * A. Functions
 */
 
-// Encrypt File Contents
-const encryptFile = async (plaintextBytes) => {
-    // initialize agent
-    try {
-        let resp = await new window.IonicSdk.ISAgent(appData);
-
-        // encrypt file contents
-        try {
-            let response = await resp.agent.encryptBytesFileCipher(plaintextBytes);
-            return response;
-        } catch (sdkErrorResponse) {
-            console.log('Error Encrypting Byte Array: ' + sdkErrorResponse.error);
-        }
-    } catch (sdkErrorResponse) {
-        console.log('Initializing agent error: ' + sdkErrorResponse.error);
-    }
-}
-
 // Update Filename
 const makeNewFilename = function(oldFilename = "", fillText = "") {
     let lastDot = oldFilename.lastIndexOf('.');
@@ -48,6 +30,25 @@ const makeNewFilename = function(oldFilename = "", fillText = "") {
         baseName = oldFilename;
     }
     return baseName + fillText + extSuff;
+}
+
+// Encrypt File Contents
+const encryptFile = async (plaintextBytes) => {
+    // initialize agent
+    try {
+        let resp = await new window.IonicSdk.ISAgent(appData);
+        let agent = resp.agent;
+
+        // encrypt file contents
+        try {
+            let response = await agent.encryptBytesFileCipher(plaintextBytes);
+            return response;
+        } catch (sdkErrorResponse) {
+            console.log('Error Encrypting Byte Array: ' + sdkErrorResponse.error);
+        }
+    } catch (sdkErrorResponse) {
+        console.log('Initializing agent error: ' + sdkErrorResponse.error);
+    }
 }
 
 /*
